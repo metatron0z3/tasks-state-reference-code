@@ -1,0 +1,1 @@
+requireSpec('cards', 'add-card');

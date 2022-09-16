@@ -1,0 +1,1 @@
+requireSpec('trooper', 'logout');

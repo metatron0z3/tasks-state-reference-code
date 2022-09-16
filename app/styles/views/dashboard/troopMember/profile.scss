@@ -1,0 +1,76 @@
+@import "../../../bower-import.scss";
+@import "../../../variables.scss";
+
+[data-state*="dashboard.troopMember.profile"] {
+
+  [data-ui-view=dashboardContent] {
+    padding: 60px 0px 0px 0px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background: $white-primary;
+    @include justify-content(center);
+
+    > .edit {
+      padding: 0px;
+      height: 32px;
+      width: 110px;
+      min-width: 110px;
+      right: 30px;
+      top: 30px;
+      position: absolute;
+
+      > .wrapper {
+
+        > .label {
+          font-size: 12px;
+        }
+      }
+    }
+
+    > .wrapper {
+      width: 740px;
+      max-width: 100%;
+      height: 100%;
+      @include align-items(flex-start);
+
+      > .profile-image {
+        margin-right: 40px;
+
+        &,
+        > svg,
+        > img {
+          width: 100px;
+          min-width: 100px;
+          max-width: 100px;
+          height: 100px;
+          min-height: 100px;
+          max-height: 100px;
+          overflow: hidden;
+          @include border-radius(50px);
+        }
+      }
+
+      > .info {
+        @include flex-grow(1);
+
+        > .flex-row {
+          min-height: 44px;
+          font-size: 14px;
+          color: $gray-quaternary;
+          border-bottom: 1px solid rgba($light-gray-senary, 0.4);
+        }
+
+        > .blurb {
+          line-height: 26px;
+          border-bottom: 0px;
+        }
+      }
+    }
+  }
+
+  [data-ui-view=dashboardRightSidebar] {
+    display: none;
+  }
+
+}

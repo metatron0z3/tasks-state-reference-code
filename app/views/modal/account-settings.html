@@ -1,0 +1,109 @@
+<div class="modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click="close()"
+>
+
+  <form name="accountSettingsForm"
+        class="account-settings-modal modal flex-column"
+        novalidate="novalidate"
+        ng-submit="updateTrooper(accountSettingsForm)"
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click="close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header>
+      <h1>Account Settings</h1>
+    </header>
+
+    <main>
+
+      <div class="field-group flex-row">
+        <input name="name"
+               placeholder="Name"
+               required=""
+               ng-model=" formVals.name "
+               autocomplete="off"
+        >
+      </div>
+      <div class="flex-row"
+           ng-if=" accountSettingsForm.name.$dirty && accountSettingsForm.name.$touched && accountSettingsForm.name.$invalid  "
+           ng-messages="accountSettingsForm.name.$error"
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Your Name is required
+        </div>
+      </div>
+
+      <p class="field-group flex-row">
+        <input placeholder="Old Password"
+               type="password"
+               name="oldPassword"
+               ng-minlength="6"
+               ng-model=" formVals.oldPassword "
+               autocomplete="off"
+        />
+      </p>
+      <div  class="flex-row"
+            ng-if="( ! isProcessing ) && ( formVals.errorMsg ) || ( accountSettingsForm.oldPassword.$dirty && accountSettingsForm.oldPassword.$touched && accountSettingsForm.oldPassword.$invalid ) "
+            ng-messages="accountSettingsForm.oldPassword.$error"
+      >
+
+        <div class="error"
+             ng-message="ng-minlength"
+        >
+          Your Old Password is at least 6 characters long
+        </div>
+        <div class="error"
+             ng-if=" formVals.errorMsg "
+        >
+          Your Old Password is Invalid
+        </div>
+      </div>
+
+      <p class="field-group flex-row">
+        <input placeholder="New Password"
+               type="password"
+               name="newPassword"
+               ng-minlength="6"
+               ng-model=" formVals.newPassword "
+               autocomplete="off"
+        />
+      </p>
+
+      <div  class="flex-row"
+            ng-if=" ( formVals.oldPassword  === formVals.newPassword ) || ( accountSettingsForm.newPassword.$dirty && accountSettingsForm.newPassword.$touched && accountSettingsForm.newPassword.$invalid ) "
+            ng-messages="accountSettingsForm.newPassword.$error"
+      >
+        <div class="error"
+             ng-message="ng-minlength"
+        >
+          Your Password must be at least 6 characters long
+        </div>
+        <div class="error"
+             ng-if=" ( formVals.oldPassword ) && ( formVals.newPassword ) &&  ( formVals.oldPassword === formVals.newPassword )  "
+        >
+          Your New Password Must be Different From Your Old
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="flex-row">
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label">Save</span>
+        </div>
+      </button>
+    </footer>
+  </form>
+
+</div>

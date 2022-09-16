@@ -1,0 +1,187 @@
+<main class="flex-row">
+
+  <span class="profile-image image-container flex-row"
+        tp-troop-member-profile=" ::note.memberId "
+        tp-troop-member-troop-id=" ::note.troopId "
+        tp-troop-member-avatar-asset-size="smallUrl"
+        ng-click="navToTroopMember()"
+  ></span>
+
+  <div class="note-box flex-column">
+    <div class="top-row flex-row">
+      <!-- <div class="info flex-row flex-spacer"
+            ng-if=" showHeaderInfo !== false && ! editing  "
+      >
+
+        <div class="user-name"
+             tp-troop-member="{{ note.memberId }}"
+             tp-troop-member-troop-id="{{ note.troopId }}"
+             tp-troop-member-user-name="true"
+        ></div>
+        </div> -->
+
+        <div class="middle-row flex-row">
+
+          <div class="text"
+               ng-class="{ 'overflow-marker': needsOverflow }"
+               data-marked=" authorLink + $note.cleanedText "
+               ng-dblclick=" note.memberId === Me.troopMember.$id && edit(note) "
+               ng-if=" ! editing  "
+               ng-click="needsOverflow && navToDetailCard($note)"
+          ></div>
+
+          <div class="editor textarea field-group flex-column"
+                ng-if=" editing "
+          >
+
+            <textarea name="text"
+                      placeholder="Can't leave it blank..."
+                      rows="1"
+                      data-msd-elastic=""
+                      ng-model="$note.text"
+                      ng-change="noteEntryTyping()"
+                      ng-key-bind=""
+                      ng-key-bind-enter-action="save()"
+                      ng-key-bind-enter-catch="single"
+                      ng-key-bind-esc-action="cancel()"
+                      ng-focus=" editing "
+                      ng-blur=" save() "
+                      autocomplete="off"
+            ></textarea>
+
+            <div class="actions flex-row">
+            <!-- <button class="blue-primary small"
+                    ng-click="save()"
+            >
+              <div class="wrapper flex-row">
+                <span class="label">Save</span>
+              </div>
+            </button>
+            <button class="link small"
+                    ng-click="cancel()"
+            >
+              <div class="wrapper flex-row">
+                <span class="label">Cancel</span>
+              </div>
+            </button> -->
+            <span ng-click="cancel()"> &nbsp;Cancel</div>
+          </div>
+
+        </div>
+
+
+
+        <span class="note-menu flex-row"
+              ng-class=" noteMenus[note.$id] === true ? 'showing' : '' "
+              ng-if=" ( Me.troopMember.$id === note.memberId ) || ( Me.troopMember.troopPermission === 'admin' ) "
+        >
+          <span class="menu-button pencil image-container"
+                ng-if=" ( ! editing && ! mobile && note.memberId === Me.troopMember.$id )"
+                ng-click=" edit(note) "
+                title=" Edit "
+          >
+            <svg class="icon pencil">
+              <use xlink:href="#pencil"/>
+            </svg>
+          </span>
+          <span class="menu-button close image-container"
+                ng-if= " ( ! editing && ! mobile && (( Me.troopMember.$id === note.memberId ) || ( Me.troopMember.troopPermission === 'admin' )) ) "
+                ng-click="showDeleteCardNoteModal()"
+                title=" Delete "
+          >
+            <svg class="icon close">
+              <use xlink:href="#close"/>
+            </svg>
+          </span>
+
+          <span class="menu-button image-container flex-row"
+                ng-click=" noteMenus[note.$id] = !noteMenus[note.$id] "
+                ng-if=" ! editing && mobile"
+          >
+
+            <svg class="icon dotdotdot">
+              <use xlink:href="#dotdotdot"/>
+            </svg>
+
+          </span>
+
+          <ul class="menu flex-column"
+              ng-mouseleave=" noteMenus[note.$id] = false "
+              ng-class=" noteMenus[note.$id] === true ? 'show' : '' "
+              ng-if=" ! editing "
+          >
+
+            <li class="edit-filename menu-item flex-row"
+                ng-click="edit(note)"
+                ng-if=" note.memberId === Me.troopMember.$id "
+            >
+              <span class="label">Edit</span>
+            </li>
+
+            <li class="delete menu-item warning flex-row"
+                ng-click="showDeleteCardNoteModal()"
+                ng-if= " ( Me.troopMember.$id === note.memberId ) || ( Me.troopMember.troopPermission === 'admin' ) "
+            >
+              <span class="label">Delete</span>
+            </li>
+
+          </ul>
+        </span>
+
+      </div>
+
+
+
+      <div class="bottom-row flex-row">
+        <span class="timestamp"
+              ng-bind="note.updatedAt | moment:'note-format' "
+        ></span>
+      </div>
+    </div>
+
+</main>
+
+<!-- <footer class="flex-row">
+
+  <span class="timestamp"
+        ng-bind="note.createdAt | moment:'h:mm a' "
+  ></span>
+
+  <span class="note-menu flex-row"
+        ng-class=" noteMenus[note.$id] === true ? 'showing' : '' "
+        ng-if=" ( Me.troopMember.$id === note.memberId ) || ( Me.troopMember.troopPermission === 'admin' ) "
+  >
+
+    <span class="menu-button image-container flex-row"
+          ng-click=" noteMenus[note.$id] = !noteMenus[note.$id] "
+          ng-if=" ! editing "
+    >
+
+      <svg class="icon dotdotdot">
+        <use xlink:href="#dotdotdot"/>
+      </svg>
+
+    </span>
+
+    <ul class="menu flex-column"
+        ng-mouseleave=" noteMenus[note.$id] = false "
+        ng-class=" noteMenus[note.$id] === true ? 'show' : '' "
+        ng-if=" ! editing "
+    >
+
+      <li class="edit-filename menu-item flex-row"
+          ng-click="edit(note)"
+      >
+        <span class="label">Edit</span>
+      </li>
+
+      <li class="delete menu-item warning flex-row"
+          ng-click="showDeleteCardNoteModal()"
+      >
+        <span class="label">Delete</span>
+      </li>
+
+    </ul>
+  </span>
+
+</footer> -->

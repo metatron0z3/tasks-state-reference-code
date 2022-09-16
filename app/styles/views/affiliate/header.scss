@@ -1,0 +1,75 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+[data-state="home.affiliate"] {
+
+  [data-ui-view=dashboardHeader] {
+    padding: 0px 65px;
+    @include size(100%, 70px);
+    position: relative;
+    background: $blue-twentyoneary;
+
+    > .title {
+
+      > h1 {
+        margin-left: 15px;
+        text-align: left;
+        font-size: 17px;
+        font-family: $font-family-medium;
+        color: $white-primary;
+      }
+
+
+    }
+
+    > .trooper {
+      cursor: pointer;
+
+      > .profile-image {
+        @include size(70px);
+
+        > .asset {
+
+          &,
+          > .asset-thumbnail,
+          > .asset-thumbnail > img {
+            @include size(35px);
+          }
+
+          > .asset-thumbnail {
+            border: 0px;
+            @include border-radius(50%);
+          }
+        }
+      }
+
+      > .info {
+
+        > .label {
+          font-size: 14px;
+          color: $white-primary;
+        }
+      }
+
+      > .trooper-actions {
+
+        > .menu-toggle {
+
+          > svg {
+            @include size(8px);
+            fill: rgba($white-primary, 0.5);
+            @include transform(rotate(90deg));
+          }
+        }
+
+        > .menu {
+          bottom: 15px;
+          right: 15px;
+        }
+      }
+    }
+
+
+  }
+
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="17px" height="20px" viewBox="0 0 17 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.3 (16044) - http://www.bohemiancoding.com/sketch -->
+    <title>Locked fill Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Boards" stroke="none" stroke-width="1" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="All-Boards" sketch:type="MSArtboardGroup" transform="translate(-687.000000, -587.000000)">
+            <g id="Board-3" sketch:type="MSLayerGroup" transform="translate(247.000000, 388.000000)">
+                <path d="M440.5,208.762277 C440.5,208.226512 440.936259,207.792189 441.46484,207.792189 L455.53516,207.792189 C456.068027,207.792189 456.5,208.229329 456.5,208.762277 L456.5,217.973287 C456.5,218.509052 456.063741,218.943374 455.53516,218.943374 L441.46484,218.943374 C440.931973,218.943374 440.5,218.506235 440.5,217.973287 L440.5,208.762277 L440.5,208.762277 Z M454.075356,207.792189 L452.136019,207.792189 L452.136019,205.044796 C452.136019,203.087563 450.514298,201.489345 448.499763,201.489345 C446.485228,201.489345 444.863507,203.087563 444.863507,205.044796 L444.863507,207.792189 L442.924171,207.792189 L454.075356,207.792189 Z M442.924171,205.044796 C442.924171,202.010109 445.420449,199.550009 448.499763,199.550009 C451.579078,199.550009 454.075356,202.010109 454.075356,205.044796 L454.075356,208.275011 L442.924171,208.275011 L442.924171,205.044796 Z" id="Locked-fill-Copy" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

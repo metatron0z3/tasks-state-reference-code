@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Email Confirmation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      height:100%;
+      padding:0;
+      margin:0;
+    }
+
+    table {
+      margin: 0 auto;
+      width: 540px;
+    }
+    table > tr {
+      margin: 0 auto;
+    }
+    table tr .logo {
+      color: #05A6F7;
+      font-family: "Avenir";
+      text-align: center;
+      font-size: 56px;
+    }
+    /**  Replace font with helvetica from the vaiables.css file   */
+    table tr .button {
+      text-align: center;
+      padding-bottom: 45px;
+      padding-top: 45px;
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+
+    table > tr .button > td > a {
+      cursor: pointer;
+      padding: 11.5px 68px;
+      text-align: center;
+      outline: 0px;
+      border: 1px solid rgba(25, 57, 69, 0.4);
+      border-radius: 4px;
+      margin: 0 auto;
+      background: #05A6F7;
+      border-color: #05A6F7;
+      color: #FFFFFF;
+      font-size: 18px;
+      font-family: 'Avenir';
+      text-decoration: initial;
+
+    }
+    table > tr .paragraph {
+      border-bottom: 1px solid #cccccc;
+      text-align: center;
+      font-size: 18px;
+      font-family: "Avenir";
+      line-height: 2;
+      color: #8f97a1;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding-bottom: 60px;
+    }
+    table > tr .code {}
+
+
+  </style>
+</head>
+<body>
+<table>
+  <tr>
+    <td>
+      <div class="header-image">
+        <img src="images/email-confirmation-header.png" alt="" />
+      </div>
+    </td>
+  </tr>
+  <tr class="troop-logo">
+    <td>
+      <span class="image-container">
+        <svg data-ng-class="icon" class="icon troop-logo-color">
+          <use xlink:href="#troop-logo-color"/>
+        </svg>
+      </span>
+    </td>
+  </tr>
+  <tr class="heading">
+    <td>
+      <h2>Location. Messaging. Group Boards.</h2>
+    </td>
+  </tr>
+  <tr style="margin: 0 auto;" class="paragraph" >
+    <td>
+      <p>
+        To activate account we are going to need to click the
+        <br>link above. Click now, because the link will expire.
+      </p>
+    </td>
+  </tr>
+  <tr class="button">
+    <td>
+      <a href="">Confirm Email</a>
+    </td>
+  </tr>
+  <tr class="code">
+    <td style="padding-top: 0px; padding: 35px;">
+      <p>
+        Your 6 digit code is:
+        <span style="color: #89cafa;">{{.SignUpCode}}</span>
+      </p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
+

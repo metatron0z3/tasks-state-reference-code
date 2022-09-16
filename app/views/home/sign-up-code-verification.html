@@ -1,0 +1,39 @@
+<section class="verify-sign-up-code page flex-column">
+
+  <section class="left-sidebar"
+  ></section>
+
+  <section class="code-matches">
+           <!--ng-if=" 'does-match' === state "-->
+
+
+    <div class="">
+      <h2>Code Matches</h2>
+      <p>Yay it works</p>
+    </div>
+
+  </section>
+
+  <section class="code-does-not-match"
+           ng-if=" 'does-not-match' === state "
+  >
+
+    <div class="">
+      <h2>Code Does Not Match</h2>
+      <p></p>
+    </div>
+
+  </section>
+
+  <section class="code-does-not-exist"
+           ng-if=" 'does-not-exist' === state "
+  >
+
+    <div class="">
+      <h2>Code Does Not Exist</h2>
+      <p></p>
+    </div>
+
+  </section>
+
+</section>

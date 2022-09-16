@@ -1,0 +1,303 @@
+<section class="flex-column" xmlns="http://www.w3.org/1999/html">
+
+  <div class="flex-row">
+    <h1>Colors</h1>
+  </div>
+
+  <div class="colors flex-row-wrap">
+    <div class="thumbnail flex-column"
+         ng-repeat="color in colors "
+         ng-class="color"
+      >
+      <span class="color">&nbsp;</span>
+      <span class="hex"></span>
+      <span class="name">{{ color }}</span>
+    </div>
+  </div>
+
+  <div class="flex-row">
+    <h1>Icons</h1>
+  </div>
+
+  <div class="icons flex-row-wrap">
+    <div class="thumbnail flex-column"
+         ng-repeat="icon in icons "
+         ng-class="icon"
+      >
+      <svg class="icon"
+           ng-class="icon"
+        >
+        <use xlink:href="{{ '#' + icon }}"></use>
+      </svg>
+      <label>{{ icon }}</label>
+    </div>
+  </div>
+
+  <div class="flex-row">
+    <h1>Animated Icons</h1>
+  </div>
+
+  <div class="icons flex-row-wrap">
+
+    <div id="animated-loading" class="thumbnail flex-column">
+      <span class="animated-loading image-container">
+        <svg class="icon loading-1">
+          <use xlink:href="#loading-1"/>
+        </svg>
+        <svg class="icon loading-2">
+          <use xlink:href="#loading-2"/>
+        </svg>
+        <svg class="icon loading-3">
+          <use xlink:href="#loading-3"/>
+        </svg>
+      </span>
+    </div>
+
+  </div>
+
+  <div class="flex-row">
+    <h1>&lt;h1&gt; Header</h1>
+  </div>
+
+  <div class="flex-row">
+    <h2>&lt;h2&gt; Header</h2>
+  </div>
+
+  <div class="flex-row">
+    <h3>&lt;h3&gt; Header</h3>
+  </div>
+
+  <div class="flex-row">
+    <h4>&lt;h4&gt; Header</h4>
+  </div>
+
+  <div class="flex-row">
+    <p>&lt;p&gt; Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+
+  <div class="flex-row">
+    <h1>Form Elements</h1>
+  </div>
+
+  <div class="flex-row">
+    <p>Input Text: &nbsp;</p></br>
+    <input type="text" />
+  </div>
+
+  <div class="flex-row">
+    <p>Input Textarea: &nbsp;</p></br>
+    <input type="textarea" />
+  </div>
+
+  <div class="flex-row">
+    <p>Radio Button: &nbsp;</p></br>
+    <input type="radio" />
+  </div>
+
+  <div class="flex-row">
+    <p>Checkbox: &nbsp;</p></br>
+    <input type="checkbox" />
+  </div>
+
+  <div class="flex-row-wrap">
+    <p>Button</p>
+    <button class=""
+            ng-repeat="type in buttons.types"
+            ng-class="type"
+      >
+      <div class="wrapper flex-row">
+        <span class="label">{{ type }}</span>
+      </div>
+    </button>
+  </div>
+
+  <div class="flex-row-wrap">
+    <p>Button Sizes</p>
+    <button class=""
+            ng-repeat="size in buttons.sizes"
+            ng-class="size"
+      >
+      <div class="wrapper flex-row">
+        <span class="label">{{ size }}</span>
+      </div>
+    </button>
+  </div>
+
+  <div class="flex-row-wrap">
+    <button class=""
+            ng-repeat="color in colors"
+            ng-class="color"
+      >
+      <div class="wrapper flex-row">
+        <span class="label">{{ color }}</span>
+      </div>
+    </button>
+  </div>
+
+  <div class="flex-row-wrap">
+    <button class=""
+            ng-repeat="icon in icons"
+            ng-class="icon"
+      >
+      <div class="wrapper flex-row">
+        <span class="label">{{ icon }}</span>
+        <span class="image-container">
+          <svg class="icon"
+               ng-class="icon"
+            >
+            <use xlink:href="{{ '#' + icon }}"></use>
+          </svg>
+        </span>
+      </div>
+    </button>
+  </div>
+
+
+  <div class="flex-row">
+    <div class="modal-overlay flex-row show">
+
+      <form name="exampleModalForm"
+            class="card-modal modal flex-column"
+            novalidate=""
+      >
+
+        <div class="close image-container">
+          <svg class="icon close">
+            <use xlink:href="#close"/>
+          </svg>
+        </div>
+
+        <header class="drag-handle">
+          <h1 class="uppercase">Example Modal with Form</h1>
+        </header>
+
+        <main>
+
+          <div class="uploader field-group flex-row">
+            <ul class="asset-list flex-row"></ul>
+            <div class="image-container">
+              <svg class="icon upload">
+                <use xlink:href="#upload"/>
+              </svg>
+            </div>
+            <div class="text">Drag and drop to upload images and attachments.</div>
+          </div>
+
+          <div class="field-group flex-row"
+               ng-class=" labels['exampleModalForm.textInput'] ? '' : 'hide-label' "
+            >
+            <label class="uppercase">Text Input</label>
+            <input name="text"
+                   type="text"
+                   ng-model="forms.exampleModalForm.textInput"
+                   ng-focus="hideLabel('exampleModalForm.textInput')"
+                   ng-blur=" ! forms.exampleModalForm.textInput ? showLabel('exampleModalForm.textInput') : '' "
+              >
+
+          </div>
+
+          <div class="textarea field-group flex-row"
+               ng-class=" labels['exampleModalForm.textarea'] ? '' : 'hide-label' "
+            >
+            <label class="uppercase">Textarea</label>
+            <textarea name="textarea"
+                      ng-model="forms.exampleModalForm.textarea"
+                      ng-focus="hideLabel('exampleModalForm.textarea')"
+                      ng-blur=" ! forms.exampleModalForm.textarea ? showLabel('exampleModalForm.textarea') : '' "
+            >
+
+            </textarea>
+
+          </div>
+
+        </main>
+
+        <footer class="flex-row">
+          <button class="blue-primary">
+            <div class="wrapper flex-row">
+              <span class="label">Save</span>
+            </div>
+          </button>
+        </footer>
+      </form>
+
+    </div>
+
+  </div>
+
+  <div class="flex-row">
+
+    <form name="exampleForm"
+          class="flex-column"
+          novalidate=""
+    >
+      <header>
+        <h1 class="uppercase">Example Form</h1>
+      </header>
+
+      <main>
+
+        <div class="field-group flex-row"
+             ng-class=" labels['exampleForm.textInput'] ? '' : 'hide-label' "
+          >
+          <label class="uppercase">Text Input</label>
+          <input name="text"
+                 type="text"
+                 ng-model="forms.exampleForm.textInput"
+                 ng-focus="hideLabel('exampleForm.textInput')"
+                 ng-blur=" ! forms.exampleForm.textInput ? showLabel('exampleForm.textInput') : '' "
+            >
+
+        </div>
+
+        <div class="field-group flex-row"
+             ng-class=" labels['exampleForm.minicolors'] ? '' : 'hide-label' "
+          >
+          <label class="uppercase">Mini Colors</label>
+          <input name="minicolors"
+                 type="text"
+                 data-minicolors=""
+                 ng-model="forms.exampleForm.minicolors"
+                 ng-focus="hideLabel('exampleForm.minicolors')"
+                 ng-blur=" ! forms.exampleForm.minicolors ? showLabel('exampleForm.minicolors') : '' "
+            >
+
+        </div>
+
+
+        <div class="textarea field-group flex-row"
+             ng-class=" labels['exampleModalForm.textarea'] ? '' : 'hide-label' "
+          >
+          <label class="uppercase">Textarea</label>
+            <textarea name="textarea"
+                      ng-model="forms.exampleForm.textarea"
+                      ng-focus="hideLabel('exampleForm.textarea')"
+                      ng-blur=" ! forms.exampleForm.textarea ? showLabel('exampleForm.textarea') : '' "
+              >
+
+            </textarea>
+
+        </div>
+
+      </main>
+
+      <footer class="flex-row">
+        <button class="blue-primary spinner hide-icon">
+          <div class="wrapper flex-row">
+            <span class="label">Save</span>
+              <span class="image-container">
+                <svg class="icon spinner">
+                  <use xlink:href="#spinner"/>
+                </svg>
+              </span>
+          </div>
+        </button>
+      </footer>
+    </form>
+  </div>
+
+
+
+
+
+</section>

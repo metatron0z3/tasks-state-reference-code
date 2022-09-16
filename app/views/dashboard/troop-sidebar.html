@@ -1,0 +1,78 @@
+<ul class="troop-list flex-column">
+
+  <li class="new-troop flex-row">
+    <span class="image-container flex-row"
+          ng-click="showNewTroopModal()"
+    >
+      <svg class="icon plus">
+        <use xlink:href="#plus"></use>
+      </svg>
+    </span>
+  </li>
+
+  <li class="text"
+      ng-if="invites.length > 0"
+  >
+    Invites
+  </li>
+
+  <li class="invite flex-row"
+      ng-if="invites.length > 0"
+      ng-repeat=" invite in invites "
+      ng-click=" acceptInvite(invite) "
+  >
+    <span class="text flex-row"
+          ng-class=" true ? 'active' : '' "
+    >
+      {{ invite.abbreviation }}
+    </span>
+    <div class="bubble">
+      <div class="wrapper">
+        <span class="image-container">
+          <svg class="icon circle">
+            <use xlink:href="#circle"/>
+          </svg>
+        </span>
+        <span class="image-container">
+          <svg class="icon plus">
+            <use xlink:href="#plus"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </li>
+
+  <li class="splitter"
+      ng-if="invites.length > 0"
+  >
+    &nbsp;
+  </li>
+
+  <li class="troop flex-row"
+      ng-if="troops.length > 0"
+      ng-repeat=" $troop in troops "
+      tp-troop=" $troop "
+      ng-click=" switchToTroop($troop.$id) "
+      data-troop-id="{{ $troop.$id }}"
+  ></li>
+
+  <li class="splitter"
+      ng-if=" publicTroop && troops.length > 0"
+  >
+    &nbsp;
+  </li>
+
+  <!-- <li class="text"
+      ng-if="publicTroops.length > 0"
+  >
+    Public Troops
+  </li> -->
+
+  <li class="troop flex-row"
+      ng-if=" publicTroop "
+      tp-troop=" publicTroop "
+  ></li>
+
+
+
+</ul>

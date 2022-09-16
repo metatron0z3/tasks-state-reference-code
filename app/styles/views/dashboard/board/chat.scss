@@ -1,0 +1,27 @@
+@import "../../../bower-import.scss";
+@import "../../../variables.scss";
+
+[data-state*="dashboard.board.chat"],
+[data-state*="dashboard.search.chat"] {
+
+  [data-ui-view=dashboardContent] {
+
+
+  }
+
+}
+
+@media only screen and (max-width:1024px) {
+
+  [data-state*="dashboard.board.chat"],
+  [data-state*="dashboard.search.chat"] {
+
+    [data-ui-view=dashboardContent] {
+
+
+    }
+
+
+
+  }
+}

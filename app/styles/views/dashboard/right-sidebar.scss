@@ -1,0 +1,13 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+[data-ui-view=dashboardRightSidebar] {
+  z-index: 0;
+  width: $right-sidebar-width;
+  min-width: $right-sidebar-width;
+  max-width: $right-sidebar-width;
+  height: 100%;
+  background: $white-primary;
+}
+
+

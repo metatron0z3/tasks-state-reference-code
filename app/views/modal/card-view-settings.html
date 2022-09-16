@@ -1,0 +1,81 @@
+<div class="modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click=" close() "
+>
+
+  <form name="cardViewSettingsModalForm"
+        class="card-view-settings-modal modal flex-column"
+        novalidate="novalidate"
+        ng-submit=" save(cardViewSettingsModalForm) "
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click="close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header>
+      <h1>Cards View Settings</h1>
+      <!-- <p>Customize the appearance of the view.</p> -->
+    </header>
+
+
+    <main>
+
+      <div class="image-size field-group flex-column">
+        <label class="flex-column">
+          <h1>Image Size</h1>
+        </label>
+
+        <span class="flex-spacer"></span>
+
+        <ui-select ng-model="imageSizeChoice.value"
+                   search-enabled="false"
+        >
+          <ui-select-match>
+            <span ng-bind="$select.selected.label"></span>
+            <span class="arrow-down"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="choice.value as choice in imageSizes"
+                             position="down"
+                             ng-hide=" ! $select.open "
+          >
+            <span ng-bind="choice.label | highlight: $select.search"></span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+
+      <div class="switch-group field-group flex-row">
+        <label class="flex-column">
+          <h1>Show Header</h1>
+          <!-- <p>Hide card header on all cards</p> -->
+        </label>
+        <switch name="showHeader"
+                class="blue"
+                ng-model=" viewSettings.card.showHeader "
+        ></switch>
+      </div>
+
+    </main>
+
+
+    <footer class="flex-row">
+
+      <!-- <button class="cancel link">
+        <div class="wrapper flex-row">
+          <span class="label">Cancel</span>
+        </div>
+      </button> -->
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label">Save</span>
+        </div>
+      </button>
+    </footer>
+  </form>
+
+</div>

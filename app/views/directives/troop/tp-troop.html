@@ -1,0 +1,16 @@
+<span class="text flex-row"
+      ng-class=" true ? 'active' : '' "
+>
+  {{ troop.abbreviation }}
+</span>
+<div class="notifications"
+     ng-class=" troopMemberNotifications.breakdown.totalUnreadNotifications ? 'active' : '' "
+>
+  <span class="image-container">
+  
+    <svg class="icon circle">
+      <use xlink:href="#circle"/>
+    </svg>
+  </span>
+
+</div>

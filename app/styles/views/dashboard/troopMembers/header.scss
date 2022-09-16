@@ -1,0 +1,37 @@
+@import "../../../bower-import.scss";
+@import "../../../variables.scss";
+
+
+[data-state*="dashboard.troopMembers.list"] {
+
+  [data-ui-view=dashboardHeader] {
+    > .wrapper {
+
+      > .nav-list {
+
+        > .nav-item {
+          width: 100px;
+          &:first-of-type {
+            width: 120px;
+          }
+        }
+      }
+    }
+  }
+
+  &.showing-search-bar {
+
+    [data-ui-view=dashboardHeader] {
+
+      > .wrapper {
+
+        > form {
+
+          &.search {
+            background: $white-primary;
+          }
+        }
+      }
+    }
+  }
+}

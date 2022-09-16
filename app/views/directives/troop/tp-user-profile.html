@@ -1,0 +1,21 @@
+<div class="asset flex-column"
+    ng-if=" user.avatarAssetId "
+    tp-asset=" user.avatarAssetId "
+    tp-asset-is-avatar=" true "
+    tp-asset-user-id=" user.$id "
+    tp-asset-size=" smallUrl "
+    tp-asset-info=" false "
+    tp-asset-download=" false "
+    tp-asset-rename=" false "
+    tp-asset-remove=" false "
+    tp-asset-progress=" progress "
+    tp-asset-title=" user.name "
+></div>
+
+<div class="asset flex-column"
+     ng-if=" ! user.avatarAssetId "
+>
+  <div class="asset-thumbnail">
+    <img src=" {{ defaultAvatarIconUrl }} " />
+  </div>
+</div>

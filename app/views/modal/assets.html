@@ -1,0 +1,66 @@
+<div class="assets-modal-overlay modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+>
+
+  <div class="close image-container"
+       ng-click="close()"
+    >
+    <svg class="icon close">
+      <use xlink:href="#close"/>
+    </svg>
+  </div>
+
+
+  <span class="prev-asset flex-row flex-spacer">
+    <span class="image-container"
+          ng-disabled=" ! prevAssetKey "
+          ng-click="navToAsset(prevAssetKey)"
+      >
+      <svg class="icon arrow-reverse">
+        <use xlink:href="#arrow-reverse"/>
+      </svg>
+    </span>
+  </span>
+
+<!--- this input is here for focusing reasons, so the bkg does't move on keydown/up -->
+  <input type="text"
+         ng-focus=" showModal "
+  />
+
+  <div class="assets-modal modal flex-column"
+       ng-class=" extraClasses "
+  >
+
+
+    <main>
+      <ul class="asset-list flex-row-wrap">
+
+        <li class="asset flex-column"
+            tp-asset=" assetId "
+            tp-asset-troop-id=" troopId "
+            tp-asset-size=" originalUrl "
+            tp-asset-info=" false "
+            tp-asset-download=" checkDownload() "
+            tp-asset-rename=" false "
+            tp-asset-remove=" false "
+            tp-asset-display-document=" isDocumentFileType "
+        ></li>
+      </ul>
+
+    </main>
+  </div>
+
+  <span class="next-asset flex-row flex-spacer">
+    <span class="image-container"
+          ng-disabled=" ! nextAssetKey "
+          ng-click="navToAsset(nextAssetKey)"
+      >
+      <svg class="icon arrow">
+        <use xlink:href="#arrow"/>
+      </svg>
+    </span>
+  </span>
+
+
+
+</div>

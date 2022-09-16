@@ -1,0 +1,214 @@
+<section class="login flex-column"
+         ng-class=" { loading: isProcessing }"
+         ng-has-overflow=""
+>
+
+  <div class="background image-container">
+
+    <div class="earth-map-dots image-container">
+      <svg class="icon earth-map-dots">
+        <use xlink:href="#earth-map-dots"/>
+      </svg>
+    </div>
+
+    <div class="sonar-animation flex-row">
+
+      <div class="image-00 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhj8PUMZfG6MBaWu_original_pulse_web_00000.png">
+      </div>
+
+      <div class="image-01 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhj5giq6lT5fh68V_original_pulse_web_00001.png">
+      </div>
+
+      <div class="image-02 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhj2Djgf4D4cF2Ad_original_pulse_web_00002.png">
+      </div>
+
+      <div class="image-03 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhiyAVY4p-i7ODMv_original_pulse_web_00003.png">
+      </div>
+
+      <div class="image-04 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhi91GtLV7CKqAwp_original_pulse_web_00004.png">
+      </div>
+
+      <div class="image-05 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhi5_VX1eB7LVMXy_original_pulse_web_00005.png">
+      </div>
+
+      <div class="image-06 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhi1ictHh1vVV5lN_original_pulse_web_00006.png">
+      </div>
+
+      <div class="image-07 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhi-foxTaHvIlZNg_original_pulse_web_00007.png">
+      </div>
+
+      <div class="image-08 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhzlQB8jieTjQVb_original_pulse_web_00008.png">
+      </div>
+
+      <div class="image-09 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhy5K6a1vDa0RJg_original_pulse_web_00009.png">
+      </div>
+
+      <div class="image-10 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhwYsgUF-sbAPht_original_pulse_web_00010.png">
+      </div>
+
+      <div class="image-11 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhH0GLtwfxO9lkr_original_pulse_web_00011.png">
+      </div>
+
+      <div class="image-12 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhEeGUpdgScTres_original_pulse_web_00012.png">
+      </div>
+
+      <div class="image-13 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhDLer-iwYHbyDm_original_pulse_web_00013.png">
+      </div>
+
+      <div class="image-14 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhAXU7ObhntVVzs_original_pulse_web_00014.png">
+      </div>
+
+    </div>
+
+  </div>
+
+  <a class="troop-logo image-container"
+     ui-sref="home"
+  >
+    <svg class="icon troop-logo">
+      <use xlink:href="#troop-logo"/>
+    </svg>
+  </a>
+
+  <form name="loginForm"
+        class="login-modal modal embedded-modal flex-column"
+        novalidate="novalidate"
+        ng-submit="login(loginForm)"
+  >
+    <header class="drag-handle">
+      <h1>Log In</h1>
+    </header>
+
+    <div class="loader-wrapper flex-row"
+         ng-if=" Me.isLoggingIn "
+    >
+      <div class="wrapper">
+        <div class="loader-2 small"></div>
+      </div>
+    </div>
+
+    <main>
+      <p class="field-group flex-row"
+         ng-class="{ 'error': formVals.failedAuth || ( loginForm.phone.$dirty && loginForm.phone.$touched && loginForm.phone.$invalid ) }"
+      >
+        <input name="phone"
+               placeholder="Mobile Phone Number"
+               type="tel"
+               required=""
+               phone-number=""
+               ng-model=" formVals.$storage.newAccount.phone "
+               ng-blur=" phoneCheck() "
+               ng-change=" formChange() "
+               country-code=" "
+               autocomplete="off"
+        />
+      </p>
+      <div class="flex-row"
+           ng-if=" ( ! isProcessing ) && ( formVals.failedAuth || ( loginForm.phone.$dirty && loginForm.phone.$touched && loginForm.phone.$invalid ) )"
+           ng-messages="loginForm.phone.$error"
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Your mobile phone number is required
+        </div>
+        <div class="error"
+             ng-message="phoneNumber"
+        >
+          Your mobile phone number must be valid
+        </div>
+        <div class="error"
+             ng-if=" formVals.failedAuth "
+        >
+          Oops! That phone / password combination is not valid.
+        </div>
+      </div>
+
+      <p class="field-group flex-row"
+          ng-class="{ 'error': ( ! isProcessing ) && ( loginForm.password.$dirty && loginForm.password.$touched && loginForm.password.$invalid ) }"
+      >
+        <input placeholder="Password"
+               type="password"
+               name="password"
+               required=""
+               ng-change="formChange()"
+               ng-model=" formVals.$storage.newAccount.password "
+               autocomplete="off"
+        />
+      </p>
+      <div  class="flex-row"
+            ng-if="( ! isProcessing ) && ( loginForm.password.$dirty && loginForm.password.$touched && loginForm.password.$invalid )"
+            ng-messages="loginForm.password.$error"
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Your Password is Required
+        </div>
+      </div>
+
+
+      <p class="forgot-password field-group flex-row">
+        <span class="link"
+              ng-click="forgotPassword(loginForm)"
+        >
+          Forgot Password?
+        </span>
+        <span class="reset-sent"
+              ng-if=" formVals.passwordResetSent "
+        >
+          Reset request sent.
+        </span>
+      </p>
+
+    </main>
+
+    <footer class="flex-row">
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label">Log In</span>
+        </div>
+      </button>
+    </footer>
+
+  </form>
+
+  <a class="sign-up"
+     ui-sref="sign-up"
+  >
+    Don’t have an account? Sign Up
+  </a>
+
+
+
+</section>

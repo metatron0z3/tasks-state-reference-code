@@ -1,0 +1,176 @@
+@import "../bower-import.scss";
+@import "../variables.scss";
+
+$header-height: 70px;
+$footer-height: 50px;
+
+::-webkit-scrollbar {
+  display:none;
+}
+
+
+
+html {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  //position: fixed;
+  overflow: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+}
+/**  set containers to display: nne tp avoid the flicker that this is causing.  */
+* {
+  margin: 0px;
+  //@include transition(all 0.2s linear 0s);
+
+  &,
+  &:before,
+  &:after {
+    box-sizing: inherit;
+  }
+
+}
+
+a {
+  outline: 0;
+  color: $grey-primary;
+  text-decoration: none;
+}
+
+img {
+  box-sizing: content-box;
+}
+
+svg {
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+}
+
+video {
+  outline: none;
+}
+
+body {
+  height: 100%;
+  background: $blue-grey-septenary;
+  //overflow-x: hidden;
+  //overflow-y: auto;
+  //-webkit-overflow-scrolling: touch;
+  &.read-only-mode {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    > .wrapper {
+      position: relative;
+      z-index: 0;
+    }
+  }
+  &.flex-row {
+    @include align-items(flex-start);
+    @include justify-content(flex-start);
+  }
+
+  > aside {
+
+
+  }
+
+  > .wrapper {
+    width: 75%;
+    min-width: 50vw;
+    height: 100%;
+    @include align-items(flex-start);
+    @include justify-content(center);
+    @include flex-grow(1);
+
+
+    > main {
+      width: 100%;
+      height: 100%;
+
+      @include justify-content(center);
+
+      > header {
+        width: 100%;
+      }
+
+      > section {
+
+      }
+
+    }
+
+
+  }
+
+
+
+}
+
+
+body {
+  > .background {
+    display: none;
+  }
+}
+
+
+body.loading {
+
+  > .background {
+    @include size(100%);
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    display: inline-block;
+    z-index: -2;
+    //@include background-size(cover);
+
+    &:before {
+      z-index: -1;
+      content: "";
+      @include size(100%);
+      left: 0px;
+      top: 0px;
+      position: absolute;
+      background-image: linear-gradient(0deg, $blue-sixteenary 0%, $blue-seventenary 100%);
+    }
+
+    .loading-anim{
+      //border: 1px solid blue;
+      width: $loading-anim-size;
+      height: $loading-anim-height;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      > div {
+        content: " ";
+        width: $loading-anim-dot-size;
+        height: $loading-anim-dot-size;
+        background: $loading-anim-dot-color;
+        border-radius: 100%;
+        position: absolute;
+        animation: shift 1.6s linear infinite;
+        &:nth-of-type(1) { animation-delay: -.4s; }
+        &:nth-of-type(2) { animation-delay: -.8s; }
+        &:nth-of-type(3) { animation-delay: -1.2s; }
+
+      }
+    }
+
+    .loading-lbl {
+      color: white;
+      font-family: $font-family-medium;
+      top: 58%;
+      left: 50%;
+      position: absolute;
+    }
+  }
+}
+[data-os-name="iOS"] {
+  html {
+    position: fixed;
+  }
+}

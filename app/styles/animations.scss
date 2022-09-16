@@ -1,0 +1,504 @@
+@import "bower-import.scss";
+@import "variables.scss";
+
+@keyframes blink {
+  0% {
+    @include transform( scale(1, 1) );
+  }
+  2% {
+    @include transform( scale(1, 0) );
+  }
+  4% {
+    @include transform( scale(1, 0) );
+  }
+  5% {
+    @include transform( scale(1, 1) );
+  }
+  100% {
+    @include transform( scale(1, 1) );
+  }
+}
+@keyframes showMe {
+  0% { visibility: visible; z-index: 11; }
+50% { visibility: hidden; z-index: 0; }
+  100% { visibility: hidden; z-index: 0; }
+}
+@keyframes shift {
+  0%{
+    left: -2*$loading-anim-dot-size;
+    opacity: 0;
+    background-color: white;
+  }
+  10% {
+    left: 0;
+    opacity: 1;
+  }
+  90% {
+    left: $loading-anim-size;
+    opacity: 1;
+  }
+  100%{
+    left: ($loading-anim-size + 2*$loading-anim-dot-size);
+    background-color: white;
+    opacity: 0;
+  }
+}
+@keyframes flap {
+  0% {
+    @include transform( scale(1, 1) );
+  }
+  2% {
+    @include transform( scale(0, 1) );
+  }
+  4% {
+    @include transform( scale(0, 1) );
+  }
+  5% {
+    @include transform( scale(1, 1) );
+  }
+  100% {
+    @include transform( scale(1, 1) );
+  }
+}
+@keyframes grow {
+  0% {
+    @include transform( scale(1, 1) );
+  }
+  2% {
+    @include transform( scale(1.7, 1.7) );
+  }
+  4% {
+    @include transform( scale(1.5, 1.5) );;
+  }
+  5% {
+    @include transform( scale(1, 1) );
+  }
+  100% {
+    @include transform( scale(1, 1) );
+  }
+}
+@keyframes spin {
+  from {
+    @include transform( rotate(0deg) );
+  }
+  to {
+    @include transform( rotate(360deg) );
+  }
+}
+@keyframes rock {
+  0% {
+    @include transform( rotate(0deg) );
+  }
+  10% {
+    @include transform( rotate(-15deg) );
+  }
+  20% {
+    @include transform( rotate(15deg) );
+  }
+  30% {
+    @include transform( rotate(0deg) );
+  }
+  100% {
+    @include transform( rotate(0deg) );
+  }
+}
+@keyframes scroll-down {
+  0% {
+    @include transform( scale(1, 1) translate(0px, 0px));
+  }
+  19% {
+    @include transform( scale(1, 1) translate(0px, 0px));
+  }
+  20% {
+    @include transform( scale(0.5, 0.5) translate(0px, -50%));
+  }
+  30% {
+    @include transform( scale(0.5, 0.5) translate(0px, 75%));
+  }
+  31% {
+    @include transform( scale(1, 1) translate(0px, 0px));
+  }
+}
+@keyframes scroll-right {
+  0% {
+    @include transform( scale(0.5, 0.5) translate(-50%, 0px) rotate(0deg));
+  }
+  20% {
+    @include transform( scale(0.5, 0.5) translate(-25%, 0px) rotate(0deg));
+  }
+  24% {
+    @include transform( scale(0.5, 0.5) rotate(-15deg));
+  }
+  28% {
+    @include transform( scale(0.5, 0.5) rotate(-15deg));
+  }
+  30% {
+    @include transform( scale(0.5, 0.5) translate(50%, 0px) rotate(0deg));
+  }
+  100% {
+    @include transform( scale(0.5, 0.5) translate(75%, 0px) rotate(0deg));
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out-in {
+  0% {
+    opacity: 1;
+  }
+  1% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.faded-in {
+  @include animation-name(fade-in);
+  @include animation-duration(0.4s);
+  @include animation-timing-function(linear);
+  @include animation-delay(0);
+}
+
+.faded-out {
+  @include animation-name(fade-out);
+  @include animation-duration(0.4s);
+  @include animation-timing-function(linear);
+  @include animation-delay(0);
+}
+
+@keyframes slide-gradient-animation {
+  0% {
+    //background-position: 0%, 10%, 20%, 30%, 100%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    //background-position: 0%, 40%, 50%, 60%, 100%;
+    //@include transform(translateX(0%));
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    //background-position: 0%, 70%, 80%, 90%, 100%;
+    //@include transform(translateX(50%));
+    left: 100%;
+  }
+}
+
+.slide-gradient-animation {
+  //background: linear-gradient(to right, #ffffff 40%, #ffffff 50%, #207cca 60%, #ffffff 100%, #ffffff 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+
+  &:after {
+    content: "";
+    height: 100%;
+    width: 20%;
+    left: -25%;
+    top: 1px;
+    display: inline-block;
+    position: absolute;
+
+    //background: linear-gradient(to right, #FFFFFF 0%, #FFFFFF 40%, #008000 50%, #FFFFFF 60%, #FFFFFF 100%);
+    background: linear-gradient(to right, #FFFFFF 0%,#84c99d 50%, #FFFFFF 100%);
+
+    @include animation-name(slide-gradient-animation);
+    @include animation-duration(1s);
+    @include animation-timing-function(linear);
+    @include animation-delay(0);
+  }
+}
+
+@keyframes pulse-grow {
+  100% {
+    transform: scale(1.02);
+  }
+}
+
+/* Pulse Grow */
+@-webkit-keyframes tp-fade {
+  to {
+    opacity: 0.5;
+  }
+}
+
+@keyframes tp-fade {
+  to {
+    opacity: 0.5;
+  }
+}
+
+/* The starting CSS styles for the enter animation */
+.fade.ng-enter {
+  transition:0.5s linear all;
+  opacity:0;
+}
+
+/* The finishing CSS styles for the enter animation */
+.fade.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+/* now the element will fade out before it is removed from the DOM */
+.fade.ng-leave {
+  transition:0.5s linear all;
+  opacity:1;
+}
+.fade.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+
+/* Loading spinner */
+@-webkit-keyframes loader-spinner {
+  0% {
+    @include transform(rotate(0deg));
+  }
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+@keyframes loader-spinner {
+  0% {
+    @include transform(rotate(0deg));
+  }
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+
+@include keyframes(radial-gradient-pulse) {
+  0% {
+    //@include transform(scale(1.0));
+    background: rgba($blue-octornary, 0.5); /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, rgba($blue-octornary, 0.5) 0%, #ffffff 70%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover, rgba($blue-octornary, 0.5) 0%,#ffffff 70%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center, rgba($blue-octornary, 0.5) 0%,#ffffff 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{rgba($blue-octornary, 0.5)}', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  }
+  50% {
+    //@include transform(scale(1.0));
+    background: rgba($blue-octornary, 0.5); /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, rgba($blue-octornary, 0.5) 0%, #ffffff 70%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover, rgba($blue-octornary, 0.5) 0%,#ffffff 70%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center, rgba($blue-octornary, 0.5) 0%,#ffffff 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{rgba($blue-octornary, 0.5)}', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  }
+  100% {
+    //@include transform(scale(1.0));
+    background: rgba($blue-octornary, 0.5); /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, rgba($blue-octornary, 0.5) 0%, #ffffff 70%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover, rgba($blue-octornary, 0.5) 0%,#ffffff 70%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center, rgba($blue-octornary, 0.5) 0%,#ffffff 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{rgba($blue-octornary, 0.5)}', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  }
+
+}
+
+@include keyframes(breath) {
+  0% {
+      @include transform(scale(0.7));
+  }
+
+  25% {
+    @include transform(scale(0.9));
+  }
+
+  60% {
+    @include transform(scale(0.7));
+  }
+
+  100% {
+    @include transform(scale(0.7));
+  }
+}
+
+@include keyframes(loader2) {
+  0% {
+    @include transform(rotate(0deg));
+  }
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+
+@include keyframes(sonar-image) {
+  0% {
+    opacity: 0;
+  }
+  24% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  51% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes shift-fade-up {
+  0% {
+		@include transform(translateY(50%));
+    opacity: 0;
+	}
+
+	100% {
+		@include transform(translateY(0));
+    opacity: 1;
+	}
+}
+/* Wobble Vertical */
+@keyframes wobble-vertical {
+	25% {
+		@include transform(translateY(-15px));
+	}
+
+	75% {
+		@include transform(translateY(10px));
+	}
+
+	100% {
+		@include transform(translateY(0));
+	}
+}
+
+
+
+.rotate {
+  @include animation-name(spin);
+  @include animation-duration(6s);
+  @include animation-timing-function(linear);
+  @include animation-delay(0s);
+  @include animation-iteration-count(infinite);
+
+  &.fast {
+    @include animation-duration(2s);
+  }
+  &.faster {
+    @include animation-duration(1s);
+  }
+  &.fastest {
+    @include animation-duration(0.1s);
+  }
+}
+/*
+&.eye {
+	@include animation-name(blink);
+	@include animation-duration(6s);
+	@include animation-timing-function(linear);
+	@include animation-delay(2s);
+	@include animation-iteration-count(infinite);
+}
+&.eye-mobile {
+	@include animation-name(blink);
+	@include animation-duration(6s);
+	@include animation-timing-function(linear);
+	@include animation-delay(1s);
+	@include animation-iteration-count(infinite);
+}
+&.twitter {
+	@include animation-name(flap);
+	@include animation-duration(6s);
+	@include animation-timing-function(linear);
+	@include animation-delay(4s);
+	@include animation-iteration-count(infinite);
+}
+
+&.gear {
+	@include animation-name(spin);
+	@include animation-duration(6s);
+	@include animation-timing-function(linear);
+	@include animation-delay(0s);
+	@include animation-iteration-count(infinite);
+}
+&.person {
+	&:hover {
+		@include animation-name(rock);
+		@include animation-duration(1s);
+		@include animation-timing-function(linear);
+		@include animation-delay(0s);
+		@include animation-iteration-count(infinite);
+	}
+}
+&.magnifying-glass {
+	&:hover {
+		@include animation-name(grow);
+		@include animation-duration(3s);
+		@include animation-timing-function(linear);
+		@include animation-delay(0s);
+		@include animation-iteration-count(infinite);
+	}
+}
+&.down-arrow {
+	&:hover {
+		@include animation-name(scroll-down);
+		@include animation-duration(6s);
+		@include animation-timing-function(linear);
+		@include animation-delay(0s);
+		@include animation-iteration-count(infinite);
+	}
+}
+&.cart {
+	&:hover {
+		@include animation-name(scroll-right);
+		@include animation-duration(6s);
+		@include animation-timing-function(linear);
+		@include animation-delay(0s);
+		@include animation-iteration-count(infinite);
+	}
+}
+*/

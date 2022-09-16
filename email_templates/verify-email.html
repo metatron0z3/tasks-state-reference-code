@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Email Confirmation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body style="height:100%; padding:0; margin:0;">
+<table style="margin: 0 auto; width: 540px;">
+  <tr>
+    <td>
+      <div >
+
+        <div class="troop-logo image-container item">
+          <svg class="icon troop-logo">
+            <use xlink:href="#troop-logo"/>
+          </svg>
+        </div>
+
+        <div class="social-media-icons item">
+
+          <ul class="flex-row">
+            <li>
+              <div class="image-container">
+                <svg class="icon">
+                  <use xlink:href="#facebook"/>
+                </svg>
+              </div>
+            </li>
+            <li>
+              <div class="image-container">
+                <svg class="icon">
+                  <use xlink:href="#twitter"/>
+                </svg>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+    </td>
+  </tr>
+  <tr style="margin: 0 auto;" class="logo">
+    <td>
+      <div style='color: #05A6F7; font-family: "Avenir"; text-align: center; font-size: 56px;'>Welcome to Troop</div>
+    </td>
+  </tr>
+  <tr style="margin: 0 auto;" class="button">
+    <td style="text-align: center; padding-bottom: 45px; padding-top: 45px; padding-left: 60px; padding-right: 60px;">
+      <a href="" style="cursor: pointer; padding: 11.5px 68px; text-align: center; outline: 0px; border: 1px solid rgba(25, 57, 69, 0.4); border-radius: 4px; margin: 0 auto; background: #05A6F7;   border-color: #05A6F7; color: #FFFFFF; font-size: 18px; font-family: 'Avenir'; text-decoration: initial;">Confirm Email</a>
+    </td>
+  </tr>
+  <tr style="margin: 0 auto;" class="paragraph">
+    <td>
+      <p style='border-bottom: 1px solid #cccccc; text-align: center; font-size: 18px; font-family: "Avenir"; line-height: 2; color: #8f97a1; margin-top: 0px; margin-bottom: 0px; padding-bottom: 60px;'>
+        Before you start playing with your new toy, we are going to <br>need you to click the link above
+        to prove that you are who<br>you say you are. Click now, because the link will expire.
+      </p>
+    </td>
+  </tr>
+  <tr class="code">
+    <td style="padding-top: 0px; padding: 35px;">
+      <p style='text-align: center; font-size: 18px; font-family: "Avenir"; line-height: 2; color: #8f97a1; margin-top: 0px; margin-bottom: 0px; padding-bottom: 60px;'>
+        Your 6 digit code is:
+        <span style="color: #89cafa;">{{.SignUpCode}}</span>
+      </p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

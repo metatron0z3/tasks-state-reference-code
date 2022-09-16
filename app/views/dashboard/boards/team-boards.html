@@ -1,0 +1,110 @@
+<ul class="board-list flex-row-wrap"
+    ng-if=" (  Me.troopMember.troopPermission !== 'guest'  ) "
+>
+  <li class="board board-new flex-column"
+      ng-if="  Me.troopMember.troopPermission === 'admin'   "
+      ng-click="  showBoardModal('new')  "
+  >
+      <button class="transparent circle ">
+        <div class="wrapper flex-row">
+          <span class="plus image-container flex-row">
+            <svg class="icon plus">
+              <use xlink:href="#plus"/>
+            </svg>
+          </span>
+        </div>
+      </button>
+      <h2>Create New Board</h2>
+  </li>
+  <li class="board flex-column"
+      ng-repeat=" board in Me.allBoards "
+      ng-if=" ( ! Me.troopMember.boards.hasOwnProperty(board.$id) ) && ( ! board.private )  "
+  >
+    <header class="flex-row">
+
+      <span class="create-date">
+        Created on
+        <span ng-bind=" board.createdAt | moment : 'MM.DD.YYYY' "></span>
+      </span>
+      <span class="flex-spacer"></span>
+      <button class="add-to-member-boards small"
+              ng-click=" joinBoard(board) "
+              ng-if=" ! Me.troopMember.boards.hasOwnProperty(board.$id) "
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Join Board</span>
+          <span class="plus image-container flex-row">
+            <svg class="icon plus">
+              <use xlink:href="#plus"/>
+            </svg>
+          </span>
+        </div>
+      </button>
+      <button class="remove-from-member-boards small"
+              ng-click=" tryToLeaveBoard(board) "
+              ng-if=" Me.troopMember.boards.hasOwnProperty(board.$id) "
+      >
+        <div class="wrapper flex-row">
+          <span class="label"
+                data-permission=" {{ Me.troopMember.boards.hasOwnProperty(board.$id) && Me.troopMember.boards[board.$id].permission === 'admin' ? 'Board Leader' : 'Member' }} "
+          ></span>
+          <span class="check image-container flex-row">
+            <svg class="icon check">
+              <use xlink:href="#check"/>
+            </svg>
+          </span>
+        </div>
+      </button>
+    </header>
+
+    <main class="flex-column flex-spacer"
+          ng-class=" board.description ? 'has-description' : ''"
+    >
+      <h1 class="title"
+          title="{{ board.boardName }}"
+          ng-bind="board.boardName"
+          ng-click="navToBoard(board)"
+      ></h1>
+      <p class="description"
+         title="{{ board.description }}"
+         ng-if="board.description"
+         ng-bind="board.description"
+      ></p>
+<!--
+      <p>Private: {{ board.private }} </p>
+      <p>Read Only: {{ board.readOnly }} </p>
+-->
+    </main>
+
+    <footer class="flex-row">
+      <ul class="board-members flex-row">
+
+        <li class="member flex-row"
+            ng-repeat=" troopMember in Me.troopMembers "
+            ng-if=" membersDisplayCheck(board, troopMember) "
+            title=" {{ troopMember.name + troopMember.boards[board.$id].permission }} "
+        >
+
+          <span class="profile-image image-container flex-row"
+                tp-troop-member-profile=" troopMember.$id "
+                tp-troop-member-troop-id=" troopMember.troopId "
+                tp-troop-member-avatar-asset-size="smallUrl"
+                ng-click="navToTroopMember(member.$id)"
+          ></span>
+
+        </li>
+      </ul>
+
+      <div class="permissions flex-row">
+        <span class="read-only image-container"
+              ng-if="board.readOnly"
+        >
+          <svg class="icon lock">
+            <use xlink:href="#lock"/>
+          </svg>
+        </span>
+      </div>
+    </footer>
+  </li>
+  <li class="flex-spacer"></li>
+</ul>

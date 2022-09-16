@@ -1,0 +1,352 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+  > .modal-overlay {
+
+    > form.modal {
+
+      &.card-modal {
+        position: relative;
+
+        > main {
+
+          .field-group {
+
+            &.uploader {
+              position: relative;
+              min-height: 100px;
+
+              > .dropper {
+                left: 0px;
+                top: 0px;
+                position: absolute;
+
+                > .image-container {
+                  border: 1px dashed $light-gray-tertiary;
+                  @include border-radius(2px);
+
+                  > svg {
+                    @include size(20px);
+                    fill: $light-gray-tertiary;
+                  }
+                }
+
+                &:after {
+                  display: none;
+                }
+
+                &:hover {
+
+                  > .image-container {
+
+                    > svg {
+
+                    }
+                  }
+                }
+              }
+
+              > .asset-list {
+
+                > .asset {
+                  cursor: move;
+                  padding: 0px;
+                  margin-right: 10px;
+                  margin-bottom: 20px;
+                  position: relative;
+                  background-position: center center;
+                  background-size: cover;
+                  background-repeat: no-repeat;
+                  @include border-radius(4px);
+
+                  > .asset-thumbnail {
+
+                  }
+
+                  > .info {
+                    @include all-width(100%);
+                    left: 0px;
+                    bottom: -25px;
+                    position: absolute;
+                  }
+
+                  &:first-of-type {
+                    margin-left: 100px;
+                  }
+
+                  &.file-non-image {
+                    background-size: 48px 48px;
+                  }
+
+                  // &:not(.sortable-ghost) {
+                  //   background: none !important;
+                  // }
+                }
+              }
+            }
+
+            &.editor {
+
+              > .toolbar {
+                z-index: 2;
+                right: -30px;
+                top: 4px;
+                position: absolute;
+
+                > .inject {
+                  opacity: 0.5;
+
+                  &.has-content {
+                    opacity: 1;
+                  }
+                }
+
+                > .find-replace {
+                  position: relative;
+
+                  > .text-search {
+                    pointer-events: none;
+                    opacity: 0;
+                    top: 0px;
+                    left: 30px;
+                    position: absolute;
+
+                    > input {
+                      padding: 2px;
+                      background: $white-primary;
+                    }
+                  }
+
+                  &.show {
+
+                    > .text-search {
+                      pointer-events: auto;
+                      opacity: 1;
+                    }
+                  }
+                }
+              }
+
+              > label {
+                z-index: -1;
+              }
+
+            }
+
+            > input {
+              &.tp-invalid,
+              &.ng-dirty.ng-touched.ng-invalid {
+                border-color: $red-quaternary;
+              }
+            }
+
+          }
+
+          > [data-ng-messages],
+          > [np-messages] {
+            @include transform(translateY(-30px));
+
+            > .error {
+              line-height: 26px;
+              font-size: 12px;
+              color: $red-quaternary;
+            }
+          }
+
+          > .loader-wrapper {
+            z-index: 10;
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            left: 4px;
+            top: 4px;
+            position: absolute;
+            display: none;
+            @include align-items(flex-start);
+            background: rgba($white-primary, 0.9);
+            @include border-radius(8px);
+
+            > .wrapper {
+              margin-top: 150px;
+              @include align-items(center);
+
+              &:before {
+                display: none;
+              }
+
+              > .message {
+                margin-top: 20px;
+
+                > * {
+                  font-size: 14px;
+                  color: $blue-primary;
+                }
+              }
+
+            }
+          }
+        }
+
+        > footer {
+          > button {
+            width: 165px;
+            font-family: $font-family-heavy;
+            font-size: 11px;
+            line-height: 26px;
+          }
+        }
+
+        &.full-screen {
+          min-height: calc(100% - 50px);
+          width: calc(100% - 50px);
+          @include justify-content(flex-start);
+
+          > .close {
+            display: none;
+          }
+
+          > header,
+          > footer {
+            display: none;
+          }
+
+          > main {
+            margin: 0px;
+            height: 100%;
+
+
+            > .uploader,
+            > .card-name,
+            > .card-tags {
+              position: absolute;
+              left: -999999px;
+            }
+
+            > .editor {
+              margin: 0px;
+              height: 100%;
+              position: inherit;
+
+              > label {
+                width: calc(100% - 50px);
+                left: 50px;
+                top: 50px;
+              }
+
+              > .toolbar {
+                right: 20px;
+                top: 20px;
+
+                > .full-screen-toggle {
+
+                }
+
+
+              }
+
+
+
+              > .ta-root {
+                height: 100%;
+
+                > .ta-scroll-window {
+                  height: 100%;
+                  min-height: unset;
+
+                  > .ta-bind {
+                    height: 100%;
+                    min-height: unset;
+                  }
+                }
+              }
+            }
+
+          }
+
+        }
+
+        &.loading-embedly {
+
+          > main {
+
+            > .loader-wrapper {
+
+              @include display(flex);
+            }
+          }
+        }
+
+        &.saving {
+
+          // > .close {
+          //   display: none;
+          // }
+
+          // > header {
+          //   display: none;
+          // }
+
+          > main {
+
+            // > * {
+            //   display: none;
+            // }
+
+            > .uploader {
+              @include display(flex);
+
+              // > .dropper {
+              //   display: none;
+              // }
+
+              > .asset-list {
+
+                > .asset {
+
+                  > .asset-menu {
+                    display: none;
+                  }
+
+                }
+              }
+            }
+
+            > .loader-wrapper {
+              @include display(flex);
+            }
+          }
+
+          // > footer {
+          //   display: none;
+          // }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width:414px) {
+  body {
+    > .modal-overlay {
+
+      > form.modal {
+
+        &.card-modal {
+          width: 100%;
+          > main {
+
+            .field-group {
+
+              &.editor {
+
+                > .full-screen-toggle {
+                  right: 0px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,167 @@
+<div class="modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click=" close() "
+>
+
+  <form name="troopSettingsForm"
+        class="troop-settings-modal modal flex-column"
+        ng-class=" { 'saving': processing } "
+        novalidate="novalidate"
+        ng-submit="save(troopSettingsForm)"
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click="close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header>
+      <h1 ng-if= "! newTroop ">Troop Settings</h1>
+      <h1 ng-if= " newTroop ">Create New Troop</h1>
+
+      <!-- <div class="uploader field-group flex-column">
+
+           <span class="troop-icon image-container flex-row"
+                ng-show=" ( ! $file ) && Me.troopMember.avatarAssetId "
+                tp-troop-member-profile=" Me.troopMember.$id "
+                tp-troop-member-troop-id=" Me.troop.$id "
+          ></span>
+
+          <div class="empty image-container">
+            <svg class="icon profile-icon">
+              <use xlink:href="#profile-icon"/>
+            </svg>
+          </div>
+      </div> -->
+
+    </header>
+
+    <main>
+
+      <div class="loader-wrapper flex-row">
+        <div class="wrapper flex-column">
+          <div class="loader-2 small"></div>
+          <div class="message">
+            Creating...
+          </div>
+        </div>
+      </div>
+
+
+      <div class="field-group flex-row"
+           ng-class=" labels['troopName'] ? '' : 'hide-label' "
+      >
+        <label class="">Troop Name</label>
+        <input name="troopName"
+               placeholder="Troop Name"
+               required=""
+               ng-model="troop.troopName"
+               ng-focus="hideLabel('troopName')"
+               ng-blur=" ! troop.troopName ? showLabel('troopName') : '' "
+               autocomplete="off"
+        >
+      </div>
+      <div class="flex-row"
+           ng-if="troopSettingsForm.troopName.$dirty && troopSettingsForm.troopName.$touched && troopSettingsForm.troopName.$invalid"
+           ng-messages="troopSettingsForm.troopName.$error"
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Your Troop Name is required
+        </div>
+      </div>
+
+      <div class="privacy-settings flex-column">
+        <label>Privacy Settings</label>
+        <div class="switch-group field-group flex-row">
+          <label>Public Troop</label>
+          <!-- <div class="sub-heading">Share this Troop with the world</div> -->
+          <switch name="private"
+                  class="blue"
+                  ng-model="troop.public"
+                  ng-change="goPublicPrivate(troopSettingsForm)"
+                  on="Yes"
+                  off="No"
+          ></switch>
+        </div>
+      </div>
+
+    </main>
+
+    <div class="link-group field-group flex-row"
+         ng-if=" troop.public "
+         ng-class=" { invalid: publicUrl.duplicate } "
+    >
+      <label>Copy Link to Share Troop</label>
+
+      <div class="url-box"
+           ng-class=" { invalid: publicUrl.duplicate, invalid: publicUrl.error } "
+      >
+        <!-- <div> -->
+          <span  ng-if=" publicUrl.baseUrlShow "
+                 ng-class=" { invalid: publicUrl.error, invalid: publicUrl.duplicate } "
+                 ng-model=" publicUrl.baseUrl "
+          >
+            {{ publicUrl.baseUrl }}
+          </span
+          ><input name="troopSlug"
+                 ng-class=" { invalid: publicUrl.error, invalid: publicUrl.duplicate } "
+                 ng-model="publicUrl.troopSlug"
+                 ng-focus="focusCallback($event)"
+                 ng-blur="validateSlug()"
+                 autocomplete="off"
+          >
+        <!-- </div> -->
+      </div>
+      <div class="error"
+           ng-if=" publicUrl.duplicate "
+      >
+        Oops! That URL is already being used, please choose another one.
+        <span ng-click="injectAvailSlug()"
+              class="availUrl"
+        >
+          {{ publicUrl.availSlug }}
+        </span>
+        is available.
+      </div>
+      <div class="error"
+           ng-if=" publicUrl.error "
+      >
+        {{ errorMsg }}
+      </div>
+
+      <button type="button"
+              class="uppercase copy-btn"
+              data-clipboard-text="{{ publicUrl.baseUrl + publicUrl.troopSlug }}"
+              ng-click="copyNotification()"
+      >
+        Copy
+      </button>
+    </div>
+
+
+    <footer class="flex-row">
+      <!-- <button class="cancel"
+              type="button"
+              ng-click="close()">
+        <div class="wrapper flex-row">
+          <span class="label">Cancel</span>
+        </div>
+      </button> -->
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label"
+                ng-if= " ! newTroop ">Save</span>
+          <span class="label"
+                ng-if= " newTroop ">Create</span>
+        </div>
+      </button>
+    </footer>
+  </form>
+
+</div>

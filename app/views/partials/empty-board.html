@@ -1,0 +1,37 @@
+<button class="white-primary circle"
+        ng-click="showCardModal('new')"
+        ng-if=" ( Me.troopMember.troopPermission !== 'guest' ) && (( ! Me.currentBoard.readOnly ) || ( Me.currentBoard.readOnly && Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ))">
+  <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon plus">
+            <use xlink:href="#plus"/>
+          </svg>
+        </span>
+  </div>
+</button>
+
+<section class="join flex-row"
+         ng-if="  Me.troopMember.troopPermission === 'guest'  "
+>
+  <button class="blue-primary "
+          ng-click="showPublicTroopJoinModal('button')"
+  >
+  <div class="wrapper flex-row">
+    <span class="label">Join</span>
+  </div>
+  </button>
+
+</section>
+
+<h1 ng-if="( Me.troopMember.troopPermission !== 'guest' ) && (( ! Me.currentBoard.readOnly ) || ( Me.currentBoard.readOnly && Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ))">
+  Click the + button to add a card.
+</h1>
+<h1 ng-if="( Me.troopMember.troopPermission === 'guest' )">
+  Click the join button to add a card.
+</h1>
+<p>
+  The board is currently empty.
+</p>
+<div class="drag-overlay flex-column"
+      ng-include=" '/views/partials/drag-drop-overlay.html' "
+></div>

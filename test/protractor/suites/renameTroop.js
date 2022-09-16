@@ -1,0 +1,1 @@
+requireSpec('troop', 'rename-troop');

@@ -1,0 +1,154 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+  &.read-only-mode {
+    > .wrapper {
+
+      > [data-ui-view=content] {
+
+        > section {
+          height: calc(100% - 40px);
+        }
+      }
+    }
+  }
+  > .wrapper {
+
+    > [data-ui-view=content] {
+
+      > section {
+        width: 100%;
+        height: calc(100% - #{$header-height});
+        @include justify-content(flex-start);
+
+        > [data-ui-view=dashboardContent] {
+
+          &.ng-leave {
+            display: none;
+          }
+        }
+      }
+
+      > video {
+        z-index: -110;
+        opacity: 0;
+        @include size(100%);
+        left: 0px;
+        top: 0px;
+        position: fixed;
+        object-fit: cover;
+      }
+
+      > .troop-logo {
+        z-index: 1;
+        @include size(100%);
+        left: 0px;
+        top: 0px;
+        position: fixed;
+        display: none;
+
+        > svg {
+          @include size(230px, 98px);
+          fill: $white-primary;
+        }
+      }
+    }
+  }
+
+  &.loading {
+
+    > [data-ui-view=troopSidebar] {
+      opacity: 0;
+    }
+
+    > [data-ui-view=leftSidebar] {
+      opacity: 0;
+    }
+
+    > [data-ui-view=notificationSidebar] {
+      opacity: 0;
+    }
+
+    > .wrapper {
+
+      > [data-ui-view=content] {
+
+        > [data-ui-view=dashboardHeader] {
+          opacity: 0;
+        }
+
+        > section {
+
+          > [data-ui-view=dashboardContent] {
+            opacity: 0;
+          }
+
+          > [data-ui-view=dashboardRightSidebar] {
+            opacity: 0;
+          }
+        }
+
+        > video {
+          z-index: -1;
+          opacity: 1;
+        }
+
+        > .troop-logo {
+          @include display(flex);
+        }
+      }
+    }
+  }
+
+  &[color-scheme="5"] {
+
+    background-color: $gray-quaternary;
+
+    svg {
+
+      &.dotdotdot {
+        fill: $black-primary !important;
+      }
+    }
+
+
+    > aside {
+
+      &.left {
+
+        svg {
+
+          &.dotdotdot {
+            fill: $white-primary !important;
+          }
+        }
+      }
+    }
+
+    [data-ui-view="dashboardContent"] {
+
+      .chat {
+
+        .timestamp {
+          color: $black-primary !important;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+@media only screen and (max-width:1024px) {
+  [data-ui-view=content] {
+
+    > section {
+
+    }
+  }
+
+}

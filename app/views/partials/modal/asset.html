@@ -1,0 +1,74 @@
+<div class="upload-progress flex-row">
+  <progress max="100"
+            value="{{ asset.progress }}"
+  >
+  </progress>
+  <svg class="icon circle-check">
+    <use xlink:href="#circle-check"/>
+  </svg>
+</div>
+
+<div class="close image-container">
+  <div class="wrapper flex-row"
+       ng-click="removeAsset(asset, $index)"
+  >
+    <svg class="icon circle-close">
+      <use xlink:href="#circle-close"/>
+    </svg>
+  </div>
+</div>
+
+
+
+<div ng-if="asset.assetId"
+     class="asset-thumbnail image-container flex-row"
+     tp-card-asset=" {{ asset.assetId }} "
+     tp-card-asset-first=" {{ $first }} "
+     tp-card-asset-index=" {{ $index }}"
+>
+
+</div>
+
+
+
+
+<div ng-if="asset.file && isImageFileType(asset)"
+     class="asset-thumbnail image-container flex-row"
+>
+  <img ngf-src="asset.file">
+  <svg class="icon upload">
+    <use xlink:href="#upload"/>
+  </svg>
+</div>
+
+<div ng-if="asset.file && isOtherFileType(asset) "
+     class="asset-thumbnail image-container flex-row"
+     title="{{asset.file.name}}"
+     data-filename="{{asset.file.name}}"
+     tp-other-file-type=" fileTypeClass(asset) "
+>
+</div>
+
+
+
+
+<div ng-if="asset.image"
+     class="asset-thumbnail image-container flex-row"
+>
+  <img ng-src="{{ asset.image.url }}">
+  <svg class="icon embedly-logo">
+    <use xlink:href="#embedly-logo"/>
+  </svg>
+</div>
+
+
+
+<div ng-if="asset.paste"
+     class="asset-thumbnail image-container flex-row"
+>
+  <img ng-src="{{ asset.paste.url }}">
+  <svg class="icon clipboard">
+    <use xlink:href="#clipboard"/>
+  </svg>
+
+</div>

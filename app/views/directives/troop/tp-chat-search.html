@@ -1,0 +1,212 @@
+<div class="wrapper">
+
+
+<ul class="chat flex-column">
+  <li class="search-context search-context-prev chat-entry flex-row" ng-if="preventry">
+
+    <header class="flex-row">
+
+      <span class="profile-image image-container flex-row"
+            tp-troop-member-profile=" preventry.memberId "
+            tp-troop-member-troop-id=" preventry.troopId "
+            tp-troop-member-avatar-asset-size="smallUrl"
+            ng-click="navToTroopMember()"
+      ></span>
+
+      <span class="info flex-row"
+            ng-if=" showHeaderInfo !== false "
+      >
+
+        <div class="user-name"
+             tp-troop-member="{{ preventry.memberId }}"
+             tp-troop-member-troop-id="{{ preventry.troopId }}"
+             tp-troop-member-user-name="true"
+        ></div>
+
+        <span class="timestamp"
+              ng-bind="preventry.updatedAt | moment "
+        ></span>
+
+        <span class="flex-spacer">&nbsp;</span>
+
+      </span>
+
+    </header>
+
+
+    <main class="flex-row flex-spacer">
+
+      <div class="wrapper" ng-class="preventry.assetId ? 'isAsset' : ''">
+
+        <div class="text"
+             data-marked=" preventry.text "
+             ng-if=" ( ! preventry.assetId ) && ( ! editing ) "
+        ></div>
+
+        <div class="asset flex-column"
+            ng-if=" preventry.assetId  && ( ! editing ) "
+            tp-asset=" preventry.assetId "
+            tp-asset-troop-id=" preventry.troopId "
+            tp-asset-size=" largeUrl "
+            tp-asset-info=" true "
+            tp-asset-info-file-size=" true "
+            tp-asset-download=" false "
+            tp-asset-rename=" false "
+            tp-asset-remove=" false "
+            tp-asset-remove-click=" showDeleteChatEntryModal() "
+            tp-asset-thumbnail-click=" showAssetsModal() "
+            tp-asset-progress=" preventry.progress "
+        ></div>
+
+      </div>
+
+    </main>
+
+    <footer class="flex-row">
+
+      <span class="timestamp"
+            ng-bind="preventry.createdAt | moment:'h:mm a' "
+      ></span>
+
+    </footer>
+
+  </li>
+  <li class="search-result search-context-curr chat-entry flex-row">
+    <header class="flex-row">
+
+      <span class="profile-image image-container flex-row"
+            tp-troop-member-profile=" entry.memberId "
+            tp-troop-member-troop-id=" entry.troopId "
+            tp-troop-member-avatar-asset-size="smallUrl"
+            ng-click="navToTroopMember()"
+      ></span>
+
+      <span class="info flex-row"
+            ng-if=" showHeaderInfo !== false "
+      >
+
+        <div class="user-name"
+             tp-troop-member="{{ entry.memberId }}"
+             tp-troop-member-troop-id="{{ entry.troopId }}"
+             tp-troop-member-user-name="true"
+        ></div>
+
+        <span class="timestamp"
+              ng-bind="entry.updatedAt | moment "
+        ></span>
+
+        <span class="flex-spacer">&nbsp;</span>
+
+      </span>
+
+    </header>
+
+
+    <main class="flex-row flex-spacer">
+
+      <div class="wrapper">
+
+        <div class="text"
+             data-marked=" entry.text "
+             ng-if=" ( ! entry.assetId ) && ( ! editing ) "
+        ></div>
+
+        <div class="asset flex-column"
+            ng-if=" entry.assetId  && ( ! editing ) "
+            tp-asset=" entry.assetId "
+            tp-asset-troop-id=" entry.troopId "
+            tp-asset-size=" largeUrl "
+            tp-asset-info=" true "
+            tp-asset-info-file-size=" true "
+            tp-asset-download=" true "
+            tp-asset-rename=" false "
+            tp-asset-remove=" ( Me.troopMember.$id === entry.memberId ) || ( Me.troopMember.troopPermission === 'admin' ) "
+            tp-asset-remove-click=" showDeleteChatEntryModal() "
+            tp-asset-thumbnail-click=" showAssetsModal() "
+            tp-asset-progress=" entry.progress "
+        ></div>
+
+      </div>
+
+    </main>
+
+    <footer class="flex-row">
+
+      <span class="timestamp"
+            ng-bind="entry.createdAt | moment:'h:mm a' "
+      ></span>
+
+    </footer>
+  </li>
+  <li class="search-context search-context-next chat-entry flex-row" ng-if="nextentry">
+
+    <header class="flex-row">
+
+      <span class="profile-image image-container flex-row"
+            tp-troop-member-profile=" nextentry.memberId "
+            tp-troop-member-troop-id=" nextentry.troopId "
+            tp-troop-member-avatar-asset-size="smallUrl"
+            ng-click="navToTroopMember()"
+      ></span>
+
+      <span class="info flex-row"
+            ng-if=" showHeaderInfo !== false "
+      >
+
+        <div class="user-name"
+             tp-troop-member="{{ nextentry.memberId }}"
+             tp-troop-member-troop-id="{{ nextentry.troopId }}"
+             tp-troop-member-user-name="true"
+        ></div>
+
+        <span class="timestamp"
+              ng-bind="nextentry.updatedAt | moment "
+        ></span>
+
+        <span class="flex-spacer">&nbsp;</span>
+
+      </span>
+
+    </header>
+
+
+    <main class="flex-row flex-spacer">
+
+      <div class="wrapper" ng-class="nextentry.assetId ? 'isAsset' : ''">
+
+        <div class="text"
+             data-marked=" nextentry.text "
+             ng-if=" ( ! nextentry.assetId ) && ( ! editing ) "
+        ></div>
+
+        <div class="asset flex-column"
+            ng-if=" nextentry.assetId  && ( ! editing ) "
+            tp-asset=" nextentry.assetId "
+            tp-asset-troop-id=" nextentry.troopId "
+            tp-asset-size=" largeUrl "
+            tp-asset-info=" true "
+            tp-asset-info-file-size=" true "
+            tp-asset-download=" false "
+            tp-asset-rename=" false "
+            tp-asset-remove=" false "
+            tp-asset-remove-click=" showDeleteChatEntryModal() "
+            tp-asset-thumbnail-click=" showAssetsModal() "
+            tp-asset-progress=" nextentry.progress "
+        ></div>
+
+      </div>
+
+    </main>
+
+    <footer class="flex-row">
+
+      <span class="timestamp"
+            ng-bind="nextentry.createdAt | moment:'h:mm a' "
+      ></span>
+
+    </footer>
+
+  </li>
+</ul>
+
+</div>

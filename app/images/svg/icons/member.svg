@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Outline</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Settings" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="Member-Invite" transform="translate(-422.000000, -346.000000)" >
+            <g id="Group-13" transform="translate(422.000000, 334.000000)">
+                <g id="Outline" transform="translate(0.000000, 12.000000)">
+                    <path d="M15,15 L15,15 C18.3137085,15 21,12.3137085 21,9 C21,5.6862915 18.3137085,3 15,3 C11.6862915,3 9,5.6862915 9,9 C9,12.3137085 11.6862915,15 15,15 L15,15 Z M15,18 L15,18 C10.0294373,18 6,13.9705627 6,9 C6,4.02943725 10.0294373,0 15,0 C19.9705627,0 24,4.02943725 24,9 C24,13.9705627 19.9705627,18 15,18 L15,18 Z" id="Shape"></path>
+                    <path d="M27,30 C27,23.372583 21.627417,18 15,18 C8.372583,18 3,23.372583 3,30 M0,30 C0,21.7157288 6.71572875,15 15,15 C23.2842712,15 30,21.7157288 30,30" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

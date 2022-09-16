@@ -1,0 +1,257 @@
+<div class="modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click=" close() "
+>
+
+  <form name="boardModalForm"
+        class="board-modal modal flex-column"
+        novalidate="novalidate"
+        ng-submit="next(boardModalForm)"
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="back image-container"
+         ng-if=" currentStep !== 'board-options' "
+         ng-click=" back() "
+    >
+      <svg class="icon arrow-left">
+        <use xlink:href="#arrow-left"/>
+      </svg>
+    </div>
+
+    <div class="close image-container"
+         ng-click="close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header ng-if=" currentStep === 'board-options' ">
+      <h1 ng-bind=" (action === 'edit' ? 'Edit' : 'New') + ' Board' "></h1>
+      <!-- <p>
+        Fill out the rest of the fields to complete the process
+      </p> -->
+    </header>
+
+    <header ng-if=" currentStep === 'view-choices' ">
+      <h1>
+        Customize Your Board
+      </h1>
+      <p>
+        Select the views you wish to show on this board
+      </p>
+    </header>
+
+    <main ng-if=" currentStep === 'board-options' ">
+
+      <div class="field-group flex-row">
+        <input name="boardName"
+               placeholder="Board Name"
+               ng-class=" boardModalForm.boardName.$dirty && boardModalForm.boardName.$touched && boardModalForm.boardName.$invalid ? 'tp-invalid' : '' "
+               ng-model="board.boardName"
+               required=""
+               autocomplete="off"
+        >
+      </div>
+      <div  class="flex-row"
+            ng-if=" boardModalForm.boardName.$dirty && boardModalForm.boardName.$touched && boardModalForm.boardName.$invalid"
+            ng-messages="boardModalForm.boardName.$error"
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Board Title is required
+        </div>
+
+      </div>
+
+      <div class="textarea field-group flex-row">
+        <textarea name="description"
+                  placeholder="Description"
+                  rows="1"
+                  data-msd-elastic=""
+                  ng-model="board.description"
+                  ng-keyup=""
+                  autocomplete="off"
+        ></textarea>
+      </div>
+
+
+
+      <div class="board-settings flex-column">
+        <label>Board Settings</label>
+
+        <div class="switch-group field-group flex-row first">
+          <label>Private Board</label>
+          <!-- <div class="sub-heading">No one else can see this board, invite only</div> -->
+          <switch name="private"
+                  class="blue"
+                  ng-model="board.private"
+                  on="Yes"
+                  off="No"
+          ></switch>
+        </div>
+
+        <div class="switch-group field-group flex-row">
+          <label>Read Only</label>
+          <!-- <div class="sub-heading">Only admins can add cards</div> -->
+          <switch name="read-only"
+                  class="blue"
+                  ng-model="board.readOnly"
+          ></switch>
+        </div>
+
+        <div class="switch-group field-group flex-row">
+          <label>Allow Notes</label>
+          <!-- <div class="sub-heading">Allow members to add notes to cards</div> -->
+          <switch name="allow-notes"
+                  class="blue"
+                  ng-model="board.allowNotes"
+                  on="Yes"
+                  off="No"
+          ></switch>
+        </div>
+      </div>
+    </main>
+
+    <main ng-if=" currentStep === 'view-choices' ">
+
+      <ul class="view-choices flex-row-wrap">
+        <li class="choice"
+            ng-class=" { selected: board.viewSettings[choice].visible } "
+            ng-repeat=" choice in viewChoices "
+            ng-click=" selectView(choice) "
+        >
+          <div class="check"
+               ng-if=" board.viewSettings[choice].visible "
+          >
+            <div class="wrapper">
+              <div class="circle image-container">
+                <svg class="icon">
+                  <use xlink:href="#circle"/>
+                </svg>
+              </div>
+              <div class="check image-container">
+                <svg class="icon">
+                  <use xlink:href="#check"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="card box flex-column"
+               ng-if=" choice === 'card' "
+          >
+            <div class="image-container">
+              <svg class="icon card">
+                <use xlink:href="#card"/>
+              </svg>
+            </div>
+            <label>Cards</label>
+          </div>
+
+          <div class="tag box flex-column"
+               ng-if=" choice === 'tag' "
+          >
+            <div class="image-container">
+              <svg class="icon hash">
+                <use xlink:href="#hash"/>
+              </svg>
+            </div>
+            <label>Tags</label>
+          </div>
+
+          <div class="chat box flex-column"
+               ng-if=" choice === 'chat' "
+          >
+            <div class="image-container">
+              <svg class="icon chat">
+                <use xlink:href="#chat"/>
+              </svg>
+            </div>
+            <label>Chat</label>
+          </div>
+
+          <div class="grid box flex-column"
+               ng-if=" choice === 'grid' "
+          >
+            <div class="image-container">
+              <svg class="icon grid">
+                <use xlink:href="#grid"/>
+              </svg>
+            </div>
+            <label>Grid</label>
+          </div>
+
+
+          <div class="document box flex-column"
+               ng-if=" choice === 'document' "
+          >
+            <div class="image-container">
+              <svg class="icon document">
+                <use xlink:href="#document"/>
+              </svg>
+            </div>
+            <label>Document</label>
+          </div>
+
+
+          <div class="list box flex-column"
+               ng-if=" choice === 'list' "
+          >
+            <div class="image-container">
+              <svg class="icon list-2">
+                <use xlink:href="#list-2"/>
+              </svg>
+            </div>
+            <label>List</label>
+
+          </div>
+
+        </li>
+      </ul>
+      <div  class="view-choices-errors flex-row"
+            ng-if=" viewChoiceError"
+            ng-messages=" viewChoiceError "
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          View required.
+        </div>
+
+      </div>
+    </main>
+
+
+    <footer class="flex-row">
+      <button class="blue-primary"
+              ng-if=" currentStep !== 'view-choices' "
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Next</span>
+        </div>
+      </button>
+
+      <!-- <span class="button cancel link"
+              ng-if=" currentStep === 'view-choices' "
+              ng-click=" close() "
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Cancel</span>
+        </div>
+      </span> -->
+      <button class="blue-primary"
+              ng-if=" currentStep === 'view-choices' "
+      >
+        <div class="wrapper flex-row">
+          <span class="label"
+                ng-bind=" action === 'edit' ? 'Save' : 'Create' "
+          ></span>
+        </div>
+      </button>
+    </footer>
+  </form>
+
+</div>

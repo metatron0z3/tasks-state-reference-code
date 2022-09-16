@@ -1,0 +1,2035 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+[data-state*="dashboard.board.chat"],
+[data-state*="dashboard.troopMember.chat"],
+[data-state*="dashboard.search.chat"] {
+
+  &.read-only-mode {
+    [data-ui-view=dashboardContent] {
+      min-width: 375px;
+      > .wrapper {
+        > .chat {
+          height: calc(100% - 120px);
+        }
+      }
+    }
+  }
+
+  [data-ui-view="content"] {
+
+    > section {
+      height: calc(100% - 80px);
+    }
+  }
+
+  [data-ui-view=dashboardContent] {
+    height: 100%;
+    width: 100%;
+    @include transition(all 0.2s linear 0s);
+
+    > .wrapper {
+      height: 100%;
+      width: 100%;
+      position: relative;
+      @include flex-grow(1);
+      @include justify-content(flex-start);
+      @include align-items(center);
+      @include flex-direction(column);
+      background: $white-primary;
+
+      > .drag-drop-modal-overlay {
+        z-index: 5;
+        height: 100%;
+        width: 100%;
+        left: 0px;
+        top: 0px;
+        position: fixed;
+        display: none;
+
+        > .wrapper {
+          height: 100%;
+          width: 100%;
+          position: relative;
+          @include justify-content(center);
+
+
+          &:before {
+            content: "";
+            height: 100%;
+            width: 100%;
+            left: 0px;
+            top: 0px;
+            position: absolute;
+            background: rgba($blue-secondary, 0.69);
+          }
+
+          > .background {
+            z-index: 1;
+            padding: 56px 50px 85px 50px;
+            width: 730px;
+            @include align-items(center);
+            background: $white-primary;
+            @include border-radius(10px);
+            @include css3-prefix('box-shadow', 0px 8px 16px 1px rgba($blue-secondary,0.30));
+
+            > h1 {
+              margin-top: 30px;
+              font-family: $font-family-regular;
+              font-size: 40px;
+              color: $blue-gray-primary;
+            }
+
+            > p {
+              margin-top: 25px;
+              font-size: 16px;
+              color: rgba($blue-gray-primary, 1.0);
+            }
+
+            > .image-container {
+
+              &,
+              > svg {
+                height: 175px;
+                min-height: 175px;
+                max-height: 175px;
+                width: 310px;
+                min-width: 310px;
+                max-width: 310px;
+              }
+            }
+
+
+          }
+        }
+      }
+
+      > .empty-chat {
+        width: 100%;
+        height: calc(100% - 92px);
+        @include align-items(flex-start);
+        @include justify-content(flex-end);
+        @include transform(translate(10px, -30px));
+
+        > .title {
+          padding: 0px 12px;
+          line-height: 25px;
+          font-family: $font-family-regular;
+          font-size: 18px;
+          color: $black-senary;
+          text-align: left;
+        }
+
+        > .description {
+          margin-top: 4px;
+          padding: 0px 12px;
+          line-height: 26px;
+          overflow: hidden;
+          font-size: 14px;
+          color: $gray-quaternary;
+          text-align: left;
+
+        }
+      }
+
+      > .chat {
+        padding: 0px 28px;
+        height: calc(100% - 92px);
+        width: 100%;
+        @include align-items(flex-start);
+        @include justify-content(flex-start);
+        @include flex-grow(1);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+
+        > li {
+          max-width: 1200px;
+        }
+
+        > .top-spacer,
+        > .bottom-spacer {
+          height: 20px;
+          width: 100%;
+        }
+
+        > .top-spacer {
+          @include flex-grow(1);
+        }
+
+        > .chat-entry {
+          margin: 13px 0px;
+          padding: 0px;
+          width: 100%;
+          @include align-items(flex-start);
+          position: relative;
+
+          &:hover {
+
+            > footer {
+
+              > .chat-menu {
+
+                > .menu-button {
+                  opacity: 1;
+                }
+              }
+
+            }
+          }
+
+          &:first-of-type {
+            margin-top: 20px;
+          }
+
+          > header {
+
+            > .profile-image {
+              margin-right: 12px;
+              height: 100%;
+              min-height: 100%;
+              max-height: 100%;
+              width: 39px;
+              min-width: 39px;
+              max-width: 39px;
+              @include align-items(flex-start);
+              @include justify-content(flex-end);
+
+              > .asset,
+              > .asset > .asset-thumbnail,
+              > .asset > .asset-thumbnail > img {
+                width: 39px;
+                min-width: 39px;
+                max-width: 39px;
+                height: 39px;
+                min-height: 39px;
+                max-height: 39px;
+              }
+
+              > .asset {
+                padding: 0px;
+
+                > .asset-thumbnail {
+                  overflow: hidden;
+                  border: 0px;
+                  @include border-radius(20px);
+
+                  &:before {
+                    display: none;
+                  }
+                }
+              }
+
+            }
+
+            > .info {
+              margin: 0px;
+              left: 20px;
+              top: -20px;
+              position: absolute;
+              @include justify-content(flex-start);
+
+              &,
+              > .user-name,
+              > .timestamp {
+                line-height: 17px;
+                font-size: 12px;
+                color: rgba($gray-quaternary, 0.2);
+                white-space: nowrap;
+              }
+
+              > .user-name {
+                margin-right: 4px;
+
+                &:after {
+                  content: " - ";
+                }
+              }
+            }
+          }
+
+          > main {
+            max-width: calc(100% - 150px);
+
+            > .wrapper {
+              padding: 9px 20px;
+              max-width: 100%;
+              position: relative;
+              background: $white-septenary;
+              @include border-radius(24px);
+
+              > .text {
+                width: 100%;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                -ms-word-break: break-all;
+                word-break: break-word;
+                -ms-hyphens: auto;
+                -moz-hyphens: auto;
+                -webkit-hyphens: auto;
+                hyphens: auto;
+
+                &,
+                * {
+                  line-height: 21px;
+                  font-size: 14px;
+                  color: $gray-quaternary;
+                  line-height: 21px;
+                  font-size: 14px;
+                  color: rgba($gray-quaternary, 1.0);
+                  width: 101%;
+                }
+
+                strong {
+                  font-family: $font-family-heavy;
+                }
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                  margin-bottom: 0px;
+                }
+
+                ul,
+                ol {
+                  margin: 0px;
+                  line-height: 0px;
+                }
+
+                a {
+                  color: rgba($blue-elevenary, 1.0);
+                }
+
+                p {
+                  margin: 0px;
+
+                  > span {
+                    width: auto;
+
+                    > code {
+                      padding: 0px 11px;
+                      display: inline-block;
+                      background: rgba($light-gray-quaternary, 0.2);
+                      @include border-radius(2px);
+                      font-family: $font-family-light;
+                      line-height: 20px;
+                      font-size: 14px;
+                      width: auto;
+                    }
+                  }
+
+
+                }
+              }
+
+
+            }
+
+          }
+
+          > footer {
+            margin-left: 10px;
+
+            > .timestamp {
+                margin: 12px 0px 0px 10px;
+                line-height: 17px;
+                font-family: $font-family-regular;
+                font-size: 12px;
+                color: rgba($gray-quaternary, 0.2);
+                white-space: nowrap;
+            }
+
+            > .chat-menu {
+              margin: 12px 0px 0px 10px;
+              position: relative;
+
+              > .menu-button {
+                cursor: pointer;
+                opacity: 0;
+
+                &:active {
+                  > svg {
+                    fill: rgba($black-senary, 0.8);
+                  }
+                }
+
+                &,
+                > svg {
+                  width: 18px;
+                  min-width: 18px;
+                  max-width: 18px;
+                  height: 18px;
+                  min-height: 18px;
+                  max-height: 18px;
+                }
+
+                > svg {
+                  fill: rgba($light-gray-secondary, 0.5);
+                }
+              }
+
+              > .menu {
+                bottom: 84px;
+              }
+            }
+
+          }
+
+          &.has-date-spacer {
+            margin: 65px 0px 13px 0px;
+          }
+
+          &.file-image,
+          &.file-non-image {
+
+            > header {
+
+              > .info {
+                top: -8px;
+                @include justify-content(flex-end);
+              }
+            }
+
+            > main {
+
+              > .wrapper {
+                padding: 0px;
+                background: transparent;
+                @include border-radius(9px);
+
+              }
+            }
+
+          }
+
+          &.can-nav-to {
+
+            > header {
+
+              > .profile-image {
+                cursor: pointer;
+              }
+            }
+          }
+
+          &.mine {
+
+            > header {
+
+              > .profile-image {
+                cursor: default;
+              }
+
+            }
+
+            > main {
+
+              > .wrapper {
+
+                background: $blue-octornary;
+
+                > .text {
+
+                  &,
+                  * {
+                    color: $white-octonary;
+                  }
+
+                  a {
+                    color: rgba($white-primary, 1.0);
+                  }
+                }
+
+              }
+            }
+
+
+            &.file-image,
+            &.file-non-image {
+
+              > main {
+
+                .wrapper {
+                  background: transparent;
+                }
+              }
+
+            }
+          }
+
+          &.editing {
+
+            &:before {
+              content: "";
+              width: calc(100% + 56px);
+              height: calc(100% + 26px);
+              left: -28px;
+              top: -13px;
+              position: absolute;
+              background: rgba($blue-octornary, 0.1);
+            }
+
+            > main {
+              width: 100%;
+
+              > .wrapper {
+                width: 100%;
+                background: transparent;
+
+                > .editor {
+                  width: 100%;
+
+                  textarea {
+                    resize: none !important;
+                    margin: 0px 0px 10px 0px;
+                    padding: 0px 0px 0px 0px;
+                    max-height: none;
+                    min-height: unset;
+                    width: 100%;
+                    line-height: 26px;
+                    font-size: 14px;
+                    font-weight: 300;
+                    color: $blue-gray-primary;
+                    background: transparent;
+                    border: 0px;
+                    border-bottom: 1px solid rgba($blue-octornary, 0.4);
+                    @include border-radius(0px);
+
+
+                  }
+
+                  > .actions {
+
+                    > button {
+
+                      > .wrapper {
+
+                        > .label {
+                          text-transform: none;
+                        }
+                      }
+
+                      &.link {
+                        margin-left: 26px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            /*
+            > .flex-spacer,
+            > .timestamp,
+            > .chat-menu {
+              display: none;
+            }
+            */
+          }
+        }
+        > .chat-entry:not([data-tp-chat-search-search-result=" true "]) {
+            > .date-spacer {
+              width: 100%;
+              left: 0px;
+              top: -44px;
+              position: absolute;
+
+              > .wrapper {
+                width: 100%;
+                position: relative;
+                @include justify-content(center);
+
+                &:before {
+                  content: "";
+                  width: 100%;
+                  height: 1px;
+                  left: 0px;
+                  top: calc(50% - 1px);
+                  position: absolute;
+                  background: $white-nonary;
+                }
+
+                > .text {
+                  z-index: 1;
+                  width: 104px;
+                  background: $white-primary;
+                  font-size: 14px;
+                  text-align: center;
+                  color: rgba($gray-quaternary, 0.4);
+                }
+              }
+            }
+          }
+
+
+      }
+
+      > form {
+        height: 92px;
+        width: 100%;
+        position: relative;
+        background: rgba($white-septenary, 0.69);
+        border-top: 1px solid rgba($white-nonary, 0.69);
+
+        > .field-group {
+          margin: 0px;
+          height: 100%;
+          @include align-items(flex-start);
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+
+          > label {
+            padding-left: 0px;
+            line-height: 26px;
+            font-size: 14px;
+            color: rgba($gray-quaternary, 0.5);
+          }
+
+          > .wrapper {
+            z-index: 1;
+            width: 100%;
+            min-height: 100%;
+
+            > input[type=text],
+            > textarea {
+              padding-left: 0px;
+              width: 100%;
+              line-height: 26px;
+              font-size: 14px;
+              color: rgba($gray-quaternary, 0.8);
+              background: transparent;
+              border: none;
+              resize: none !important;
+            }
+          }
+        }
+
+        > .actions {
+
+          > .menu-button  {
+            cursor: pointer;
+            margin: 0px 30px;
+            height: 35px;
+            min-height: 35px;
+            max-height: 35px;
+            width: 35px;
+            min-width: 35px;
+            max-width: 35px;
+            background: $white-primary;
+            border: 1px solid $light-gray-senary;
+            @include border-radius(20px);
+            overflow: hidden;
+
+            &:hover {
+              @include css3-prefix('box-shadow', 0px 3px 6px 0px $white-denary);
+            }
+
+            &:active,
+            &.showing {
+              @include css3-prefix('box-shadow', inset 0px 3px 6px 0px $white-denary);
+
+            }
+
+            > svg {
+              height: 16px;
+              min-height: 16px;
+              max-height: 16px;
+              width: 16px;
+              min-width: 16px;
+              max-width: 16px;
+              fill: rgba($gray-quinary, 0.69);
+            }
+          }
+        }
+      }
+
+      &.file-drop {
+
+        > .drag-drop-modal-overlay {
+          @include display(flex);
+        }
+      }
+
+    }
+  }
+
+  // &.showing-notification-sidebar,
+  &.showing-right-sidebar,
+  &.showing-profile-sidebar {
+
+    [data-ui-view=dashboardContent] {
+      width: calc(100% - #{$right-sidebar-width});
+
+    }
+  }
+    &[data-browser-name="Edge"],
+    &[data-browser-name="IE"] {
+        [data-ui-view=dashboardContent] {
+          > .wrapper {
+            > form {
+              >.field-group {
+                > .wrapper {
+                  textarea {
+                    height: 50px !important;
+                  }
+                }
+              }
+            }
+          }
+        }
+    }
+}
+
+[data-state*="dashboard.board.chat"] {
+
+  [data-ui-view=dashboardContent] {
+
+    > .wrapper {
+
+      > .chat {
+
+        > .chat-entry {
+          margin: 26px 0px 13px 0px;
+
+          > header {
+
+            > .info {
+              left: 72px;
+
+              > .user-name {
+
+                &:after {
+                  display: none;
+                }
+              }
+
+              > .timestamp {
+                display: none;
+              }
+            }
+          }
+
+          &.mine {
+            //margin: 13px 0px;
+
+            > header {
+
+              > .info {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+[data-state*="dashboard.search.chat"] {
+
+  [data-ui-view="dashboardContent"] {
+
+    > .wrapper {
+
+      > .chat {
+
+        > [data-tp-chat-search-search-result=" true "] {
+          margin: 0 0 -1px 0;
+          padding:20px 0;
+          cursor: pointer;
+
+
+          &:before,
+          &:after {
+            content: "";
+            width: calc(100% - 20px);
+            left: 10px;
+            height: 1px;
+            position: absolute;
+            background: $white-nonary;
+          }
+          &:before {
+            top: 0;
+          }
+          &:after {
+            bottom: 0;
+          }
+          // &:not(:first):before {
+          //   height: 0;
+          //   background: transparent;
+          // }
+          // &.has-date-spacer {
+          //   margin: 0;
+          // }
+
+          > .date-spacer,
+          > .subHeader {
+            width: 100%;
+            left: 0px;
+            top: 20px;
+            position: absolute;
+
+            > .wrapper {
+              width: 100%;
+              position: relative;
+              // @include justify-content(center);
+
+              > .text,
+              > .date {
+                z-index: 1;
+                width: 104px;
+                background: $white-primary;
+                font-size: 14px;
+                text-align: right;
+                position:absolute;
+                right:10px;
+                top:5px;
+                color: rgba($gray-quaternary, 1);
+              }
+              > .label {
+                z-index: 1;
+                width: 104px;
+                background: $white-primary;
+                font-size: 14px;
+                text-align: left;
+                position:absolute;
+                left:10px;
+                color: rgba($gray-quaternary, 1);
+
+                > .type {
+                  display:block;
+                  padding-bottom:5px;
+                  opacity: 0.5;
+                  font-size: 10px;
+                  color: rgba($gray-quaternary, 1);
+
+                }
+                > .name {
+                  font-size: 18px;
+                  white-space: nowrap;
+                  color: rgba($gray-quaternary, 1);
+                }
+              }
+
+            }
+          }
+
+          > .wrapper {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            @include flex-grow(1);
+            @include justify-content(flex-start);
+            @include align-items(center);
+            @include flex-direction(column);
+            background: $white-primary;
+            padding: 30px 0;
+
+            > .drag-drop-modal-overlay {
+              z-index: 5;
+              height: 100%;
+              width: 100%;
+              left: 0px;
+              top: 0px;
+              position: fixed;
+              display: none;
+
+              > .wrapper {
+                height: 100%;
+                width: 100%;
+                position: relative;
+                @include justify-content(center);
+
+
+                &:before {
+                  content: "";
+                  height: 100%;
+                  width: 100%;
+                  left: 0px;
+                  top: 0px;
+                  position: absolute;
+                  background: rgba($blue-secondary, 0.69);
+                }
+
+                > .background {
+                  z-index: 1;
+                  padding: 56px 50px 85px 50px;
+                  width: 730px;
+                  @include align-items(center);
+                  background: $white-primary;
+                  @include border-radius(10px);
+                  @include css3-prefix('box-shadow', 0px 8px 16px 1px rgba($blue-secondary,0.30));
+
+                  > h1 {
+                    margin-top: 30px;
+                    font-family: $font-family-regular;
+                    font-size: 40px;
+                    color: $blue-gray-primary;
+                  }
+
+                  > p {
+                    margin-top: 25px;
+                    font-size: 16px;
+                    color: rgba($blue-gray-primary, 0.6);
+                  }
+
+                  > .image-container {
+
+                    &,
+                    > svg {
+                      height: 175px;
+                      min-height: 175px;
+                      max-height: 175px;
+                      width: 310px;
+                      min-width: 310px;
+                      max-width: 310px;
+                    }
+                  }
+
+
+                }
+              }
+            }
+
+            > .empty-chat {
+              width: 100%;
+              height: calc(100% - 92px);
+              @include align-items(flex-start);
+              @include justify-content(flex-end);
+              @include transform(translate(10px, -30px));
+
+              > .title {
+                padding: 0px 12px;
+                line-height: 25px;
+                font-family: $font-family-regular;
+                font-size: 18px;
+                color: $black-senary;
+                text-align: left;
+              }
+
+              > .description {
+                margin-top: 4px;
+                padding: 0px 12px;
+                line-height: 26px;
+                overflow: hidden;
+                font-size: 14px;
+                color: $gray-quaternary;
+                text-align: left;
+
+              }
+            }
+
+            > .chat {
+              padding: 10px;
+              height: 100%;
+              width: 100%;
+              @include align-items(flex-start);
+              @include justify-content(flex-start);
+              @include flex-grow(1);
+              overflow-y: auto;
+              -webkit-overflow-scrolling: touch;
+
+              > li {
+                max-width: 1200px;
+              }
+
+              > .top-spacer,
+              > .bottom-spacer {
+                height: 20px;
+                width: 100%;
+              }
+
+              > .top-spacer {
+                @include flex-grow(1);
+              }
+
+              > .search-context {
+                margin: 5px 0px;
+                padding: 0px;
+                width: 100%;
+                opacity: 0.4;
+                @include align-items(flex-start);
+                position: relative;
+
+                &.search-context-prev {
+                  .asset {
+                     &.file-image {
+                       > .asset-thumbnail {
+                          &:before {
+                            @include linear-gradient(rgba(255,255,255,1), rgba(255,255,255,0));
+                          }
+                       }
+                     }
+                  }
+                }
+
+                &.search-context-next {
+                  padding-bottom: 10px;
+
+                  .asset {
+                    &.file-image {
+                      > .asset-thumbnail {
+                        &:before {
+                          @include linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1));
+                        }
+                      }
+                    }
+                  }
+                }
+                &:hover {
+
+                  > footer {
+
+                    > .chat-menu {
+
+                      > .menu-button {
+                        opacity: 1;
+                      }
+                    }
+
+                  }
+                }
+
+                &:first-of-type {
+                  margin-top: 20px;
+                }
+
+                > header {
+
+                  > .profile-image {
+                    cursor: pointer;
+                    margin-right: 12px;
+                    height: 100%;
+                    min-height: 100%;
+                    max-height: 100%;
+                    width: 39px;
+                    min-width: 39px;
+                    max-width: 39px;
+                    @include align-items(flex-start);
+                    @include justify-content(flex-end);
+
+                    > .asset,
+                    > .asset > .asset-thumbnail,
+                    > .asset > .asset-thumbnail > img {
+                      width: 39px;
+                      min-width: 39px;
+                      max-width: 39px;
+                      height: 39px;
+                      min-height: 39px;
+                      max-height: 39px;
+                    }
+
+                    > .asset {
+                      padding: 0px;
+
+                      > .asset-thumbnail {
+                        overflow: hidden;
+                        border: 0px;
+                        @include border-radius(20px);
+
+                        &:before {
+                          display: none;
+                        }
+                      }
+                    }
+
+                  }
+
+                  > .info {
+                    margin: 0px;
+                    left: 20px;
+                    top: -20px;
+                    position: absolute;
+                    @include justify-content(flex-start);
+
+                    &,
+                    > .user-name,
+                    > .timestamp {
+                      line-height: 17px;
+                      font-size: 12px;
+                      color: rgba($gray-quaternary, 0.2);
+                      white-space: nowrap;
+                    }
+
+                    > .user-name {
+                      margin-right: 4px;
+
+                      &:after {
+                        content: " - ";
+                      }
+                    }
+                  }
+                }
+
+                > main {
+                  max-width: calc(100% - 150px);
+
+                  > .wrapper {
+                    padding: 9px 20px;
+                    max-width: 100%;
+                    position: relative;
+                    background: $white-septenary;
+                    @include border-radius(24px);
+
+                    &.isAsset {
+                      padding:0;
+                    }
+
+                    > .text {
+                      width: 100%;
+
+                      &,
+                      * {
+                        line-height: 21px;
+                        font-size: 14px;
+                        color: $gray-quaternary;
+                        word-break: break-word;
+                        //white-space: pre-wrap;
+                      }
+
+                      strong {
+                        font-family: $font-family-heavy;
+                      }
+
+                      h1,
+                      h2,
+                      h3,
+                      h4,
+                      h5,
+                      h6 {
+                        margin-bottom: 0px;
+                      }
+
+                      ul,
+                      ol {
+                        margin: 0px;
+                        line-height: 0px;
+                      }
+
+                      a {
+                        color: rgba($blue-elevenary, 1.0);
+                      }
+
+                      p {
+                        margin: 0px;
+                      }
+                    }
+
+                    > .asset {
+
+                      > .asset-thumbnail {
+
+                        &:before {
+                          content:"";
+                          @include size(100%);
+                          top:0px;
+                          left:0px;
+                          position: absolute;
+                        }
+
+                        &,
+                        > img {
+                          @include all-height(50px);
+                        }
+
+                      }
+
+                    }
+                  }
+
+                }
+
+                > footer {
+                  margin-left: 10px;
+
+                  > .timestamp {
+                      margin: 12px 0px 0px 10px;
+                      line-height: 17px;
+                      font-family: $font-family-regular;
+                      font-size: 12px;
+                      color: rgba($gray-quaternary, 0.2);
+                      white-space: nowrap;
+                  }
+
+                  > .chat-menu {
+                    margin: 12px 0px 0px 10px;
+                    position: relative;
+
+                    > .menu-button {
+                      cursor: pointer;
+                      opacity: 0;
+
+                      &:active {
+                        > svg {
+                          fill: rgba($black-senary, 0.8);
+                        }
+                      }
+
+                      &,
+                      > svg {
+                        width: 18px;
+                        min-width: 18px;
+                        max-width: 18px;
+                        height: 18px;
+                        min-height: 18px;
+                        max-height: 18px;
+                      }
+
+                      > svg {
+                        fill: rgba($light-gray-secondary, 0.5);
+                      }
+                    }
+
+                    > .menu {
+                      bottom: 84px;
+                    }
+                  }
+
+                }
+
+
+                &.has-date-spacer {
+                  margin: 65px 0px 13px 0px;
+                }
+
+                &.file-image,
+                &.file-non-image {
+
+                  > header {
+
+                    > .info {
+                      top: -8px;
+                      @include justify-content(flex-end);
+                    }
+                  }
+
+                  > main {
+
+                    > .wrapper {
+                      padding: 0px;
+                      background: transparent;
+                      @include border-radius(9px);
+
+                    }
+                  }
+
+                }
+
+                &.mine {
+
+                  > header {
+
+                    > .profile-image {
+                      cursor: default;
+                    }
+
+                  }
+
+                  > main {
+
+                    > .wrapper {
+
+                      background: $blue-octornary;
+
+                      > .text {
+
+                        &,
+                        * {
+                          color: $white-octonary;
+                        }
+
+                        a {
+                          color: rgba($blue-elevenary, 1.0);
+                        }
+                      }
+
+                    }
+                  }
+
+
+                  &.file-image,
+                  &.file-non-image {
+
+                    > main {
+
+                      .wrapper {
+                        background: transparent;
+                      }
+                    }
+
+                  }
+                }
+
+                &.editing {
+
+                  &:before {
+                    content: "";
+                    width: calc(100% + 56px);
+                    height: calc(100% + 26px);
+                    left: -28px;
+                    top: -13px;
+                    position: absolute;
+                    background: rgba($blue-octornary, 0.1);
+                  }
+
+                  > main {
+                    width: 100%;
+
+                    > .wrapper {
+                      width: 100%;
+                      background: transparent;
+
+                      > .editor {
+                        width: 100%;
+
+                        textarea {
+                          resize: none !important;
+                          margin: 0px 0px 10px 0px;
+                          padding: 0px 0px 0px 0px;
+                          max-height: none;
+                          min-height: unset;
+                          width: 100%;
+                          line-height: 26px;
+                          font-size: 14px;
+                          font-weight: 300;
+                          color: $blue-gray-primary;
+                          background: transparent;
+                          border: 0px;
+                          border-bottom: 1px solid rgba($blue-octornary, 0.4);
+                          @include border-radius(0px);
+
+
+                        }
+
+                        > .actions {
+
+                          > button {
+
+                            > .wrapper {
+
+                              > .label {
+                                text-transform: none;
+                              }
+                            }
+
+                            &.link {
+                              margin-left: 26px;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  /*
+                  > .flex-spacer,
+                  > .timestamp,
+                  > .chat-menu {
+                    display: none;
+                  }
+                  */
+                }
+              }
+              > .search-result {
+                margin: 0px 0px;
+                padding: 10px;
+                width: 100%;
+                border-radius: 5px;
+                box-shadow: 0px 4px 16px 0px rgba(80, 73, 91, 0.15);
+                @include align-items(flex-start);
+                position: relative;
+
+                &:hover {
+
+                  > footer {
+
+                    > .chat-menu {
+
+                      > .menu-button {
+                        opacity: 1;
+                      }
+                    }
+
+                  }
+                }
+
+                &:first-of-type {
+                  margin-top: 20px;
+                }
+
+                > header {
+
+                  > .profile-image {
+                    cursor: pointer;
+                    margin-right: 12px;
+                    height: 100%;
+                    min-height: 100%;
+                    max-height: 100%;
+                    width: 39px;
+                    min-width: 39px;
+                    max-width: 39px;
+                    @include align-items(flex-start);
+                    @include justify-content(flex-end);
+
+                    > .asset,
+                    > .asset > .asset-thumbnail,
+                    > .asset > .asset-thumbnail > img {
+                      width: 39px;
+                      min-width: 39px;
+                      max-width: 39px;
+                      height: 39px;
+                      min-height: 39px;
+                      max-height: 39px;
+                    }
+
+                    > .asset {
+                      padding: 0px;
+
+                      > .asset-thumbnail {
+                        overflow: hidden;
+                        border: 0px;
+                        @include border-radius(20px);
+
+                        &:before {
+                          display: none;
+                        }
+                      }
+                    }
+
+                  }
+
+                  > .info {
+                    margin: 0px;
+                    left: 20px;
+                    top: -20px;
+                    position: absolute;
+                    @include justify-content(flex-start);
+
+                    &,
+                    > .user-name,
+                    > .timestamp {
+                      line-height: 17px;
+                      font-size: 12px;
+                      color: rgba($gray-quaternary, 0.2);
+                      white-space: nowrap;
+                    }
+
+                    > .user-name {
+                      margin-right: 4px;
+
+                      &:after {
+                        content: " - ";
+                      }
+                    }
+                  }
+                }
+
+                > main {
+                  max-width: calc(100% - 150px);
+
+                  > .wrapper {
+                    padding: 9px 20px;
+                    max-width: 100%;
+                    position: relative;
+                    // background: $white-septenary;
+                    // @include border-radius(24px);
+
+                    > .text {
+                      width: 100%;
+
+                      &,
+                      * {
+                        line-height: 21px;
+                        font-size: 14px;
+                        color: $gray-quaternary;
+                        word-break: break-word;
+                        //white-space: pre-wrap;
+                      }
+
+                      strong {
+                        font-family: $font-family-heavy;
+                      }
+
+                      h1,
+                      h2,
+                      h3,
+                      h4,
+                      h5,
+                      h6 {
+                        margin-bottom: 0px;
+                      }
+
+                      ul,
+                      ol {
+                        margin: 0px;
+                        line-height: 0px;
+                      }
+
+                      a {
+                        color: rgba($blue-elevenary, 1.0);
+                      }
+
+                      p {
+                        margin: 0px;
+                        > em {
+                          font-style: normal;
+                          background-color: $purple-septenary;
+                        }
+                      }
+                    }
+
+                  }
+
+                }
+
+                > footer {
+                  margin-left: 10px;
+
+                  > .timestamp {
+                      margin: 12px 0px 0px 10px;
+                      line-height: 17px;
+                      font-family: $font-family-regular;
+                      font-size: 12px;
+                      color: rgba($gray-quaternary, 0.2);
+                      white-space: nowrap;
+                  }
+
+                  > .chat-menu {
+                    margin: 12px 0px 0px 10px;
+                    position: relative;
+
+                    > .menu-button {
+                      cursor: pointer;
+                      opacity: 0;
+
+                      &:active {
+                        > svg {
+                          fill: rgba($black-senary, 0.8);
+                        }
+                      }
+
+                      &,
+                      > svg {
+                        width: 18px;
+                        min-width: 18px;
+                        max-width: 18px;
+                        height: 18px;
+                        min-height: 18px;
+                        max-height: 18px;
+                      }
+
+                      > svg {
+                        fill: rgba($light-gray-secondary, 0.5);
+                      }
+                    }
+
+                    > .menu {
+                      bottom: 84px;
+                    }
+                  }
+
+                }
+
+                > .date-spacer {
+                  width: 100%;
+                  left: 0px;
+                  top: -44px;
+                  position: absolute;
+
+                  > .wrapper {
+                    width: 100%;
+                    position: relative;
+                    @include justify-content(center);
+
+                    &:before {
+                      content: "";
+                      width: 100%;
+                      height: 1px;
+                      left: 0px;
+                      top: calc(50% - 1px);
+                      position: absolute;
+                      background: $white-nonary;
+                    }
+
+                    > .text {
+                      z-index: 1;
+                      width: 104px;
+                      background: $white-primary;
+                      font-size: 14px;
+                      text-align: center;
+                      color: rgba($gray-quaternary, 0.4);
+                    }
+                  }
+                }
+
+                &.has-date-spacer {
+                  margin: 65px 0px 13px 0px;
+                }
+
+                &.file-image,
+                &.file-non-image {
+
+                  > header {
+
+                    > .info {
+                      top: -8px;
+                      @include justify-content(flex-end);
+                    }
+                  }
+
+                  > main {
+
+                    > .wrapper {
+                      padding: 0px;
+                      background: transparent;
+                      @include border-radius(9px);
+
+                    }
+                  }
+
+                }
+
+                &.mine {
+
+                  > header {
+
+                    > .profile-image {
+                      cursor: default;
+                    }
+
+                  }
+
+                  > main {
+
+                    > .wrapper {
+
+                      background: $blue-octornary;
+
+                      > .text {
+
+                        &,
+                        * {
+                          color: $white-octonary;
+                        }
+
+                        a {
+                          color: rgba($blue-elevenary, 1.0);
+                        }
+                      }
+
+                    }
+                  }
+
+
+                  &.file-image,
+                  &.file-non-image {
+
+                    > main {
+
+                      .wrapper {
+                        background: transparent;
+                      }
+                    }
+
+                  }
+                }
+
+                &.editing {
+
+                  &:before {
+                    content: "";
+                    width: calc(100% + 56px);
+                    height: calc(100% + 26px);
+                    left: -28px;
+                    top: -13px;
+                    position: absolute;
+                    background: rgba($blue-octornary, 0.1);
+                  }
+
+                  > main {
+                    width: 100%;
+
+                    > .wrapper {
+                      width: 100%;
+                      background: transparent;
+
+                      > .editor {
+                        width: 100%;
+
+                        textarea {
+                          resize: none !important;
+                          margin: 0px 0px 10px 0px;
+                          padding: 0px 0px 0px 0px;
+                          max-height: none;
+                          min-height: unset;
+                          width: 100%;
+                          line-height: 26px;
+                          font-size: 14px;
+                          font-weight: 300;
+                          color: $blue-gray-primary;
+                          background: transparent;
+                          border: 0px;
+                          border-bottom: 1px solid rgba($blue-octornary, 0.4);
+                          @include border-radius(0px);
+
+
+                        }
+
+                        > .actions {
+
+                          > button {
+
+                            > .wrapper {
+
+                              > .label {
+                                text-transform: none;
+                              }
+                            }
+
+                            &.link {
+                              margin-left: 26px;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  /*
+                  > .flex-spacer,
+                  > .timestamp,
+                  > .chat-menu {
+                    display: none;
+                  }
+                  */
+                }
+              }
+            }
+
+            > form {
+              height: 92px;
+              width: 100%;
+              position: relative;
+              background: rgba($white-septenary, 0.69);
+              border-top: 1px solid rgba($white-nonary, 0.69);
+
+              > .field-group {
+                margin: 0px;
+                height: 100%;
+                @include align-items(flex-start);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+
+                > label {
+                  padding-left: 0px;
+                  line-height: 26px;
+                  font-size: 14px;
+                  color: rgba($gray-quaternary, 0.5);
+                }
+
+                > .wrapper {
+                  z-index: 1;
+                  width: 100%;
+                  min-height: 100%;
+
+                  > input[type=text],
+                  > textarea {
+                    padding-left: 0px;
+                    width: 100%;
+                    line-height: 26px;
+                    font-size: 14px;
+                    color: rgba($gray-quaternary, 0.8);
+                    background: transparent;
+                    border: none;
+                    resize: none !important;
+                  }
+                }
+              }
+
+              > .actions {
+
+                > .menu-button  {
+                  cursor: pointer;
+                  margin: 0px 30px;
+                  height: 35px;
+                  min-height: 35px;
+                  max-height: 35px;
+                  width: 35px;
+                  min-width: 35px;
+                  max-width: 35px;
+                  background: $white-primary;
+                  border: 1px solid $light-gray-senary;
+                  @include border-radius(20px);
+                  overflow: hidden;
+
+                  &:hover {
+                    @include css3-prefix('box-shadow', 0px 3px 6px 0px $white-denary);
+                  }
+
+                  &:active,
+                  &.showing {
+                    @include css3-prefix('box-shadow', inset 0px 3px 6px 0px $white-denary);
+
+                  }
+
+                  > svg {
+                    height: 16px;
+                    min-height: 16px;
+                    max-height: 16px;
+                    width: 16px;
+                    min-width: 16px;
+                    max-width: 16px;
+                    fill: rgba($gray-quinary, 0.69);
+                  }
+                }
+              }
+            }
+
+            &.file-drop {
+
+              > .drag-drop-modal-overlay {
+                @include display(flex);
+              }
+            }
+
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width:1024px) {
+
+  // [data-state*="dashboard.board.chat"],
+  // [data-state*="dashboard.troopMember.chat"] {
+  //
+  //   [data-ui-view=content] {
+  //
+  //     > section {
+  //       //height: calc(100% - 44px);
+  //     }
+  //   }
+  //
+  //   [data-ui-view=dashboardContent] {
+  //
+  //     > .wrapper {
+  //
+  //       > .empty-chat {
+  //         @include align-items(center);
+  //         @include justify-content(center);
+  //         @include transform(translate(0px, 0px));
+  //
+  //         > .title {
+  //           line-height: 22px;
+  //           font-size: 16px;
+  //           text-align: center;
+  //         }
+  //
+  //         > .description {
+  //           line-height: 20px;
+  //           font-size: 12px;
+  //           text-align: center;
+  //         }
+  //       }
+  //
+  //       > .chat {
+  //
+  //
+  //         > .chat-entry {
+  //           width: calc(100% - 62px);
+  //           min-width: calc(100% - 62px);
+  //           max-width: calc(100% - 62px);
+  //
+  //           > header {
+  //
+  //             > .user-name {
+  //               line-height: 16px;
+  //               font-size: 12px;
+  //               color: $black-senary;
+  //             }
+  //
+  //             > .timestamp {
+  //               display: none;
+  //             }
+  //
+  //           }
+  //
+  //           > main {
+  //
+  //             > .wrapper {
+  //               padding: 8px 14px;
+  //
+  //               > .text {
+  //                 margin-top: 2px;
+  //               }
+  //
+  //             }
+  //           }
+  //
+  //           > footer {
+  //
+  //             > .chat-menu {
+  //
+  //               > .menu-button {
+  //                 display: none;
+  //
+  //               }
+  //             }
+  //
+  //             > .timestamp {
+  //               margin-top: 6px;
+  //               display: inline-block;
+  //               font-size: 10px;
+  //               color: rgba($black-senary, 0.8);
+  //             }
+  //
+  //           }
+  //         }
+  //       }
+  //
+  //     }
+  //   }
+  //
+  //
+  //   &.showing-search-bar {
+  //
+  //     [data-ui-view="content"] {
+  //
+  //       > section {
+  //         height: calc(100% - 128px);
+  //       }
+  //     }
+  //   }
+  // }
+  //
+  // [data-state*="dashboard.troopMember.chat"] {
+  //
+  //   [data-ui-view=content] {
+  //
+  //     > section {
+  //       height: calc(100% - 44px);
+  //     }
+  //   }
+  // }
+}
+
+
+@media only screen and (max-width:414px) {
+
+  // [data-state*="dashboard.board.chat"],
+  // [data-state*="dashboard.troopMember.chat"],
+  // [data-state*="dashboard.search.chat"] {
+  //
+  //   [data-ui-view=content] {
+  //
+  //     > section {
+  //
+  //     }
+  //   }
+  //
+  //   [data-ui-view=dashboardContent] {
+  //     width: 100% !important;
+  //
+  //     > .wrapper {
+  //
+  //       > .chat {
+  //         height: calc(100% - 74px);
+  //
+  //         > .chat-entry {
+  //           margin-bottom: 0px;
+  //           padding: 0px;
+  //           @include flex-wrap(wrap);
+  //
+  //
+  //           > main {
+  //             width: calc(100% - 51px);
+  //             min-width: calc(100% - 51px);
+  //             max-width: calc(100% - 51px);
+  //
+  //             > .wrapper {
+  //
+  //               > .asset {
+  //
+  //                 > .asset-menu {
+  //                   display: none;
+  //                 }
+  //                 > .info {
+  //
+  //                   > .file-name {
+  //                     max-width: 80px;
+  //                   }
+  //                 }
+  //
+  //                 &.file-non-image {
+  //                   width: 100%;
+  //                 }
+  //
+  //                 &.file-image {
+  //
+  //                   &,
+  //                   > .asset-thumbnail,
+  //                   > .asset-thumbnail > img {
+  //                     width: 100%;
+  //                     min-width: 100%;
+  //                     max-width: 100%;
+  //                   }
+  //
+  //                   > .asset-thumbnail {
+  //
+  //                     &,
+  //                     > img {
+  //                       height: 122px;
+  //                       min-height: 122px;
+  //                       max-height: 122px;
+  //
+  //                     }
+  //                   }
+  //                 }
+  //               }
+  //
+  //             }
+  //
+  //           }
+  //
+  //           > footer {
+  //
+  //             > .timestamp {
+  //               margin-left: 0px;
+  //               width: 100%;
+  //               text-align: right;
+  //             }
+  //
+  //           }
+  //
+  //         }
+  //       }
+  //
+  //       > form {
+  //         height: 74px;
+  //       }
+  //     }
+  //   }
+  //
+  //
+  //   &.showing-search-bar {
+  //
+  //     [data-ui-view="content"] {
+  //
+  //       > section {
+  //
+  //       }
+  //     }
+  //   }
+  // }
+  //
+  // [data-state*="dashboard.troopMember.chat"],
+  // [data-state*="dashboard.search.chat"] {
+  //
+  //   [data-ui-view=content] {
+  //
+  //     > section {
+  //
+  //     }
+  //   }
+  // }
+}

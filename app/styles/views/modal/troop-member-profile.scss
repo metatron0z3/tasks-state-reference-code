@@ -1,0 +1,251 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+  > .modal-overlay {
+
+    > form.modal {
+
+      &.troop-member-profile-modal {
+
+        > .close {
+          z-index:1;
+          fill: $black-primary;
+        }
+
+        > header {
+          position: relative;
+          height: 166px;
+          width: calc(100% - 8px);
+          margin: 0px 4px;
+          @include border-radius(8px 8px 0px 0px);
+          @include justify-content(center);
+
+          > h1 {
+            // margin-top: 50px;
+            // color: $white-primary;
+            color: $gray-tertiary;;
+          }
+
+          > .background {
+            z-index: -1;
+            @include all-width(100%);
+            @include all-height(calc(100% - 8px));
+            left: 0px;
+            top: 4px;
+            position: absolute;
+            overflow: hidden;
+            @include border-radius(8px 8px 0px 0px);
+
+            > .profile-image {
+              @include size(100%);
+              @include border-radius(0px);
+
+              > .asset {
+                @include size(100%);
+
+                > .asset-thumbnail {
+                  @include size(100%);
+                  @include border-radius(0px);
+                  border: 0px;
+
+                  &:before {
+                    opacity: 1;
+                  }
+
+                  > img {
+                    @include size(100%);
+                    filter: blur(8px);
+                  }
+
+                }
+              }
+
+            }
+          }
+
+          > .uploader {
+            @include size(100%, 78px);
+
+            left: 0px;
+            top: 60px;
+            position: absolute;
+            @include align-items(center);
+            @include justify-content(center);
+
+            > .dropper {
+              cursor: pointer;
+              margin: 0px;
+              @include size(78px);
+
+              > .uploaded-image {
+                @include border-radius(40px);
+
+                &,
+                > img {
+                  @include size(78px);
+                }
+
+                > img {
+                  object-fit: cover;
+                }
+              }
+
+              > .profile-image {
+
+                &,
+                > .asset,
+                > .asset > .asset-thumbnail,
+                > .asset > .asset-thumbnail > img {
+                  @include size(78px);
+                }
+
+                > .asset {
+
+                  &:hover {
+
+                    > .asset-thumbnail {
+                      opacity: 1;
+                    }
+                  }
+
+                  > .asset-thumbnail {
+                    overflow: hidden;
+                    border: 0px;
+
+                    &:before {
+                      display: none;
+                    }
+
+                    &,
+                    > .upload-progress {
+                      @include border-radius(50%);
+                    }
+
+                  }
+                }
+
+                &.ng-hide {
+                  display: none !important;
+                }
+              }
+
+              > .empty {
+                // @include size(78px);
+                // background: $white-primary;
+                // @include border-radius(50%);
+                // border: 1px solid $light-gray-tertiary;
+
+                > svg {
+                  height: 78px;
+                  min-height: 78px;
+                  max-height: 78px;
+                  width: 78px;
+                  min-width: 78px;
+                  max-width: 78px;
+                  fill: $light-gray-tertiary;
+                }
+
+              }
+            }
+          }
+
+          &.empty {
+
+            > h1 {
+              color: $light-gray-tertiary;
+            }
+          }
+        }
+
+        > main {
+          margin-bottom:0px;
+
+          > .username {
+            position: relative;
+
+            &:before {
+              content: "@";
+              position: absolute;
+              top: 6px;
+              left: 0;
+              color: $blue-gray-primary;
+            }
+
+            > input {
+              padding-left: 14px;
+            }
+          }
+
+          > .field-group {
+
+            &:last-of-type {
+              margin-bottom: 20px;
+            }
+
+            > input {
+              &.ng-dirty.ng-touched.ng-invalid {
+                border-color: $red-quaternary;
+              }
+            }
+
+          }
+
+          > [data-ng-messages],
+          > [np-messages] {
+            @include transform(translateY(-30px));
+
+            > .error {
+              line-height: 26px;
+              font-size: 12px;
+              color: $red-quaternary;
+            }
+          }
+
+        }
+
+        > footer {
+
+          margin-top: 20px;
+          // @include justify-content(flex-end);
+
+          > button {
+            padding: 0px;
+            @include size(160px, 44px);
+            background: $blue-octornary;
+            border-color: $blue-octornary;
+
+            > .wrapper {
+
+              > .label {
+                font-size: 11px;
+              }
+            }
+          }
+        }
+
+
+        > .loader-wrapper {
+          z-index: 9;
+          @include size(100%);
+          left: 0px;
+          top: 0px;
+          position: absolute;
+          background: rgba($white-primary, 0.9);
+          @include border-radius(4px);
+
+          > .wrapper {
+
+            &:before {
+              content: "Updating...";
+              min-width: 80px;
+              @include transform(translateX(-8px));
+            }
+          }
+        }
+
+      }
+
+    }
+  }
+}

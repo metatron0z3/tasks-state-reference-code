@@ -1,0 +1,211 @@
+
+<div class="card-menu-wrapper">
+  <span class="card-menu flex-row"
+        ng-if=" ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( card.createdByMemberId === Me.troopMember.$id ) "
+        ng-include=" '/views/partials/card/card-menu.html' "
+  ></span>
+</div>
+
+<header class="flex-row"
+        ng-class=" { 'border-bottom' : card.description && ( card.assetCount === 0 ) } "
+        ng-if=" Me.currentBoard.viewSettings.card.showHeader "
+>
+  <span class="creator-block flex-row">
+    <span class="profile-image image-container"
+          ng-click="navToTroopMember(card.createdByMemberId)"
+          tp-troop-member-profile=" ::card.createdByMemberId "
+          tp-troop-member-avatar-asset-size=" 'smallUrl' "
+          tp-troop-member-troop-id=" ::card.troopId "
+    ></span>
+    <span class="name-date flex-column">
+      <span class="creator"
+            ng-click="navToTroopMember(card.createdByMemberId)"
+            tp-troop-member="{{ ::card.createdByMemberId }}"
+            tp-troop-member-troop-id=" {{ ::card.troopId }} "
+            tp-troop-member-user-name="true"
+      ></span>
+      <span class="date"
+            ng-bind=" card.createdAt | moment:'extended-format'  "
+      >
+      </span>
+    </span>
+
+
+  </span>
+
+  <span class="flex-spacer flex-row"></span>
+
+
+<!--  add :after for horizontal line  -->
+</header>
+
+
+
+<main class="flex-column"
+      ng-class=" { decapitated: ( ! Me.currentBoard.viewSettings.card.showHeader ) } "
+      ng-init=" card.assetsExtra = card.assetCount - assetCountLimit"
+      data-count="{{ card.assetCount }}"
+>
+
+  <span class="title">
+    <h1 ng-bind="card.cardName"
+        ng-click="navToDetailCard(card)"
+    ></h1>
+  </span>
+
+  <ul ng-if=" card.assetCount > 0 "
+      class="asset-list flex-row-wrap"
+      ng-class=" card.assetsExtra > 0 ? 'has-more' : '' "
+      ng-click=" navToDetailCard(card) "
+  >
+    <li class="asset flex-column"
+        ng-repeat=" assetId in card.orderedAssets | limitTo : assetCountLimit "
+        tp-asset=" ::assetId "
+        tp-asset-troop-id=" ::card.troopId "
+        tp-asset-index=" $index "
+        tp-asset-count=" card.orderedAssets.length "
+        tp-asset-count-limit=" assetCountLimit "
+        tp-asset-size=" {{ assetSize($index) }} "
+        tp-asset-info=" true "
+        tp-asset-download=" checkDownload(card) "
+        tp-asset-rename=" false "
+        tp-asset-remove=" false "
+        tp-asset-thumbnail-click=" showAssetsModal(card, assetId)  "
+        tp-asset-has-more-click=" navToDetailCard(card) "
+        ng-click=" $event.stopPropagation() "
+    ></li>
+
+  </ul>
+
+  <div ng-if="card.description"
+       class="wrapper"
+       ng-has-overflow=""
+       ng-click=" navToDetailCard(card) "
+  >
+    <div class="description"
+         data-marked=" card.description "
+         ng-has-overflow=""
+    ></div>
+    <div class="read-more flex-row">
+      <span class="text"
+            ng-click="navToDetailCard(card)"
+      >
+        Read More
+      </span>
+    </div>
+  </div>
+
+  <div class="tags flex-row-wrap"
+       ng-if=" ( card.orderedTags.length > 0 ) "
+       ng-click="navToDetailCard(card)"
+  >
+  <!--
+  -->
+    <button class="tag"
+            title="{{ tag.value }}"
+            ng-repeat=" tag in card.orderedTags "
+            ng-include=" '/views/partials/card/tag.html' "
+            ng-click="selectTag('tag' + tag.name); $event.stopPropagation();"
+    ></button>
+  </div>
+
+  <span class="card-info flex-row"
+        ng-click="navToDetailCard(card)"
+  >
+    <span class="notes image-container"
+          ng-if="card.detailNotes.list.length > 0 "
+          data-count=" {{ card.detailNotes.list.length + ' Note' + ( card.detailNotes.list.length > 1 ? 's' : '' ) }}"
+    >
+      <svg class="icon add-note">
+        <use xlink:href="#add-note"/>
+      </svg>
+    </span>
+    <span class="notes image-container"
+          ng-if="card.detailNotes.list.length === 0 "
+          data-count=" Add Note"
+    >
+      <svg class="icon add-note">
+        <use xlink:href="#add-note"/>
+      </svg>
+    </span>
+    <span class="asset image-container"
+          ng-if=" card.orderedAssets.length > 0 "
+          data-count=" {{ card.orderedAssets.length + ' Attachment' + ( card.orderedAssets.length > 1 ? 's' : '' ) }} "
+    >
+      <svg class="icon paper-clip">
+        <use xlink:href="#paper-clip"/>
+      </svg>
+    </span>
+    <span class="flex-spacer">&nbsp;</span>
+  </span>
+
+</main>
+
+<footer
+  class="flex-column"
+  ng-class="card.detailNotes.list.length > 0 ? 'has-comments' : 'empty-notes' "
+  ng-if=" Me.currentBoard.allowNotes "
+>
+
+<form name="newNoteForm"
+      class="flex-row full-size-form"
+      ng-if=" ( newNote.show || ( notes.orderedList.length === 0 ) || (newNote.value) && ( newNote.value !== '' ) ) "
+>
+  <span class="profile-image image-container"
+        tp-troop-member-profile=" ::Me.troopMember.$id "
+        tp-troop-member-avatar-asset-size="smallUrl"
+        tp-troop-member-troop-id=" ::card.troopId "
+  ></span>
+  <div class="new-comment field-group flex-row"
+       ng-class=" { 'has-notes': notes.orderedList.length > 0 }"
+  >
+    <textarea name="newNote"
+              placeholder="Add new note..."
+              rows="1"
+              data-msd-elastic=""
+              ng-change="newNoteTyping(card)"
+              ng-model="newNote[card.$id].value"
+              ng-click="newNoteFocus(card)"
+              ng-enter-key=""
+              ng-enter-key-action="writeComment(card)"
+              ng-enter-key-catch="single"
+              autocomplete="off"
+              ng-class="{ 'has-note-text': newNote[card.$id].value }"
+    ></textarea>
+  </div>
+
+</form>
+  <ul class="notes flex-column"
+      ng-if="card.detailNotes.list.length > 0"
+  >
+    <li class="note flex-column"
+        ng-repeat="note in card.detailNotes.list | limitTo: noteCountLimit"
+        ng-mouseleave=" noteMenus[note.$id] = false "
+        tp-card-note=" note "
+        tp-card-note-last="$last"
+    ></li>
+  </ul>
+  <span
+    class="comments flex-row"
+    ng-class="card.notes ? 'has-comments' : ''"
+    ng-if="card.detailNotes.list.length > noteCountLimit"
+    tp-card-note-limit="noteCountLimit"
+    tp-card-note-count="card.notes"
+    tp-card-note-count-append="{ single:'note', plural:'notes' }"
+    ng-click=" ( Me.troopMember.troopPermission === 'guest' && ( ! card.notes ) )  ? showPublicTroopJoinModal() : navToDetailCard(card) "
+    >
+    <!-- <span class="comment image-container flex-row">
+      <svg class="icon book">
+        <use xlink:href="#book"/>
+      </svg>
+    </span> -->
+  </span>
+
+  <span class="flex-spacer"></span>
+
+  <!-- <span class="card-menu flex-row"
+        ng-if=" ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( card.createdByMemberId === Me.troopMember.$id ) "
+        ng-include=" '/views/partials/card/card-menu.html' "
+  ></span> -->
+
+</footer>

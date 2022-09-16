@@ -1,0 +1,152 @@
+<div class="modal-overlay logger-settings-modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click="close()"
+>
+
+  <form name="loggerSettingsModalForm"
+        class="logger-settings-modal modal flex-column"
+        novalidate="novalidate"
+        ng-submit="save(loggerSettingsModalForm)"
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click="close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header>
+      <h1>Logger Settings</h1>
+    </header>
+
+    <main>
+      <section class="core flex-column">
+        <h1>Log Level</h1>
+        <div class="level field-group flex-column">
+          <label class="">Level</label>
+
+          <ui-select ng-model="levelChoice.value" search-enabled="false" on-select="changeLogLevel($select.selected.value)" data-bla="{{levelChoice.value}}">
+            <ui-select-match>
+              <span ng-bind="$select.selected.label"></span>
+              <span class="arrow-down"></span>
+            </ui-select-match>
+            <ui-select-choices repeat=" choice.value as choice in logLevels | filter: $select.search "
+                               position="down"
+                               ng-hide=" ! $select.open "
+            >
+              <span ng-bind="choice.label | highlight: $select.search"></span>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </section>
+
+      <section class="core flex-column">
+        <h1>Core</h1>
+        <ul class="flex-column">
+          <li class="checkbox flex-row field-group"
+              ng-repeat=" (fileName, settings) in $storage.loggerSettings.core "
+          >
+            <div tp-checkbox="settings.checked"></div>
+            <label class="label"> {{ fileName }} </label>
+          </li>
+        </ul>
+
+      </section>
+
+      <section class="controllers flex-column">
+        <h1>Controllers</h1>
+        <div class="core-controllers flex-column">
+          <label>Core</label>
+          <ul class="flex-column">
+            <li class="checkbox flex-row field-group"
+                ng-repeat=" (fileName, settings) in $storage.loggerSettings.controllers.core "
+            >
+              <div tp-checkbox="settings.checked"></div>
+              <label class="label"> {{ fileName }} </label>
+            </li>
+          </ul>
+        </div>
+        <br />
+        <div class="dashboard-controllers flex-column">
+          <label>Dashboard</label>
+          <div class="flex-column"
+               ng-repeat=" (group, files) in $storage.loggerSettings.controllers.dashboard "
+          >
+            <br />
+            <label>{{ group }}</label>
+            <ul class="flex-column">
+              <li class="checkbox flex-row field-group"
+                  ng-repeat=" (fileName, settings) in files "
+              >
+                <div tp-checkbox="settings.checked"></div>
+                <label class="label"> {{ fileName }} </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <br />
+        <div class="modal-controllers flex-column">
+          <label>Modal</label>
+          <ul class="flex-column">
+            <li class="checkbox flex-row field-group"
+                ng-repeat=" (fileName, settings) in $storage.loggerSettings.controllers.modal "
+            >
+              <div tp-checkbox="settings.checked"></div>
+              <label class="label"> {{ fileName }} </label>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="directives flex-column">
+        <h1>Directives</h1>
+        <div class="flex-column"
+             ng-repeat=" (group, files) in $storage.loggerSettings.directives "
+        >
+          <br />
+          <label>{{ group }}</label>
+          <ul class="flex-column">
+            <li class="checkbox flex-row field-group"
+                ng-repeat=" (fileName, settings) in files "
+            >
+              <div tp-checkbox="settings.checked"></div>
+              <label class="label"> {{ fileName }} </label>
+            </li>
+          </ul>
+        </div>
+
+      </section>
+
+      <section class="services flex-column">
+        <h1>Services</h1>
+        <ul class="flex-column">
+          <li class="checkbox flex-row field-group"
+              ng-repeat=" (fileName, settings) in $storage.loggerSettings.services "
+          >
+            <div tp-checkbox="settings.checked"></div>
+            <label class="label"> {{ fileName }} </label>
+          </li>
+        </ul>
+
+      </section>
+
+
+
+
+    </main>
+
+    <footer class="flex-row">
+      <button class="blue-primary"
+              ng-click="close()"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">YAY JENNY</span>
+        </div>
+      </button>
+    </footer>
+  </form>
+
+</div>

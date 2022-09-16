@@ -1,0 +1,350 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+
+
+body {
+  > .modal-overlay {
+
+    > .board-import-modal {
+
+      &:before {
+        display: none;
+      }
+
+
+      > header {
+        @include justify-content(center);
+
+
+        > .image-container {
+          width: 100px;
+          min-width: 100px;
+          height: 100px;
+          min-height: 100px;
+
+          > svg {
+            width: 100px;
+            min-width: 100px;
+            height: 100px;
+            min-height: 100px;
+            fill: $white-primary;
+          }
+        }
+      }
+
+      > h1 {
+        margin-top: 25px;
+        line-height: 33px;
+        font-family: $font-family-regular;
+        font-size: 29px;
+        color: $white-primary;
+      }
+
+      > p {
+        margin-top: 8px;
+        width: 100%;
+        line-height: 22px;
+        font-size: 14px;
+        text-align: center;
+        color: $white-primary;
+        @include text-shadow(0px 1px 0px rgba($blue-grey-quaternary, 0.5));
+      }
+
+      > .progress-bar {
+        margin-top: 32px;
+        @include justify-content(center);
+
+        > .image-container {
+          margin-right: 15px;
+          width: 12px;
+          min-width: 12px;
+          height: 12px;
+          min-height: 12px;
+
+          &:last-of-type {
+            margin-right: 0px;
+          }
+
+          > svg {
+            width: 12px;
+            min-width: 12px;
+            height: 12px;
+            min-height: 12px;
+            fill: rgba($white-primary, 0.3);
+          }
+        }
+
+
+        &[data-percent="10"] {
+
+          > .image-container {
+
+            &:nth-of-type(1) {
+              @include animation-name(tp-fade);
+              @include animation-duration(0.3s);
+              @include animation-timing-function(linear);
+              @include animation-iteration-count(infinite);
+              @include animation-direction(alternate);
+
+              > svg {
+                fill: $white-primary;
+              }
+            }
+
+          }
+
+        }
+
+        &[data-percent="20"] {
+
+          > .image-container {
+
+            &:nth-of-type(1),
+            &:nth-of-type(2) {
+
+              > svg {
+                fill: $white-primary;
+              }
+            }
+
+            &:nth-of-type(2) {
+              @include animation-name(tp-fade);
+              @include animation-duration(0.3s);
+              @include animation-timing-function(linear);
+              @include animation-iteration-count(infinite);
+              @include animation-direction(alternate);
+            }
+
+          }
+
+        }
+        &[data-percent="30"] {
+
+          > .image-container {
+
+            &:nth-of-type(1),
+            &:nth-of-type(2),
+            &:nth-of-type(3) {
+
+              > svg {
+                fill: $white-primary;
+              }
+            }
+
+            &:nth-of-type(3) {
+              @include animation-name(tp-fade);
+              @include animation-duration(0.3s);
+              @include animation-timing-function(linear);
+              @include animation-iteration-count(infinite);
+              @include animation-direction(alternate);
+            }
+
+          }
+
+        }
+        &[data-percent="40"] {
+
+          > .image-container {
+
+            &:nth-of-type(1),
+            &:nth-of-type(2),
+            &:nth-of-type(3),
+            &:nth-of-type(4) {
+
+              > svg {
+                fill: $white-primary;
+              }
+            }
+
+            &:nth-of-type(4) {
+              @include animation-name(tp-fade);
+              @include animation-duration(0.3s);
+              @include animation-timing-function(linear);
+              @include animation-iteration-count(infinite);
+              @include animation-direction(alternate);
+            }
+
+          }
+
+        }
+        &[data-percent="50"] {
+
+          > .image-container {
+
+            &:nth-of-type(1),
+            &:nth-of-type(2),
+            &:nth-of-type(3),
+            &:nth-of-type(4),
+            &:nth-of-type(5) {
+
+              > svg {
+                fill: $white-primary;
+              }
+            }
+
+            &:nth-of-type(5) {
+              @include animation-name(tp-fade);
+              @include animation-duration(0.3s);
+              @include animation-timing-function(linear);
+              @include animation-iteration-count(infinite);
+              @include animation-direction(alternate);
+            }
+
+          }
+
+        }
+        &[data-percent="60"] {
+
+          > .image-container {
+
+            &:nth-of-type(1),
+            &:nth-of-type(2),
+            &:nth-of-type(3),
+            &:nth-of-type(4),
+            &:nth-of-type(5),
+            &:nth-of-type(6) {
+
+              > svg {
+                fill: $white-primary;
+              }
+            }
+
+            &:nth-of-type(6) {
+              @include animation-name(tp-fade);
+              @include animation-duration(0.3s);
+              @include animation-timing-function(linear);
+              @include animation-iteration-count(infinite);
+              @include animation-direction(alternate);
+            }
+
+          }
+
+        }
+        &[data-percent="70"] {
+
+          > .image-container {
+
+            &:nth-of-type(1),
+            &:nth-of-type(2),
+            &:nth-of-type(3),
+            &:nth-of-type(4),
+            &:nth-of-type(5),
+            &:nth-of-type(6),
+            &:nth-of-type(7) {
+
+              > svg {
+                fill: $white-primary;
+              }
+            }
+
+            &:nth-of-type(7) {
+              @include animation-name(tp-fade);
+              @include animation-duration(0.3s);
+              @include animation-timing-function(linear);
+              @include animation-iteration-count(infinite);
+              @include animation-direction(alternate);
+            }
+
+          }
+
+        }&[data-percent="80"] {
+
+           > .image-container {
+
+             &:nth-of-type(1),
+             &:nth-of-type(2),
+             &:nth-of-type(3),
+             &:nth-of-type(4),
+             &:nth-of-type(5),
+             &:nth-of-type(6),
+             &:nth-of-type(7),
+             &:nth-of-type(8) {
+
+               > svg {
+                 fill: $white-primary;
+               }
+             }
+
+             &:nth-of-type(8) {
+               @include animation-name(tp-fade);
+               @include animation-duration(0.3s);
+               @include animation-timing-function(linear);
+               @include animation-iteration-count(infinite);
+               @include animation-direction(alternate);
+             }
+
+           }
+
+         }
+        &[data-percent="90"] {
+
+          > .image-container {
+
+            &:nth-of-type(1),
+            &:nth-of-type(2),
+            &:nth-of-type(3),
+            &:nth-of-type(4),
+            &:nth-of-type(5),
+            &:nth-of-type(6),
+            &:nth-of-type(7),
+            &:nth-of-type(8),
+            &:nth-of-type(9) {
+
+              > svg {
+                fill: $white-primary;
+              }
+            }
+
+            &:nth-of-type(9) {
+              @include animation-name(tp-fade);
+              @include animation-duration(0.3s);
+              @include animation-timing-function(linear);
+              @include animation-iteration-count(infinite);
+              @include animation-direction(alternate);
+            }
+
+          }
+
+        }
+        &[data-percent="100"] {
+
+          > .image-container {
+
+            &:nth-of-type(1),
+            &:nth-of-type(2),
+            &:nth-of-type(3),
+            &:nth-of-type(4),
+            &:nth-of-type(5),
+            &:nth-of-type(6),
+            &:nth-of-type(7),
+            &:nth-of-type(8),
+            &:nth-of-type(9),
+            &:nth-of-type(10) {
+
+              > svg {
+                fill: $white-primary;
+              }
+            }
+
+            &:nth-of-type(10) {
+              @include animation-name(tp-fade);
+              @include animation-duration(0.3s);
+              @include animation-timing-function(linear);
+              @include animation-iteration-count(infinite);
+              @include animation-direction(alternate);
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+    &.board-import-modal-overlay {
+      @include align-items(center);
+    }
+  }
+}

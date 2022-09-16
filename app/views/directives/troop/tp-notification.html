@@ -1,0 +1,65 @@
+
+<div class="wrapper flex-row"
+     ng-if=" vm.loaded "
+     ng-click=" vm.onClick($event) "
+>
+  <span class="profile-image image-container"
+        tp-troop-member-profile=" vm.notification.fromMemberId "
+        tp-troop-member-troop-id=" vm.notification.troopId "
+        tp-troop-member-avatar-asset-size=" smallUrl "
+  ></span>
+
+  <span class="info flex-column">
+
+    <header class="flex-row">
+      <span class="member-name flex-spacer">
+        {{ vm.fromMember.name }}
+      </span>
+      <span class="timestamp"
+            ng-bind=" vm.notification.createdAt | moment "
+      ></span>
+    </header>
+
+    <main class="flex-row"
+          ng-messages=" vm.type "
+    >
+
+      <span ng-message=" newBoard ">Created a board: {{ vm.board.boardName }}</span>
+
+      <span ng-message=" newCard ">Added a card: {{ vm.card.cardName }}</span>
+
+      <span ng-message=" newNote ">Posted a note on the card <i>{{ vm.card.cardName }}</i>: "{{ vm.note.text.truncateOnWord(50) }}"</span>
+
+      <span ng-message=" inviteToBoard ">Invited you to join the board: {{ vm.board.boardName }}</span>
+
+
+    </main>
+
+    <footer class="flex-row"
+            ng-if=" ( vm.notification.notificationType === 'inviteToBoard' ) && ( ! notification.isRead ) "
+    >
+
+        <button class="accept transparent small"
+                ng-click=" vm.onAcceptBoardInvitation() "
+        >
+          <div class="image-container">
+            <svg class="icon check">
+              <use xlink:href="#check"></use>
+            </svg>
+          </div>
+        </button>
+
+        <button class="decline transparent small"
+                ng-click=" vm.onDeclineBoardInvitation() "
+        >
+          <div class="image-container">
+              <svg class="icon close">
+                <use xlink:href="#close"></use>
+              </svg>
+          </div>
+        </button>
+
+    </footer>
+
+  </span>
+</div>

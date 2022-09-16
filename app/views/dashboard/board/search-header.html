@@ -1,0 +1,150 @@
+<div class="wrapper flex-row search"
+     ng-class=" ($root.showSearch ? '' : 'shrink-for-mobile ') + ($root.showListViewTagChooser ? 'showing-list-view-tag-chooser ' : '') "
+     ng-mouseleave=" showActionMenu = false "
+>
+  <section class="left-sidebar-toggle action flex-row">
+    <button class="white-primary circle"
+            ng-click="toggleLeftSidebar()"
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon list">
+            <use xlink:href="#list"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+  </section>
+
+  <section class="detail-card flex-row action"
+           ng-if=" view === 'detail-card' "
+  >
+    <button class="back-to-multi-card white-primary circle"
+            ng-click="navToCards()"
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon arrow-reverse">
+            <use xlink:href="#arrow-reverse"/>
+          </svg>
+          <svg class="icon arrow-left">
+            <use xlink:href="#arrow-left"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+    <button class="back-to-detail white-primary circle"
+            ng-click="$root.showDetailCardComments = false"
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon arrow-left">
+            <use xlink:href="#arrow-left"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+  </section>
+
+ <ul class="nav-list flex-row"
+      ng-if=" view !== 'detail-card' "
+  >
+    <li class="board nav-item flex-row"
+        data-ui-sref-active="active"
+    >
+      <a data-ui-sref="home.dashboard.search.allboard({boardId: search.lastBoard, search:search.string})">
+        All Boards ({{search.results.all.length}})
+      </a>
+    </li>
+    <li class="cards nav-item flex-row"
+        data-ui-sref-active="active"
+        ng-if="Me.currentBoard.$id"
+    >
+      <a data-ui-sref="home.dashboard.search.currentboard({boardId: search.lastBoard, search:search.string})">
+        This Board ({{search.results.curr.length}})
+      </a>
+    </li>
+    <li class="chat nav-item flex-row"
+        data-ui-sref-active="active"
+    >
+      <a data-ui-sref="home.dashboard.search.chat({boardId: search.lastBoard, search:search.string})">
+        Direct Messages ({{search.results.chat.length}})
+      </a>
+    </li>
+  </ul>
+
+  <span class="flex-spacer"></span>
+
+  <form class="search flex-row"
+        ng-submit="searchBlur()"
+  >
+
+    <div class="field-group flex-row"
+         ng-class=" labels['search'] ? '' : 'hide-label' "
+    >
+      <input type="search"
+             ng-model="search.string"
+             ng-keyup="$event.keyCode == 13 && doSearch()"
+             ng-focus="hideLabel('search')"
+             ng-blur="doSearch()"
+      >
+      <label class="uppercase">Search</label>
+
+      <span class="image-container magnifying-glass"
+            ng-click=" $root.showSearch = true "
+      >
+        <svg class="icon magnifying-glass">
+          <use xlink:href="#magnifying-glass"/>
+        </svg>
+      </span>
+      <span class="image-container close"
+            ng-click=" $root.showSearch = false "
+      >
+        <svg class="icon close">
+          <use xlink:href="#close"/>
+        </svg>
+      </span>
+    </div>
+  </form>
+
+  <section class="new action flex-row"
+           ng-if=" ( view === 'multi-card' || view === 'list' ) && ( ( ! Me.currentBoard.readOnly ) || ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) ) "
+  >
+    <button class="blue-primary circle"
+            ng-click="showCardModal('new')"
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon plus">
+            <use xlink:href="#plus"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+  </section>
+
+  <section class="notifications action flex-row">
+
+    <button class="white-primary circle"
+            ng-class=" $root.showNotifications ? 'showing' : '' "
+            ng-click=" $root.showNotifications = !$root.showNotifications "
+    >
+      <div class="wrapper flex-row">
+        <span class="count image-container"
+              ng-if=" Me.notifications[Me.troopMember.$id].breakdown.unreadNonMessageNotifications "
+              ng-bind=" Me.notifications[Me.troopMember.$id].breakdown.unreadNonMessageNotifications "
+        ></span>
+
+        <span class="image-container">
+          <svg class="icon bell">
+            <use xlink:href="#bell"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+
+
+  </section>
+
+
+</div>

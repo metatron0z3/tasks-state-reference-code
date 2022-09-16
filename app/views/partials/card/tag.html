@@ -1,0 +1,20 @@
+<div class="wrapper flex-row">
+  <span class="label flex-row">
+
+    <span class="color image-container"
+          data-color="{{ Me.currentBoard.tagNames['tag' + tag.name].color }}"
+          ng-if="Me.currentBoard.tagNames.hasOwnProperty('tag' + tag.name) && Me.currentBoard.tagNames['tag' + tag.name].color "
+    >
+      <svg class="icon circle">
+        <use xlink:href="#circle"/>
+      </svg>
+    </span>
+    <span class="tag-name"
+          ng-bind=" '#' + tag.name "
+    ></span>
+    <span class="tag-value"
+          ng-if="tag.value"
+          ng-bind=" ':' + tag.value "
+    ></span>
+  </span>
+</div>

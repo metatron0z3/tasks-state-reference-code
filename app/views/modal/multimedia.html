@@ -1,0 +1,22 @@
+<div class="multimedia-modal-overlay modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click="close()"
+>
+
+  <div class="close image-container"
+       ng-click="close()"
+    >
+    <svg class="icon close">
+      <use xlink:href="#close"/>
+    </svg>
+  </div>
+
+  <div class="multimedia-modal modal flex-column"
+       ng-class=" extraClasses "
+  >
+    <main tp-multimedia-player="asset">
+
+    </main>
+  </div>
+
+</div>

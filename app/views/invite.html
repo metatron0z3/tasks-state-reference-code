@@ -1,0 +1,203 @@
+<section class="invite flex-column"
+         ng-has-overflow=""
+>
+
+  <div class="background image-container"></div>
+
+  <div class="troop-logo image-container">
+    <svg class="icon troop-logo">
+      <use xlink:href="#troop-logo"/>
+    </svg>
+  </div>
+
+  <form name="messageForm"
+        class="message-modal modal embedded-modal flex-column"
+        autocomplete="nope"
+        novalidate="novalidate"
+        ng-if=" data.message "
+  >
+    <header>{{ data.message }}</header>
+  </form>
+
+  <form name="signUpForm"
+        class="sign-up-modal modal embedded-modal flex-column"
+        autocomplete="nope"
+        novalidate="novalidate"
+        ng-submit="signUp(signUpForm)"
+        ng-if=" data.email && data.currentModal === 'sign-up' "
+  >
+    <header class="drag-handle">
+      <h1>Sign Up</h1>
+    </header>
+
+    <div class="loader-wrapper flex-row"
+         ng-if=" Me.isSigningUp "
+    >
+      <div class="wrapper">
+        <div class="loader-2 small"></div>
+      </div>
+    </div>
+
+    <main ng-if=" ! Me.isSigningUp ">
+      <p class="field-group flex-row ">
+        <input name="name"
+               placeholder="Name"
+               type="text"
+               required=""
+               ng-model=" data.name "
+               autocomplete="off"
+        />
+
+      </p>
+      <div class="flex-row"
+           ng-if="signUpForm.name.$dirty && signUpForm.name.$touched && signUpForm.name.$invalid"
+           ng-messages="signUpForm.name.$error"
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Your Name is required
+        </div>
+      </div>
+
+      <p class="email field-group flex-row">
+        <span class="text"
+              ng-bind=" data.email "
+        >&nbsp;</span>
+      </p>
+
+      <!--  password  -->
+      <p class="field-group flex-row">
+        <input name="password"
+               placeholder="Password"
+               type="password"
+               ng-model=" data.password "
+               required=""
+               autocomplete="off"
+
+        />
+      </p>
+      <div  class="flex-row"
+            ng-if="signUpForm.password.$dirty && signUpForm.password.$touched  && signUpForm.password.$invalid"
+            ng-messages="signUpForm.password.$error"
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Your password is required
+        </div>
+      </div>
+    </main>
+
+    <footer class="flex-row"
+            ng-if=" ! Me.isSigningUp "
+    >
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label">Sign Up</span>
+        </div>
+      </button>
+
+
+    </footer>
+  </form>
+
+  <form name="loginForm"
+        class="login-modal modal embedded-modal flex-column"
+        novalidate="novalidate"
+        ng-submit="login(loginForm)"
+        ng-if=" data.email && data.currentModal === 'login' "
+  >
+    <header class="drag-handle">
+      <h1>Login</h1>
+    </header>
+
+    <div class="loader-wrapper flex-row"
+         ng-if=" Me.isLoggingIn "
+    >
+      <div class="wrapper">
+        <div class="loader-2 small"></div>
+      </div>
+    </div>
+
+    <main ng-if=" ! Me.isLoggingIn ">
+
+      <p class="email field-group flex-row">
+        <span class="text"
+              ng-bind=" data.email "
+        >&nbsp;</span>
+      </p>
+
+      <div class="flex-row"
+           ng-if=" data.failedAuth"
+      >
+        <div class="error"
+             ng-if=" data.failedAuth "
+        >
+          Oops! That email / password combination is not valid.
+        </div>
+      </div>
+
+      <p class="field-group flex-row">
+        <input placeholder="Password"
+               type="password"
+               name="password"
+               required=""
+               ng-model="data.password"
+               ng-focus=" data.failedAuth = false "
+        />
+      </p>
+      <div  class="flex-row"
+            ng-if="loginForm.password.$dirty && loginForm.password.$touched && loginForm.password.$invalid"
+            ng-messages="loginForm.password.$error"
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Your Password is Required
+        </div>
+      </div>
+
+
+      <p class="forgot-password field-group flex-row">
+        <span ng-click="sendPasswordResetEmail()">
+          Forgot Password?
+        </span>
+      </p>
+    </main>
+
+    <footer class="flex-row"
+            ng-if=" ! Me.isLoggingIn "
+    >
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label">Login</span>
+        </div>
+      </button>
+
+
+
+    </footer>
+  </form>
+
+  <span class="info flex-column"
+        ng-if=" data.troopName || data.message "
+  >
+    <button class="round"
+            ng-if=" data.message "
+            ng-click=" navToHome() "
+    >
+      <div class="wrapper">
+        <div class="label">Go home</div>
+      </div>
+    </button>
+    <div ng-if=" data.troopName && data.troopName.$value ">
+      Troop: {{ data.troopName.$value }}
+    </div>
+    <div ng-if=" data.boardName && data.boardName.$value ">
+      Board: {{ data.boardName.$value }}
+    </div>
+  </span>
+
+
+</section>

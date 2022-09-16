@@ -1,0 +1,246 @@
+<!-- <svg width="100%" height="1">
+  <path id="lineBC" d="M 0 0 l 100 0" stroke="black" stroke-width="1" fill="none" />
+</svg> -->
+
+<div
+  class="card-menu-wrapper"
+  ng-class=" {
+      'notitle': card.tags.hasOwnProperty('tag_notitle'),
+      'caption': card.tags.hasOwnProperty('tag_caption')
+  } "
+>
+  <span class="card-menu flex-row"
+        ng-if=" ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( card.createdByMemberId === Me.troopMember.$id ) "
+        ng-include=" '/views/partials/card/card-menu.html' "
+  ></span>
+</div>
+
+<main class="flex-column"
+      ng-class=" {
+        'decapitated': ( ! Me.currentBoard.viewSettings.card.showHeader ),
+        'caption': card.tags.hasOwnProperty('tag_caption')
+      } "
+      ng-init=" card.assetsExtra = card.assetCount - assetCountLimit"
+      data-count="{{ card.assetCount }}"
+>
+
+<!-- ng-if=" $first " -->
+  <span
+    class=" title "
+    ng-class=" {
+        'headline': card.tags.hasOwnProperty('tag_headline')
+    } "
+    ng-if=" ! card.tags.hasOwnProperty('tag_notitle') "
+  >
+    <h1 ng-bind="card.cardName"></h1>
+  </span>
+
+  <ul ng-if=" (card.assetCount > 0) && ( !card.tags.hasOwnProperty('tag_banner') ) && (card.orderedAssets.length !== 3 || Me.screen.size !== 'desktop')"
+      class="asset-list flex-row-wrap squares"
+      ng-class="
+        {
+          'has-more': card.assetsExtra > 0,
+          'one-photo-layout': card.orderedAssets.length === 1,
+          'two-photo-layout': card.orderedAssets.length === 2,
+          'four-photo-layout': card.orderedAssets.length > 3,
+          'mobile-layout': card.orderedAssets.length === 3 && Me.screen.size !== 'desktop'
+        }
+      "
+  >
+    <li class="asset flex-column"
+        ng-repeat=" assetId in card.orderedAssets "
+        tp-asset=" assetId "
+        tp-asset-troop-id=" card.troopId "
+        tp-asset-index=" $index "
+        tp-asset-count=" card.orderedAssets.length "
+        tp-asset-count-limit=" card.orderedAssets.length "
+        tp-asset-size=" card.orderedAssets.length === 1 ? 'originalUrl' : 'xlargeUrl' "
+        tp-asset-info=" false "
+        tp-asset-download=" false "
+        tp-asset-rename=" false "
+        tp-asset-remove=" false "
+        tp-asset-show-menu=" false "
+        tp-asset-thumbnail-click=" showAssetsModal(card, assetId) "
+        tp-asset-has-more-click=" navToDetailCard(card) "
+    ></li>
+
+  </ul>
+
+  <ul ng-if="card.assetCount > 0 && !$first && ( card.orderedAssets.length === 3 && Me.screen.size === 'desktop' )"
+      class="asset-list flex-row-wrap squares"
+      ng-class="
+        {
+          'has-more': card.assetsExtra > 0,
+          'three-photo-layout': card.orderedAssets.length === 3
+        }
+      "
+  >
+    <li class="asset flex-column"
+        tp-asset=" card.orderedAssets[0] "
+        tp-asset-troop-id=" card.troopId "
+        tp-asset-index=" $index "
+        tp-asset-count=" 3 "
+        tp-asset-count-limit=" 3 "
+        tp-asset-size=" xlargeUrl "
+        tp-asset-info=" false "
+        tp-asset-download=" false "
+        tp-asset-rename=" false "
+        tp-asset-remove=" false "
+        tp-asset-show-menu=" false "
+        tp-asset-thumbnail-click=" showAssetsModal(card, assetId) "
+        tp-asset-has-more-click=" navToDetailCard(card) "
+    ></li>
+    <li class=" flex-row-wrap two-row-container ">
+      <div class=" asset flex-column "
+        tp-asset=" card.orderedAssets[1] "
+        tp-asset-troop-id=" card.troopId "
+        tp-asset-index=" $index "
+        tp-asset-count=" 3 "
+        tp-asset-count-limit=" 3 "
+        tp-asset-size=" xlargeUrl "
+        tp-asset-info=" false "
+        tp-asset-download=" false "
+        tp-asset-rename=" false "
+        tp-asset-remove=" false "
+        tp-asset-show-menu=" false "
+        tp-asset-thumbnail-click=" showAssetsModal(card, assetId) "
+        tp-asset-has-more-click=" navToDetailCard(card) "
+      >
+      </div>
+      <div class="asset flex-column"
+        tp-asset=" card.orderedAssets[2] "
+        tp-asset-troop-id=" card.troopId "
+        tp-asset-index=" $index "
+        tp-asset-count=" 3 "
+        tp-asset-count-limit=" 3 "
+        tp-asset-size=" xlargeUrl "
+        tp-asset-info=" false "
+        tp-asset-download=" false "
+        tp-asset-rename=" false "
+        tp-asset-remove=" false "
+        tp-asset-show-menu=" false "
+        tp-asset-thumbnail-click=" showAssetsModal(card, assetId) "
+        tp-asset-has-more-click=" navToDetailCard(card) "
+      >
+      </div>
+
+    </li>
+
+  </ul>
+
+  <div ng-if="card.description"
+       class="wrapper"
+       ng-has-overflow=""
+  >
+    <div class="description"
+         data-marked=" card.description "
+         ng-has-overflow=""
+    ></div>
+  </div>
+
+</main>
+
+
+<section class="card-notes flex-column"
+         ng-if=" Me.currentBoard.allowNotes && $last"
+         data-bla=" {{Me.currentBoard.allowNotes}} "
+>
+
+  <!-- <div class="count"
+       ng-if="notes.orderedList.length > 0"
+       ng-bind="notes.orderedList.length + ' Note' + ( notes.orderedList.length > 1 ? 's' : '') ">
+  </div> -->
+  <form name="newNoteForm"
+        class="flex-row"
+        ng-if=" canDisplayMembers && ( newNote.show || ( notes.orderedList.length > 0 ) || (newNote.value) && ( newNote.value !== '' ) ) "
+  >
+    <span class="profile-image image-container"
+          tp-troop-member-profile=" Me.troopMember.$id "
+          tp-troop-member-avatar-asset-size="smallUrl"
+          tp-troop-member-troop-id=" card.troopId "
+    ></span>
+    <div class="new-comment field-group flex-row"
+         ng-class=" { 'has-notes': notes.orderedList.length > 0 }"
+    >
+      <textarea name="newNote"
+                placeholder="Add new note here"
+                rows="1"
+                data-msd-elastic=""
+                ng-change="newNoteTyping()"
+                ng-model="newNote.value"
+                ng-click="newNoteFocus()"
+                ng-enter-key=""
+                ng-enter-key-action="writeComment()"
+                ng-enter-key-catch="single"
+                autocomplete="off"
+      ></textarea>
+    </div>
+
+    <!-- <div class="actions flex-row"
+          ng-if=" notes.orderedList.length === 0">
+      <button class="cancel link"
+              ng-click=" newNote.show = false"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Cancel</span>
+        </div>
+      </button>
+      <button class="save blue-primary"
+              ng-click="writeComment()"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Save</span>
+        </div>
+      </button>
+    </div> -->
+  </form>
+
+  <ul class="notes flex-column"
+      ng-if="notes.orderedList.length > 0"
+  >
+    <li class="note flex-column"
+        ng-repeat="note in notes.orderedList"
+        ng-mouseleave=" noteMenus[note.$id] = false "
+        tp-card-note=" note "
+        tp-card-note-last="$last"
+        tp-card-note-scroll-to-when="$root.showDetailCardComments"
+    ></li>
+  </ul>
+
+  <div class="show-note-toggle flex-column"
+       ng-if=" canDisplayMembers && ! newNote.show && notes.orderedList.length === 0 && (! newNote.value || newNote.value === '') "
+  >
+
+    <button class="show-new-note white-primary circle"
+            ng-click=" newNote.show = ! newNote.show "
+            ng-if=" ( Me.troopMember.troopPermission !== 'guest' ) "
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon plus">
+            <use xlink:href="#plus"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+
+    <section class="join flex-row"
+             ng-if="  Me.troopMember.troopPermission === 'guest'  "
+    >
+      <button class="blue-primary "
+              ng-click="showPublicTroopJoinModal('button')"
+      >
+      <div class="wrapper flex-row">
+        <span class="label">Join</span>
+      </div>
+      </button>
+
+    </section>
+
+    <label ng-if="( Me.troopMember.troopPermission !== 'guest' ) ">Add New Note</label>
+    <label ng-if="( Me.troopMember.troopPermission === 'guest' ) ">Click join add a note to this card</label>
+
+  </div>
+
+</section>
+<!-- <span class="flex-spacer">&nbsp;</span> -->

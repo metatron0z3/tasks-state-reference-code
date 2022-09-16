@@ -1,0 +1,117 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+  > .modal-overlay {
+
+    > form.modal {
+
+      &.link-accounts-modal {
+        padding: 40px;
+        @include all-width(430px);
+
+        > main {
+          @include align-items(center);
+
+          > h1 {
+            margin-bottom: 15px;
+            line-height: 37px;
+            font-size: 24px;
+            font-family: $font-family-medium;
+            color: $blue-secondary;
+          }
+
+          > p {
+            margin-bottom: 40px;
+            padding-bottom: 28px;
+            @include all-width(100%);
+            border-bottom: 1px dashed rgba($gray-twelvary, 0.4);
+            line-height: 26px;
+            font-size: 14px;
+            font-family: $font-family-medium;
+            color: rgba($blue-secondary, 0.7);
+          }
+
+          > .social-media {
+            margin-bottom: 21px;
+
+            &,
+            > svg {
+              @include size(131px, 119px);
+            }
+          }
+
+          > .firebaseui-wrapper {
+            @include all-width(100%);
+
+            > button,
+            > .button {
+              margin-top: 11px;
+              padding: 0px;
+              @include size(100%, 45px);
+              border: 0px;
+              @include border-radius(4px);
+
+              &:first-of-type {
+                margin-top: 0px;
+              }
+
+              > .wrapper {
+                @include justify-content(flex-start);
+
+                > .image-container {
+                  margin-left: 0px;
+                  @include size(105px, 100%);
+
+                  > svg {
+                    @include size(20px);
+                  }
+
+                }
+
+                > .label {
+                  line-height: 20px;
+                  font-family: $font-family-medium;
+                  font-size: 14px;
+                  letter-spacing: 0.02em;
+                  color: $white-primary;
+                  text-transform: none;
+                }
+              }
+
+              &.google {
+                background: $red-nonary;
+
+                > .wrapper {
+
+                  > .label {
+                    color: $white-primary;
+                  }
+
+                }
+
+              }
+
+              &.facebook {
+                background: $purple-octonary;
+              }
+
+              &.twitter {
+                background: $blue-twentytwoary;
+              }
+
+
+            }
+
+          }
+
+
+        }
+
+
+
+      }
+
+    }
+  }
+}

@@ -1,0 +1,65 @@
+
+<div class="loader-wrapper flex-row"
+     ng-if="loading"
+>
+  <div class="wrapper">
+    <div class="loader-2 small"></div>
+  </div>
+</div>
+
+<div class="empty-board flex-column"
+     ng-if=" ( ! loading ) && Me.currentBoardCards.length === 0"
+     ng-include=" '/views/partials/empty-board.html' "
+     ngf-drop="filesAdded($files, $file, $event)"
+     ngf-drop-disabled=" dragDisabled "
+     ngf-change="filesAdded($files, $file, $event)"
+     ngf-multiple="true"
+     ngf-allow-dir="false"
+     ngf-drag="emptyDrag($isDragging, $class, $event)"
+     ngf-drag-over-class= "{accept: 'dragover', delay:200}"
+></div>
+
+<ul class="card-list macro flex-column"
+    ng-if="( ! loading ) && Me.currentBoardCards.length > 0"
+    ngf-drop="filesAdded($files, $file, $event)"
+    ngf-drop-disabled=" dragDisabled "
+    ngf-change="filesAdded($files, $file, $event)"
+    ngf-multiple="true"
+    ngf-allow-dir="false"
+    ngf-drag-over-class= "{accept: 'dragover', delay:200}"
+    ngf-drag="drag($isDragging, $class, $event)"
+>
+  <li
+    class="flex-column hero-image"
+    ng-if=" cards[0].orderedAssets.length > 0 && cards[0].tags.hasOwnProperty('tag_banner') "
+    tp-asset=" cards[0].orderedAssets[0] "
+    tp-asset-troop-id=" cards[0].troopId "
+    tp-asset-index=" 0 "
+    tp-asset-count=" 1 "
+    tp-asset-count-limit=" 1 "
+    tp-asset-size=" xlargeUrl "
+    tp-asset-info=" false "
+    tp-asset-download=" false "
+    tp-asset-rename=" false "
+    tp-asset-remove=" false "
+    tp-asset-show-menu=" false "
+  >
+  </li>
+  <li class="card flex-column fade"
+      ng-class="{
+        'first-card' : $first,
+        'admin' : Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin',
+        'notitle': card.tags.hasOwnProperty('tag_notitle'),
+      }"
+      ng-repeat="card in cards track by customTracking($index,card.$id)"
+      ng-mouseleave=" cardMenus[card.$id] = false "
+      ng-include=" '/views/partials/card/card-document.html' "
+  >
+  </li>
+
+  <li class="bottom flex-spacer">&nbsp;</li>
+
+  <li class="drag-overlay flex-column"
+        ng-include=" '/views/partials/drag-drop-overlay.html' "
+  ></li>
+</ul>

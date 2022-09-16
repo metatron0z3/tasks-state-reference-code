@@ -1,0 +1,68 @@
+<header class="flex-row">
+
+  <h1 class="flex-spacer">Dashboard</h1>
+
+  <form class="search flex-row"
+        ng-submit=" vm.search() "
+  >
+
+    <div class="field-group flex-row">
+      <input type="search"
+             placeholder="Search"
+             ng-model=" vm.searchFilter"
+             ng-blur=" vm.search() "
+      >
+      <label class="uppercase">Search</label>
+
+      <span class="image-container magnifying-glass">
+        <svg class="icon magnifying-glass">
+          <use xlink:href="#magnifying-glass"/>
+        </svg>
+      </span>
+    </div>
+  </form>
+
+  <button class="new-code blue-primary"
+          ng-click=" vm.showTrackingCodeModal() "
+  >
+    <div class="wrapper flex-row">
+      <span class="label">+ New Code</span>
+    </div>
+  </button>
+</header>
+
+<main>
+
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Code
+        </th>
+        <th>
+          Facebook
+        </th>
+        <th>
+          Google
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Total
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class=""
+          ng-repeat=" code in vm.codeBreakdowns "
+      >
+        <td ng-bind=" code.name "></td>
+        <td ng-bind=" code['facebook.com'].count || 0 "></td>
+        <td ng-bind=" code['google.com'].count || 0 "></td>
+        <td ng-bind=" code.email.count || 0 "></td>
+        <td ng-bind=" code.total.count || 0 "></td>
+      </tr>
+    </tbody>
+  </table>
+</main>

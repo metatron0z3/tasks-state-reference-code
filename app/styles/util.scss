@@ -1,0 +1,90 @@
+@import "bower-import.scss";
+@import "variables.scss";
+
+ul {
+
+  &.flex-column,
+  &.flex-column-wrap,
+  &.flex-row,
+  &.flex-row-wrap {
+
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+
+    li {
+      margin: 0px;
+      padding: 0px;
+    }
+  }
+
+}
+
+.flex-row,
+.flex-row-wrap {
+  @include display(flex);
+  @include flex-direction(row);
+  @include align-items(center);
+
+  > .flex-spacer {
+    @include flex-grow(1);
+  }
+}
+
+.flex-row-wrap {
+  @include flex-wrap(wrap);
+  @include align-content(flex-start);
+}
+
+.flex-column,
+.flex-column-wrap {
+  @include display(flex);
+  @include flex-direction(column);
+  @include justify-content(center);
+  //@include flex-shrink(0);
+
+  > .flex-spacer {
+    @include flex-grow(1);
+  }
+}
+
+.flex-column-wrap {
+  @include flex-wrap(wrap);
+}
+
+.hide {
+  display: none !important;
+}
+
+.rotate-90 {
+  @include transform(rotate(90deg));
+}
+
+.rotate-90-ccw {
+  @include transform(rotate(-90deg));
+}
+
+// TODO: 180deg, 270deg
+
+
+.drag-handle {
+  cursor: move;
+}
+
+
+
+[data-browser-name~="Safari"],
+[data-os-name='iOS'],
+[data-browser-name="Chrome"],
+[data-browser-name="Vivaldi"]{
+
+  .flex-column,
+  .flex-column-wrap {
+
+    > * {
+      @include flex-shrink(0);
+    }
+  }
+
+
+}

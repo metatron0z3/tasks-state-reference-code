@@ -1,0 +1,132 @@
+
+<div class="loader-wrapper flex-row"
+     ng-if="loading"
+>
+  <div class="wrapper">
+    <div class="loader-2 small"></div>
+  </div>
+</div>
+
+<div class="empty-board flex-column"
+     ng-if=" ( ! loading ) && ( ! hasImageAssets ) && ( Me.currentBoardCards.length === 0 )"
+     ng-include=" '/views/partials/empty-board.html' "
+     ngf-drop="filesAdded($files, $file, $event)"
+     ngf-drop-disabled=" dragDisabled "
+     ngf-change="filesAdded($files, $file, $event)"
+     ngf-multiple="true"
+     ngf-allow-dir="false"
+     ngf-drag-over-class= "{accept: 'dragover', delay:200}"
+     ngf-drag="emptyDrag($isDragging, $class, $event)"
+></div>
+<div class="drop-wrapper"
+      ng-if="( ! loading ) && Me.currentBoardCards.length > 0"
+      ngf-drop="filesAdded($files, $file, $event)"
+      ngf-drop-disabled=" dragDisabled "
+      ngf-change="filesAdded($files, $file, $event)"
+      ngf-multiple="true"
+      ngf-allow-dir="false"
+      ngf-drag="drag($isDragging, $class, $event)"
+      ngf-drag-over-class= "{accept: 'dragover', delay:200}"
+>
+  <main class="field-group flex-row"
+        ng-sortable="sortableOptions"
+  >
+    <div class="square"
+      ng-repeat="card in gridList.cards"
+      data-card-id="{{card.$id}}"
+      ng-if="card.numImages !== 0 || (card.numImages === 0 && Me.currentBoard.viewSettings.grid.showNonImages)"
+      ng-click=" goToDetail($event, card) "
+      ng-style=" gridList.firstUrl[card.$id] "
+      draggable="true"
+      ng-mouseover="hoverTitle = true"
+      ng-mouseleave="hoverTitle = false"
+    >
+
+      <span class="image-container"
+            ng-if=" card.numFiles === 0  && card.numImages === 0"
+      >
+        <svg class="icon no-image">
+          <use xlink:href="#no-image"/>
+        </svg>
+      </span>
+
+      <div class="asset"
+          ng-repeat=" assetId in card.fileAssets "
+          ng-if="card.numFiles !== 0"
+          ng-style=" gridList.assets[assetId] "
+          ng-class=" { 'animate-this': card.numImages > 1 }"
+          tp-asset=" assetId "
+          tp-asset-troop-id=" card.troopId "
+          tp-asset-index=" $index "
+          tp-asset-count=" card.numImages "
+          tp-asset-count-limit=" assetCountLimit "
+          tp-asset-size=" mediumUrl "
+          tp-asset-info=" false "
+          tp-asset-download=" checkDownload(card) "
+          tp-asset-show-menu=" false "
+          tp-asset-rename=" false "
+          tp-asset-remove=" false "
+          tp-asset-has-more-click=" navToDetailCard(card) "
+      >
+      </div>
+
+      <div class="asset"
+          ng-repeat=" assetId in card.imageAssets "
+          ng-style=" gridList.assets[assetId] "
+          ng-class=" { 'animate-this': card.numImages > 1 }"
+          tp-asset=" assetId "
+          tp-asset-troop-id=" card.troopId "
+          tp-asset-index=" $index "
+          tp-asset-count=" card.numImages "
+          tp-asset-count-limit=" assetCountLimit "
+          tp-asset-size=" mediumUrl "
+          tp-asset-info=" false "
+          tp-asset-download=" checkDownload(card) "
+          tp-asset-show-menu=" false "
+          tp-asset-rename=" false "
+          tp-asset-remove=" false "
+          tp-asset-has-more-click=" navToDetailCard(card) "
+      >
+      </div>
+      <div class="card-menu-wrapper">
+        <span class="close image-container"
+              ng-if=" ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( card.createdByMemberId === Me.troopMember.$id ) "
+              ng-click="showDeleteCardModal(card); $event.stopPropagation();"
+              title=" Delete "
+        >
+          <svg class="icon close">
+            <use xlink:href="#close"/>
+          </svg>
+        </span>
+        <span class="pencil image-container"
+              ng-if=" ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( card.createdByMemberId === Me.troopMember.$id ) "
+              ng-click="showCardModal('edit', card); $event.stopPropagation();"
+              title=" Edit "
+        >
+          <svg class="icon pencil">
+            <use xlink:href="#pencil"/>
+          </svg>
+        </span>
+        <!-- <span class="card-menu flex-row"
+              ng-include=" '/views/partials/card/card-menu.html' "
+              ng-if="( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin')
+              || ( card.createdByMemberId === Me.troopMember.$id ) "
+        ></span> -->
+      </div>
+      <div class="grid-title"
+            ng-if = " Me.currentBoard.viewSettings.grid.showTitle
+                    || hoverTitle"
+      >
+        <div class="overlay"></div>
+        <div class="title-text">
+          {{card.cardName}}
+        </div>
+      </div>
+
+
+    </div>
+  </main>
+  <div class="drag-overlay flex-column"
+        ng-include=" '/views/partials/drag-drop-overlay.html' "
+  ></div>
+</div>

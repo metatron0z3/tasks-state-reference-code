@@ -1,0 +1,26 @@
+<button class="small icon"
+        ng-click=" showActionMenu = true "
+>
+  <div class="wrapper flex-row">
+    <span class="label">Actions</span>
+    <span class="image-container">
+      <svg class="icon arrow rotate-90">
+        <use xlink:href="#arrow"/>
+      </svg>
+    </span>
+  </div>
+</button>
+
+<ul class="menu flex-column"
+    ng-class=" showActionMenu === true ? 'show' : '' "
+    ng-mouseleave=" showActionMenu = false "
+>
+  <li class="reset-order menu-item flex-row">
+    <span class="label"
+          ng-click="resetOrder()"
+    >
+      Reset Order
+    </span>
+  </li>
+
+</ul>

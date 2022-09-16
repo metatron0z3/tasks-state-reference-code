@@ -1,0 +1,322 @@
+<header class="troop-select flex-row">
+  <h1 class="label flex-spacer"
+      ng-bind="Me.troop.troopName"
+      ng-click=" toggleSideBar() "
+  ></h1>
+  <span class="flex-spacer">&nbsp;</span>
+  <span class="troop-actions"
+        ng-if=" Me.troopMember.troopPermission !== 'guest' "
+  >
+    <span class="menu-toggle image-container flex-row"
+          ng-click=" showTroopMenu = !showTroopMenu "
+    >
+      <svg class="icon dotdotdot">
+        <use xlink:href="#dotdotdot"/>
+      </svg>
+    </span>
+
+    <ul class="menu flex-column"
+        ng-class=" showTroopMenu ? 'show' : '' "
+        ng-mouseleave=" showTroopMenu = false "
+      >
+      <li class="edit menu-item flex-row"
+          ng-click=" showTroopModal() "
+          ng-if=" ( Me.troop.createdByUserId === Me.trooper.$id )  "
+      >
+        <span class="label">Troop Settings</span>
+      </li>
+      <li class="edit menu-item flex-row"
+          ng-click=" showPublicTroopShareModal() "
+          ng-if=" Me.troop.public "
+      >
+        <span class="label">Share</span>
+      </li>
+      <!-- <li class="troop-invite menu-item flex-row"
+          ng-click=" showTroopInviteModal() "
+      >
+        <span class="label">Invite To Troop</span>
+      </li> -->
+      <li class="delete warning menu-item flex-row"
+          ng-click=" showLeaveTroopMemberModal() "
+          ng-if=" ( Me.troop.createdByUserId !== Me.trooper.$id ) "
+      >
+        <span class="label">Leave Troop</span>
+      </li>
+      <li class="delete warning menu-item flex-row"
+          ng-click=" showDeleteTroopMemberModal() "
+          ng-if=" ( Me.troop.createdByUserId === Me.trooper.$id ) "
+      >
+        <span class="label">Delete Troop</span>
+      </li>
+      <li class="jh-settings menu-item flex-row"
+          ng-click=" showJhSettings() "
+          ng-if=" Me.isjhExperience "
+      >
+        <span class="label">JH Settings</span>
+      </li>
+
+
+    </ul>
+  </span>
+
+</header>
+
+<div class="loader-wrapper flex-row"
+     ng-if=" isLoading "
+>
+  <div class="wrapper">
+    <div class="loader-2 small"></div>
+  </div>
+</div>
+
+<main ng-if=" ! isLoading ">
+  <section class="boards flex-column">
+    <header class="flex-row"
+            ng-class=" data.boardHeaderSelected ? 'active' : '' "
+    >
+      <a class="label"
+         ng-click=" goToBoards() "
+      >
+          <!-- Boards ( {{ boards.length }} of {{ availBoards.length }} ) -->
+          Boards ( {{ availBoards.length }} )
+      </a>
+      <span class="flex-spacer"></span>
+      <span class="image-container"
+            ng-if=" Me.troopMember.troopPermission === 'admin'  "
+            ng-click=" showBoardModal('new') "
+      >
+        <svg class="icon circle-plus">
+          <use xlink:href="#circle-plus"/>
+        </svg>
+      </span>
+    </header>
+    <ul class="flex-column">
+      <li class="add-board flex-row"
+          ng-if=" boards.length === 0 && Me.troopMember.troopPermission === 'admin'  "
+      >
+        <span class="text"
+              ng-click=" showBoardModal('new') "
+        >
+          + New Board
+        </span>
+      </li>
+      <li class="flex-row"
+          ng-if="boards.length > 0"
+          ng-class=" ( ! Me.currentBoard.$isDestroyed ) && board.$id === Me.currentBoard.$id ? 'active' : '' "
+          ng-repeat="board in boards "
+          ng-click="switchBoard(board)"
+          ng-sortable="boardSortableOptions"
+          data-board-id="{{ board.$id }}"
+      >
+        <span class="text"
+              ng-class=" {
+                'active' : Me.notifications[Me.troopMember.$id].breakdown.boardMessage[board.$id].unread,
+                'active' : Me.notifications[Me.troopMember.$id].breakdown.nonMessage[board.$id].unread
+              } "
+              title="{{ board.boardName }}"
+              ng-bind="board.boardName"
+        ></span>
+        <span class="flex-spacer">&nbsp;</span>
+        <span class="notifications image-container"
+              ng-class=" {
+                'active' : Me.notifications[Me.troopMember.$id].breakdown.boardMessage[board.$id].unread,
+                'active' : Me.notifications[Me.troopMember.$id].breakdown.nonMessage[board.$id].unread
+              } "
+        >
+          <span class="count flex-row"
+                ng-bind=" Me.notifications[Me.troopMember.$id].breakdown.boardMessage[board.$id].unread + Me.notifications[Me.troopMember.$id].breakdown.nonMessage[board.$id].unread"
+          ></span>
+          <svg class="icon circle">
+            <use xlink:href="#circle"/>
+          </svg>
+        </span>
+      </li>
+    </ul>
+
+  </section>
+
+  <section class="troop-members flex-column ng-animate-disabled">
+    <header class="flex-row"
+            ng-class=" data.troopMemberHeaderSelected ? 'active' : '' "
+            ng-click=" vm.navToTroopMembers() "
+    >
+      <span class="label">
+        Direct Messages
+        <span ng-if=" Me.troop.$id !== vm.demoTroopId && Me.troop.$id !== vm.helpTroopId">
+          ( {{ Me.troopMembers.length }} )
+        </span>
+      </span>
+      <span class="flex-spacer"></span>
+      <span class="invite-to-troop image-container">
+        <svg class="icon circle-plus">
+          <use xlink:href="#circle-plus"/>
+        </svg>
+      </span>
+    </header>
+    <ul class="flex-column" >
+      <li class="flex-row"
+          ng-repeat=" member in vm.troopMembers "
+          ng-if=" ( vm.troopMembers.length > 0 ) && ( member.$id !== Me.troopMember.$id ) "
+          ng-class=" ( ! Me.currentTroopMember.$isDestroyed ) && member.$id === Me.currentTroopMember.$id ? 'active' : '' "
+          ng-click="navToTroopMember(member.$id)"
+      >
+        <span class="presence active image-container"
+              ng-if=" member.present "
+        >
+          <svg class="icon circle">
+            <use xlink:href="#circle"/>
+          </svg>
+        </span>
+        <span class="presence empty-circle image-container"
+              ng-if=" ! member.present "
+        ></span>
+
+        <span class="text"
+              ng-class=" Me.notifications[Me.troopMember.$id].breakdown.directMessage[member.$id].unread ? 'active' : '' "
+              title="{{ member.name }}"
+              ng-bind=" member.name "
+        ></span>
+
+        <span class="flex-spacer">&nbsp;</span>
+
+        <span class="notifications image-container"
+              ng-class="{
+                active: Me.notifications[Me.troopMember.$id].breakdown.directMessage[member.$id].unread
+              }"
+        >
+          <span class="count flex-row"
+                ng-bind=" Me.notifications[Me.troopMember.$id].breakdown.directMessage[member.$id].unread "
+          ></span>
+          <svg class="icon circle">
+            <use xlink:href="#circle"/>
+          </svg>
+        </span>
+
+        <span class="close image-container"
+              ng-class="{
+                active: ! Me.notifications[Me.troopMember.$id].breakdown.directMessage[member.$id].unread
+              }"
+              ng-click=" vm.closeDirectMessage($event, member.$id) "
+        >
+          <svg class="icon close">
+            <use xlink:href="#close"/>
+          </svg>
+        </span>
+      </li>
+      <li class="invite-to-troop flex-row"
+          ng-if=" Me.troopMember.troopPermission === 'admin' "
+      >
+        <span class="text"
+              ng-click=" showTroopInviteModal() "
+        >
+          + Invite to troop
+        </span>
+      </li>
+    </ul>
+    <footer class="flex-row">
+
+    </footer>
+
+  </section>
+</main>
+
+<footer class="trooper-settings flex-column"
+        ng-mouseleave=" showTrooperMenu = false "
+        ng-if=" ! isLoading "
+>
+
+  <section class="trooper flex-row">
+
+    <span class="profile-image image-container flex-row"
+          tp-troop-member-profile=" Me.troopMember.$id "
+          tp-troop-member-troop-id=" Me.troop.$id "
+          tp-troop-member-avatar-asset-size="smallUrl"
+          ng-click="showTroopMemberProfileModal()"
+    ></span>
+
+    <span class="info flex-column flex-spacer">
+      <span class="label flex-spacer"
+            ng-bind=" Me.troopMember.name "
+            ng-click="showTroopMemberProfileModal()"
+      >
+      </span>
+      <span class="permission"
+            ng-bind="
+              ( Me.troop.createdByUserId === Me.troopMember.userId )
+                ? 'Owner'
+                : vm.troopPermissionMap[Me.troopMember.troopPermission]
+            "
+      ></span>
+    </span>
+    <span class="trooper-actions"
+          ng-if=" ! Me.firebaseUser.isAnonymous "
+    >
+      <span class="menu-toggle image-container flex-row"
+            ng-click=" showTrooperMenu = !showTrooperMenu "
+      >
+        <svg class="icon dotdotdot">
+          <use xlink:href="#dotdotdot"/>
+        </svg>
+      </span>
+
+      <ul class="menu flex-column"
+          ng-class=" showTrooperMenu ? 'show' : '' "
+          ng-mouseleave=" showTrooperMenu = false "
+
+      >
+        <!-- <li class="menu-item flex-row"
+            ng-click="showAccountSettingsModal()"
+        >
+          <span class="label">Account Settings</span>
+        </li> -->
+        <li class="menu-item flex-row"
+            ng-click="showTroopMemberProfileModal()"
+        >
+          <span class="label">Edit Profile</span>
+        </li>
+        <li class="menu-item flex-row"
+            ng-click=" vm.navToAffiliateDashboard()"
+        >
+          <span class="label">Affiliate Dashboard</span>
+        </li>
+        <li class="menu-item flex-row"
+            ng-click="logout()"
+        >
+          <span class="label">Logout</span>
+        </li>
+      </ul>
+    </span>
+    <span class="mobile-trooper-actions"
+          ng-if=" ! Me.firebaseUser.isAnonymous "
+    >
+      <span class="menu-toggle image-container flex-row"
+            ng-click="toggleMobileProfile($event)"
+      >
+        <svg class="icon dotdotdot">
+          <use xlink:href="#dotdotdot"/>
+        </svg>
+      </span>
+
+      <ul class="mobile-menu flex-column"
+          ng-if="showMobile"
+          ng-click="toggleMobileProfile($event)"
+      >
+        <!-- <li class="menu-item flex-row"
+            ng-click="showAccountSettingsModal()"
+        >
+          <span class="label">Account Settings</span>
+        </li> -->
+        <li class="menu-item flex-row"
+            ng-click="showTroopMemberProfileModal()"
+        >
+          <span class="label">Edit Profile</span>
+        </li>
+        <li class="menu-item flex-row"
+            ng-click="logout()"
+        >
+          <span class="label">Logout</span>
+        </li>
+      </ul>
+    </span>
+  </section>
+</footer>

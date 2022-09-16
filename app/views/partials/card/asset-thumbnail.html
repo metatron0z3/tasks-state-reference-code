@@ -1,0 +1,8 @@
+<img ng-src="{{ asset.url }}">
+<span class="play-button image-container"
+      ng-if="asset.metaData && asset.metaData.videoUrl"
+>
+  <svg class="icon play">
+    <use xlink:href="#play"/>
+  </svg>
+</span>

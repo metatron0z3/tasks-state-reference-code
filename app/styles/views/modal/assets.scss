@@ -1,0 +1,157 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+  > .modal-overlay {
+
+    &.assets-modal-overlay {
+
+      > .close {
+        cursor: pointer;
+        height: 20px;
+        min-height: 20px;
+        width: 20px;
+        min-width: 20px;
+        top: 25px;
+        right: 25px;
+        position: absolute;
+
+        > svg {
+          height: 16px;
+          width: 16px;
+          fill: rgba($light-gray-secondary, 0.8);
+        }
+
+      }
+
+      > input {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+      }
+
+      > .prev-asset,
+      > .next-asset {
+
+        > .image-container {
+          cursor: pointer;
+          width: 24px;
+          min-width: 24px;
+          height: 24px;
+          min-height: 24px;
+
+          > svg {
+            width: 24px;
+            min-width: 24px;
+            height: 24px;
+            min-height: 24px;
+            fill: $light-gray-secondary;
+
+          }
+
+          &[disabled] {
+            opacity: 0.2;
+          }
+        }
+
+      }
+
+      > .prev-asset {
+        @include justify-content(flex-end);
+
+        > .image-container {
+          margin-right: 16px;
+        }
+      }
+
+      > .next-asset {
+        @include justify-content(flex-start);
+
+        > .image-container {
+          margin-left: 16px;
+        }
+      }
+
+      > .modal {
+
+        &.assets-modal {
+          padding: 0;
+          margin: 0;
+          width: calc(100% - 100px);
+          height: calc(100% - 100px);
+          max-width: none;
+          max-height: none;
+          @include border-radius(0px);
+          background: transparent;
+
+          &:before {
+            display: none;
+          }
+
+          > main {
+            margin: 0px;
+            width: 100%;
+            height: 100%;
+
+            > .asset-list {
+              width: 100%;
+              height: 100%;
+
+
+              > .asset {
+                padding: 0px;
+                height: 100%;
+                min-height: 0;
+                max-height: none;
+                width: 100%;
+                min-width: 0;
+                max-width: none;
+
+                &:hover {
+
+                  > .asset-thumbnail {
+
+                    &:before {
+                      opacity: 0;
+                    }
+                  }
+                }
+
+                > .asset-thumbnail {
+                  height: 100%;
+                  min-height: 0;
+                  max-height: none;
+                  width: 100%;
+                  min-width: 0;
+                  max-width: none;
+                  border: 0px;
+
+                  > img {
+                    height: auto;
+                    min-height: 0;
+                    max-height: 100%;
+                    width: auto;
+                    min-width: 0;
+                    max-width: 100%;
+                    object-fit: contain;
+                  }
+
+                  > iframe {
+                    z-index: 1;
+                  }
+                }
+
+                > .asset-menu {
+                  opacity: 1;
+                  top: -30px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+  }
+}

@@ -1,0 +1,361 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+  > .modal-overlay {
+
+    > form.modal {
+
+      &.card-view-settings-modal,
+      &.grid-view-settings-modal,
+      &.table-view-settings-modal,
+      &.tags-view-settings-modal {
+
+        > header {
+
+          > h1 {
+            font-size: 20px;
+            font-family: $font-family-light;
+            color: rgba($blue-gray-primary, 1);
+            text-align: center;
+          }
+
+          > p {
+            margin-top: 8px;
+            line-height: 20px;
+            font-size: 14px;
+            // font-family: $font-family-medium;
+            color: rgba($blue-gray-primary, 0.5);
+            text-align: center;
+          }
+
+        }
+
+        > main {
+          margin-top: 65px;
+          margin-bottom: 48px;
+
+          .field-group {
+
+            > label {
+              padding: 0px;
+              width: auto;
+              min-width: 0;
+              max-width: none;
+              @include align-items(flex-start);
+
+              > h1 {
+                // margin-bottom:10px;
+                font-size: 14px;
+                color: $blue-secondary;
+              }
+
+              > p {
+
+              }
+            }
+
+            > input {
+
+              &.tp-invalid,
+              &.ng-dirty.ng-touched.ng-invalid {
+                border-color: $red-quaternary;
+              }
+            }
+
+            > .ui-select-container {
+              z-index: 1;
+            }
+
+            &.switch-group {
+              position: relative;
+
+              &:before,
+              &:after {
+                content: "";
+                @include size(100%, 1px);
+                left: 0px;
+                position: absolute;
+                background: $gray-octonary;
+              }
+
+              &:before {
+                top: -7px;
+              }
+
+              &:after {
+                bottom: -7px;
+              }
+
+              // &:after {
+              //   content: "";
+              //   @include size(100%, 1px);
+              //   left: 0px;
+              //   bottom: -15px;
+              //   position: absolute;
+              //   background: $gray-senary;
+              // }
+
+            }
+
+            &.image-size {
+              margin-top: 40px;
+              margin-bottom: 30px;
+              position: relative;
+              text-transform: uppercase;
+
+              > label {
+                margin-bottom:10px;
+                color: $gray-twelvary;
+                font-size: 12px;
+              }
+
+              // &:before,
+              // &:after {
+              //   content: "";
+              //   @include size(100%, 1px);
+              //   left: 0px;
+              //   position: absolute;
+              //   background: $gray-senary;
+              // }
+
+              &:before {
+                top: -15px;
+              }
+
+              &:after {
+                bottom: -15px;
+              }
+
+              > label {
+                padding: 0px;
+                left: unset;
+                top: unset;
+                position: relative;
+              }
+
+              > .ui-select-container {
+                margin-bottom: 0px;
+                width: 200px;
+              }
+
+            }
+          }
+
+          > [data-ng-messages],
+          > [np-messages] {
+            @include transform(translateY(-30px));
+
+            > .error {
+              line-height: 26px;
+              font-size: 12px;
+              color: $red-quaternary;
+            }
+          }
+
+        }
+
+        > footer {
+          margin-top: 10px;
+
+          > button {
+
+            > .wrapper {
+
+              > span.label {
+                line-height: 26px;
+                font-family: $font-family-medium;
+                font-size: 11px;
+              }
+            }
+
+            &.link {
+
+              > .wrapper {
+
+                > span.label {
+                  color: $light-gray-tertiary;
+                }
+              }
+            }
+          }
+        }
+
+      }
+
+      &.card-view-settings-modal {
+
+        > main {
+
+          .field-group {
+            > label {
+              > h1 {
+                font-size: 14px;
+                color: $gray-octonary;
+              }
+            }
+
+            &.switch-group {
+              > label{
+                > h1 {
+                  color: $blue-secondary;
+                }
+              }
+
+            }
+
+          }
+        }
+      }
+
+
+      &.grid-view-settings-modal {
+        > main {
+          > .field-group {
+
+            &.switch-group {
+              position: relative;
+              &:first-of-type {
+                &:after {
+                  display: none;
+                }
+              }
+
+              &:before,
+              &:after {
+                content: "";
+                @include size(100%, 1px);
+                left: 0px;
+                position: absolute;
+                background: $gray-senary;
+              }
+
+              &:before {
+                top: -10px;
+              }
+              &:after {
+                bottom: -10px;
+              }
+            }
+          }
+        }
+      }
+
+      &.table-view-settings-modal {
+
+        // > header {
+        //
+        //   > h1 {
+        //     font-size: 20px;
+        //     font-family: $font-family-light;
+        //     color: rgba($blue-gray-primary, 1);
+        //     text-align: center;
+        //   }
+        //
+        //   > p {
+        //     margin-top: 8px;
+        //     line-height: 20px;
+        //     font-size: 14px;
+        //     // font-family: $font-family-medium;
+        //     color: rgba($blue-gray-primary, 0.5);
+        //     text-align: center;
+        //   }
+        //
+        // }
+
+        > main {
+          margin-top: 65px;
+          margin-bottom: 48px;
+
+          > .field-group {
+
+            &:first-of-type,
+            &:last-of-type {
+
+              &:before {
+                content: "";
+                @include size(100%, 1px);
+                left: 0px;
+                top: -15px;
+                position: absolute;
+                background: $gray-senary;
+              }
+            }
+
+            &.middle {
+              &:before {
+                content: "";
+                @include size(100%, 0px);
+                left: 0px;
+                top: -25px;
+                position: absolute;
+                background: $white-primary;
+              }
+              &:after {
+                content: "";
+                @include size(100%, 0px);
+                left: 0px;
+                top: -25px;
+                position: absolute;
+                background: $white-primary;
+              }
+            }
+
+            &.switch-group {
+              margin-top: 35px;
+              position: relative;
+
+
+              &:after {
+                bottom: -15px;
+              }
+
+
+            }
+          }
+        }
+
+
+        // > [data-ng-messages],
+        // > [np-messages] {
+        //   @include transform(translateY(-30px));
+        //
+        //   > .error {
+        //     line-height: 26px;
+        //     font-size: 12px;
+        //     color: $red-quaternary;
+        //   }
+        // }
+        //
+        // > footer {
+        //   margin-top: 40px;
+        //
+        //   > button {
+        //
+        //     > .wrapper {
+        //
+        //       > span.label {
+        //         line-height: 26px;
+        //         font-family: $font-family-medium;
+        //         font-size: 11px;
+        //       }
+        //     }
+        //
+        //     &.link {
+        //
+        //       > .wrapper {
+        //
+        //         > span.label {
+        //           color: $light-gray-tertiary;
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
+
+
+      }
+
+    }
+  }
+}

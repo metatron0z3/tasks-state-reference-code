@@ -1,0 +1,57 @@
+<div class="wrapper"
+     ngf-drop="filesAdded($files, $file, $event)"
+     ngf-change="filesAdded($files, $file, $event)"
+     ngf-multiple="true"
+     ngf-allow-dir="false"
+     ngf-drag-over-class="file-drop"
+>
+  <div class="drag-drop-modal-overlay flex-row">
+    <div class="wrapper flex-row">
+      <div class="background flex-column">
+        <div class="image-container">
+          <svg class="icon drag-drop">
+            <use xlink:href="#drag-drop"></use>
+          </svg>
+        </div>
+        <h1>Drag &amp; Drop to Upload</h1>
+        <p>your files and assets to Troop</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="loader-wrapper flex-row"
+       ng-if="loading"
+  >
+    <div class="wrapper">
+      <div class="loader-2 small"></div>
+    </div>
+  </div>
+
+  <div class="empty-chat flex-column"
+       ng-if="( ! loading ) && data.chatEntries.length === 0"
+       ng-include=" '/views/partials/empty-chat.html' "
+  ></div>
+
+
+  <ul class="chat flex-column"
+      ng-if="( ! loading ) && data.chatEntries.length > 0"
+  >
+    <li class="top-spacer">&nbsp;</li>
+    <li class=" chat-entry flex-row "
+        ng-repeat=" entry in data.chatEntries "
+        tp-chat-search=" entry "
+        tp-chat-search-show-context=" true "
+        tp-chat-search-search-result=" true "
+        tp-chat-search-previous=" data.chatEntries[$index - 1] "
+        tp-chat-search-first=" $first "
+        tp-chat-search-last=" $last "
+        tp-chat-search-asset=" data.chatAssets[entry.assetId] "
+        tp-chat-search-header-info=" false "
+        data-id="{{entry.$id}}"
+        ng-click="entry.clickAction(entry)"
+    ></li>
+
+    <li class="bottom-spacer">&nbsp;</li>
+  </ul>
+
+</div>

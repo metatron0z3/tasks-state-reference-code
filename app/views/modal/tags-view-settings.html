@@ -1,0 +1,59 @@
+<div class="modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click=" close() "
+>
+
+  <form name="tagsViewSettingsModalForm"
+        class="tags-view-settings-modal modal flex-column"
+        novalidate="novalidate"
+        ng-submit=" save(tagsViewSettingsModalForm) "
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click="close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header>
+      <h1>Tag View Settings</h1>
+      <!-- <p>Customize the appearance of the tags view.</p> -->
+    </header>
+
+
+    <main>
+
+      <div class="switch-group field-group flex-row">
+        <label class="flex-column">
+          <h1>Show Images</h1>
+        </label>
+        <switch name="showImages"
+                class="blue"
+                ng-model=" viewSettings.tag.showImage "
+                on="Show"
+                off="Hide"
+        ></switch>
+      </div>
+
+    </main>
+
+
+    <footer class="flex-row">
+
+      <!-- <button class="cancel link">
+        <div class="wrapper flex-row">
+          <span class="label">Cancel</span>
+        </div>
+      </button> -->
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label">Save</span>
+        </div>
+      </button>
+    </footer>
+  </form>
+
+</div>

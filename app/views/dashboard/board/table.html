@@ -1,0 +1,286 @@
+
+<div class="loader-wrapper flex-row"
+     ng-if="loading"
+>
+  <div class="wrapper">
+    <div class="loader-2 small"></div>
+  </div>
+</div>
+
+<div class="empty-board flex-column"
+     ng-if=" ( ! loading ) && ( Me.currentBoardCards.length === 0 ) && (  _.isEmpty(Me.currentboard.tagNames) ) "
+     ng-include=" '/views/partials/empty-board.html' "
+     ngf-drop="vm.filesAdded($files, $file, $event)"
+     ngf-drop-disabled=" vm.dragDisabled "
+     ngf-change="vm.filesAdded($files, $file, $event)"
+     ngf-multiple="true"
+     ngf-allow-dir="false"
+     ngf-drag-over-class= "{accept: 'dragover', delay:200}"
+     ngf-drag="vm.drag($isDragging, $class, $event)"
+></div>
+<div class="wrapper flex-column"
+      ngf-drop="vm.filesAdded($files, $file, $event)"
+      ngf-drop-disabled=" vm.dragDisabled "
+      ngf-change="vm.filesAdded($files, $file, $event)"
+      ngf-multiple="true"
+      ngf-allow-dir="false"
+      ngf-drag-over-class= "{accept: 'dragover', delay:200}"
+      ngf-drag="vm.drag($isDragging, $class, $event)"
+>
+
+  <div class="header-bg"></div>
+  <div class="table-container">
+    <table  id="card-table-view"
+            class="card-table-view card-list fixed-header"
+            ng-class=" { 'show-handles': vm.showHandles } "
+            ng-sortable="cardSortableOptions"
+    >
+      <thead>
+        <tr>
+
+          <!-- <th class="reset">
+            <span class="th-inner flex-row empty">
+              <div class="reset image-container"
+                   ng-click="vm.resetColSort()"
+              >
+                <svg class="icon arrow-reset">
+                  <use xlink:href="#arrow-reset"/>
+                </svg>
+              </div>
+            </span>
+          </th> -->
+
+          <th class="first-card-asset"
+              ng-if = " Me.currentBoard.viewSettings.list.showImage "
+              ng-click="  vm.sortColBy('iconAsset')  "
+              data-ng-class="{ sorting: vm.sortingColBy === 'iconAsset', asc: vm.sortDirection === 'asc', desc: vm.sortDirection === 'desc'}"
+
+          >
+            <span class="th-inner flex-row">
+              <label>Files</label>
+              <span class="image-container">
+                <svg class="icon arrow">
+                  <use xlink:href="#arrow"/>
+                </svg>
+              </span>
+            </span>
+          </th>
+
+
+          <th class="title-head"
+              ng-click="  vm.sortColBy('cardName')  "
+              data-ng-class="{ sorting: vm.sortingColBy === 'cardName', asc: vm.sortDirection === 'asc', desc: vm.sortDirection === 'desc'}"
+          >
+            <span class="th-inner flex-row">
+
+              <label>Title</label>
+
+              <span class="image-container">
+                <svg class="icon arrow">
+                  <use xlink:href="#arrow"/>
+                </svg>
+              </span>
+
+            </span>
+          </th>
+
+
+          <th class="card-author"
+              ng-if = " Me.currentBoard.viewSettings.list.showAuthor "
+              ng-click="  vm.sortColBy('createdByMemberId')  "
+              data-ng-class="{ sorting: vm.sortingColBy === 'createdByMemberId', asc: vm.sortDirection === 'asc', desc: vm.sortDirection === 'desc'}"
+          >
+            <span class="th-inner flex-row"
+            >
+              <label>Author</label>
+
+              <span class="image-container">
+                <svg class="icon arrow">
+                  <use xlink:href="#arrow"/>
+                </svg>
+              </span>
+
+            </span>
+          </th>
+
+
+          <th class="card-date"
+              ng-if = " Me.currentBoard.viewSettings.list.showDate "
+              ng-click=" vm.sortColBy('createdAt')  "
+              data-ng-class="{ sorting: vm.sortingColBy === 'createdAt', asc: vm.sortDirection === 'asc', desc: vm.sortDirection === 'desc'}"
+          >
+            <span class="th-inner flex-row"
+            >
+              <label>Date</label>
+
+              <span class="image-container">
+                <svg class="icon arrow">
+                  <use xlink:href="#arrow"/>
+                </svg>
+              </span>
+
+            </span>
+          </th>
+
+          <th class="reset">
+            <span class="th-inner flex-row empty">
+              <div class="reset image-container"
+                   ng-click="vm.resetColSort()"
+              >
+                <svg class="icon arrow-reset">
+                  <use xlink:href="#arrow-reset"/>
+                </svg>
+              </div>
+            </span>
+          </th>
+<!--
+          <th class="tag-column"
+              ng-if=" Me.currentBoard.viewSettings.list.showTags"
+              ng-repeat=" (tagName, tag) in Me.currentBoard.tagNames "
+              ng-click=" vm.sortColBy( tagName )  "
+              data-ng-class="{ sorting: vm.sortingColBy === tagName, asc: vm.sortDirection === 'asc', desc: vm.sortDirection === 'desc'}"
+          >
+            <span class="th-inner flex-row"
+            >
+              <label ng-bind=" (tagName || '').substr(3) "
+              ></label>
+
+              <span class="image-container">
+                <svg class="icon arrow">
+                  <use xlink:href="#arrow"/>
+                </svg>
+              </span>
+
+            </span>
+          </th> -->
+
+
+        </tr>
+      </thead>
+      <tbody  class="card-list"
+              ng-sortable=" vm.cardSortableOptions "
+      >
+        <tr class="card-row"
+            ng-if=" ( vm.selectedTagName === 'tp-all' ) ||  card.tags.hasOwnProperty( vm.selectedTagName )  "
+            ng-repeat="card in vm.tableViewArray"
+            data-board-id=" card.boardId "
+            data-card-id=" {{ card.$id }} "
+        >
+        <!--
+        ng-click=" vm.navToDetailCard( card.$id )" -->
+
+          <!-- <td class="sorting">
+            <span class="td-inner flex-row ">
+              <span class="image-container sort-handle"
+              >
+                <svg class="icon handle">
+                  <use xlink:href="#handle"/>
+                </svg>
+              </span>
+            </span>
+          </td> -->
+
+
+          <td class="first-card-asset "
+              ng-if = " Me.currentBoard.viewSettings.list.showImage "
+              ng-click=" vm.navToDetailCard( card.$id )"
+          >
+
+            <span class="icon-asset image-container"
+                  ng-click=" vm.navToDetailCard( card.$id ) "
+                  tp-asset=" card.iconAsset "
+                  tp-asset-troop-id=" card.troopId "
+                  tp-asset-index=" $index "
+                  tp-asset-size=" mediumUrl "
+                  tp-asset-info=" false "
+                  tp-asset-info-file-size=" false "
+                  tp-asset-remove=" false "
+                  tp-asset-show-menu="false"
+                  data-id="  "
+            >
+            </span>
+          </td>
+
+          <td class="card-name">
+            <span class="td-inner"
+                  ng-click=" vm.navToDetailCard( card.$id ) "
+            >
+              {{ card.cardName }}
+
+            </span>
+          </td>
+
+          <td class="card-author"
+              ng-if = " Me.currentBoard.viewSettings.list.showAuthor "
+          >
+            <span class="creator-block flex-row">
+              <span class="profile-image image-container"
+                    tp-troop-member-profile=" card.createdByMemberId "
+                    tp-troop-member-avatar-asset-size="smallUrl"
+                    tp-troop-member-troop-id=" card.troopId "
+              ></span>
+              <span class="name flex-column">
+                <span class="creator"
+                      tp-troop-member="{{ card.createdByMemberId }}"
+                      tp-troop-member-troop-id=" {{ card.troopId }} "
+                      tp-troop-member-user-name="true"
+                ></span>
+
+              </span>
+            </span>
+          </td>
+
+          <td class="card-date"
+              ng-if = " Me.currentBoard.viewSettings.list.showDate"
+          >
+            <span class="td-inner">
+              {{ card.createdAt | moment:'extended-format' }}
+            </span>
+          </td>
+
+
+          <td class="sorting">
+            <span class="td-inner flex-row ">
+              <span class="image-container sort-handle"
+              >
+                <svg class="icon handle">
+                  <use xlink:href="#handle"/>
+                </svg>
+              </span>
+            </span>
+          </td>
+
+          <!-- <td class="tag-column"
+              ng-if=" Me.currentBoard.viewSettings.list.showTags "
+              ng-repeat=" (tagName, tag) in Me.currentBoard.tagNames "
+          >
+            <span class="td-inner"
+                  ng-bind=" card.tags[tagName] "
+            ></span>
+          </td> -->
+
+           <!-- <td>
+            <span class="">
+              Di
+               {{ card.tags }}
+            </span>
+          </td> -->
+
+         <!-- <td class="tag-column"
+              ng-repeat=" (tagName, tagValue) in card.tags track by $index "
+          >
+            <span class="tag-value"
+                  ng-bind=" (tagValue || '') "
+            >
+            </span>
+          </td>-->
+
+       </tr>
+      </tbody>
+
+    </table>
+  </div>
+  <div class="drag-overlay flex-column"
+        ng-include=" '/views/partials/drag-drop-overlay.html' "
+  ></div>
+</div>

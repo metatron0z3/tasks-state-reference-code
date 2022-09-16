@@ -1,0 +1,12 @@
+<script>
+  (function (d, s, id){
+    var js, params, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    params = "c2c_token=630f4cf0-7414-4bdb-8ed9-c7749fc5d12a";
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://cdn.aircall.io/c2c/v1/c2c.min.js#"+params;
+    fjs.parentNode.insertBefore(js,fjs);
+  }(document, "script", "aircall-ajs"))
+</script>
+<div class="ac-c2c-event ac-c2c-button"></div>

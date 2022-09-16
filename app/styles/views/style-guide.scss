@@ -1,0 +1,634 @@
+@import "../bower-import.scss";
+@import "../variables.scss";
+
+
+body {
+  &[data-state=style-guide] {
+
+    > .wrapper {
+
+      > main {
+
+        width: 75%;
+
+        > section {
+
+          > .flex-row,
+          > .flex-column,
+          > .flex-row-wrap {
+            margin-bottom: 16px;
+
+            button {
+              margin: 8px;
+              > .wrapper {
+                > .label {
+                  padding-right: 5px;
+                }
+              }
+            }
+
+            > .modal-overlay {
+              position: unset;
+            }
+
+          }
+
+          > .colors {
+            @include justify-content(center);
+
+            .thumbnail {
+              height: 110px;
+              width: 160px;
+            }
+          }
+
+          > .icons {
+            @include justify-content(center);
+
+            .thumbnail {
+              height: 50px;
+              width: 100px;
+
+              label {
+                white-space: nowrap;
+              }
+
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+
+.thumbnail {
+
+  &#animated-loading {
+    background: $blue-primary;
+
+    .image-container {
+
+      svg {
+        fill: $white-primary;
+
+
+      }
+    }
+  }
+
+  /* Style-Guide Color Components */
+  &.black-primary {
+    > span {
+      &.color {
+        background: $black-primary;
+      }
+      &.hex {
+        &:after {
+          content: "#{$black-primary}"
+        }
+      }
+    }
+  }
+
+  &.black-secondary {
+    > span {
+      &.color {
+        background: $black-secondary;
+      }
+      &.hex {
+        &:after {
+          content: "#{$black-secondary}"
+        }
+      }
+    }
+  }
+
+  &.black-secondary-40 {
+    > span {
+      &.color {
+        background: $black-secondary-40;
+      }
+      &.hex {
+        &:after {
+          content: "#{$black-secondary-40}"
+        }
+      }
+    }
+  }
+
+  &.black-secondary-60 {
+    > span {
+      &.color {
+        background: $black-secondary-60;
+      }
+      &.hex {
+        &:after {
+          content: "#{$black-secondary-60}"
+        }
+      }
+    }
+  }
+
+  &.black-secondary-65 {
+    > span {
+      &.color {
+        background: $black-secondary-65;
+      }
+      &.hex {
+        &:after {
+          content: "#{$black-secondary-65}"
+        }
+      }
+    }
+  }
+
+  &.black-tertiary {
+    > span {
+      &.color {
+        background: $black-tertiary;
+      }
+      &.hex {
+        &:after {
+          content: "#{$black-tertiary}"
+        }
+      }
+    }
+  }
+
+  &.black-quaternary {
+    > span {
+      &.color {
+        background: $black-quaternary;
+      }
+      &.hex {
+        &:after {
+          content: "#{$black-quaternary}"
+        }
+      }
+    }
+  }
+
+  &.black-quinary {
+    > span {
+      &.color {
+        background: $black-quinary;
+      }
+      &.hex {
+        &:after {
+          content: "#{$black-quinary}"
+        }
+      }
+    }
+  }
+
+  &.black-senary {
+    > span {
+      &.color {
+        background: $black-senary;
+      }
+      &.hex {
+        &:after {
+          content: "#{$black-senary}"
+        }
+      }
+    }
+  }
+
+  &.white-primary {
+    > span {
+      &.color {
+        background: $white-primary;
+      }
+      &.hex {
+        &:after {
+          content: "#{$white-primary}"
+        }
+      }
+    }
+  }
+
+  &.white-secondary {
+    > span {
+      &.color {
+        background: $white-secondary;
+      }
+      &.hex {
+        &:after {
+          content: "#{$white-secondary}"
+        }
+      }
+    }
+  }
+
+  &.white-tertiary {
+    > span {
+      &.color {
+        background: $white-tertiary;
+      }
+      &.hex {
+        &:after {
+          content: "#{$white-tertiary}"
+        }
+      }
+    }
+  }
+
+  &.gray-primary {
+    > span {
+      &.color {
+        background: $gray-primary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$gray-primary}"
+        }
+      }
+    }
+  }
+
+  &.gray-secondary {
+    > span {
+      &.color {
+        background: $gray-secondary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$gray-secondary}"
+        }
+      }
+    }
+  }
+
+  &.gray-tertiary {
+    > span {
+      &.color {
+        background: $gray-tertiary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$gray-tertiary}"
+        }
+      }
+    }
+  }
+
+  &.gray-quaternary {
+    > span {
+      &.color {
+        background: $gray-quaternary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$gray-quaternary}"
+        }
+      }
+    }
+  }
+
+  &.gray-quinary {
+    > span {
+      &.color {
+        background: $gray-quinary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$gray-quinary}"
+        }
+      }
+    }
+  }
+
+  &.gray-senary {
+    > span {
+      &.color {
+        background: $gray-senary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$gray-senary}"
+        }
+      }
+    }
+  }
+
+  &.gray-septenary {
+    > span {
+      &.color {
+        background: $gray-septenary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$gray-septenary}"
+        }
+      }
+    }
+  }
+
+  &.gray-octonary {
+    > span {
+      &.color {
+        background: $gray-octonary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$gray-octonary}"
+        }
+      }
+    }
+  }
+
+  &.gray-nonary {
+    > span {
+      &.color {
+        background: $gray-nonary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$gray-nonary}"
+        }
+      }
+    }
+  }
+
+  &.gray-denary {
+    > span {
+      &.color {
+        background: $gray-denary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$gray-denary}"
+        }
+      }
+    }
+  }
+
+  &.light-gray-primary {
+    > span {
+      &.color {
+        background: $light-gray-primary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$light-gray-primary}"
+        }
+      }
+    }
+  }
+
+  &.light-gray-secondary {
+    > span {
+      &.color {
+        background: $light-gray-secondary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$light-gray-secondary}"
+        }
+      }
+    }
+  }
+
+  &.light-gray-tertiary {
+    > span {
+      &.color {
+        background: $light-gray-tertiary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$light-gray-tertiary}"
+        }
+      }
+    }
+  }
+
+  &.light-gray-quaternary {
+    > span {
+      &.color {
+        background: $light-gray-quaternary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$light-gray-quaternary}"
+        }
+      }
+    }
+  }
+
+  &.blue-primary {
+    > span {
+      &.color {
+        background: $blue-primary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$blue-primary}"
+        }
+      }
+    }
+  }
+
+  &.blue-secondary {
+    > span {
+      &.color {
+        background: $blue-secondary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$blue-secondary}"
+        }
+      }
+    }
+  }
+
+  &.blue-tertiary {
+    > span {
+      &.color {
+        background: $blue-tertiary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$blue-tertiary}"
+        }
+      }
+    }
+  }
+
+  &.blue-quaternary {
+    > span {
+      &.color {
+        background: $blue-quaternary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$blue-quaternary}"
+        }
+      }
+    }
+  }
+
+  &.blue-quinary {
+    > span {
+      &.color {
+        background: $blue-quinary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$blue-quinary}"
+        }
+      }
+    }
+  }
+
+  &.blue-septenary {
+    > span {
+      &.color {
+        background: $blue-septenary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$blue-septenary}"
+        }
+      }
+    }
+  }
+
+  &.blue-gray-primary {
+    > span {
+      &.color {
+        background: $blue-gray-primary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$blue-gray-primary}"
+        }
+      }
+    }
+  }
+
+  &.blue-gray-secondary {
+    > span {
+      &.color {
+        background: $blue-gray-secondary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$blue-gray-secondary}"
+        }
+      }
+    }
+  }
+
+  &.blue-gray-tertiary {
+    > span {
+      &.color {
+        background: $blue-gray-tertiary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$blue-gray-tertiary}"
+        }
+      }
+    }
+  }
+
+  &.blue-green-primary {
+    > span {
+      &.color {
+        background: $blue-green-primary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$blue-green-primary}"
+        }
+      }
+    }
+  }
+
+  &.green-primary {
+    > span {
+      &.color {
+        background: $green-primary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$green-primary}"
+        }
+      }
+    }
+  }
+
+  &.red-primary {
+    > span {
+      &.color {
+        background: $red-primary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$red-primary}"
+        }
+      }
+    }
+  }
+
+  &.red-secondary {
+    > span {
+      &.color {
+        background: $red-secondary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$red-secondary}"
+        }
+      }
+    }
+  }
+
+  &.orange-primary {
+    > span {
+      &.color {
+        background: $orange-primary;
+      }
+
+      &.hex {
+        &:after {
+          content: "#{$orange-primary}"
+        }
+      }
+    }
+  }
+  /* Style-Guide Color Components */
+}
+
+
+
+
+

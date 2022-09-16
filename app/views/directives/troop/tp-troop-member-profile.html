@@ -1,0 +1,22 @@
+<div class="asset flex-column"
+    ng-if=" troopMemberLoaded && $troopMember.avatarAssetId "
+    tp-asset=" $troopMember.avatarAssetId "
+    tp-asset-is-avatar=" true "
+    tp-asset-user-id=" $troopMember.userId "
+    tp-asset-troop-id=" troopId "
+    tp-asset-size=" smallUrl "
+    tp-asset-info=" false "
+    tp-asset-download=" false "
+    tp-asset-rename=" false "
+    tp-asset-remove=" false "
+    tp-asset-progress=" progress "
+    tp-asset-title=" member.name "
+></div>
+
+<div class="asset flex-column"
+     ng-if=" troopMemberLoaded && ( ! $troopMember.avatarAssetId ) "
+>
+  <div class="asset-thumbnail">
+    <img src=" {{ defaultAvatarIconUrl }} " />
+  </div>
+</div>

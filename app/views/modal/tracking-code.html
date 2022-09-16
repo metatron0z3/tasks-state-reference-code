@@ -1,0 +1,82 @@
+<div class="modal-overlay flex-row fade"
+     ng-class=" vm.showModal ? 'show' : '' "
+     ng-has-overflow=""
+     ng-click=" vm.closeModal() "
+>
+
+  <form name="trackingCodeModalForm"
+        class="card-modal modal flex-column fade"
+        ng-submit=" vm.save(trackingCodeModalForm) "
+        novalidate=""
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click=" vm.closeModal() "
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header>
+      <h1>New Tracking Code</h1>
+    </header>
+
+    <main>
+
+
+      <div class="code field-group flex-row">
+        <input name="newCode"
+               placeholder="Code"
+               ng-class=" {
+                 'tp-invalid' : (
+                   vm.isExistingSlug
+                   || (
+                     trackingCodeModalForm.newCode.$dirty
+                     && trackingCodeModalForm.newCode.$touched
+                     && trackingCodeModalForm.newCode.$invalid
+                   )
+                 )
+               } "
+               ng-model=" vm.newCode "
+               required=""
+               autocomplete="off"
+               ng-focus=" vm.showModal "
+        />
+      </div>
+      <div  class="flex-row"
+            ng-if="
+              vm.isExistingSlug
+              || (
+                trackingCodeModalForm.newCode.$dirty
+                && trackingCodeModalForm.newCode.$touched
+                && trackingCodeModalForm.newCode.$invalid
+              )
+            "
+            ng-messages=" trackingCodeModalForm.newCode.$error "
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Code is required
+        </div>
+        <div class="error"
+             ng-if="vm.isExistingSlug"
+        >
+          Code '{{ vm.oldCode }}' is already taken
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="flex-row">
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label">Create</span>
+        </div>
+      </button>
+    </footer>
+  </form>
+
+</div>

@@ -1,0 +1,97 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+  > .modal-overlay {
+
+    > form.modal {
+
+      &.logger-settings-modal {
+
+        > main {
+          margin-bottom: 30px;
+
+          .field-group {
+
+            > label {
+              font-size: 14px;
+              color: $light-gray-tertiary;
+            }
+
+            > input {
+
+              &.tp-invalid,
+              &.ng-dirty.ng-touched.ng-invalid {
+                border-color: $red-quaternary;
+              }
+            }
+
+            &.level {
+
+              > label {
+                margin-bottom: 10px;
+                padding: 0px;
+                left: unset;
+                top: unset;
+                position: relative;
+              }
+
+              > .ui-select-container {
+                width: 200px;
+              }
+            }
+
+            > .ui-select-container {
+              z-index: 1;
+            }
+
+            &.checkbox {
+
+              width: 150px;
+
+              > label {
+                padding: 0px;
+                left: unset;
+                top: unset;
+                position: relative;
+                color: $blue-gray-primary
+              }
+
+              > [data-tp-checkbox],
+              > [tp-checkbox] {
+                margin: 0px 15px 0px 0px;
+              }
+            }
+          }
+
+          > .checkboxes {
+
+
+          }
+
+          > [data-ng-messages],
+          > [np-messages] {
+            @include transform(translateY(-30px));
+
+            > .error {
+              line-height: 26px;
+              font-size: 12px;
+              color: $red-quaternary;
+            }
+          }
+
+        }
+
+        > footer {
+          > button {
+
+          }
+        }
+      }
+    }
+
+    &.logger-settings-modal-overlay {
+      @include align-items(flex-start);
+    }
+  }
+}

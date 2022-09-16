@@ -1,0 +1,508 @@
+@import "../../../bower-import.scss";
+@import "../../../variables.scss";
+
+[data-state*="dashboard.boards.available"],
+[data-state*="dashboard.boards.mine"],
+[data-state*="dashboard.troopMember.boards"] {
+
+  [data-ui-view=dashboardContent] {
+    height: 100%;
+    position: relative;
+    @include flex-grow(1);
+    @include justify-content(center);
+    @include align-items(flex-start);
+
+    > .board-list {
+      padding: 26px 24px 0px 0px;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      @include justify-content(flex-start);
+      @include align-items(flex-start);
+      @include align-content(flex-start);
+
+
+      > .board {
+        margin: 0px 0px 26px 24px;
+        padding: 20px 20px 20px 34px;
+        width: 450px;
+        height: 250px;
+        position: relative;
+        //@include flex-grow(1);
+        @include justify-content(flex-start);
+        background: $white-primary;
+        @include css3-prefix('box-shadow', 0px 1px 0px 0px rgba($black-primary, 0.15));
+        @include border-radius(4px);
+        overflow: hidden;
+
+        &:hover {
+          @include css3-prefix('box-shadow', 0px 4px 10px -1px rgba($blue-gray-octonary, 0.3));
+
+          &:before {
+            background: $blue-primary;
+          }
+        }
+
+        &:before {
+          content: "";
+          height: 100%;
+          width: 3px;
+          left: 0px;
+          top: 0px;
+          position: absolute;
+          display: inline-block;
+          background: $light-gray-senary;
+        }
+
+        &.board-new {
+          cursor: pointer;
+          background: transparent;
+          @include align-items(center);
+          border: 1px dashed $light-gray-senary;
+          @include css3-prefix('box-shadow', none);
+
+
+          &:before {
+            display: none;
+          }
+
+          > button {
+            > .wrapper {
+              > .image-container {
+                > svg {
+                  fill: rgba($light-gray-senary, 1.0);
+                }
+              }
+            }
+          }
+
+          &:hover {
+            background: rgba($light-gray-senary,0.20);
+            border: 1px dashed $gray-twelvary;
+            @include css3-prefix('box-shadow', none);
+
+            > button {
+              background: rgba($light-gray-senary,0.20);
+              border: 1px solid rgba($gray-elevenary, 1.0);
+
+              > .wrapper {
+
+                > .image-container {
+
+                  > svg {
+                    fill: rgba($gray-twelvary, 1.0);
+                  }
+                }
+              }
+            }
+
+          }
+
+          > button {
+            margin-top:60px;
+          }
+
+          > h2 {
+            font-family: $font-family-light;
+            font-size: 20px;
+            color: $gray-elevenary;
+            line-height: 27px;
+            margin-top:15px;
+
+          }
+
+        }
+
+        > header {
+          height: 32px;
+          width: 100%;
+          position: relative;
+
+          > button {
+            padding: 0px;
+            width: 100px;
+            height: 32px;
+            top: 0px;
+            right: 0px;
+            position: absolute;
+
+            > .wrapper {
+
+              > .label {
+                line-height: 22px;
+                font-size: 12px;
+                text-transform: none;
+              }
+
+              > .image-container {
+                display: none;
+              }
+            }
+
+            &.add-to-member-boards {
+
+              >.wrapper {
+                display: flex;
+              }
+
+              > h2 {
+
+              }
+            }
+
+            &.remove-from-member-boards {
+              background: $blue-primary;
+              border-color: $blue-primary;
+
+              > .wrapper {
+
+                > .label {
+
+                  &:before {
+                    //content: "Member";
+                    content: attr(data-permission);
+                    color: $white-primary;
+                  }
+                }
+              }
+
+              &:hover {
+                background: $red-senary;
+                border-color: $red-senary;
+
+                > .wrapper {
+
+                  > .label {
+
+                    &:before {
+                      content: "Leave Board";
+                      color: $white-primary;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          > .create-date {
+            line-height: 22px;
+            font-size: 12px;
+            color: rgba($black-senary, 0.8);
+          }
+
+          > .board-menu {
+
+            > .dotdotdot {
+              cursor: pointer;
+            }
+          }
+        }
+
+        > main {
+          @include flex-shrink(0);
+
+          > .title {
+            cursor: pointer;
+            padding-top: 10px;
+            width: 100%;
+            line-height: 38px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-famly: $font-family-regular;
+            font-size: 24px;
+            color: $black-senary;
+            text-align: left;
+          }
+
+          > .description {
+            margin-top: 14px;
+            width: 100%;
+            max-height: 44px;
+            line-height: 22px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 12px;
+
+          }
+
+          &.has-description {
+            @include justify-content(flex-start);
+          }
+        }
+
+        > footer {
+          margin-top: 15px;
+          width: 100%;
+          position: relative;;
+
+          > .board-members {
+            width: 100%;
+
+            > .member {
+              margin-right: 8px;
+
+              > .profile-image {
+                cursor: pointer;
+
+                &,
+                > .asset,
+                > .asset > .asset-thumbnail,
+                > .asset > .asset-thumbnail > img {
+                  width: 25px;
+                  min-width: 25px;
+                  max-width: 25px;
+                  height: 25px;
+                  min-height: 25px;
+                  max-height: 25px;
+                }
+
+                > .asset {
+                  padding: 0px;
+
+                  > .asset-thumbnail {
+                    overflow: hidden;
+                    border: 0px;
+
+                    &:before {
+                      display: none;
+                    }
+
+                    &,
+                    > .upload-progress {
+                      @include border-radius(15px);
+                    }
+
+                  }
+                }
+              }
+            }
+          }
+
+          > .permissions {
+            right: 14px;
+            bottom: 0px;
+            position: absolute;
+
+            > .image-container {
+              width: 20px;
+              min-width: 20px;
+              height: 20px;
+              min-height: 20px;
+              margin-left:10px;
+
+              > svg {
+                width: 20px;
+                min-width: 20px;
+                height: 20px;
+                min-height: 20px;
+
+                fill: $light-gray-secondary;
+              }
+            }
+          }
+        }
+
+
+        &.has-notifications {
+
+          &:before {
+            background: $blue-primary;
+          }
+        }
+
+      }
+
+
+      > .flex-spacer {
+        height: 1px;
+        width: 100%;
+        overflow: hidden;
+      }
+
+    }
+  }
+
+  [data-ui-view=dashboardRightSidebar] {
+    display: none;
+  }
+
+}
+
+@media only screen and (max-width:1280px) {
+  [data-state*="dashboard.boards.available"],
+  [data-state*="dashboard.boards.mine"],
+  [data-state*="dashboard.troopMember.boards"] {
+
+    [data-ui-view=dashboardContent] {
+
+      > .board-list {
+
+        > .board {
+          //width: 35%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width:1024px) {
+  [data-state*="dashboard.boards.available"],
+  [data-state*="dashboard.boards.mine"],
+  [data-state*="dashboard.troopMember.boards"] {
+
+    [data-ui-view=dashboardContent] {
+
+      > .board-list {
+
+        > .board {
+          width: 345px;
+          max-width: 85%;
+        }
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width:414px) {
+  [data-state*="dashboard.boards.available"],
+  [data-state*="dashboard.boards.mine"],
+  [data-state*="dashboard.troopMember.boards"] {
+
+    [data-ui-view=dashboardContent] {
+      width: 100%;
+
+      > .board-list {
+        padding: 0px;
+
+        > .board {
+          margin: 0px;
+          padding: 0px;
+          width: 100%;
+          height: 72px;
+          max-width: none;
+          border-bottom: 1px solid $light-gray-senary;
+          overflow: visible;
+          @include flex-direction(row);
+
+          &:before {
+            display: none;
+          }
+
+          > header {
+            height: 100%;
+            width: 60px;
+            max-width: 60px;
+            min-width: 60px;
+
+            > button {
+              height: 100%;
+              @include transition(none);
+
+              > .wrapper {
+                @include justify-content(center);
+
+                > .label {
+                  display: none;
+                }
+
+                > .image-container {
+                  margin: 0px;
+                  height: 20px;
+                  min-height: 20px;
+                  max-height: 20px;
+                  width: 20px;
+                  min-width: 20px;
+                  max-width: 20px;
+                  @include display(flex);
+                  @include border-radius(10px);
+                  border: 2px solid $light-gray-senary;
+
+                  > svg {
+                    height: 10px;
+                    min-height: 10px;
+                    max-height: 10px;
+                    width: 10px;
+                    min-width: 10px;
+                    max-width: 10px;
+                    fill: $light-gray-senary;
+
+                  }
+
+                }
+              }
+
+              &.remove-from-member-boards,
+              &.add-to-member-boards {
+                background: transparent;
+                border: 0px;
+
+              }
+
+              &.remove-from-member-boards {
+                > .wrapper {
+
+                  > .label {
+
+                  }
+
+                  > .image-container {
+                    border-color: $blue-primary;
+
+                    > svg {
+                      fill: $blue-primary;
+                    }
+
+                  }
+                }
+
+              }
+            }
+
+            > .board-menu {
+
+              margin-right: 12px;
+
+              > .menu {
+
+                &.show {
+
+                }
+              }
+            }
+
+            > .create-date {
+              display: none;
+            }
+          }
+
+          > main {
+            @include order(-1);
+            max-width: calc(100% - 60px);
+
+            > .title {
+              margin: 0px;
+              padding: 0px 0px 0px 18px;
+              font-size: 16px;
+              color: $black-senary;
+            }
+
+            > .description {
+              display: none;
+            }
+
+            &.has-description {
+              @include justify-content(center);
+            }
+          }
+
+          > footer {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

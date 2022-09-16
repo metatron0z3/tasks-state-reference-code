@@ -1,0 +1,140 @@
+<header class="flex-row">
+
+  <span class="profile-image image-container flex-row"
+        tp-troop-member-profile=" entry.memberId "
+        tp-troop-member-troop-id=" entry.troopId "
+        tp-troop-member-avatar-asset-size="smallUrl"
+        ng-click="navToTroopMember()"
+  ></span>
+
+  <span class="info flex-row"
+        ng-if=" showHeaderInfo !== false "
+  >
+
+    <div class="user-name"
+         tp-troop-member="{{ entry.memberId }}"
+         tp-troop-member-troop-id="{{ entry.troopId }}"
+         tp-troop-member-user-name="true"
+    ></div>
+
+    <span class="timestamp"
+          ng-bind="entry.updatedAt | moment "
+    ></span>
+
+    <span class="flex-spacer">&nbsp;</span>
+
+  </span>
+
+</header>
+
+
+<main class="flex-row flex-spacer">
+
+  <div class="wrapper"
+       data-id=" {{  FIREBASE_ID  }} "
+  >
+
+    <div class="text"
+         data-marked=" $entry.text "
+         ng-if=" ( ! $entry.assetId ) && ( ! editing ) "
+         data-blah={{$entry.text}}
+    ></div>
+
+    <div class="editor textarea field-group flex-column"
+          ng-if=" editing "
+    >
+
+      <textarea name="text"
+                placeholder="Can't leave it blank..."
+                rows="1"
+                data-msd-elastic=""
+                ng-model="$entry.text"
+                ng-key-bind=""
+                ng-key-bind-enter-action="save()"
+                ng-key-bind-enter-catch="single"
+                ng-key-bind-esc-action="cancel()"
+                autocomplete="off"
+      ></textarea>
+
+      <div class="actions flex-row">
+        <button class="blue-primary small"
+                ng-click="save()"
+        >
+          <div class="wrapper flex-row">
+            <span class="label">Save</span>
+          </div>
+        </button>
+        <button class="link small"
+                ng-click="cancel()"
+        >
+          <div class="wrapper flex-row">
+            <span class="label">Cancel</span>
+          </div>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="asset flex-column"
+        ng-if=" $entry.assetId  && ( ! editing ) "
+        tp-asset=" $entry.assetId "
+        tp-entry=" entry "
+        tp-asset-troop-id=" $entry.troopId "
+        tp-asset-size=" mediumUrl "
+        tp-asset-info=" true "
+        tp-asset-info-file-size=" true "
+        tp-asset-download=" true "
+        tp-asset-rename=" false "
+        tp-asset-remove=" ( Me.troopMember.$id === $entry.memberId ) || ( Me.troopMember.troopPermission === 'admin' ) "
+        tp-asset-remove-click=" showDeleteChatEntryModal() "
+        tp-asset-thumbnail-click=" showAssetsModal() "
+        tp-asset-progress=" $entry.progress "
+    ></div>
+
+  </div>
+
+</main>
+
+<footer class="flex-row">
+
+  <span class="timestamp"
+        ng-bind="$entry.createdAt | moment:'h:mm a' "
+  ></span>
+
+  <span class="chat-menu flex-row"
+        ng-class=" chatMenus[$entry.$id] === true ? 'showing' : '' "
+        ng-if=" ( Me.troopMember.$id === $entry.memberId ) || ( Me.troopMember.troopPermission === 'admin' ) "
+  >
+
+    <span class="menu-button image-container flex-row"
+          ng-click=" chatMenus[$entry.$id] = !chatMenus[$entry.$id] "
+    >
+
+      <svg class="icon dotdotdot">
+        <use xlink:href="#dotdotdot"/>
+      </svg>
+
+    </span>
+
+    <ul class="menu flex-column"
+        ng-mouseleave=" chatMenus[$entry.$id] = false "
+        ng-class=" chatMenus[$entry.$id] === true ? 'show' : '' "
+    >
+
+      <li class="edit-filename menu-item flex-row"
+          ng-click="edit($entry)"
+          ng-if=" ! $entry.assetId && Me.troopMember.$id === $entry.memberId "
+      >
+        <span class="label">Edit</span>
+      </li>
+
+      <li class="delete menu-item warning flex-row"
+          ng-click="showDeleteChatEntryModal()"
+      >
+        <span class="label">Delete</span>
+      </li>
+
+    </ul>
+  </span>
+
+</footer>

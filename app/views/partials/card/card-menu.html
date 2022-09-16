@@ -1,0 +1,42 @@
+<span class="dotdotdot image-container flex-row"
+      ng-click=" cardMenus[card.$id] = !cardMenus[card.$id] "
+>
+  <svg class="icon dotdotdot">
+    <use xlink:href="#dotdotdot"/>
+  </svg>
+</span>
+
+<ul class="menu flex-column"
+    ng-class=" cardMenus[card.$id] === true ? 'show' : '' "
+    ng-mouseleave=" cardMenus[card.$id] = false "
+>
+  <li class="edit menu-item flex-row"
+      ng-click="showCardModal('edit', card)"
+      ng-if=" ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' )
+      || ( card.createdByMemberId === Me.troopMember.$id ) "
+  >
+    <span class="label">Edit Card</span>
+  </li>
+  <li class="delete menu-item warning flex-row"
+      ng-click="showDeleteCardModal(card)"
+      ng-if=" ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' )
+      || ( card.createdByMemberId === Me.troopMember.$id ) "
+  >
+    <span class="label">Delete Card</span>
+  </li>
+  <!-- <li class="download menu-item flex-row"
+      ng-if=" Me.currentRouteState === 'home.dashboard.board.grid'
+      && ( Me.troopMember.boards[Me.currentBoard.$id].permission !== 'guest' )
+      && ( Me.currentBoard.readOnly === false
+      || ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin'
+      || ( card.createdByMemberId === Me.troopMember.$id ))) "
+  >
+  <a ng-href="{{ getAssetURL(card) }}"
+     class="label"
+     download="{{ getAssetFileName(card) }}"
+     ng-if="permission !== 'guest'"
+  >
+    Download Image
+  </a>
+  </li> -->
+</ul>

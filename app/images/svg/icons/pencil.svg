@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.3 (16044) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Cards" stroke="none" stroke-width="1" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Card-View-(Board-Members)" sketch:type="MSArtboardGroup" transform="translate(-729.000000, -419.000000)">
+            <g id="pen29" sketch:type="MSLayerGroup" transform="translate(729.000000, 419.000000)">
+                <g id="Capa_1" sketch:type="MSShapeGroup">
+                    <path d="M10.8572723,0.420513599 C11.4181765,0.981417823 11.4172492,1.8905613 10.8572723,2.45146553 L10.1804479,3.12828996 L8.14904722,1.09733803 L8.82587165,0.420513599 C9.38674596,-0.139911987 10.2963681,-0.140390625 10.8572723,0.420513599 L10.8572723,0.420513599 Z M0.703948577,8.54333412 L0.0276027851,11.2506318 L2.73490051,10.5738074 L9.50362345,3.80508447 L7.47222279,1.77413254 L0.703948577,8.54333412 L0.703948577,8.54333412 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

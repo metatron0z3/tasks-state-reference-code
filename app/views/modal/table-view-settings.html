@@ -1,0 +1,131 @@
+<div class="modal-overlay flex-row"
+     ng-class=" vm.showModal ? 'show' : '' "
+     ng-click=" vm.close() "
+>
+
+  <form name="tableViewSettingsModalForm"
+        class="table-view-settings-modal modal flex-column"
+        novalidate="novalidate"
+        ng-submit=" vm.save(tableViewSettingsModalForm) "
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click=" vm.close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header>
+      <h1>List View Settings</h1>
+      <!-- <p>Customize the appearance of the List View.</p> -->
+    </header>
+
+
+    <main>
+
+      <!-- <div class="image-size field-group flex-row">
+        <label class="flex-column">
+          <h1>Image Size</h1>
+          <p>The size of images on all cards</p>
+        </label>
+
+        <span class="flex-spacer"></span>
+
+        <ui-select ng-model="imageSizeChoice.value"
+                   search-enabled="false"
+        >
+          <ui-select-match>
+            <span ng-bind="$select.selected.label"></span>
+            <span class="arrow-down"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="choice.value as choice in imageSizes | filter: $select.search"
+                             position="down"
+                             ng-hide=" ! $select.open "
+          >
+            <span ng-bind="choice.label | highlight: $select.search"></span>
+          </ui-select-choices>
+        </ui-select>
+      </div> -->
+
+
+      <div class="switch-group field-group flex-row">
+        <label class="flex-column">
+          <h1>Show Card Image</h1>
+        </label>
+        <switch name="showImage"
+                class="blue"
+                ng-model=" vm.viewSettings.list.showImage "
+        ></switch>
+      </div>
+
+      <!-- <div class="switch-group field-group flex-row">
+        <label class="flex-column">
+          <h1>Show Title</h1>
+          <p>Hide card title on all cards rows</p>
+        </label>
+        <switch name="showTitle"
+                class="blue"
+                ng-model=" vm.viewSettings.list.showTitle "
+                on="Show"
+                off="Hide"
+        ></switch>
+      </div> -->
+
+      <div class="switch-group field-group flex-row middle">
+        <label class="flex-column">
+          <h1>Show Card Author</h1>
+        </label>
+        <switch name="showAuthor"
+                class="blue"
+                ng-model=" vm.viewSettings.list.showAuthor "
+
+        ></switch>
+      </div>
+
+      <div class="switch-group field-group flex-row ">
+        <label class="flex-column">
+          <h1>Show Card Date</h1>
+        </label>
+        <switch name="showDate"
+                class="blue"
+                ng-model=" vm.viewSettings.list.showDate "
+
+        ></switch>
+      </div>
+
+      <!-- <div class="switch-group field-group flex-row">
+        <label class="flex-column">
+          <h1>Show Tags</h1>
+          <p>Hide Tags & Tag Values on all card rows</p>
+        </label>
+        <switch name="showTags"
+                class="blue"
+                ng-model=" vm.viewSettings.list.showTags "
+                on="Show"
+                off="Hide"
+        ></switch>
+      </div> -->
+
+    </main>
+
+
+    <footer class="flex-row">
+      <!-- <span class="button cancel link"
+            ng-click=" vm.close "
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Cancel</span>
+        </div>
+      </span> -->
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label">Save</span>
+        </div>
+      </button>
+    </footer>
+  </form>
+
+</div>

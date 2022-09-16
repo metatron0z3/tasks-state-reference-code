@@ -1,0 +1,146 @@
+<header class="flex-row"
+        ng-if=" vm.canDisplayMembers "
+>
+  <section class="close-wrapper flex-row">
+
+    <span class="image-container flex-row"
+          ng-click=" $root.showNotifications = false "
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </span>
+
+  </section>
+
+  <section class="title flex-row" >
+    <span class="text">Notifications</span>
+    <span class="count flex-row"
+          ng-if=" vm.Me.notifications[vm.Me.troopMember.$id].breakdown.unreadNonMessageNotifications "
+          ng-bind=" vm.Me.notifications[vm.Me.troopMember.$id].breakdown.unreadNonMessageNotifications "
+    ></span>
+  </section>
+
+  <section class="action-wrapper flex-row">
+
+    <span class="actions">
+      <span class="menu-toggle image-container flex-row"
+            ng-click="vm.showActionMenu = !vm.showActionMenu "
+      >
+        <svg class="icon dotdotdot">
+          <use xlink:href="#dotdotdot"/>
+        </svg>
+      </span>
+
+      <ul class="menu flex-column"
+          ng-class=" vm.showActionMenu ? 'show' : '' "
+          ng-mouseleave=" vm.showActionMenu = false "
+        >
+        <li class="mark-read warning menu-item flex-row"
+            ng-click=" vm.markAllRead() "
+        >
+          <span class="label">Mark All Read</span>
+        </li>
+        <li class="delete warning menu-item flex-row"
+            ng-click=" vm.showDeleteAllNotificationsModal() "
+        >
+          <span class="label">Delete All</span>
+        </li>
+      </ul>
+    </span>
+
+  </section>
+
+</header>
+<ul class="notification-filter flex-row">
+
+  <li class="board flex-row"
+      ng-class=" { active: vm.notificationFilter === 'board' }  "
+      ng-click=" vm.notificationFilter = 'board' "
+  >
+    Board
+  </li>
+
+  <li class="all flex-row"
+      ng-class=" { active: vm.notificationFilter === 'all' }  "
+      ng-click=" vm.notificationFilter = 'all' "
+  >
+    All
+  </li>
+
+</ul>
+
+<main class="flex-column"
+      ng-if=" vm.isAnon ">
+
+  <ul class="notification-list flex-column">
+
+    <li class="notification flex-row unread"
+        ng-click=" vm.ptNotificationClick() "
+    >
+      <div class = "wrapper flex-row ptNotification">
+          <span class="profile-image image-container flex-row"
+                tp-troop-member-profile=" vm.troopMember.$id "
+                tp-troop-member-troop-id=" vm.troop.$id "
+                tp-troop-member-avatar-asset-size="smallUrl"
+          ></span>
+           <span class="info flex-column">
+             <header class= "flex-row">
+               <span class="member-name flex-spacer">{{ vm.troopMember.name }}</span>
+               <span class="timestamp"
+                     ng-bind=" vm.date | moment "
+               />
+             </header>
+             <main class="flex-row ng-active">
+               <span>Is viewing {{ vm.troop.troopName }}</span>
+             </main>
+           </span>
+      </div>
+    </li>
+  </ul>
+</main>
+
+
+<main class="flex-column flex-spacer"
+        ng-if=" vm.canDisplayMembers "
+>
+
+  <div class=" no-notifications  flex-column"
+       ng-if="  vm.notifications.length === 0  "
+  >
+    <span class="image-container">
+      <svg class="icon bell">
+        <use xlink:href="#bell"/>
+      </svg>
+    </span>
+    <span class="text flex-row">
+      You have no Notifications<br/>
+      at this time
+    </span>
+  </div>
+
+  <ul class="notification-list flex-column"
+
+  >
+
+  <!--
+
+  tp-data-pump = " vm.notifications "
+  tp-data-pump-limit = " 15 "
+  tp-data-pump-scroll-up = "true"
+
+  -->
+
+    <li class="notification flex-row"
+
+        ng-class=" { 'unread': ! notification.isRead } "
+        ng-repeat="notification in vm.notifications track by vm.uniqueTrackById($index,notification.$id)"
+        ng-if=" vm.notificationFilter === 'all' || ( vm.notificationFilter === 'board' && notification.boardId === vm.Me.currentBoard.$id ) "
+        tp-notification="::notification"
+        tp-notification-list="vm.notificationList"
+        data-read=" {{ vm.notification.isRead }}"
+    ></li>
+
+  </ul>
+
+</main>

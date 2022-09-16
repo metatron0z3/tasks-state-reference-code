@@ -1,0 +1,106 @@
+<div class="wrapper flex-row"
+     ng-class=" $root.showSearch ? '' : 'shrink-for-mobile' "
+     ng-mouseleave=" showActionMenu = false "
+>
+
+  <section class="left-sidebar-toggle action flex-row">
+    <button class="white-primary circle"
+            ng-click="toggleLeftSidebar()"
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon list">
+            <use xlink:href="#list"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+  </section>
+
+  <section class="title flex-row">
+
+    <span class="name">Troop Members</span>
+
+  </section>
+
+  <ul class="nav-list flex-row">
+    <li class="nav-item flex-row"
+        data-ui-sref-active="active"
+        data-ui-sref=" .list({ permission: 'admin' }) "
+    >
+      <a class="label">
+        Full Members
+      </a>
+    </li>
+    <li class="nav-item flex-row"
+        data-ui-sref-active="active"
+        data-ui-sref=" .list({ permission: 'member' }) "
+        ng-if=" canDisplayMembers "
+    >
+      <a class="label">
+        Guests
+      </a>
+    </li>
+  </ul>
+
+  <span class="flex-spacer"></span>
+
+  <form class="search flex-row"
+        ng-submit="searchBlur()"
+  >
+
+    <div class="field-group flex-row"
+         ng-class=" labels['search'] ? '' : 'hide-label' "
+         ng-if="searchIsEnabled"
+    >
+      <input type="search"
+             ng-model="search.string"
+             ng-keyup="$event.keyCode == 13 && doSearch()"
+             ng-focus="hideLabel('search')"
+             ng-blur="doSearch()"
+      >
+      <label class="uppercase">Search</label>
+
+      <span class="image-container magnifying-glass"
+            ng-click=" $root.showSearch = true "
+      >
+        <svg class="icon magnifying-glass">
+          <use xlink:href="#magnifying-glass"/>
+        </svg>
+      </span>
+      <span class="image-container close"
+            ng-click=" $root.showSearch = false "
+      >
+        <svg class="icon close">
+          <use xlink:href="#close"/>
+        </svg>
+      </span>
+    </div>
+  </form>
+
+  <section class="notifications action flex-row"
+           ng-if=" canDisplayMembers "
+  >
+
+    <button class="white-primary circle"
+            ng-class=" $root.showNotifications ? 'showing' : '' "
+            ng-click=" $root.showNotifications = !$root.showNotifications "
+    >
+      <div class="wrapper flex-row">
+        <span class="count image-container"
+              ng-if=" Me.notifications[Me.troopMember.$id].breakdown.unreadNonMessageNotifications "
+              ng-bind=" Me.notifications[Me.troopMember.$id].breakdown.unreadNonMessageNotifications "
+        ></span>
+
+        <span class="image-container">
+          <svg class="icon bell">
+            <use xlink:href="#bell"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+
+
+  </section>
+
+</div>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="20px" viewBox="0 0 16 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>Page</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Cardview" stroke="none" stroke-width="1" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Card-View" sketch:type="MSArtboardGroup" transform="translate(-1190.000000, -105.000000)">
+            <g id="Board-Members" sketch:type="MSLayerGroup" transform="translate(981.000000, 80.000000)">
+                <path d="M219.694306,25 C220.244809,25 221.007327,25.3188394 221.399885,25.7146165 L223.846751,28.1815471 C224.238213,28.5762189 224.555556,29.34368 224.555556,29.9035307 L224.555556,42.9929987 C224.555556,44.1014349 223.651986,45 222.553784,45 L211.001771,45 C209.896224,45 209,44.1017876 209,43.0092049 L209,26.9907951 C209,25.8913093 209.897967,25 211.009768,25 L219.694306,25 Z M218.333333,26.7777778 L218.333333,29.1251652 C218.333333,30.2252026 219.238129,31.1169591 220.333496,31.1169591 L222.804443,31.1169591 L222.777778,43.2222222 L210.777778,43.2222222 L210.777778,26.7777778 L218.333333,26.7777778 Z M220.111111,26.7777778 L222.777778,29.4444444 L220.111111,29.4444444 L220.111111,26.7777778 Z" id="Page" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

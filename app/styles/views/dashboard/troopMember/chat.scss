@@ -1,0 +1,14 @@
+@import "../../../bower-import.scss";
+@import "../../../variables.scss";
+
+[data-state*="dashboard.troopMember.chat"] {
+
+  [data-ui-view=dashboardContent] {
+
+  }
+
+  [data-ui-view=dashboardRightSidebar] {
+    //display: none;
+  }
+
+}

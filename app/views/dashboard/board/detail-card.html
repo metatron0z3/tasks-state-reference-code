@@ -1,0 +1,301 @@
+<div class="loader-wrapper flex-row"
+     ng-if="loading"
+>
+  <div class="wrapper">
+    <div class="loader-2 small"></div>
+  </div>
+</div>
+
+<!--
+<span class="prev-card flex-row flex-spacer"
+      ng-if="( ! loading )"
+>
+  <span class="image-container"
+        ng-disabled=" ! prevCardKey "
+        ng-click="navToCard(prevCardKey)"
+  >
+    <svg class="icon arrow-reverse">
+      <use xlink:href="#arrow-reverse"/>
+    </svg>
+  </span>
+</span>
+-->
+
+<ul class="card-list flex-column"
+    ng-if="( ! loading )"
+    ng-class=" Me.currentBoard.viewSettings.card.imageSize || 'thumbnail' "
+>
+  <li class="card flex-column fade"
+      ng-mouseleave=" cardMenus[card.$id] = false "
+      ng-if="card"
+  >
+    <div class="card-menu-wrapper">
+      <span class="card-menu flex-row"
+            ng-if=" ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( card.createdByMemberId === Me.troopMember.$id ) "
+            ng-include=" '/views/partials/card/card-menu.html' "
+      ></span>
+    </div>
+
+    <header class="flex-row"
+            ng-if=" Me.currentBoard.viewSettings.card.showHeader "
+    >
+
+      <span class="creator-block flex-row"
+            ng-class=" Me.currentBoard.viewSettings.card.imageSize === 'thumbnail' ||  'large' ? 'border-bottom' : '' "
+      >
+        <span class="profile-image image-container"
+              ng-click="navToTroopMember(card.createdByMemberId)"
+              tp-troop-member-profile=" card.createdByMemberId "
+              tp-troop-member-troop-id=" card.troopId "
+              tp-troop-member-avatar-asset-size="smallUrl"
+        ></span>
+        <span class="name-date flex-column">
+          <span class="creator"
+                ng-click="navToTroopMember(card.createdByMemberId)"
+                tp-troop-member="{{ card.createdByMemberId }}"
+                tp-troop-member-troop-id=" {{ card.troopId }} "
+                tp-troop-member-user-name="true"
+          ></span>
+          <span class="date"
+                ng-bind=" card.createdAt | moment:'extended-format'   "
+          >
+          </span>
+        </span>
+
+      </span>
+
+      <span class="flex-spacer flex-row"></span>
+
+      <span class="comments action flex-row"
+            tp-chat-entries-count="card.chatId"
+            ng-click="$root.showDetailCardComments = true"
+        >
+        <span class="comment image-container flex-row">
+          <svg class="icon chat">
+            <use xlink:href="#chat"/>
+          </svg>
+        </span>
+      </span>
+
+
+
+    </header>
+
+    <main class="flex-column"
+          ng-class=" { decapitated: ( ! Me.currentBoard.viewSettings.card.showHeader ) } "
+          data-count="{{ card.assetCount }}"
+    >
+      <span class="title-detail"
+            ng-dblclick="( ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( card.createdByMemberId === Me.troopMember.$id ) ) && showCardModal('edit', card, 'title')"
+      >
+        <h1 ng-bind="card.cardName"></h1>
+      </span>
+
+      <ul class="asset-list flex-row-wrap expand"
+          ng-dblclick="(  ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( card.createdByMemberId === Me.troopMember.$id ) ) && showCardModal('edit', card, 'title')"
+      >
+        <li class="asset flex-column"
+            ng-repeat=" assetId in card.orderedAssets"
+            tp-asset=" assetId "
+            tp-asset-troop-id=" card.troopId "
+            tp-asset-index=" $index "
+            tp-asset-size=" {{ assetSize($index) }} "
+            tp-asset-info=" true "
+            tp-asset-download=" checkDownload(card) "
+            tp-asset-rename=" false "
+            tp-asset-remove=" false "
+            tp-asset-thumbnail-click=" showAssetsModal(card, assetId) "
+        ></li>
+      </ul>
+
+      <div class="wrapper"
+           ng-show="card.description"
+           ng-dblclick="( (Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( card.createdByMemberId === Me.troopMember.$id ) ) && showCardModal('edit', card, 'description')"
+      >
+
+        <div class="description"
+             data-marked=" card.description "
+        ></div>
+      </div>
+
+      <div class="tags flex-row-wrap"
+           ng-if=" ( card.orderedTags.length > 0 ) "
+           ng-dblclick="( ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( card.createdByMemberId === Me.troopMember.$id ) ) && showCardModal('edit', card, 'tags')"
+      >
+
+        <button class="tag"
+                title="{{ tag.value }}"
+                ng-repeat="tag in card.orderedTags"
+                ng-include=" '/views/partials/card/tag.html' "
+                ng-click="navToMultiCard(tag.name); $event.stopPropagation();"
+        >
+        </button>
+
+      </div>
+    </main>
+
+    <footer class="card-notes flex-column"
+             ng-if=" Me.currentBoard.allowNotes "
+             ng-class="notes.orderedList.length > 0 ? 'has-comments' : 'empty-notes' "
+    >
+
+      <!-- <div class="count"
+           ng-if="notes.orderedList.length > 0"
+           ng-bind="notes.orderedList.length + ' Note' + ( notes.orderedList.length > 1 ? 's' : '') ">
+      </div> -->
+      <form name="newNoteForm"
+            class="flex-row full-size-form"
+            ng-if=" canDisplayMembers "
+      >
+        <span class="profile-image image-container flex-row"
+              tp-troop-member-profile=" Me.troopMember.$id "
+              tp-troop-member-troop-id=" Me.troop.$id "
+              tp-troop-member-avatar-asset-size="smallUrl"
+        ></span>
+
+        <div class="new-comment field-group flex-row"
+             ng-class=" { 'has-notes': notes.orderedList.length > 0 }"
+        >
+          <textarea name="newNote"
+                    placeholder="Add new note..."
+                    rows="1"
+                    data-msd-elastic=""
+                    ng-change="newNoteTyping($event)"
+                    ng-model="newNote.value"
+                    ng-click="newNoteFocus($event)"
+                    ng-enter-key=""
+                    ng-enter-key-action="writeComment()"
+                    ng-enter-key-catch="single"
+                    autocomplete="off"
+          ></textarea>
+        </div>
+
+        <!-- <div class="actions flex-row"
+              ng-if=" notes.orderedList.length === 0">
+          <button class="cancel link"
+                  ng-click=" newNote.show = false"
+          >
+            <div class="wrapper flex-row">
+              <span class="label">Cancel</span>
+            </div>
+          </button>
+          <button class="save blue-primary"
+                  ng-click="writeComment()"
+          >
+            <div class="wrapper flex-row">
+              <span class="label">Add</span>
+            </div>
+          </button>
+        </div> -->
+      </form>
+
+      <form name="newNoteForm"
+            class="flex-column mobile-note-form"
+            ng-if=" canDisplayMembers  "
+      >
+        <!-- <span class="profile-image image-container flex-row"
+              tp-troop-member-profile=" Me.troopMember.$id "
+              tp-troop-member-troop-id=" Me.troop.$id "
+              tp-troop-member-avatar-asset-size="smallUrl"
+        ></span> -->
+
+        <div class="new-comment field-group flex-row"
+             ng-class=" { 'has-notes': notes.orderedList.length > 0 }"
+        >
+          <textarea name="newNote"
+                    placeholder="Add new note..."
+                    rows="1"
+                    data-msd-elastic=""
+                    ng-change="newNoteTyping($event)"
+                    ng-model="newNote.value"
+                    ng-click="newNoteFocus($event)"
+                    ng-enter-key=""
+                    ng-enter-key-action="writeComment()"
+                    ng-enter-key-catch="single"
+                    autocomplete="off"
+          ></textarea>
+        </div>
+
+        <div class="mobile-actions flex-row">
+          <button class="save"
+                  ng-click="writeComment()"
+                  ng-class=" { active : newNote.value } "
+          >
+            <div class="wrapper flex-row">
+              <span class="label">Add</span>
+            </div>
+          </button>
+        </div>
+      </form>
+
+      <ul class="notes flex-column"
+          ng-if="notes.orderedList.length > 0"
+      >
+        <li class="note flex-column"
+            ng-repeat="note in notes.orderedList"
+            ng-mouseleave=" noteMenus[note.$id] = false "
+            tp-card-note=" note "
+            tp-card-note-last="$last"
+            tp-card-note-scroll-to-when="$root.showDetailCardComments"
+        ></li>
+      </ul>
+
+      <!-- <div class="show-note-toggle flex-column"
+           ng-if=" canDisplayMembers && ! newNote.show && notes.orderedList.length === 0 && (! newNote.value || newNote.value === '') "
+      >
+
+        <button class="show-new-note white-primary circle"
+                ng-click=" newNote.show = ! newNote.show "
+                ng-if=" ( Me.troopMember.troopPermission !== 'guest' ) "
+        >
+          <div class="wrapper flex-row">
+            <span class="image-container">
+              <svg class="icon plus">
+                <use xlink:href="#plus"/>
+              </svg>
+            </span>
+          </div>
+        </button> -->
+
+        <!-- <section class="join flex-row"
+                 ng-if="  Me.troopMember.troopPermission === 'guest'  "
+        >
+          <button class="blue-primary "
+                  ng-click="showPublicTroopJoinModal('button')"
+          >
+          <div class="wrapper flex-row">
+            <span class="label">Join</span>
+          </div>
+          </button>
+
+        </section> -->
+
+        <!-- <label ng-if="( Me.troopMember.troopPermission !== 'guest' ) ">Add New Note</label> -->
+        <!-- <label ng-if="( Me.troopMember.troopPermission === 'guest' ) ">Click join add a note to this card</label> -->
+
+      <!-- </div> -->
+
+    </footer>
+
+  </li>
+
+
+
+</ul>
+
+
+<span class="flex-spacer">&nbsp;</span>
+<!--
+<span class="next-card flex-row flex-spacer"
+      ng-if="( ! loading )"
+>
+  <span class="image-container"
+        ng-disabled=" ! nextCardKey "
+        ng-click="navToCard(nextCardKey)"
+  >
+    <svg class="icon arrow">
+      <use xlink:href="#arrow"/>
+    </svg>
+  </span>
+</span>
+-->

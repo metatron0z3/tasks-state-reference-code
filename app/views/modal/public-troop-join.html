@@ -1,0 +1,57 @@
+<div class="modal-overlay flex-row"
+     ng-class=" vm.showModal ? 'show' : '' "
+     ng-click="vm.close()"
+>
+
+  <div class="public-troop-join modal flex-column"
+       ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click="vm.close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header>
+      <h1 class="center">Join This Troop</h1>
+    </header>
+
+    <main class="flex-column sub-heading center">
+
+      <p>{{ vm.message }}</p>
+    </main>
+
+    <footer class="flex-row dual-buttons"
+            ng-if=" ! vm.loggedIn ">
+      <button class="login left"
+              ng-click="vm.login()"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Log In</span>
+        </div>
+      </button>
+      <!-- <button class="sign-up blue-primary right"
+              ng-click="vm.signUp()"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Sign Up</span>
+        </div>
+      </button> -->
+    </footer>
+
+    <footer class="flex-row dual-buttons"
+            ng-if=" vm.loggedIn ">
+      <button class="blue-primary"
+              ng-click="vm.join()"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Join</span>
+        </div>
+      </button>
+    </footer>
+  </div>
+
+</div>

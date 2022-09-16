@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="51px" height="65px" viewBox="0 0 51 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>ai-drag</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ai-drag" transform="translate(1.602152, 1.931873)">
+            <path d="M47.1641492,13.8997726 L47.1641492,59.3110316 C47.1641492,60.5483453 46.1495839,61.5578947 44.9061228,61.5578947 L2.86971283,61.5578947 C1.6262517,61.5578947 0.611686398,60.5483453 0.611686398,59.3110316 L0.611686398,2.40075789 C0.611686398,1.16344421 1.6262517,0.153894737 2.86971283,0.153894737 L31.8528741,0.153894737 L47.1641492,13.8997726 Z" id="Fill-1" stroke="#D8E0E6" stroke-width="1" fill="#FFFFFF"></path>
+            <path d="M47.1641492,13.8997726 L47.1641492,14.1583158 L33.7025998,14.1583158 C32.5952389,14.1583158 31.6982147,13.2657263 31.6982147,12.16384 L31.6982147,0.153894737 L31.8528741,0.153894737 L47.1641492,13.8997726 Z" id="Fill-3" stroke="#D8E0E6" stroke-width="1"></path>
+            <text id="Ps" font-family="Avenir-Medium, Avenir" font-size="22" font-weight="400" line-spacing="37" fill="#05A6F7">
+                <tspan x="13.5263333" y="43.5333333">Ps</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

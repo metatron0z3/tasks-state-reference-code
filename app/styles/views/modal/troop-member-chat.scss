@@ -1,0 +1,321 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+  > .modal-overlay {
+
+    > form.modal {
+
+
+      &.troop-member-chat-modal {
+        padding: 0px;
+        width: 640px;
+
+
+        &:before {
+          width: 100%;
+          height: 100%;
+          left: 0px;
+          top: 0px;
+        }
+
+        > .close {
+          top: 36px;
+          right: 30px;
+
+          &,
+          > svg {
+            height: 15px;
+            min-height: 15px;
+            max-height: 15px;
+            width: 15px;
+            min-width: 15px;
+            max-width: 15px;
+          }
+
+          > svg {
+            fill: rgba($white-primary, 0.3);
+          }
+        }
+
+        > .loader-wrapper {
+          z-index: 2;
+          width: calc(100% - 16px);
+          height: calc(100% - 16px);
+          left: 8px;
+          top: 8px;
+          position: absolute;
+          @include justify-content(center);
+          background: $white-primary;
+        }
+
+        > header {
+          margin: 0px;
+          height: 88px;
+          background: $blue-octornary;
+          @include border-radius(8px 8px 0px 0px);
+
+          > .profile-image {
+            padding-right: 18px;
+            height: 100%;
+            min-height: 100%;
+            max-height: 100%;
+            width: 100px;
+            min-width: 100px;
+            max-width: 100px;
+            @include align-items(center);
+            @include justify-content(flex-end);
+
+            > img {
+              width: 60px;
+              min-width: 60px;
+              max-width: 60px;
+              height: 60px;
+              min-height: 60px;
+              max-height: 60px;
+              @include border-radius(30px);
+              object-fit: cover;
+            }
+
+          }
+
+          > .talking-to-member {
+
+            > .user-name {
+              margin-bottom: 4px;
+              line-height: 25px;
+              font-family: $font-family-heavy;
+              font-size: 18px;
+              color: $white-primary;
+            }
+
+            > .troop-title {
+              font-size: 14px;
+              color: rgba($white-primary, 0.6);
+            }
+
+          }
+        }
+
+        > main {
+          margin: 0px;
+          padding: 0px 25px;
+
+          > .confirm-entry-delete {
+            min-height: 400px;
+
+            > .text {
+              line-height: 26px;
+            }
+          }
+
+          > .empty-chat {
+            min-height: 400px;
+          }
+
+          > .chat {
+            max-height: 60vh;
+            min-height: 400px;
+            width: 100%;
+            @include align-items(flex-start);
+            @include justify-content(flex-start);
+            @include flex-grow(1);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+
+            > .top-spacer,
+            > .bottom-spacer {
+              height: 20px;
+              width: 100%;
+            }
+
+            > .chat-entry {
+              margin-bottom: 15px;
+              width: 100%;
+
+              &:hover {
+
+                > .entry {
+
+                  > .wrappe {
+
+                    > main {
+
+                      > .chat-menu {
+
+                        > .menu-button {
+                          opacity: 1;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+              &:first-of-type {
+                margin-top: 15px;
+              }
+
+
+
+              > .entry {
+                width: 100%;
+                position: relative;
+                @include flex-grow(1);
+                @include align-items(flex-start);
+
+                > .profile-image {
+                  margin-right: 25px;
+
+                  &,
+                  > img {
+                    height: 40px;
+                    min-height: 40px;
+                    max-height: 40px;
+                    width: 40px;
+                    min-width: 40px;
+                    max-width: 40px;
+                  }
+
+                }
+
+                > .wrapper {
+                  max-width: calc(100% - 65px);
+
+                  > main {
+                    padding: 10px 35px 10px 15px;
+                    position: relative;
+                    background: $gray-senary;
+                    @include border-radius(4px);
+
+
+                    > .text {
+                      max-width: 100%;
+                      //word-break: break-word;
+                      line-height: 21px;
+                      font-size: 12px;
+                      color: $gray-quaternary;
+                    }
+
+                    > .menu {
+                      right: auto;
+                      left: 10px;
+                      bottom: auto;
+                      top: -70px;
+                    }
+
+                    > .chat-menu {
+                      right: 10px;
+                      top: 10px;
+                      position: absolute;
+
+
+                      > .menu-button {
+                        cursor: pointer;
+                        opacity: 0;
+
+                        &:active {
+                          > svg {
+                            fill: rgba($black-senary, 0.8);
+                          }
+                        }
+
+                        &,
+                        > svg {
+                          width: 14px;
+                          min-width: 14px;
+                          max-width: 14px;
+                          height: 14px;
+                          min-height: 14px;
+                          max-height: 14px;
+                        }
+
+                        > svg {
+                          fill: rgba($black-senary, 0.5);
+                        }
+                      }
+
+
+                    }
+                  }
+
+                  > footer {
+                    width: 100%;
+                    line-height: 22px;
+                    font-size: 10px;
+                    color: rgba($black-senary, 0.8);
+                  }
+                }
+
+
+              }
+
+              &.mine {
+
+                > .entry {
+
+                  > .wrapper {
+
+                    > main {
+                      background: rgba($blue-octornary, 0.1);
+
+                      > .chat-menu {
+
+                        > .menu-button {
+
+                          &:active {
+
+                            > svg {
+                              fill: rgba($blue-nonary, 1);
+                            }
+                          }
+
+                          > svg {
+                            fill: rgba($blue-nonary, 0.4);
+                          }
+                        }
+                      }
+                    }
+                  }
+
+
+                }
+              }
+
+            }
+
+          }
+
+
+        }
+
+        > footer {
+          padding: 0px 25px;
+
+          > .actions {
+            margin: 40px 0px;
+            width: 80%;
+          }
+
+          > .field-group {
+            min-height: 75px;
+            border-top: 1px solid $gray-senary;
+
+            > input {
+              margin: 0px;
+              border: 0px;
+            }
+          }
+        }
+
+
+        &.loading {
+
+
+        }
+
+      }
+
+    }
+  }
+}

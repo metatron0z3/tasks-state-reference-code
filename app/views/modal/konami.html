@@ -1,0 +1,109 @@
+<div class="konami-modal-overlay modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click="close()"
+>
+
+  <div class="close image-container"
+       ng-click="close()"
+    >
+    <svg class="icon close">
+      <use xlink:href="#close"/>
+    </svg>
+  </div>
+
+  <div class="konami-modal modal flex-column"
+       ng-class=" extraClasses "
+       ng-click=" $event.stopPropagation() "
+  >
+    <main>
+      <div id="controllerOut">
+
+        <div id="controllerInner">
+
+          <div class="left">
+
+            <div class="arrow aUp">
+              <div id="trs"></div>
+              <div class="base" ng-click="addCode('up')"></div>
+            </div>
+
+            <div class="arrow aDown">
+              <div id="trs"></div>
+              <div class="base" ng-click="addCode('down')"></div>
+            </div>
+
+            <div class="arrow aLeft">
+              <div id="trs"></div>
+              <div class="base" ng-click="addCode('left')"></div>
+            </div>
+
+            <div class="arrow aRight">
+              <div id="trs"></div>
+              <div class="base" ng-click="addCode('right')"></div>
+            </div>
+
+            <div class="horz"></div>
+            <div class="horzShad"></div>
+            <div class="horzShadWhite"></div>
+            <div class="moves"></div>
+            <div class="vert">
+            </div>
+            <div class="vertWhite"></div>
+          </div><!--End Left-->
+
+          <div class="center">
+            <div class="bar bTop"></div>
+            <div class="bar"></div>
+            <div class="bar bText">
+              <ul>
+                <li>SELECT</li>
+                <li>START</li>
+              </ul>
+            </div>
+            <div class="bar buttonBar">
+              <div class="buttonBarInner">
+                <ul>
+                  <li ng-click="addCode('select')"><!--##--></li>
+                  <li ng-click="addCode('start')"><!--##--></li>
+                </ul>
+              </div>
+            </div><!--end buttonBar-->
+            <div class="bar bBot"></div>
+          </div><!--End Center-->
+          <div class="right">
+            <h3 class="trademark">
+              Nintendo
+              <span class="reg">&reg;</span>
+            </h3>
+            <ul class="rightButtons">
+              <li>
+                <div class="circ" ng-click="addCode('b')"></div>
+                <span class="buttNums">B</span>
+              </li>
+              <li>
+                <div class="circ" ng-click="addCode('a')"></div>
+                <span class="buttNums aButt">A</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="settings">
+
+      <div class="slider field-group flex-row">
+        <label>Color Scheme</label>
+        <input type="range"
+               ng-model="$storage.jhSettings.colorScheme"
+               min="1"
+               max="5"
+        />
+        <div class="value">
+          {{ $storage.jhSettings.colorScheme }}
+        </div>
+
+      </div>
+    </footer>
+  </div>
+
+</div>

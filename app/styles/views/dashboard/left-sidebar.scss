@@ -1,0 +1,779 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+
+
+body {
+
+  &.read-only-mode {
+    > aside.left {
+      position: relative;
+      > header {
+
+        > .troop-actions {
+          display: none;
+        }
+      }
+      > main {
+        > section {
+          > ul {
+            > li {
+              > .text {
+                font-family: $font-family-medium;
+              }
+            }
+          }
+        }
+        > .boards {
+          > header {
+            >.image-container {
+              display: none;
+            }
+          }
+        }
+        > .troop-members {
+          display: none;
+        }
+      }
+      > footer {
+        > .trooper {
+          > .trooper-actions {
+            display: none;
+            > .menu {
+              //display: none;
+            }
+          }
+          > .mobile-trooper-actions {
+            position: relative;
+            display: flex;
+
+            > .mobile-menu {
+              z-index: 130;
+              height: 100%;
+              width: 100%;
+              left: 0px;
+              top: 0px;
+              position: fixed;
+              background-color: rgba($blue-twentyoneary, .9);
+              @include justify-content(flex-end);
+
+              > .menu-item {
+                width: 100%;
+                height: 70px;
+                background-color: $white-primary;
+                > .label {
+                  width: 100%;
+                  text-align: center;
+                  color: $blue-secondary;
+                  font-size: 16px;
+                }
+
+              }
+            }
+            > .menu-toggle {
+              @include size(44px);
+
+              &:hover {
+                > svg {
+                  fill: $white-primary;
+                }
+              }
+
+              > svg {
+                @include size(18px, 4px);
+                fill: rgba($white-primary, 0.5);
+              }
+
+
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+  > aside {
+
+    &.left {
+      z-index: 103;
+      width: 0px;
+      max-width: $left-aside-width;
+      height: 100%;
+      @include justify-content(flex-start);
+      position: relative;
+      overflow: hidden;
+      color: $grey-primary;
+      // background: $blue-secondary;
+      background-image: linear-gradient(25deg, $blue-sixteenary 0%, $blue-seventenary 100%);
+
+
+      .image-container {
+        height: 16px;
+        min-height: 16px;
+        width: 16px;
+        min-width: 16px;
+
+        > svg {
+          height: 16px;
+          width: 16px;
+          fill: $grey-primary;
+        }
+      }
+
+      > .loader-wrapper {
+
+        > .wrapper {
+
+          &:before {
+            color: $white-primary;
+          }
+        }
+      }
+
+      > header {
+        padding: 0px 15px 0px 27px;
+        cursor: pointer;
+        height: $header-height;
+        min-height: $header-height;
+        max-height: $header-height;
+        width: $left-aside-width;
+        min-width: $left-aside-width;
+        max-width: $left-aside-width;
+        position: relative;
+        //overflow: hidden;
+        color: $white-primary;
+        // background: $blue-tertiary;
+        //
+
+        &:after {
+          z-index: 1;
+          content: "";
+          width: calc(100% - 54px);
+          height: 1px;
+          left: 27px;
+          bottom: 0px;
+          position: absolute;
+          background: rgba($white-primary, 0.2);
+        }
+
+        > h1 {
+          height: 26px;
+          line-height: 26px;
+          text-align: left;
+          font-size: 18px;
+          max-width: 300px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: $white-primary;
+          white-space: nowrap;
+
+        }
+
+        > .troop-actions {
+
+          > .menu-toggle {
+            @include size(44px);
+
+            &:hover {
+             > svg {
+               fill: $white-primary;
+             }
+            }
+
+            > svg {
+              @include size(18px, 4px);
+              fill: rgba($white-primary, 0.5);
+            }
+
+          }
+
+          > .menu {
+            z-index: 2;
+            bottom: 30px;
+            right: 8px;
+
+
+          }
+        }
+
+      }
+
+      > main {
+        height: calc( 100% - #{$header-height} * 2);
+        min-height: calc( 100% - #{$header-height} * 2);
+        max-height: calc( 100% - #{$header-height} * 2);
+        width: $left-aside-width;
+        min-width: $left-aside-width;
+        max-width: $left-aside-width;
+        @include flex-grow(1);
+        @include justify-content(flex-start);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 14px;
+
+        > section {
+
+          &:first-of-type {
+            margin-top: 16px;
+          }
+          &:last-of-type {
+            margin-bottom: 16px;
+          }
+
+          > header {
+            cursor: pointer;
+            padding: 10px 15px;
+            position: relative;
+            @include border-radius(2px);
+            margin-left:12px;
+            margin-right:12px;
+
+            &:hover {
+
+              > .label {
+                color: rgba($white-primary, 1);
+              }
+            }
+
+            &.active {
+              background: $blue-octornary;
+
+              > .label {
+                color: $white-primary;
+              }
+
+              > .image-container {
+
+                &:hover {
+                  > svg {
+                    fill: rgba($white-primary, 1);
+                  }
+                }
+
+                > svg {
+                  fill: rgba($white-primary, 0.5);
+                }
+              }
+            }
+
+            > .label {
+              width: 100%;
+              line-height: 16px;
+              text-transform: uppercase;
+              // color: $light-gray-denary;
+              color: rgba($white-primary, 0.8);
+              font-family: $font-family-regular;
+              font-size: 12px;
+
+              // &:hover {
+              //   color: $white-primary;
+              // }
+            }
+
+            > .image-container {
+              opacity: 1;
+
+              &:hover {
+                > svg {
+                  fill: rgba($white-primary, 1);
+                }
+              }
+
+              &,
+              > svg {
+                @include size(17px);
+              }
+
+              > svg {
+                fill: rgba($white-primary, 0.6);
+              }
+            }
+          }
+
+          > ul {
+            position: relative;
+            padding: 0px 12px;
+
+            > li {
+              cursor: pointer;
+              padding: 1px 11px 1px 13px;
+              width: 100%;
+              position: relative;
+              font-size: 14px;
+              @include border-radius(2px);
+
+              > .text {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                line-height: 28px;
+                // font-family: $font-family-regular;
+                font-size: 14px;
+                // color: $light-gray-denary;
+                color: rgba($white-primary, 0.6);
+
+
+                &:hover {
+                  color: $white-primary;
+                }
+
+                &.active {
+                  // font-family: $font-family-heavy;
+                  // color: $white-primary;
+                }
+              }
+
+              > .image-container {
+                opacity: 0;
+                @include size(20px);
+
+                &.presence {
+                  opacity: 1;
+                  margin-right: 8px;
+                  @include justify-content(flex-start);
+
+                  &,
+                  > svg {
+                    @include size(8px);
+                  }
+
+                  &.empty-circle {
+                    margin-left: 1px;
+                    @include size(7px);
+                    border: 1px solid rgba($white-primary, 1);
+                    @include border-radius(50%);
+                  }
+
+                }
+
+                &.notifications {
+                  padding: 0px;
+                  position: relative;
+
+                  &,
+                  > svg {
+                    @include size(24px);
+                  }
+
+                  > .count {
+                    width: 100%;
+                    height: 100%;
+                    left: 0px;
+                    top: 1px;
+                    position: absolute;
+                    @include justify-content(center);
+                    color: $white-primary;
+                    font-size: 10px;
+
+                  }
+
+                  > svg {
+                    fill: $red-octonnary;
+                  }
+
+                  &.active {
+                    z-index: 1;
+                  }
+                }
+
+                &.close {
+                  pointer-events: none;
+                  opacity: 0;
+                  padding: 0px;
+                  right: 9px;
+                  top: 0px;
+                  position: absolute;
+                  @include size(30px);
+
+                  > svg {
+                    @include size(9px);
+                    fill: rgba($white-primary, 0.5);
+                  }
+                }
+              }
+
+              &:hover {
+                background: rgba($blue-twentyoneary, 0.3);
+
+                > .image-container {
+
+                  &.close {
+                    opacity: 1;
+                  }
+                }
+              }
+
+              &.active {
+                background: $blue-octornary;
+
+                > .text {
+                  color: $white-primary;
+                }
+              }
+
+            }
+          }
+
+          &.troop-select {
+            @include align-items(center);
+          }
+
+          &.boards {
+            // position: relative;
+            //
+            // &:after {
+            //   z-index: 1;
+            //   content: "";
+            //   width: calc(100% - 54px);
+            //   height: 1px;
+            //   left: 27px;
+            //   top: 36px;
+            //   position: absolute;
+            //   background: rgba($grey-primary, 0.3);
+            // }
+
+            > button {
+              margin: 20px;
+            }
+
+
+            > ul {
+
+              > li {
+                padding: 1px 11px 1px 15px;
+                position: relative;
+
+                > .image-container {
+
+                  &.notifications {
+
+                    &.active {
+                      opacity: 1;
+                    }
+                  }
+                }
+
+                > .card {
+                  background-image: none !important;
+
+                  > * {
+                    display: none;
+                  }
+                }
+
+                > .sortable-ghost {
+                  z-index: 100;
+                  width: 100%;
+                  height: 100%;
+                  right: 0px;
+                  top: 0px;
+                  position: absolute;
+                  background: transparent;
+                  border: 1px dashed $blue-primary;
+
+                  > * {
+                    display: none;
+                  }
+
+                }
+
+                &.active {
+
+                  > .sortable-ghost {
+
+                    display: none;
+                  }
+                }
+
+              }
+
+            }
+
+          }
+
+          &.troop-members {
+            margin-top: 32px;
+            // position: relative;
+            //
+            // &:after {
+            //   z-index: 1;
+            //   content: "";
+            //   width: calc(100% - 54px);
+            //   height: 1px;
+            //   left: 27px;
+            //   top: 36px;
+            //   position: absolute;
+            //   background: rgba($grey-primary, 0.3);
+            // }
+
+            > header {
+              > .image-container {
+                opacity: 1;
+              }
+            }
+
+            > ul {
+
+              > li {
+                width: 100%;
+                font-size: 14px;
+
+                > .label {
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  line-height: 28px;
+                  font-size: 14px;
+                  color: $light-gray-denary;
+                }
+
+                > .image-container {
+
+                  &.presence {
+                    > svg {
+                      fill: $light-gray-denary;
+                    }
+
+                    &.active {
+
+                      > svg {
+                        fill: $blue-primary;
+                      }
+                    }
+                  }
+
+                  &.notifications {
+
+                    &.active {
+                      opacity: 1;
+                    }
+                  }
+
+                  &.close {
+
+                    &.active {
+                      pointer-events: auto;
+
+                      &:hover {
+
+                        > svg {
+                          fill: rgba($white-primary, 1);
+                        }
+                      }
+                    }
+                  }
+                }
+
+                &.invite-to-troop {
+                  margin-top: 30px;
+                  padding: 1px 13px 1px 15px;
+
+                }
+
+
+              }
+
+              > .more-text {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                line-height: 28px;
+                font-size: 14px;
+                color: $light-gray-denary;
+                margin-left: 17px;
+              }
+            }
+
+          }
+
+        }
+      }
+
+      > footer {
+        // cursor: pointer;
+        padding: 0px 15px 0px 27px;
+        @include size($left-aside-width, $header-height);
+        position: relative;
+
+        &:before {
+          z-index: 1;
+          content: "";
+          width: calc(100% - 54px);
+          height: 1px;
+          left: 27px;
+          top: 0px;
+          position: absolute;
+          background: rgba($white-primary, 0.2);
+        }
+
+        &:hover {
+          > .image-container {
+            > svg {
+              fill: $white-primary;
+            }
+          }
+        }
+
+        > .trooper {
+
+          > .profile-image {
+
+            &,
+            > .asset,
+            > .asset > .asset-thumbnail,
+            > .asset > .asset-thumbnail > img {
+              @include size(39px);
+            }
+
+            > .asset {
+
+              > .asset-thumbnail {
+                overflow: hidden;
+                border: 2px solid $white-primary;
+
+
+                &:before {
+                  display: none;
+                }
+
+                &,
+                > .upload-progress {
+                  @include border-radius(50%);
+                }
+
+                > img {
+                  margin: -2px 0px 0px -2px;
+                }
+              }
+            }
+
+          }
+
+          > .info {
+            margin-left: 10px;
+            max-width: 100px;
+
+            > .label {
+              font-family: $font-family-regular;
+              font-size: 14px;
+              line-height: 18px;
+              color: $white-primary;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+
+            > .permission {
+              line-height: 18px;
+              font-size: 14px;
+              color: rgba($white-primary, 0.4);
+              text-transform: capitalize;
+            }
+          }
+
+          > .trooper-actions {
+            position: relative;
+
+            > .menu-toggle {
+              cursor: pointer;
+              @include size(44px);
+
+              &:hover {
+                > svg {
+                  fill: $white-primary;
+                }
+              }
+
+              > svg {
+                @include size(18px, 4px);
+                fill: rgba($white-primary, 0.5);
+              }
+
+
+
+            }
+
+            > .menu {
+              z-index: 3;
+              bottom: 160px;
+              right: -100px;
+            }
+          }
+          > .mobile-trooper-actions {
+            display: none;
+          }
+        }
+
+      }
+    }
+  }
+
+  &[data-state*="dashboard"],
+  &[data-state*="dashboard.board"],
+  &[data-state*="dashboard.board.card"],
+  &[data-state*="dashboard.board.cards"],
+  &[data-state*="dashboard.board.tags"],
+  &[data-state*="dashboard.board.chat"],
+  &[data-state*="home.dashboard.search."],
+  &[data-state*="dashboard.boards.available"],
+  &[data-state*="dashboard.boards.mine"],
+  &[data-state*="dashboard.troopMember.chat"],
+  &[data-state*="dashboard.troopMember.profile"],
+  &[data-state*="dashboard.troopMember.boards"],
+  &[data-state*="dashboard.troopMembers.list"] {
+    > aside {
+      &.left {
+        width: $left-aside-width;
+        min-width: $left-aside-width;
+        overflow: unset;
+
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width:1023px) {
+
+  body {
+
+    &[data-state*="dashboard"],
+    &[data-state*="dashboard.board"],
+    &[data-state*="dashboard.board.card"],
+    &[data-state*="dashboard.board.cards"],
+    &[data-state*="dashboard.board.tags"],
+    &[data-state*="dashboard.board.chat"],
+    &[data-state*="dashboard.board.search"],
+    &[data-state*="dashboard.boards.available"],
+    &[data-state*="dashboard.boards.mine"],
+    &[data-state*="dashboard.troopMember.chat"],
+    &[data-state*="dashboard.troopMember.profile"],
+    &[data-state*="dashboard.troopMember.boards"],
+    &[data-state*="dashboard.troopMembers.list"] {
+
+      > aside {
+
+        &.left {
+          width: 0px;
+          min-width: 0px;
+          overflow: hidden;
+
+        }
+      }
+
+      &.showing-left-sidebar {
+
+        > aside {
+
+          &.left {
+            position: relative;
+            width: $left-aside-width;
+            min-width: $left-aside-width;
+            overflow: unset;
+          }
+        }
+      }
+    }
+  }
+}

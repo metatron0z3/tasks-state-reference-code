@@ -1,0 +1,32 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+  > .modal-overlay {
+
+    > .modal {
+
+      &.public-troop-share-modal {
+
+        > main {
+
+          > .url {
+            padding-bottom: 5px;
+            line-height: 20px;
+            position: relative;
+            font-size: 15px;
+            color: $blue-gray-primary;
+            border-bottom: 1px solid $gray-senary;
+          }
+
+        }
+
+        > footer {
+
+        }
+
+      }
+
+    }
+  }
+}

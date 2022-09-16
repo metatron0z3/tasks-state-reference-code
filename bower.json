@@ -1,0 +1,105 @@
+{
+  "name": "web-client",
+  "version": "0.0.0",
+  "dependencies": {
+    "FileSaver": "*",
+    "Hover": "~2.0.2",
+    "Sortable": "git@github.com:jhexperiment/Sortable.git#master",
+    "angular": "~1.5.x",
+    "angular-animate": "~1.5.x",
+    "angular-elastic": "^2.5.1",
+    "angular-embedly": "^0.0.8",
+    "angular-marked": "^1.0.1",
+    "angular-messages": "~1.5.x",
+    "angular-resource": "~1.5.x",
+    "angular-sanitize": "~1.5.x",
+    "angular-scroll-glue": "^2.0.6",
+    "angular-slugify": "^1.0.1",
+    "angular-touch": "~1.5.x",
+    "angular-ua-parser": "^0.0.2",
+    "angular-ui": "^0.4.0",
+    "angular-ui-router": "^0.2.18",
+    "angular-xml": "^2.2.1",
+    "angularfire": "2.0.1",
+    "blob-util": "^1.2.1",
+    "bourbon": "^4.2.6",
+    "cryptojslib": "^3.1.2",
+    "fingerprintjs2": "^1.1.1",
+    "firebase": "^3.0.5",
+    "firebase-util": "^0.2.5",
+    "highlight": "^9.2.0",
+    "jquery": "^2.2.2",
+    "jquery-minicolors": "git://github.com/jhexperiment/jquery-minicolors.git#master",
+    "jszip": "^2.5.0",
+    "marked": "^0.3.5",
+    "modernizr": "^3.3.1",
+    "moment": "^2.12.0",
+    "ng-file-upload": "^12.0.4",
+    "ngstorage": "^0.3.10",
+    "normalize.css": "~3.0.3",
+    "player.js": "git@github.com:jhexperiment/player.js.git#master",
+    "sass-css3-mixins": "*",
+    "sassmatic": "git@github.com:DarbyBrown/sassmatic.git#master",
+    "ua-parser-js": "~0.7.9",
+    "underscore": "~1.8.3",
+    "urijs": "uri.js#^1.17.1",
+    "algoliasearch": "^3.13.0",
+    "async": "^1.5.2",
+    "angular-cookies": "~1.5.x",
+    "angular-notification": "^1.1.1",
+    "angular-libphonenumber": "git@github.com:jseegers/angular-libphonenumber.git#master",
+    "ui-select": "angular-ui-select#^0.16.1",
+    "3596a30bd69384624c11": "https://gist.github.com/3596a30bd69384624c11.git",
+    "sugar": "^1.4.1",
+    "angular-ui-switch": "^0.1.1",
+    "clipboard": "^1.5.10",
+    "ag-logger": "git@github.com:tomasbulva/ag-logger.git#master",
+    "angular-modal-service": "git@github.com:tomasbulva/angular-modal-service.git#master",
+    "masonry": "^4.1.0",
+    "angular-masonry": "^0.16.0",
+    "tether-shepherd": "^1.8.0",
+    "to-markdown": "^3.0.1"
+  },
+  "devDependencies": {
+    "mockfirebase": "0.11.0",
+    "angular-mocks": "^1.3.0"
+  },
+  "overrides": {
+    "masonry": {
+      "main": "dist/masonry.pkgd.js",
+      "dependencies": {
+        "ev-emitter": "~1.0.0",
+        "desandro-matches-selector": "~2.0.0",
+        "fizzy-ui-utils": "2.0.2",
+        "get-size": "^2.0.2",
+        "outlayer": "^2.1.0"
+      }
+    },
+    "imagesloaded": {
+      "main": "imagesloaded.pkgd.js",
+      "dependencies": {
+        "masonry": "^4.1.0"
+      }
+    },
+    "outlayer": {
+      "main": [
+        "outlayer/item.js",
+        "outlayer/outlayer.js"
+      ]
+    },
+    "angular": {
+      "dependencies": {
+        "jquery-bridget": "1.1.x"
+      }
+    }
+  },
+  "appPath": "app",
+  "moduleName": "webClientApp",
+  "resolutions": {
+    "angular": ">=1.5.x",
+    "firebase": "^3.0.0",
+    "angularfire": "^2.0.1",
+    "masonry": "^4.1.0",
+    "outlayer": "^2.1.0"
+  }
+}

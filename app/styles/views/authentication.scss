@@ -1,0 +1,1093 @@
+@import "../bower-import.scss";
+@import "../variables.scss";
+
+$home-page-max-width: 1280px;
+
+[data-state="auth"],
+[data-state="auth.login"],
+[data-state="auth.sign-up"],
+[data-state="auth.link-oauth"],
+[data-state="login"],
+[data-state="legacy-login"],
+[data-state="sign-up"],
+[data-state="password-reset"] {
+
+  &.read-only-mode {
+      > .wrapper {
+
+        > [data-ui-view="content"] {
+          width: 100%;
+          >.auth {
+            min-height: 0;
+            height: 100%;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            > .header {
+
+              padding: 32px 32px 0px;
+              > .wrapper {
+                > .troop-logo {
+                  z-index: 15;
+                  &,
+                  > svg {
+                    @include size(74px, 32px);
+                  }
+                }
+              }
+            }
+            &.login {
+
+
+
+              > .wrapper {
+                height: auto;
+                min-height: 0px;
+                max-height: none;
+                top: 140px;
+
+                &.login {
+
+                  > .modal {
+                    opacity: 1;
+                    min-height:0px;
+                    @include transform(translateY(0px));
+                    > footer {
+                      @include transform(translateY(90%));
+
+                    }
+                  }
+                  > a {
+                    @include transform(translateY(0px));
+                  }
+                }
+              }
+            }
+            &.sign-up {
+
+              > .wrapper {
+                height: auto;
+                min-height: 0px;
+                max-height: none;
+                top: 140px;
+
+                &.sign-up {
+
+                  > .modal {
+                    opacity: 1;
+                    min-height:0px;
+                    @include transform(translateY(0px));
+                    > footer {
+                      @include transform(translateY(90%));
+
+                    }
+                  }
+                  > a {
+                    @include transform(translateY(0px));
+                  }
+                }
+              }
+            }
+            &.link-oauth {
+
+              > .wrapper {
+                height: auto;
+                min-height: 0px;
+                max-height: none;
+                top: 140px;
+
+                &.link-oauth {
+
+                  > .modal {
+                    opacity: 1;
+                    min-height:0px;
+                    @include transform(translateY(0px));
+                    > footer {
+                      @include transform(translateY(90%));
+
+                    }
+                  }
+
+                }
+              }
+            }
+          }
+        }
+      }
+  }
+
+  > .wrapper {
+
+    > [data-ui-view="content"] {
+      @include align-items(flex-start);
+      background-color: $blue-sixteenary;
+
+
+      > .auth {
+        min-height: 700px;
+        height: 1000px;
+        overflow-y: hidden;
+        position: relative;
+        @include align-items(center);
+        @include justify-content(center);
+        background-image: linear-gradient(0deg, $blue-sixteenary 0%, $blue-seventenary 100%);
+        &.has-overflow {
+          // > .sign-up {
+          //   padding-top: 100px;
+          //   flex: 1 1 auto;
+          //   overflow-y: auto;
+          //   min-height: 0px;
+          // }
+        }
+        > .earth-map-dots {
+          @include size(100%);
+          left: 0px;
+          top: 0px;
+          position: absolute;
+
+          > svg {
+            @include size(1223px, 734px);
+            //@include size(85%, 85%);
+            fill: rgba($white-primary, 0.1);
+          }
+        }
+
+        > .background {
+          z-index: -2;
+          @include size(100%);
+          left: 0px;
+          top: 0px;
+          position: absolute;
+          background-image: linear-gradient(0deg, $blue-sixteenary 0%, $blue-seventenary 100%);
+          //@include background-size(cover);
+
+          // &:before {
+          //   z-index: -1;
+          //   content: "";
+          //   @include size(100%);
+          //   left: 0px;
+          //   top: 0px;
+          //   position: absolute;
+          //   background-image: linear-gradient(0deg, $blue-sixteenary 0%, $blue-seventenary 100%);
+          //   //background-image: linear-gradient(0deg, $blue-thirteenary 0%, $blue-octornary 100%);
+          // }
+
+
+
+          > video {
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            position: fixed;
+            @include transform(scale(1.1));
+          }
+
+          > .sonar-animation {
+            @include size(100%);
+            left: 0px;
+            top: 0px;
+            position: absolute;
+            display: none;
+
+            > .image-container {
+              opacity: 0;
+              @include size(100%);
+              left: 0px;
+              top: 0px;
+              position: absolute;
+
+              > img {
+                @include size(1223px, 734px);
+              }
+            }
+          }
+
+        }
+
+        > .header {
+          z-index: 5;
+          opacity: 1.0;
+          padding: 50px 50px 0px;
+          left: 0px;
+          top: 0px;
+          position: absolute;
+          width: 100%;
+          @include justify-content(center);
+          > .wrapper {
+            @include size(1000px, 50px);
+            min-width: 0px;
+            max-width: $home-page-max-width;
+
+            > .troop-logo {
+              cursor: pointer;
+              @include transition(none);
+              &,
+              > svg {
+                height: 49px;
+                min-height: 49px;
+                max-height: 49px;
+                width: 115px;
+                min-width: 115px;
+                max-width: 115px;
+              }
+
+              > svg {
+                fill: $white-primary;
+              }
+            }
+          }
+
+        }
+
+        > .wrapper {
+          z-index: -1;
+          @include size(100%);
+          left: 0px;
+          top: 0px;
+          position: absolute;
+          @include align-items(center);
+
+          > .modal {
+            opacity: 0;
+            margin: 0px 0px 100px 0px;
+            padding: 40px;
+            position: relative;
+            @include all-width(340px);
+            background: $white-primary;
+            @include border-radius(4px);
+            @include animation(shift-fade-up linear 0.2s 1);
+            // @include transform(translateY(50%));
+            @include css3-prefix('box-shadow', 0px 5px 17px 0px rgba($blue-twentythreery, 0.30));
+
+
+            &:before {
+              // height: 100%;
+              // width: 100%;
+              // @include border-radius(4px);
+              display: none;
+            }
+
+            > header {
+              margin: 0px;
+              left: 0px;
+              top: 0px;
+              position: absolute;
+              @include transform(translateY(-64px));
+
+              > h1 {
+                line-height: 37px;
+                font-family: $font-family-light;
+                font-size: 24px;
+                color: rgba($white-primary, 0.9);
+                text-align: center;
+              }
+            }
+
+            > main {
+              margin: 0px 0px 20px 0px;
+
+
+              > .firebaseui-wrapper {
+                @include all-width(100%);
+
+                > button,
+                > .button {
+                  padding: 0px;
+                  @include size(50%, 45px);
+                  border: 0px;
+                  @include border-radius(4px);
+
+                  &:first-of-type {
+                    margin-right: 4px;
+                  }
+
+                  > .wrapper {
+                    @include justify-content(flex-start);
+
+                    > .image-container {
+                      @include justify-content(flex-start);
+                      margin-left: 11px;
+                      @include size(20 px, 100%);
+
+                      > svg {
+                        @include size(20px);
+                      }
+
+                    }
+
+                    > .label {
+                      margin-left: 20px;
+                      line-height: 20px;
+                      font-family: $font-family-medium;
+                      font-size: 12px;
+                      letter-spacing: 0.05em;
+                      color: $white-primary;
+                      text-transform: none;
+                    }
+                  }
+
+                  &.google {
+                    background: $red-nonary;
+                  }
+
+                  &.facebook {
+                    background: $purple-octonary;
+                  }
+
+                  &.twitter {
+                    background: $blue-twentytwoary;
+                  }
+
+
+                }
+
+                &.complete {
+
+                  > #firebaseui-auth-container {
+                    z-index: 1;
+                    opacity: 1;
+                  }
+
+                  > #firebaseui-auth-container-placeholder {
+                    z-index: -1;
+                    opacity: 0;
+                  }
+                }
+              }
+
+              > .or {
+                margin: 28px 0px 33px 0px;
+
+                &:before,
+                &:after {
+                  content: "";
+                  @include all-height(0px);
+                  @include flex-grow(1);
+                  border-bottom: 1px dashed rgba($gray-twelvary, 0.4);
+                }
+
+                label {
+                  @include all-width(70px);
+                  line-height: 20px;
+                  font-size: 14px;
+                  text-align: center;
+                  font-family: $font-family-medium;
+                  color: rgba($blue-secondary, 0.5);
+                  text-transform: uppercase;
+
+                }
+              }
+
+              > .field-group {
+                @include all-width(100%);
+                margin-bottom: 20px !important;
+
+                > input {
+                  line-height: 26px;
+                  font-family: $font-family-medium;
+                  font-size: 14px;
+                  color: rgba($black-primary, 1.0);
+                  &.tp-invalid,
+                  &.ng-dirty.ng-touched.ng-invalid {
+                    border-color: $red-quaternary;
+                  }
+                }
+                > input:focus {
+                  border-bottom: 1px solid rgba($blue-primary, 0.6);
+                }
+
+              }
+
+              > [data-ng-messages],
+              > [ng-messages] {
+                @include transform(translateY(-25px));
+
+                > .error {
+                  line-height: 26px;
+                  font-size: 12px;
+                  color: $red-quaternary;
+                  @include transform(translateY(0px));
+                }
+              }
+
+              > .forgot-password {
+                margin-top: 0px;
+                /* Forgot?: */
+                opacity: 0.9;
+                font-family: $font-family-light;
+                font-size: 14px;
+                color: $blue-octornary;
+                letter-spacing: 0px;
+                line-height: 26px;
+                text-align: right;
+                position: absolute;
+                right: 40px;
+                bottom: 93px;
+                z-index: 10;
+                cursor: pointer;
+              }
+
+              > .verify-code {
+
+                > .phone-stars {
+                  @include size(100%, 250px);
+
+                  > img {
+                    @include all-width(206px);
+                  }
+
+                  > svg {
+                    @include size(206px, 146px);
+                  }
+                }
+              }
+
+              &.link-oauths {
+                @include align-items(center);
+
+                > .link-image {
+
+                  > .wrapper {
+                    padding: 0px 7px;
+                    align-items: center;
+
+                    > .image-container {
+                      width: 22px;
+                      height: 23px;
+                      padding-bottom: 38px;
+
+                      > .link-icon {
+                        width: 22px;
+                        height: 23px;
+                        fill: $light-gray-tertiary;
+                      }
+                    }
+
+                    > .social-container {
+                      width: 65px;
+                      height: 67px;
+                      padding-bottom: 17px;
+
+                      > .social-icon {
+                        width: 65px;
+                        height: 67px;
+                      }
+                    }
+
+                    > .label {
+                      opacity: 0.69;
+                      font-family: $font-family-heavy;
+                      font-size: 10px;
+                      color: $grey-twelvary;
+                      letter-spacing: 0px;
+                      line-height: 34px;
+                      text-transform: uppercase;
+                    }
+                  }
+                }
+
+                > .link-warning {
+                  padding-top: 33px;
+                  text-align: center;
+                  opacity: 0.69;
+                  font-family: $font-family-medium;
+                  font-size: 14px;
+                  color: $blue-secondary;
+                  letter-spacing: 0px;
+                  line-height: 26px;
+                }
+
+                > .email-input  {
+                  width: 100%;
+                  > span {
+                    padding: 10px 0px 5px;
+                    font-family: $font-family-medium;
+                    font-size: 14px;
+                    opacity: 0.69;
+                    color: $blue-secondary;
+                    letter-spacing: 0px;
+                    line-height: 26px;
+                  }
+                  > .error {
+                    line-height: 26px;
+                    font-size: 12px;
+                    color: $red-quaternary;
+                    @include transform(translateY(0px));
+                  }
+                  > .forgot-password {
+                    margin-top: 0px;
+                    /* Forgot?: */
+                    opacity: 0.9;
+                    font-family: $font-family-light;
+                    font-size: 14px;
+                    color: $blue-octornary;
+                    letter-spacing: 0px;
+                    line-height: 26px;
+                    text-align: right;
+                    position: absolute;
+                    right: 40px;
+                    bottom: 69px;
+                    z-index: 10;
+                    cursor: pointer;
+                  }
+                }
+              }
+
+              &.forgot-password {
+                @include align-items(center);
+
+                > .email-send {
+                  padding: 5px 0px;
+                  text-align: center;
+                  opacity: 0.69;
+                  font-family: $font-family-medium;
+                  font-size: 14px;
+                  color: $blue-secondary;
+                  letter-spacing: 0px;
+                  line-height: 26px;
+                }
+
+                > .error {
+                  line-height: 26px;
+                  font-size: 12px;
+                  color: $red-quaternary;
+                  @include transform(translateY(0px));
+                }
+              }
+
+            }
+
+            > footer {
+              left: 0px;
+              bottom: 0px;
+              position: absolute;
+              @include transform(translateY(50%));
+              @include justify-content(center);
+
+              > button {
+                @include size(185px, 45px);
+                @include css3-prefix('box-shadow', 0px 5px 17px 0px rgba($blue-twentythreery, 0.30));
+                @include border-radius(100px);
+                @include animation(wobble-vertical 0.3s linear 0.2s 1);
+
+                > .wrapper {
+
+                  > .label {
+                    line-height: 20px;
+                    font-family: $font-family-medium;
+                    font-size: 14px;
+                    letter-spacing: 1px;
+                    text-transform: none;
+                  }
+                }
+              }
+
+              &.link-footer {
+                @include align-items(center);
+                @include justify-content(center);
+                > button {
+                  @include size(170px, 44px);
+                  &.transparent {
+                    padding-right: 9px;
+                    > .wrapper {
+                      > .label {
+                        color: $grey-twelvary;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            > .loader-wrapper {
+              z-index: 9;
+              @include size(100%);
+              left: 0px;
+              top: 0px;
+              position: absolute;
+              background: rgba($white-primary, 0.9);
+              @include border-radius(4px);
+
+              > .wrapper {
+
+                &:before {
+                  content: "Logging in...";
+                  min-width: 80px;
+                  @include transform(translateX(-8px));
+                }
+              }
+            }
+
+            &.message-modal {
+              margin: 0;
+              width: auto;
+              max-width: 800px;
+
+              &:before {
+                display: none;
+              }
+
+              > header {
+                line-height: 41px;
+                font-size: 30px;
+                color: $white-primary;
+
+              }
+
+
+            }
+          }
+
+          > .info {
+            @include align-items(center);
+
+            &,
+            > div {
+              line-height: 26px;
+              font-size: 18px;
+              color: rgba($white-primary, 1);
+            }
+
+            > button {
+              margin-bottom: 30px;
+              width: 165px;
+              font-size: 11px;
+
+            }
+          }
+
+          > a {
+            cursor: pointer;
+            opacity: 0;
+            line-height: 26px;
+            font-family: $font-family-medium;
+            font-size: 14px;
+            color: $white-primary;
+            @include transition(opacity 0.2s linear 0s);
+
+          }
+
+        }
+
+        > .reset-success {
+          @include size(100%);
+          left: 0px;
+          top: 0px;
+          position: fixed;
+          @include justify-content(center);
+          font-size: 18px;
+          color: $white-primary;
+        }
+
+        &.loading {
+
+          > .background {
+
+          }
+
+          > .troop-logo {
+            @include size(100%);
+            left: 0px;
+            top: 0px;
+            //display: none;
+
+            > svg {
+              @include transform(scale(1.5));
+            }
+          }
+
+          > .modal {
+            display: none;
+          }
+
+          > a {
+
+            &.sign-up,
+            &.login {
+              display: none;
+            }
+          }
+
+        }
+
+
+      }
+
+      > .auth {
+
+        &.login {
+
+          > .wrapper {
+
+            &.login {
+              z-index: 1;
+
+              > .modal {
+                opacity: 1;
+                @include transform(translateY(0));
+
+              }
+
+              > a {
+                opacity: 1;
+              }
+
+            }
+          }
+        }
+
+        &.sign-up {
+
+          > .wrapper {
+
+            &.sign-up {
+              z-index: 1;
+
+              > .modal {
+                opacity: 1;
+                @include transform(translateY(0));
+                > .loader-wrapper {
+
+                  > .wrapper {
+
+                    &:before {
+                      content: "Signing up...";
+                    }
+                  }
+                }
+              }
+
+              > a {
+                opacity: 1;
+              }
+            }
+          }
+        }
+
+        &.link-oauth {
+
+          > .wrapper {
+
+            &.link-oauth {
+              z-index: 1;
+
+              > .modal {
+                opacity: 1;
+                @include transform(translateY(0));
+              }
+
+              > a {
+                opacity: 1;
+              }
+            }
+          }
+        }
+
+        &.forgot-password {
+          > .wrapper {
+
+            &.forgot-password {
+              z-index: 1;
+
+              > .modal {
+                opacity: 1;
+                @include transform(translateY(0));
+              }
+
+              > a {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+
+  }
+
+  &[data-browser-name~="Safari"] {
+
+    > .wrapper {
+
+      > [data-ui-view="content"] {
+
+        > .auth {
+          // &.login {
+
+            > .wrapper {
+
+              > .modal {
+
+                > main {
+                  position: relative;
+
+                  > .forgot-password {
+                    position: absolute;
+                    top:185px;
+                    left:188px;
+                    padding-right: 25px;
+                  }
+
+                }
+              }
+
+            }
+          // }
+
+        }
+      }
+    }
+
+  }
+
+  &.loading {
+
+    > .background {
+      z-index: 10;
+    }
+  }
+}
+
+
+[data-state="sign-up"] {
+
+  > .wrapper {
+
+    > [data-ui-view="content"] {
+
+      > .sign-up {
+
+
+        > .modal {
+
+
+
+          > footer {
+
+            > .actions {
+
+              > button,
+              > a.button {
+                margin-right: 30px;
+                padding: 0px;
+
+                &:last-of-type {
+                  margin-right: 0px;
+                }
+
+                > .wrapper {
+
+                  > img {
+                    @include size(172px, 60px);
+                  }
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+
+
+}
+
+
+
+[data-state="password-reset"] {
+
+
+    > .wrapper {
+
+      > [data-ui-view="content"] {
+
+        > .password-reset {
+
+          > .modal {
+
+            > main {
+
+              > [data-ng-messages],
+              > [np-messages] {
+                @include transform(translateY(-10px));
+              }
+            }
+          }
+        }
+      }
+    }
+}
+
+// @media only screen and (max-height: 800px) {
+//
+//   [data-state="login"],
+//   [data-state="sign-up"] {
+//     overflow-y: auto;
+//
+//     > .wrapper {
+//
+//       > [data-ui-view="content"] {
+//
+//         > .sign-up,
+//         > .login {
+//           padding-top: 50px;
+//           @include justify-content(flex-start);
+//
+//         }
+//
+//       }
+//     }
+//   }
+// }
+@media only screen and (max-height: 900px) {
+  [data-state="auth"],
+  [data-state="auth.login"],
+  [data-state="auth.sign-up"],
+  [data-state="login"],
+  [data-state="sign-up"],
+  [data-state="password-reset"] {
+
+
+    > .wrapper {
+      > [data-ui-view="content"] {
+        overflow-y: scroll;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1024px) {
+  // [data-state="auth"],
+  // [data-state="auth.login"],
+  // [data-state="auth.sign-up"],
+  // [data-state="login"],
+  // [data-state="sign-up"],
+  // [data-state="password-reset"] {
+  //
+  //
+  //   > .wrapper {
+  //
+  //     > [data-ui-view="content"] {
+  //       @include align-items(flex-start);
+  //       width: 100%;
+  //       overflow-x:hidden;
+  //       //-webkit-overflow-scrolling: touch;
+  //
+  //       > .auth{
+  //
+  //         > .earth-map-dots {
+  //           @include size(100%);
+  //           left: 0px;
+  //           top: 0px;
+  //           position: absolute;
+  //
+  //           > svg {
+  //             @include size(1223px, 734px);
+  //             //@include size(85%, 85%);
+  //             fill: rgba($white-primary, 0.1);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+}
+
+@media only screen and (max-width:500px) {
+  // [data-state="auth"],
+  // [data-state="auth.login"],
+  // [data-state="auth.sign-up"],
+  // [data-state="login"],
+  // [data-state="sign-up"],
+  // [data-state="password-reset"] {
+  //
+  //
+  //   > .wrapper {
+  //
+  //     > [data-ui-view="content"] {
+  //       width: 100%;
+  //       >.auth {
+  //         > .header {
+  //           padding: 32px 32px 0px;
+  //           > .wrapper {
+  //             > .troop-logo {
+  //               z-index: 15;
+  //               &,
+  //               > svg {
+  //                 @include size(74px, 32px);
+  //               }
+  //             }
+  //           }
+  //         }
+  //         &.login {
+  //
+  //
+  //
+  //           > .wrapper {
+  //
+  //             &.login {
+  //
+  //               > .modal {
+  //                 opacity: 1;
+  //                 min-height:0px;
+  //                 @include transform(translateY(-80px));
+  //                 > footer {
+  //                   @include transform(translateY(90%));
+  //
+  //                 }
+  //               }
+  //               > a {
+  //                 @include transform(translateY(-80px));
+  //               }
+  //             }
+  //           }
+  //         }
+  //         &.sign-up {
+  //
+  //           > .wrapper {
+  //
+  //             &.sign-up {
+  //
+  //               > .modal {
+  //                 opacity: 1;
+  //                 min-height:0px;
+  //                 @include transform(translateY(-80px));
+  //                 > footer {
+  //                   @include transform(translateY(90%));
+  //
+  //                 }
+  //               }
+  //               > a {
+  //                 @include transform(translateY(-100px));
+  //               }
+  //             }
+  //           }
+  //         }
+  //         &.link-oauth {
+  //
+  //           > .wrapper {
+  //
+  //             &.link-oauth {
+  //
+  //               > .modal {
+  //                 opacity: 1;
+  //                 min-height:0px;
+  //                 @include transform(translateY(-80px));
+  //                 > footer {
+  //                   @include transform(translateY(90%));
+  //
+  //                 }
+  //               }
+  //
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+}

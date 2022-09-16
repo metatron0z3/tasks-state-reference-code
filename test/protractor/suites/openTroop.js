@@ -1,0 +1,1 @@
+requireSpec('troop', 'init-troop');

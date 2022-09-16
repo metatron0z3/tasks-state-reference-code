@@ -1,0 +1,68 @@
+
+<div class="tour"
+     ng-if=" vm.hasTour "
+     shepherd-tour=" vm.tourConfig "
+     shepherd-tour-start=" vm.startTour "
+></div>
+
+<div class="loader-wrapper flex-row"
+     ng-if="loading"
+>
+  <div class="wrapper">
+    <div class="loader-2 small"></div>
+  </div>
+</div>
+
+<div class="empty-board flex-column"
+     ng-if=" ( ! loading ) && Me.currentBoardCards.length === 0"
+     ng-include=" '/views/partials/empty-board.html' "
+     ngf-drop="filesAdded($files, $file, $event)"
+     ngf-drop-disabled="dragDisabled"
+     ngf-change="filesAdded($files, $file, $event)"
+     ngf-multiple="true"
+     ngf-allow-dir="false"
+     ngf-drag-over-class= "{accept: 'dragover', delay:200}"
+     ngf-drag="emptyDrag($isDragging, $class, $event)"
+></div>
+
+<div class="empty-tag flex-column"
+     ng-if=" ( ! loading ) && ( ! cardsWithSelectedTag )"
+     ng-include=" '/views/partials/empty-tag.html' "
+     ngf-drop="tagFilesAdded($files, $file, $event)"
+     ngf-drop-disabled="dragDisabled"
+     ngf-change="tagFilesAdded($files, $file, $event)"
+     ngf-multiple="true"
+     ngf-allow-dir="false"
+     ngf-drag-over-class= "{accept: 'dragover', delay:200}"
+     ngf-drag="emptyDrag($isDragging, $class, $event)"
+></div>
+
+<ul class="card-list flex-column"
+    ng-class=" Me.currentBoard.viewSettings.card.imageSize || 'thumbnail' "
+    ng-if="( ! loading ) && Me.currentBoardCards.length > 0 && cardsWithSelectedTag"
+    tp-data-pump = "Me.currentBoardCards"
+    tp-data-pump-limit = " 1 "
+    ngf-drop="filesAdded($files, $file, $event)"
+    ngf-drop-disabled="dragDisabled "
+    ngf-change="filesAdded($files, $file, $event)"
+    ngf-multiple="true"
+    ngf-allow-dir="false"
+    ngf-drag="drag($isDragging, $class, $event)"
+    ngf-drag-over-class= "{accept: 'dragover', delay:200}"
+>
+  <li class="card flex-column fade"
+      ng-class=" 'card-' + $index "
+      ng-repeat=" card in tpDataPumpItems track by uniqueTrackById( $index, card.$id ) "
+      ng-if=" ( selectedTagName === 'tp-all' ) ||  card.tags.hasOwnProperty( selectedTagName ) "
+      ng-mouseleave=" cardMenus[card.$id] = false "
+      ng-include=" '/views/partials/card/card.html' "
+  >
+  </li>
+
+  <li class="bottom flex-spacer">&nbsp;</li>
+
+  <li class="drag-overlay flex-column"
+        ng-include=" '/views/partials/drag-drop-overlay.html' "
+  ></li>
+
+</ul>

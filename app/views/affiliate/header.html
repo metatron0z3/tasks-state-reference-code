@@ -1,0 +1,51 @@
+<section class="title flex-row flex-spacer">
+  <ng-include src=" '/images/svg/icons/troop-icon.svg' "></ng-include>
+  <h1>Troop Rewards</h1>
+</section>
+
+<section class="trooper flex-row">
+
+  <span class="profile-image image-container flex-row"
+        tp-user-profile=" vm.Me.trooper "
+        tp-user-avatar-asset-size="smallUrl"
+        ng-click=" vm.showTrooperMenu = !vm.showTrooperMenu  "
+  ></span>
+
+  <span class="info flex-column flex-spacer">
+    <span class="label flex-spacer"
+          ng-bind=" vm.Me.trooper.name "
+          ng-click=" vm.showTrooperMenu = !vm.showTrooperMenu  "
+    ></span>
+  </span>
+  <span class="trooper-actions">
+    <span class="menu-toggle image-container flex-row"
+          ng-click=" vm.showTrooperMenu = !vm.showTrooperMenu "
+    >
+      <svg class="icon arrow">
+        <use xlink:href="#arrow"/>
+      </svg>
+    </span>
+
+    <ul class="menu flex-column"
+        ng-class=" vm.showTrooperMenu ? 'show' : '' "
+        ng-mouseleave=" vm.showTrooperMenu = false "
+
+    >
+      <!-- <li class="menu-item flex-row"
+          ng-click=" vm.showTroopMemberProfileModal() "
+      >
+        <span class="label">Edit Profile</span>
+      </li> -->
+      <li class="menu-item flex-row"
+          ng-click=" vm.navToTroopDashboard()"
+      >
+        <span class="label">Troop Dashboard</span>
+      </li>
+      <!-- <li class="menu-item flex-row"
+          ng-click=" vm.logout() "
+      >
+        <span class="label">Logout</span>
+      </li> -->
+    </ul>
+  </span>
+</section>

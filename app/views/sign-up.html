@@ -1,0 +1,374 @@
+<section class="sign-up flex-column"
+         ng-class=" { loading: isProcessing }"
+         ng-has-overflow=""
+>
+
+  <div class="background image-container">
+
+    <div class="earth-map-dots image-container">
+      <svg class="icon earth-map-dots">
+        <use xlink:href="#earth-map-dots"/>
+      </svg>
+    </div>
+
+    <div class="sonar-animation flex-row">
+
+      <div class="image-00 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhj8PUMZfG6MBaWu_original_pulse_web_00000.png">
+      </div>
+
+      <div class="image-01 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhj5giq6lT5fh68V_original_pulse_web_00001.png">
+      </div>
+
+      <div class="image-02 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhj2Djgf4D4cF2Ad_original_pulse_web_00002.png">
+      </div>
+
+      <div class="image-03 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhiyAVY4p-i7ODMv_original_pulse_web_00003.png">
+      </div>
+
+      <div class="image-04 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhi91GtLV7CKqAwp_original_pulse_web_00004.png">
+      </div>
+
+      <div class="image-05 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhi5_VX1eB7LVMXy_original_pulse_web_00005.png">
+      </div>
+
+      <div class="image-06 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhi1ictHh1vVV5lN_original_pulse_web_00006.png">
+      </div>
+
+      <div class="image-07 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhi-foxTaHvIlZNg_original_pulse_web_00007.png">
+      </div>
+
+      <div class="image-08 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhzlQB8jieTjQVb_original_pulse_web_00008.png">
+      </div>
+
+      <div class="image-09 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhy5K6a1vDa0RJg_original_pulse_web_00009.png">
+      </div>
+
+      <div class="image-10 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhwYsgUF-sbAPht_original_pulse_web_00010.png">
+      </div>
+
+      <div class="image-11 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhH0GLtwfxO9lkr_original_pulse_web_00011.png">
+      </div>
+
+      <div class="image-12 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhEeGUpdgScTres_original_pulse_web_00012.png">
+      </div>
+
+      <div class="image-13 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhDLer-iwYHbyDm_original_pulse_web_00013.png">
+      </div>
+
+      <div class="image-14 image-container">
+
+        <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KGLEhhAXU7ObhntVVzs_original_pulse_web_00014.png">
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <a class="troop-logo image-container"
+     ui-sref="home"
+  >
+    <svg class="icon troop-logo">
+      <use xlink:href="#troop-logo"/>
+    </svg>
+  </a>
+
+
+  <form name="signUpForm"
+        class="sign-up-modal modal flex-column"
+        novalidate="novalidate"
+        ng-submit=" nextStep(signUpForm) "
+  >
+
+    <div class="loader-wrapper flex-row"
+         ng-if=" isProcessing "
+    >
+      <div class="wrapper">
+        <div class="loader-2 small"></div>
+      </div>
+    </div>
+
+    <div class="back image-container"
+         ng-if=" ( ! isProcessing ) && ( 'generate-code' !== formVals.$storage.newAccount.step ) && ( 'get-app' !== formVals.$storage.newAccount.step ) "
+         ng-click=" prevStep(signUpForm) "
+    >
+      <svg class="icon arrow-left">
+        <use xlink:href="#arrow-left"/>
+      </svg>
+    </div>
+
+    <header class="flex-column"
+            ng-if=" ! isProcessing "
+    >
+      <h1 ng-if=" 'generate-code' === formVals.$storage.newAccount.step ">Sign Up</h1>
+      <h1 ng-if=" 'verify-code' === formVals.$storage.newAccount.step ">
+        <span ng-if=" Me.screen.size === 'desktop' ">
+          Check Your Phone
+        </span>
+        <span ng-if=" Me.screen.size !== 'desktop' ">
+          Enter Code
+        </span>
+      </h1>
+      <p ng-if=" ('verify-code' === formVals.$storage.newAccount.step) && (Me.screen.size !== 'desktop') ">
+        Check your SMS
+      </p>
+      <h1 ng-if=" 'create-account' === formVals.$storage.newAccount.step ">Create Your Troop</h1>
+      <h1 ng-if=" 'get-app' === formVals.$storage.newAccount.step ">Success!</h1>
+      <p ng-if=" ('get-app' === formVals.$storage.newAccount.step) && (Me.screen.size !== 'desktop') ">
+        You're now on Troop
+      </p>
+    </header>
+
+    <main ng-if=" ( ! isProcessing ) && ( 'get-app' !== formVals.$storage.newAccount.step ) ">
+      <div class="generate-code flex-column"
+           ng-if=" 'generate-code' === formVals.$storage.newAccount.step "
+      >
+        <p class="field-group flex-row "
+           ng-class="{ 'error': signUpForm.name.$dirty && signUpForm.name.$touched && signUpForm.name.$invalid && ( ! signUpForm.name.$focused ) }"
+        >
+          <input name="name"
+                 placeholder="Name"
+                 type="text"
+                 required=""
+                 ng-model=" formVals.$storage.newAccount.name "
+                 ng-focus=" signUpForm.name.$focused = true "
+                 ng-blur=" signUpForm.name.$focused = false "
+                 autocomplete="off"
+          />
+
+        </p>
+        <div class="flex-row"
+             ng-if="signUpForm.name.$dirty && signUpForm.name.$touched && signUpForm.name.$invalid  && ( ! signUpForm.name.$focused )"
+             ng-messages="signUpForm.name.$error"
+        >
+          <div class="error"
+               ng-message="required"
+          >
+            Your Name is required
+          </div>
+        </div>
+
+        <p class="field-group flex-row"
+            ng-class="{ 'error': formVals.errorMsg || ( signUpForm.phone.$dirty && signUpForm.phone.$touched && signUpForm.phone.$invalid ) }"
+        >
+
+          <input name="phone"
+                 placeholder="Mobile Phone Number"
+                 type="tel"
+                 required=""
+                 phone-number=""
+                 ng-model=" formVals.$storage.newAccount.phone "
+                 ng-blur=" phoneCheck() "
+                 country-code=" "
+                 autocomplete="off"
+          />
+        </p>
+        <div class="flex-row"
+             ng-if=" formVals.errorMsg || ( signUpForm.phone.$dirty && signUpForm.phone.$touched && signUpForm.phone.$invalid ) "
+             ng-messages="signUpForm.phone.$error"
+        >
+          <div class="error"
+               ng-message="required"
+          >
+            Your mobile phone number is required
+          </div>
+          <div class="error"
+               ng-message="phoneNumber"
+          >
+            Your mobile phone number must be valid
+          </div>
+          <div class="error"
+               ng-if=" formVals.errorMsg "
+          >
+            {{ formVals.errorMsg }}
+          </div>
+        </div>
+
+        <!--  password  -->
+        <p class="field-group flex-row"
+            ng-class="{ 'error': formVals.trooperExists || ( signUpForm.password.$dirty && signUpForm.password.$touched && signUpForm.password.$invalid ) }"
+        >
+          <input name="password"
+                 placeholder="Password"
+                 type="password"
+                 required=""
+                 autocomplete="off"
+                 ng-model=" formVals.$storage.newAccount.password "
+                 ng-minlength="6"
+          />
+        </p>
+        <div  class="flex-row"
+              ng-if="signUpForm.password.$dirty && signUpForm.password.$touched  && signUpForm.password.$invalid"
+              ng-messages="signUpForm.password.$error"
+        >
+          <div class="error"
+               ng-message="required"
+          >
+            Your password is required
+          </div>
+          <div class="error"
+             ng-message="ng-minlength"
+          >
+            Your Password must be at least 6 characters long
+          </div>
+        </div>
+      </div>
+
+      <div class="verify-code flex-column"
+           ng-if=" 'verify-code' === formVals.$storage.newAccount.step "
+      >
+        <div class="phone-stars image-container"
+             ng-if=" Me.screen.size === 'desktop' "
+        >
+          <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KDq48Emqlbsj0rg2_ke_original_phone-stars.png">
+        </div>
+
+        <p class="field-group flex-row "
+           ng-class="{ 'error': ( formVals.invalidCode || ( signUpForm.code.$dirty && signUpForm.code.$touched && signUpForm.code.$invalid ) ) && ( ! signUpForm.code.$focused ) }"
+        >
+          <input name="code"
+                 placeholder=" {{ Me.screen.size === 'desktop' ? 'Enter Text Code' : 'Code' }} "
+                 type="number"
+                 required=""
+                 autocomplete="off"
+                 ng-model=" formVals.$storage.newAccount.code "
+                 ng-set-focus=" true "
+                 ng-focus=" signUpForm.code.$focused = true; formVals.invalidCode = false; "
+                 ng-blur=" signUpForm.code.$focused = false "
+
+          />
+
+        </p>
+        <div class="flex-row"
+             ng-if=" ( formVals.invalidCode || ( signUpForm.code.$dirty && signUpForm.code.$touched && signUpForm.code.$invalid ) ) && ( ! signUpForm.code.$focused )  "
+             ng-messages="signUpForm.code.$error"
+        >
+          <div class="error"
+               ng-message="required"
+          >
+            Code is required
+          </div>
+          <div class="error"
+               ng-if=" formVals.invalidCode "
+          >
+            Invalid code
+          </div>
+        </div>
+      </div>
+
+      <div class="create-account"
+           ng-if=" 'create-account' === formVals.$storage.newAccount.step && ! joinFromPt "
+      >
+        <p class="field-group flex-row "
+           ng-class="{ 'error': signUpForm.troopName.$dirty && signUpForm.troopName.$touched && signUpForm.troopName.$invalid && ( ! signUpForm.troopName.$focused ) }"
+        >
+          <input name="troopName"
+                 placeholder="Troop Name"
+                 type="text"
+                 required=""
+                 ng-model=" formVals.$storage.newAccount.troopName "
+                 ng-focus=" signUpForm.troopName.$focused = true "
+                 ng-blur=" signUpForm.troopName.$focused = false "
+                 autocomplete="off"
+          />
+
+        </p>
+        <div class="flex-row"
+             ng-if="signUpForm.troopName.$dirty && signUpForm.troopName.$touched && signUpForm.troopName.$invalid  && ( ! signUpForm.troopName.$focused )"
+             ng-messages="signUpForm.troopName.$error"
+        >
+          <div class="error"
+               ng-message="required"
+          >
+            Troop Name is required
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="flex-row"
+            ng-if=" ! isProcessing "
+    >
+
+      <button class="blue-primary"
+              ng-if=" 'get-app' !== formVals.$storage.newAccount.step "
+      >
+        <div class="wrapper flex-row">
+          <span class="label"
+                ng-if=" 'generate-code' === formVals.$storage.newAccount.step || ( 'verify-code' === formVals.$storage.newAccount.step && ! joinFromPT )"
+          >
+            Next
+          </span>
+          <span class="label"
+                ng-if=" 'create-account' === formVals.$storage.newAccount.step  || ('verify-code' === formVals.$storage.newAccount.step  && joinFromPT )"
+          >
+            Done
+          </span>
+        </div>
+      </button>
+
+      <div class="actions flex-row"
+           ng-if=" 'get-app' === formVals.$storage.newAccount.step "
+      >
+
+        <a class="button black-primary"
+           href="https://itunes.apple.com/us/app/troop-app/id1025705328?mt=8"
+           target="_blank"
+        >
+          <div class="wrapper flex-row">
+            <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KG16E-hLXzEcStYnfGQ_original_app-store.png">
+          </div>
+        </a>
+
+        <a class="button black-primary"
+           href="https://play.google.com/store/apps/details?id=work.troop.troop"
+           target="_blank"
+        >
+          <div class="wrapper flex-row">
+            <img src="https://troop-prod.s3.amazonaws.com/62f92546-2393-4316-8896-d22b485cbede/-KG16E-oNk8SyTsZl2wN_original_google-play.png">
+          </div>
+        </a>
+
+
+      </div>
+
+    </footer>
+
+  </form>
+
+  <a class="login"
+     ui-sref="login"
+     ng-if=" 'generate-code' === formVals.$storage.newAccount.step "
+  >
+    Already have an account? Log In
+  </a>
+
+</section>

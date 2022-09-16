@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="65px" height="69px" viewBox="0 0 65 69" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M53,20 C58.5228475,20 63,15.5228475 63,10 C63,6.31287166 61.0044974,3.09181792 58.0345592,1.35790577 C56.5559092,0.494638896 54.8357192,0 53,0 C47.4771525,0 43,4.4771525 43,10 C43,15.5228475 47.4771525,20 53,20 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-2" y="-2" width="24" height="24">
+            <rect x="41" y="-2" width="24" height="24" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(0.000000, 2.000000)">
+            <g id="square" transform="translate(0.000000, 3.000000)">
+                <g id="Capa_1" fill="#3B5998">
+                    <ellipse id="Oval" cx="31.9707602" cy="31.9344801" rx="31.9707602" ry="31.9344801"></ellipse>
+                </g>
+                <g id="facebook-(2)" transform="translate(26.116959, 18.028169)" fill="#FFFFFF">
+                    <g id="Capa_1">
+                        <path d="M8.39680515,27.6269028 L3.37137782,27.6269028 L3.37137782,13.8134514 L0.0188579244,13.8134514 L0.0188579244,9.05293675 L3.37137782,9.05137194 L3.36592998,6.24680964 C3.36592998,2.36307145 4.3882914,0 8.82948974,0 L12.5271097,0 L12.5271097,4.76143194 L10.2162282,4.76143194 C8.48674697,4.76143194 8.40356257,5.42663596 8.40356257,6.66844366 L8.39670038,9.05137194 L12.5530917,9.05137194 L12.0631,13.8118866 L8.40015767,13.8134514 L8.39680515,27.6269028 L8.39680515,27.6269028 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+            <g id="Oval-17-Copy-2">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <use stroke="#3B5998" mask="url(#mask-2)" stroke-width="4" xlink:href="#path-1"></use>
+            </g>
+            <path d="M51.7911714,12.5272285 L49.7149945,10.4514998 C49.4598612,10.1966652 49.0465581,10.1965158 48.7914247,10.4516492 C48.5361918,10.7068821 48.5361918,11.120235 48.7914247,11.3753684 L51.3294612,13.9130065 C51.457003,14.0403988 51.6240872,14.1041448 51.7911714,14.1041448 C51.9582556,14.1041448 52.125788,14.0403988 52.25328,13.9128073 C52.2536784,13.9122594 57.8507753,8.31496338 57.8507753,8.31496338 C58.1060082,8.05997943 58.1060082,7.64632774 57.8507753,7.39134379 C57.5956917,7.13621044 57.1820898,7.13621044 56.9272553,7.39139359 L51.7911714,12.5272285 Z" id="Shape" stroke="#3B5998" fill="#3B5998"></path>
+        </g>
+    </g>
+</svg>

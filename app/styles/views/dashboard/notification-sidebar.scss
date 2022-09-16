@@ -1,0 +1,490 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+$notification-sidebar-width: 380px;
+
+body {
+  &.read-only-mode {
+    > aside.notifications {
+      display: none;
+    }
+  }
+
+  > aside {
+
+    &.notifications {
+      opacity: 0;
+      z-index: 140;
+      @include size($notification-sidebar-width, 100%);
+      // height: calc(100% - #{$header-height});
+      // width: 0;
+      // min-width: 0;
+      // max-width: 0;
+      // top: $header-height;
+      top: 0px;
+      right: $notification-sidebar-width * -1;
+      position: fixed;
+      @include justify-content(flex-start);
+      border: 0px;
+      @include transition(opacity 0.2s linear 0s, transform 0.2s linear 0s);
+      @include transform(translateX(0));
+
+      > header {
+        z-index: 142;
+        @include size(100%, 70px);
+        // height: 70px;
+        // width: $right-sidebar-width - 1;
+        // min-width: $right-sidebar-width - 1;
+        // max-width: $right-sidebar-width - 1;
+        @include justify-content(center);
+        position: relative;
+        background: $white-primary;
+
+        > section {
+          flex: 1;
+
+          &.title {
+            flex: 2 0px;
+            @include justify-content(center);
+
+            > .text {
+              text-align: center;
+              font-family: $font-family-regular;
+              font-size: 16px;
+              color: $blue-secondary;
+            }
+
+            > .count {
+              z-index: 1;
+              margin: 0px 0px 0px 4px;
+              height: 20px;
+              min-height: 20px;
+              max-height: 20px;
+              width: 20px;
+              min-width: 20px;
+              max-width: 20px;
+              // right: -4px;
+              // top: -4px;
+              // position: absolute;
+              @include justify-content(center);
+              @include border-radius(11px);
+              overflow: hidden;
+              background: $red-octonnary;
+              font-faimly: $font-family-regular;
+              font-size: 10px;
+              color: $white-primary;
+            }
+          }
+        }
+
+        > .close-wrapper {
+          @include size(44px, 100%);
+          right: 20px;
+          top: 0px;
+          position: absolute;
+
+          > .image-container {
+            cursor: pointer;
+            @include size(44px);
+
+            &:hover {
+              > svg {
+                fill: $gray-tertiary;
+              }
+            }
+
+            > svg {
+              @include size(14px);
+              fill: $light-gray-tertiary;
+            }
+          }
+        }
+
+        > .action-wrapper {
+          z-index: 141;
+          height: 100%;
+          top: 0px;
+          left: 20px;
+          position: absolute;
+
+          > .actions {
+            position: relative;
+
+            > .menu-toggle {
+              cursor: pointer;
+              @include size(44px);
+
+              &:hover {
+                > svg {
+                  fill: $gray-tertiary;
+                }
+              }
+
+              > svg {
+                @include all-height(4px);
+                @include all-width(18px);
+                fill: $light-gray-tertiary;
+              }
+            }
+
+            > .menu {
+
+              &.show {
+                z-index: 2;
+              }
+            }
+
+          }
+        }
+      }
+
+      > ul {
+        z-index: 131;
+        background: $white-primary;
+
+        > li {
+          cursor: pointer;
+          padding: 0px;
+          width: 50%;
+          line-height: 34px;
+          position: relative;
+          @include justify-content(center);
+          border-bottom: 1px solid rgba($light-gray-quaternary, 0.5);
+          font-family: $font-family-regular;
+          font-size: 12px;
+          color: rgba($gray-twelvary, 0.7);
+          text-transform: uppercase;
+
+          &:hover {
+            color:$gray-tertiary;
+          }
+
+          > .image-container {
+            width: 20px;
+            min-width: 20px;
+            height: 20px;
+            min-height: 20px;
+
+            > svg {
+              width: 20px;
+              height: 20px;
+              fill: $light-gray-secondary;
+            }
+          }
+
+          &.active {
+            border-bottom-color: transparent;
+            color: $blue-secondary;
+
+            &:before {
+              content: "";
+              width: 100%;
+              height: 2px;
+              left: 0px;
+              bottom: -1px;
+              position: absolute;
+              background: $blue-primary;
+              color: $blue-primary;
+            }
+
+
+
+            > .image-container {
+              > svg {
+                fill: $blue-primary;
+              }
+            }
+          }
+        }
+      }
+
+      > main {
+        z-index: 131;
+        @include justify-content(flex-start);
+        background: $white-primary;
+        @include all-height(100%);
+        // height: calc(100% - 70px);
+        // width: $right-sidebar-width - 1;
+        // min-width: $right-sidebar-width - 1;
+        // max-width: $right-sidebar-width - 1;
+
+        > .no-notifications {
+          margin-top: 300px;
+          @include justify-content(center);
+          @include align-items(center);
+
+
+          > .image-container {
+            @include justify-content(center);
+            @include align-items(center);
+            > svg {
+
+              height: 48px;
+              min-height: 48px;
+              width: 48px;
+              min-width: 48px;
+              fill: $light-gray-secondary;
+            }
+          }
+
+          > .text {
+            display:flex;
+            margin-top: 50px;
+            line-height: 26px;
+            text-align: center;
+            @include justify-content(center);
+            @include align-items(center);
+            color: $light-gray-secondary;
+          }
+
+        }
+
+        > .notification-list {
+          height: 100%;
+          @include justify-content(flex-start);
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+
+          > .notification {
+            cursor: pointer;
+            padding: 0px 30px;
+
+            // &:first-of-type {
+            //
+            //   > .wrapper {
+            //     border-top: 1px solid rgba($light-gray-senary, 0.4);
+            //   }
+            // }
+
+            > .wrapper {
+              padding: 15px 0px;
+              width: 100%;
+              @include align-items(flex-start);
+              border-bottom: 1px solid rgba($light-gray-senary, 0.4);
+
+              > .profile-image {
+                margin-right: 14px;
+
+                &,
+                > .asset,
+                > .asset > .asset-thumbnail,
+                > .asset > .asset-thumbnail > img {
+
+                  @include size(35px);
+                }
+
+                > .asset {
+
+                  > .asset-thumbnail {
+                    overflow: hidden;
+                    border: 0px;
+
+                    &:before {
+                      display: none;
+                    }
+
+                    &,
+                    > .upload-progress {
+                      @include border-radius(50%);
+                    }
+                  }
+                }
+
+
+
+
+              }
+
+              > .info {
+                width: 100%;
+                max-width: 270px;
+                word-wrap: break-word;
+
+                > header {
+
+                  > .member-name {
+                    margin-right: 20px;
+                    font-family: $font-family-regular;
+                    font-size: 14px;
+                    color: $blue-gray-primary;
+                  }
+
+                  > .timestamp {
+                    font-size: 10px;
+                    color: rgba($blue-gray-primary, 0.4);
+                  }
+                }
+
+                > main {
+                  > span {
+                    margin-top: 10px;
+                    line-height: 21px;
+                    font-size: 12px;
+                    color: $gray-quaternary;
+                    white-space: pre-wrap;
+                    b {
+                      font-family: $font-family-light;
+                      font-weight: normal;
+                      color: $blue-octornary;
+                    }
+                  }
+                }
+                > footer {
+
+                  margin-top: 18px;
+
+                  > button {
+                    padding: 3px 27px;
+                    min-width: 90px;
+                    font-size: 12px;
+                    @include border-radius(5px);
+                    border: 1px solid rgba(151,151,151,0.15);
+                    background-color: $white-primary;
+                    box-shadow: 0px 4px 10px 0px rgba($black-elevenary, 0.15);
+
+
+                    &:hover {
+                      box-shadow: 0px 1px 2px 0px rgba($black-elevenary, 0.05);
+                    }
+
+                    &.accept {
+
+                      margin-right: 14px;
+
+                      > .image-container {
+
+                        > svg {
+                          fill: $blue-octornary;
+                        }
+                      }
+                    }
+                    &.decline {
+
+                      > .image-container {
+
+                        > svg {
+                          fill: $red-octonnary;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            &.invalid {
+              display: none;
+            }
+
+            &.unread {
+              background: rgba($light-gray-tertiary, 0.2);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &[data-state="home.homepage.page"],
+  &[data-state="home.homepage.support"],
+  &[data-state="home.homepage.privacy"],
+  &[data-state="home.homepage.terms"] {
+    > aside {
+      display: none;
+    }
+  }
+
+  &[data-state*="dashboard"],
+  &[data-state*="dashboard.board"],
+  &[data-state*="dashboard.board.card"],
+  &[data-state*="dashboard.board.cards"],
+  &[data-state*="dashboard.board.tags"],
+  &[data-state*="dashboard.board.chat"],
+  &[data-state*="home.dashboard.search."],
+  &[data-state*="dashboard.boards.available"],
+  &[data-state*="dashboard.boards.mine"],
+  &[data-state*="dashboard.troopMember.chat"],
+  &[data-state*="dashboard.troopMember.profile"],
+  &[data-state*="dashboard.troopMember.boards"],
+  &[data-state*="dashboard.troopMembers.list"] {
+
+
+
+    &.showing-notification-sidebar {
+
+      &:before {
+        z-index: 140;
+        content: "";
+        @include size(100%);
+        left: 0px;
+        top: 0px;
+        position: fixed;
+        background: rgba($blue-twentyfourary, 0.9);
+      }
+
+      > aside {
+
+        &.notifications {
+          opacity: 1;
+          @include transform(translateX($notification-sidebar-width * -1));
+
+          // width: $right-sidebar-width;
+          // min-width: $right-sidebar-width;
+          // max-width: $right-sidebar-width;
+          // border-left: 1px solid rgba($light-gray-quaternary, 0.5);
+        }
+      }
+    }
+
+
+  }
+}
+
+
+@media only screen and (max-width:1023px) {
+
+  body {
+
+    > aside {
+
+      &.notifications {
+        top: 84px;
+      }
+    }
+
+    &[data-state*="dashboard"],
+    &[data-state*="dashboard.board"],
+    &[data-state*="dashboard.board.card"],
+    &[data-state*="dashboard.board.cards"],
+    &[data-state*="dashboard.board.tags"],
+    &[data-state*="dashboard.board.chat"],
+    &[data-state*="dashboard.boards.available"],
+    &[data-state*="dashboard.boards.mine"],
+    &[data-state*="home.dashboard.search."],
+    &[data-state*="dashboard.troopMember.chat"],
+    &[data-state*="dashboard.troopMember.profile"],
+    &[data-state*="dashboard.troopMember.boards"],
+    &[data-state*="dashboard.troopMembers.list"] {
+
+      > aside {
+
+        &.notifications {
+
+        }
+      }
+
+    }
+    &[data-state*="dashboard.board.card"].showing-detail-card-comments,
+    &[data-state*="dashboard.troopMember.chat"] {
+      > aside {
+
+        &.notifications {
+          height: calc(100% - 44px);
+          top: 44px;
+        }
+      }
+    }
+
+
+  }
+}

@@ -1,0 +1,88 @@
+<div class="wrapper"
+     ngf-drop="filesAdded($files, $file, $event)"
+     ngf-change="filesAdded($files, $file, $event)"
+     ngf-multiple="true"
+     ngf-allow-dir="true"
+     ngf-drag-over-class="file-drop"
+     ngf-drop-disabled=" Me.troopMember.troopPermission === 'guest' "
+>
+  <div class="drag-drop-modal-overlay flex-row">
+    <div class="wrapper flex-row">
+      <div class="background flex-column">
+        <div class="image-container">
+          <svg class="icon drag-drop">
+            <use xlink:href="#drag-drop"></use>
+          </svg>
+        </div>
+        <h1>Drag &amp; Drop to Upload</h1>
+        <p>your files and assets to Troop</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="loader-wrapper flex-row"
+       ng-if="loading"
+  >
+    <div class="wrapper">
+      <div class="loader-2 small"></div>
+    </div>
+  </div>
+
+  <div class="empty-chat flex-column"
+       ng-if="( ! loading ) && data.chatEntries.length === 0"
+       ng-include=" '/views/partials/empty-chat.html' "
+  ></div>
+
+
+  <ul class="chat flex-column"
+      ng-if="( ! loading ) && data.chatEntries.length > 0"
+      tp-data-pump = "data.chatEntries"
+      tp-data-pump-load-style = " 'chat' "
+      tp-data-pump-scroll-down = "true"
+  >
+
+    <li class="top-spacer">&nbsp;</li>
+    <li class="chat-entry flex-row"
+
+        ng-repeat="entry in tpDataPumpItems track by entry.$id"
+        tp-chat-entry="entry"
+        tp-chat-entry-previous="entry.prevEntry"
+        tp-chat-entry-first=" entry.first ? entry.first : false "
+        tp-chat-entry-last="$last"
+        tp-chat-entry-asset="data.chatAssets[entry.assetId]"
+        tp-chat-entry-header-info="false"
+    ></li>
+
+    <li class="bottom-spacer">&nbsp;</li>
+  </ul>
+
+  <form class="flex-row">
+    <div class="actions">
+      <span class="menu-button image-container flex-row"
+            ngf-select="filesAdded($files)"
+            ngf-multiple="true"
+      >
+        <svg class="icon plus">
+          <use xlink:href="#plus"></use>
+        </svg>
+      </span>
+    </div>
+    <div class="field-group flex-row flex-spacer">
+      <div class="wrapper flex-row">
+        <textarea name="chatEntry"
+                  placeholder="Write something here..."
+                  rows="1"
+                  data-msd-elastic=""
+                  ng-change="chatEntryTyping()"
+                  ng-model="chatEntry"
+                  ng-enter-key=""
+                  ng-enter-key-action="chatEntrySubmit()"
+                  ng-enter-key-catch="single"
+                  autocomplete="off"
+                  ng-focus=" ! loading "
+        ></textarea>
+      </div>
+    </div>
+
+  </form>
+</div>

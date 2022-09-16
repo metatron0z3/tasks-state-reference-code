@@ -1,0 +1,111 @@
+
+<header class="flex-row"
+        ng-class=" card.description && (card.assetCount === 0)  ? 'border-bottom' : '' "
+>
+  <span class="creator-block flex-row">
+    <span class="profile-image image-container"
+          tp-troop-member-profile=" card.createdByMemberId "
+          tp-troop-member-avatar-asset-size="smallUrl"
+          tp-troop-member-troop-id=" card.troopId "
+    ></span>
+    <span class="name-date flex-column">
+      <span class="creator"
+            tp-troop-member="{{ card.createdByMemberId }}"
+            tp-troop-member-troop-id=" {{ card.troopId }} "
+            tp-troop-member-user-name="true"
+      ></span>
+      <span class="date"
+            ng-bind=" card.createdAt | moment:'extended-format'  "
+      >
+      </span>
+    </span>
+
+
+  </span>
+
+  <span class="flex-spacer flex-row"></span>
+
+  <span class="card-menu flex-row"
+        ng-if=" ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( card.createdByMemberId === Me.troopMember.$id ) "
+        ng-include=" '/views/partials/card/card-menu.html' "
+  ></span>
+<!--  add :after for horizontal line  -->
+</header>
+
+
+
+<main class="flex-column"
+      ng-init=" card.assetsExtra = card.assetCount - assetCountLimit"
+      data-count="{{ card.assetCount }}"
+>
+  <ul ng-if=" card.assetCount > 0 "
+      class="asset-list flex-row-wrap"
+      ng-class=" card.assetsExtra > 0 ? 'has-more' : '' "
+  >
+    <li class="asset flex-column"
+        ng-repeat=" assetId in card.orderedAssets | limitTo : assetCountLimit "
+        tp-asset=" assetId "
+        tp-asset-troop-id=" card.troopId "
+        tp-asset-index=" $index "
+        tp-asset-count=" card.orderedAssets.length "
+        tp-asset-count-limit=" assetCountLimit "
+        tp-asset-size=" {{ assetSize($index) }} "
+        tp-asset-info=" true "
+        tp-asset-download=" true "
+        tp-asset-rename=" false "
+        tp-asset-remove=" false "
+        tp-asset-thumbnail-click=" showAssetsModal(card, assetId) "
+        tp-asset-has-more-click=" navToDetailCard(card) "
+    ></li>
+
+  </ul>
+
+  <span class="title">
+    <h1 data-marked="card.cardName"
+        ng-click="navToDetailCard(card,card.boardId)"
+    ></h1>
+  </span>
+
+  <div ng-if="card.description"
+       class="wrapper"
+       ng-has-overflow=""
+  >
+    <div class="description"
+         data-marked=" card.description "
+         ng-has-overflow=""
+    ></div>
+    <div class="read-more flex-row">
+      <span class="text"
+            ng-click="navToDetailCard(card,card.boardId)"
+      >
+        Read More
+      </span>
+    </div>
+  </div>
+
+  <div class="tags flex-row-wrap">
+    <button class="tag"
+            title="{{ tag.value }}"
+            ng-repeat="tag in card.orderedTags"
+            ng-include=" '/views/partials/card/tag.html' "
+            ng-click="selectTag(tag.name)"
+    ></button>
+  </div>
+</main>
+
+<footer class="flex-row">
+  <span class="comments flex-row"
+        tp-chat-entries-count="card.chatId"
+        tp-chat-entries-count-append="{single:'Note', plural:'Notes'}"
+        ng-click="navToDetailCard(card,card.boardId)"
+    >
+    <span class="comment image-container flex-row">
+      <svg class="icon book">
+        <use xlink:href="#book"/>
+      </svg>
+    </span>
+  </span>
+
+  <span class="flex-spacer"></span>
+
+</footer>

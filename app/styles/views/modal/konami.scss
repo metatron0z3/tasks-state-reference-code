@@ -1,0 +1,470 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500,700);
+@import url(http://fonts.googleapis.com/css?family=Orbitron:500,700,900);
+$ding: 'Ubuntu', sans-serif;
+$mash: 'Orbitron', sans-serif;
+$lightgray: #c3c4c6;
+$brack: #2b2320;
+$wolf: #878880;
+$ruby: #d92214;
+$shadow: #13110c;
+
+body {
+  > .modal-overlay {
+
+    &.konami-modal-overlay {
+
+      > .close {
+        z-index: 1;
+        cursor: pointer;
+        height: 20px;
+        min-height: 20px;
+        width: 20px;
+        min-width: 20px;
+        top: 39px;
+        right: 39px;
+        position: absolute;
+
+        > svg {
+          height: 16px;
+          width: 16px;
+          fill: rgba($light-gray-secondary, 0.8);
+        }
+
+      }
+
+      > .modal {
+
+        &.konami-modal {
+          padding: 0;
+          margin: 0;
+          width: 100%;
+          height: calc(100% - 130px);
+          max-width: none;
+          max-height: none;
+          @include border-radius(0px);
+          background: transparent;
+          @include align-items(center);
+
+          &:before {
+            display: none;
+          }
+
+          > main {
+            margin: 0px;
+            width: auto;
+            height: auto;
+
+            > #controllerOut {
+              position: relative;
+              background: $lightgray;
+              width: 500px;
+              height: 200px;
+              border-top: solid 4px #d2d6d7;
+              box-shadow: 0 12px 12px 0 rgba(0, 0, 0, 0.55);
+              border-radius: 9px;
+              font-family: $ding;
+              color: $ruby;
+
+              > #controllerInner {
+                position: relative;
+                @include background(linear-gradient(#2e2724, #1F1714) left repeat);
+                width: 480px;
+                height: 155px;
+                margin: 0 auto;
+                border-radius: 6px;
+                top: 35px;
+                box-shadow:  inset 2px -2px 4px 0 rgba(50, 50, 50, 0.75);
+                border: 1px solid #191816;
+
+                > .left {
+                  position: relative;
+                  float: left;
+                  width: 28%;
+                  text-align: center;
+                  height: 155px;
+
+                  > .arrow {
+                    position: absolute;
+                    left: 59px;
+                    top: 33px;
+                    z-index: 5;
+                    opacity: 0.7;
+
+                    > #trs {
+                      border-top:solid transparent;
+                      border-left:solid 8px transparent;
+                      border-right:solid 8px transparent;
+                      border-bottom:solid 8px #0d0d0d;
+                      width:0;
+                      height:0;
+                      @include background(linear-gradient(#0d0d0d, #404040) left repeat);
+                    }
+                    > .base {
+                      @include background(linear-gradient(#0d0d0d,#404040) left repeat);
+                      width: 9px;
+                      height: 14px;
+                      left: 3.5px;
+                      position: relative;
+                    }
+
+                    &.aDown {
+                      @include transform(scale(0.9) rotate(180deg));
+                      bottom: 29px;
+
+                      > #trs {
+                        border-bottom:solid 8px #0d0d0d;
+                      }
+                      > .base {
+                        @include background(linear-gradient(#0d0d0d, #404040) left repeat);
+                      }
+                    }
+
+                    &.aRight {
+                      @include transform(scale(0.9) rotate(90deg));
+                      bottom: 28px;
+                      top: 30px;
+
+                      > #trs {
+                        border-bottom:solid 8px #0d0d0d;
+                        opacity: 0.8;
+                      }
+                      > .base {
+                        @include background(linear-gradient(#0d0d0d, #404040) left repeat);
+                      }
+                    }
+
+                    &.aLeft {
+                      @include transform(scale(0.9) rotate(-90deg));
+                      bottom: 28px;
+                      top: 30px;
+
+                      > #trs {
+                        border-bottom:solid 8px #0d0d0d;
+                        opacity: 0.8;
+                      }
+                      > .base {
+                        @include background(linear-gradient(#0d0d0d, #404040) left repeat);
+                      }
+                    }
+                  }
+
+                  > .vert {
+                    width: 32px;
+                    height: 97px;
+                    @include background(linear-gradient(#1c1c1c, #1f1f1f) left repeat);
+                    border-radius: 6px;
+                    border: solid 4px #000;
+                    margin: 0 auto;
+                    top: 28px;
+                    z-index: 1;
+                    position: relative;
+                    //box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 1);
+                  }
+
+                  > .moves {
+                    width: 20px;
+                    height: 20px;
+                    @include background(linear-gradient(#0d0d0d, #404040) left repeat);
+                    -moz-border-radius: 50px;
+                    -webkit-border-radius: 50px;
+                    border-radius: 50px;
+                    border: solid 1px #272727;
+                    margin: 0 auto;
+                    position: absolute;
+                    left: 56px;
+                    z-index: 4;
+                    top: 67px;
+                  }
+
+                  > .vertWhite {
+                    width: 34px;
+                    height: 100px;
+                    @include background(linear-gradient(#1c1c1c, #1f1f1f) left repeat);
+                    border-radius: 6px;
+                    border: solid 6px #d6d8d7;
+                    margin: 0 auto;
+                    top: 26px;
+                    z-index: 0;
+                    position: absolute;
+                    left: 49px;
+                  }
+
+                  > .horz {
+                    width: 25px;
+                    height: 90px;
+                    @include background(linear-gradient(#1c1c1c, #1f1f1f) left repeat);
+                    border-radius: 6px;
+                    display: block;
+                    left: 50px;
+                    margin: 0 auto;
+                    top: 34px;
+                    position: absolute;
+                    @include transform(scale(0.9) rotate(90deg));
+                    z-index: 2;
+                    text-align: center;
+                  }
+
+                  > .horzShad {
+                    width: 33px;
+                    height: 107px;
+                    @include background(linear-gradient(#1c1c1c, #1f1f1f) left repeat);
+                    border-radius: 6px;
+                    border: solid 4px #000;
+                    display: block;
+                    left: 49px;
+                    margin: 0 auto;
+                    top: 25px;
+                    position: absolute;
+                    @include transform(scale(0.9) rotate(90deg));
+                    z-index: 1;
+                    text-align: center;
+                    box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 1);
+                  }
+
+                  > .horzShadWhite {
+                    width: 37px;
+                    height: 111px;
+                    @include background(linear-gradient(#1c1c1c, #1f1f1f) left repeat);
+                    border-radius: 6px;
+                    border: solid 6px #d6d8d7;
+                    display: block;
+                    left: 47px;
+                    margin: 0 auto;
+                    top: 23px;
+                    position: absolute;
+                    @include transform(scale(0.9) rotate(90deg));
+                    z-index: 0;
+                    text-align: center;
+                  }
+                }
+
+                > .center {
+                  width: 34%;
+                  height: 155px;
+                  float: left;
+
+                  > .bar {
+                    width: 100%;
+                    margin: 0 auto;
+                    height: 24px;
+                    background: $wolf;
+                    margin-bottom: 6px;
+                    border-radius: 6px;
+
+                    &.bTop {
+                      border-top-left-radius: 0;
+                      border-top-right-radius: 0;
+                      border-bottom-left-radius: 6px;
+                      border-bottom-right-radius: 6px;
+                      height: 25px;
+                      margin-top: -1px;
+                    }
+
+                    &.bBot {
+                      height: 16px;
+                      position: relative;
+                      top: 4px;
+                      border-bottom-left-radius: 0;
+                      border-bottom-right-radius: 0;
+                      border-top-left-radius: 6px;
+                      border-top-right-radius: 6px;
+                    }
+
+                    &.bText {
+                      font-family: $mash;
+                      font-weight: 900;
+                      font-size: 0.795em;
+
+                      > ul {
+                        list-style: none;
+                        padding: 0;
+                        position: relative;
+                        text-align: center;
+                        margin: 0;
+
+                        > li {
+                          display: inline-block;
+                          margin: 7px 8px 0 8px;
+                          color: #bf2618;
+                          text-shadow: -1px 0px rgba(0, 0, 0, 0.2);
+                          font-family: $mash;
+                          font-weight: 900;
+                          font-size: 0.795em;
+                        }
+                      }
+                    }
+
+                    &.buttonBar {
+                      background: $lightgray;
+                      height: 38px;
+                      border-radius: 8px;
+                      position: relative;
+                      top: 3px;
+
+                      > .buttonBarInner {
+                        height: 30px;
+                        width: 94%;
+                        position: relative;
+                        top: 4px;
+                        border-radius: 4px;
+                        margin: 0 auto;
+                        box-shadow: inset 0 3px 2px 0 rgba(50, 50, 50, 0.66);
+
+                        > ul {
+                          list-style: none;
+                          margin: 0;
+                          padding: 0;
+                          text-align: center;
+                          position: relative;
+                          top: 8px;
+
+                          > li {
+                            @include background(linear-gradient(#2c211b, #1c1412) left repeat);
+                            display: inline-block;
+                            width: 45px;
+                            height: 14px;
+                            border-top: solid 2px #635c56;
+                            border-radius: 6px;
+                            margin: 0 10px 0;
+                            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.9);
+                            @include transition(all .05s);
+
+                            &:hover {
+                              @include transition(all .05s);
+                              box-shadow: 0 2px 2px 0 rgba(50, 50, 50, 1);
+                              cursor: pointer;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+
+
+                }//end center
+
+                > .right {
+                  position: relative;
+                  float: right;
+                  height: 155px;
+                  width: 38%;
+
+                  &,
+                  * {
+                    font-weight: 400;
+                    font-size: 1em;
+                    font-family: $ding;
+
+                  }
+
+                  > .trademark {
+                    position: relative;
+                    top: 10px;
+                    right: 0px;
+                    display: block;
+                    font-size: 1.17em;
+                    -webkit-margin-before: 1em;
+                    -webkit-margin-after: 1em;
+                    -webkit-margin-start: 0px;
+                    -webkit-margin-end: 0px;
+                    font-weight: bold;
+
+                    > .reg {
+                      position: absolute;
+                      top: -4px;
+                      font-weight: 400;
+                      font-size: 0.695em;
+                      opacity: 0.9;
+                    }
+
+                  }
+
+                  > .rightButtons {
+                    list-style: none;
+                    position: absolute;
+                    bottom: 0;
+                    left: 30px;
+                    padding: 0;
+                    margin: 1em 0px;
+
+                    > li {
+                      display: inline-block;
+                      margin: 0 0 0 5px;
+                      width: 50px;
+                      position: relative;
+                      height: 50px;
+                      background: $lightgray;
+                      border-radius: 4px;
+                      border-top: solid 1px #ecedef;
+
+                      > .circ {
+                        width: 38px;
+                        height: 38px;
+                        @include background(linear-gradient(#b4150f, #fb3119) left repeat);
+                        border: 1px solid #3b2b2a;
+                        -moz-border-radius: 50px;
+                        -webkit-border-radius: 50px;
+                        border-radius: 50px;
+                        margin: 0 auto;
+                        position: relative;
+                        top: 4px;
+                        box-shadow: 0 5px 5px 0 rgba(50, 50, 50, 1);
+                        @include transition(all .1s);
+
+                        &:hover {
+                          box-shadow: 0 3px 5px 0 rgba(50, 50, 50, 0.66);
+                          @include transition(all .1s);
+                          cursor: pointer;
+                        }
+                      }
+                      > .buttNums {
+                        font-family: $mash;
+                        font-weight: 900;
+                        position: absolute;
+                        right: 0;
+                        opacity: 0.8;
+                        font-size: 0.895em;
+                        bottom: -18px;
+                      }
+                    }
+                  }
+                }//end right
+              }
+            }
+          }
+
+          > footer {
+            margin-top: 30px;
+            padding: 20px;
+            width: auto;
+            height: auto;
+            background: $white-primary;
+
+            > .field-group {
+
+              &.slider {
+
+                input {
+                  margin: 0px 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width:1024px) {
+  body {
+
+    > .modal-overlay {
+
+
+    }
+  }
+}

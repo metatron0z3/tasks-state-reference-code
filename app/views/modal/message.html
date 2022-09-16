@@ -1,0 +1,38 @@
+<div class="modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click=" close() "
+>
+
+  <div class="message-modal modal flex-column"
+       ng-class=" extraClasses "
+       ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click="close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header ng-bind-html=" header ">
+      <h1>This Board Needs a Moderator</h1>
+    </header>
+
+    <main ng-bind-html=" message ">
+      I got something to say.
+    </main>
+
+    <footer class="flex-row">
+      <button class="accept blue-primary"
+              ng-click="accept()"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">OK</span>
+        </div>
+      </button>
+    </footer>
+  </div>
+
+</div>

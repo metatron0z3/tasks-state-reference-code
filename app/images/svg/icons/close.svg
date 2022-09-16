@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="19px" height="19px" viewBox="0 0 19 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>Times</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="New-Card" stroke="none" stroke-width="1" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Card-View-Copy" sketch:type="MSArtboardGroup" transform="translate(-897.000000, -90.000000)">
+            <path d="M906.5,97.1000664 L899.895153,90.4952192 C899.238905,89.8389714 898.162972,89.8375254 897.500249,90.5002488 C896.832905,91.1675926 896.835274,92.2352072 897.495219,92.8951528 L904.100066,99.5 L897.495219,106.104847 C896.838971,106.761095 896.837525,107.837028 897.500249,108.499751 C898.167593,109.167095 899.235207,109.164726 899.895153,108.504781 L906.5,101.899934 L913.104847,108.504781 C913.761095,109.161029 914.837028,109.162475 915.499751,108.499751 C916.167095,107.832407 916.164726,106.764793 915.504781,106.104847 L908.899934,99.5 L915.504781,92.8951528 C916.161029,92.238905 916.162475,91.1629722 915.499751,90.5002488 C914.832407,89.8329051 913.764793,89.8352736 913.104847,90.4952192 L906.5,97.1000664 Z" id="Times" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

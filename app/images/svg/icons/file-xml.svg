@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="37px" height="48px" viewBox="0 0 37 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.3 (16044) - http://www.bohemiancoding.com/sketch -->
+    <title>zml</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Asset-Icons" sketch:type="MSArtboardGroup" transform="translate(-450.000000, -19.000000)">
+            <g id="zml" sketch:type="MSLayerGroup" transform="translate(450.000000, 19.000000)">
+                <g id="Page-1-+-MP4" sketch:type="MSShapeGroup">
+                    <g id="Page-1" transform="translate(0.238482, 0.000000)">
+                        <path d="M36.299458,10.8384 L36.299458,46.248 C36.299458,47.2128 35.5083469,48 34.5387534,48 L1.76070461,48 C0.791111111,48 0,47.2128 0,46.248 L0,1.872 C0,0.9072 0.791111111,0.12 1.76070461,0.12 L24.3604336,0.12 L36.299458,10.8384 Z" id="Fill-1" fill="#B2E080"></path>
+                        <path d="M36.299458,10.8384 L36.299458,11.04 L25.8027642,11.04 C24.9392954,11.04 24.2398374,10.344 24.2398374,9.4848 L24.2398374,0.12 L24.3604336,0.12 L36.299458,10.8384 Z" id="Fill-3" opacity="0.5" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+                <g id="web2-(1)" transform="translate(8.000000, 22.000000)" fill="#FFFFFF" sketch:type="MSShapeGroup">
+                    <g id="Capa_1">
+                        <g id="Group">
+                            <g id="Shape">
+                                <path d="M6.4219503,10.5750435 L0,6.92769565 L0,4.90756522 L6.4219503,1.28086957 L6.4219503,3.65365217 L1.94702982,5.89230435 L6.4219503,8.2153913 L6.4219503,10.5750435 L6.4219503,10.5750435 Z"></path>
+                                <path d="M7.51883499,11.8514783 L11.77766,0.00347826087 L13.1231213,0.00347826087 L8.85440159,11.8514783 L7.51883499,11.8514783 L7.51883499,11.8514783 Z"></path>
+                                <path d="M14.5640219,10.5750435 L14.5640219,8.2153913 L19.0380656,5.91108696 L14.5640219,3.62456522 L14.5640219,1.27991304 L20.9859722,4.91130435 L20.9859722,6.91926087 L14.5640219,10.5750435 L14.5640219,10.5750435 Z"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,388 @@
+
+<div class="loader-wrapper flex-row"
+     ng-if=" vm.loading "
+>
+  <div class="wrapper">
+    <div class="loader-2 small"></div>
+  </div>
+</div>
+
+<div class="empty-board flex-column"
+     ng-if=" ( ! vm.loading ) && ( vm.Me.currentBoardCards.length === 0 ) && (  _.isEmpty(vm.Me.currentboard.tagNames) ) "
+     ng-include=" '/views/partials/empty-board.html' "
+></div>
+<div class="card-list-tables flex-row"
+     ng-class=" $root.showListViewTagChooser ? 'showing-tag-chooser' : '' "
+     ng-if=" ( ! vm.loading ) && ( ! _.isEmpty(vm.Me.currentboard.tagNames) ) "
+     ngf-drop=" vm.filesAdded($files, $file, $event, 'untagged') "
+     ngf-drop-disabled=" vm.dragDisabled "
+     ngf-change=" vm.filesAdded($files, $file, $event, 'untagged') "
+     ngf-multiple=" true "
+     ngf-allow-dir=" false "
+     ngf-drag-over-class= " { accept: 'dragover', delay: 200 } "
+     ngf-drag=" vm.drag($isDragging, $class, $event) "
+>
+  <div class="wrapper flex-row"
+       ng-sortable=" vm.tagSortableOptions "
+  >
+    <div class="card-list-table"
+         ng-class=" vm.cardListTableClasses(list) "
+         ng-repeat=" list in vm.cardLists"
+         ng-if=" vm.showTagList[list.name] "
+         data-tag-name="{{ list.name }}"
+         data-color="{{ list.color }}"
+
+    >
+    <!-- this is for tag specifc drag and drop -->
+      <!-- <div class="wrapper flex-column"
+            ngf-drop=" vm.filesAdded($files, $file, $event, list.name) "
+            ngf-drop-disabled=" vm.Me.troopMember.troopPermission === 'guest' || vm.tagSorting "
+            ngf-change=" vm.filesAdded($files, $file, $event, list.name) "
+            ngf-multiple=" true "
+            ngf-allow-dir=" false "
+            ngf-stop-propagation=" true "
+            ngf-drag-over-class="file-drop"
+      > -->
+      <div class="wrapper flex-column">
+
+        <header class="flex-column tag-list-drag-handle">
+          <div class="tag-info">
+
+            <span class="tag-label "
+                  ng-bind=" list.label "
+                  data-count="({{ list.count }})"
+                  ng-dblclick=" vm.showTagLabelRename($event, list) "
+                  ng-if=" ! vm.showTagLabelRenameInput[list.name] "
+            ></span>
+            <form class="tag-label-rename flex-row"
+                  ng-submit=" vm.renameTagLabel($event, list) "
+                  ng-if=" vm.showTagLabelRenameInput[list.name] "
+            >
+              <input type="text"
+                     ng-model=" vm.tagLabelRenameInput[list.name] "
+                     ng-blur=" vm.renameTagLabel($event, list) "
+                     ng-esc-key=" vm.toggleTagLabelRenameInput(list, false) "
+                     ng-focus=" vm.showTagLabelRenameInput[list.name] "
+              >
+            </form>
+
+            <span class="tag-name tag-list-drag-handle"
+                  ng-bind=" list.title "
+                  ng-dblclick=" vm.showTagRename($event, list) "
+                  ng-if=" ! vm.showTagRenameInput[list.name] "
+            ></span>
+            <form class="tag-rename flex-row"
+                  ng-submit=" vm.renameTag($event, list) "
+                  ng-if=" vm.showTagRenameInput[list.name] "
+            >
+              <input type="text"
+                     ng-model=" vm.tagRenameInput[list.name] "
+                     ng-blur=" vm.renameTag($event, list) "
+                     ng-esc-key=" vm.toggleTagRenameInput(list, false) "
+                     ng-focus=" vm.showTagRenameInput[list.name] "
+              >
+            </form>
+
+
+          </div>
+          <span class="card-list-menu flex-row"
+                ng-if="
+                  ( 'untagged' !== list.name )
+                  && vm.isAdmin
+                  && ( ! vm.showTagLabelRenameInput[list.name] )
+                  && ( ! vm.showTagRenameInput[list.name] )
+                "
+          >
+            <span class="dotdotdot image-container flex-row"
+                  ng-click=" vm.cardListMenus[list.name] = ! vm.cardListMenus[list.name] "
+            >
+              <svg class="icon dotdotdot">
+                <use xlink:href="#dotdotdot"/>
+              </svg>
+            </span>
+
+            <ul class="menu flex-column"
+                ng-class=" vm.cardListMenus[list.name] === true ? 'show' : '' "
+                ng-mouseleave=" vm.cardListMenus[list.name] = false "
+            >
+              <li class="tag-color menu-item flex-column">
+                <span class="label uppercase">#Tag Color</span>
+                <ul class="tag-color-list flex-row-wrap">
+                  <li class="color"
+                      ng-repeat=" color in vm.tagColors track by vm.customTracking($index,color)"
+                      ng-class=" { active: color === list.color }"
+                      data-color="{{ color }}"
+                      ng-click=" vm.chooseColor(list.name, color) "
+                  ></li>
+                </ul>
+              </li>
+              <li class="rename-label menu-item flex-row"
+                  ng-click=" vm.showTagLabelRenameInput[list.name] = true; vm.cardListMenus[list.name] = false; vm.tagSortableOptions.disabled = true; "
+              >
+                <span class="label">Rename Label</span>
+              </li>
+              <li class="rename-tag menu-item flex-row"
+                  ng-click=" vm.showTagRenameInput[list.name] = true; vm.cardListMenus[list.name] = false; vm.tagSortableOptions.disabled = true; "
+              >
+                <span class="label">Rename Tag</span>
+              </li>
+              <li class="add menu-item flex-row"
+                  ng-click=" vm.showCardModal('new', null, list.name ) "
+              >
+                <span class="label">Add Card</span>
+              </li>
+              <li class="delete-cards warning menu-item flex-row"
+                  ng-click=" vm.showBulkArchiveCardsModal(list.name) "
+                  ng-if=" vm.cardListsMap[list.name].count > 0 "
+              >
+                <span class="label">Delete Cards in List</span>
+              </li>
+              <li class="delete menu-item flex-row"
+                  ng-click=" vm.removeList(list.name) "
+              >
+                <span class="label">Remove List</span>
+              </li>
+            </ul>
+          </span>
+        </header>
+
+        <!-- this is for tag specific drag and drop -->
+        <!-- <div class="drag-overlay flex-column"
+              ng-include=" '/views/partials/drag-drop-overlay.html' "
+        ></div> -->
+        <main>
+          <ul class="card-list flex-column"
+              data-list-name="{{ list.name }}"
+              ng-sortable=" vm.cardSortableOptions "
+          >
+            <li class="card card-row flex-column"
+                ng-class=" { hovering: vm.mouseOverCardId === card.$id} "
+                ng-repeat=" card in list.cards track by vm.customTracking($index, card.$id) "
+                ng-click=" vm.navToDetailCard(card, list.name) "
+                tp-card-tags=" card.tags "
+                data-card-id=" {{ card.$id }} "
+                title=" {{ card.cardName }} "
+                ng-style=" Me.currentBoard.viewSettings.tag.showImage && card.style "
+                ng-mouseover=" vm.mouseOverCardId = card.$id "
+                ng-mouseleave=" vm.mouseOverCardId = null "
+            >
+              <span class="close image-container"
+                    ng-if=" vm.isAdmin || ( card.createdByMemberId === vm.Me.troopMember.$id ) "
+                    ng-click=" vm.showDeleteCardModal(card); $event.stopPropagation(); "
+                    title=" Delete "
+              >
+                <svg class="icon close">
+                  <use xlink:href="#close"/>
+                </svg>
+              </span>
+              <span class="pencil image-container"
+                    ng-if=" vm.isAdmin || ( card.createdByMemberId === vm.Me.troopMember.$id ) "
+                    ng-click=" vm.showCardModal('edit', card); $event.stopPropagation(); "
+                    title=" Edit "
+              >
+                <svg class="icon pencil">
+                  <use xlink:href="#pencil"/>
+                </svg>
+              </span>
+
+              <span class="asset flex-column"
+                    ng-if=" card.orderedAssets.length > 0 && Me.currentBoard.viewSettings.tag.showImage "
+                    tp-asset=" card.orderedAssets[0] "
+                    tp-asset-troop-id=" card.troopId "
+                    tp-asset-index=" $index "
+                    tp-asset-size=" largeUrl "
+                    tp-asset-info=" false "
+                    tp-asset-download=" true "
+                    tp-asset-rename=" false "
+                    tp-asset-remove=" false "
+                    tp-asset-show-menu=" false "
+                    tp-asset-can-click=" true "
+                    tp-asset-image-only=" true "
+              ></span>
+              <span class="title">
+                {{ card.cardName }}
+              </span>
+              <span class="card-info flex-row"
+                    ng-if=" ( card.noteCount > 0 ) || ( card.orderedAssets.length > 0 ) "
+              >
+                <span class="notes image-container"
+                      ng-if=" card.noteCount > 0 "
+                      data-count=" {{ card.noteCount }} "
+                >
+                  <svg class="icon add-note">
+                    <use xlink:href="#add-note"/>
+                  </svg>
+                </span>
+                <span class="asset image-container"
+                      ng-if=" card.orderedAssets.length > 0 "
+                      data-count="{{ card.orderedAssets.length }}"
+                >
+                  <svg class="icon paper-clip">
+                    <use xlink:href="#paper-clip"/>
+                  </svg>
+                </span>
+                <span class="flex-spacer">&nbsp;</span>
+              </span>
+            </li>
+
+          </ul>
+        </main>
+        <footer ng-class=" ( 'untagged' === list.name ) || ( vm.Me.troopMember.boards[vm.Me.currentBoard.$id].permission !== 'admin' ) ? 'no-button' : '' ">
+          <div class="new-card"
+               ng-if=" ( 'untagged' !== list.name ) && vm.isAdmin "
+          >
+            <button class="new-card"
+                    ng-click=" vm.showNewCardInput[list.name] = true"
+                    ng-if=" ! vm.showNewCardInput[list.name] "
+            >
+              <div class="wrapper flex-row">
+                <span class="image-container">
+                  <svg class="icon plus">
+                    <use xlink:href="#plus"/>
+                  </svg>
+                </span>
+              </div>
+            </button>
+            <form class="flex-row-wrap"
+                  ng-if=" vm.showNewCardInput[list.name] "
+            >
+              <input type="text"
+                     ng-model=" vm.newCardName[list.name] "
+                     ng-set-focus=" vm.showNewCardInput[list.name] "
+              />
+              <button class="add blue-octornary"
+                      ng-click=" vm.createCard($event, list.name) "
+              >
+                <div class="wrapper flex-row">
+                  <span class="label">Add</span>
+                </div>
+              </button>
+
+              <span class="flex-spacer">&nbsp;</span>
+
+              <button class="cancel"
+                      ng-click=" vm.showNewCardInput[list.name] = false"
+              >
+                <div class="wrapper flex-row">
+                  <span class="label">Cancel</span>
+                </div>
+              </button>
+            </form>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="new-card-list-table"
+       ng-class=" vm.newBoardTag.showNewBoardTagInput ? 'show-input' : '' "
+       ng-if=" vm.isAdmin "
+  >
+    <header class="flex-row">
+      <button class="circle"
+              ng-click=" vm.newBoardTag.showNewBoardTagInput = true"
+      >
+        <div class="wrapper flex-row">
+          <span class="image-container">
+            <svg class="icon plus">
+              <use xlink:href="#plus"/>
+            </svg>
+          </span>
+        </div>
+      </button>
+    </header>
+    <form name="newCardListForm"
+          class="flex-row-wrap"
+    >
+      <input name="newBoardTag"
+             type="text"
+             ng-model=" vm.newBoardTag.value "
+             ng-set-focus=" vm.newBoardTag.showNewBoardTagInput "
+             autocomplete="off"
+      />
+      <button class="add blue-primary"
+              ng-click=" vm.createNewBoardTag() "
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Add</span>
+        </div>
+      </button>
+
+      <span class="flex-spacer">&nbsp;</span>
+
+      <button class="cancel"
+              ng-click=" vm.newBoardTag.showNewBoardTagInput = false "
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Cancel</span>
+        </div>
+      </button>
+    </form>
+  </div>
+  <div class="flex-spacer">&nbsp;</div>
+  <div class="drag-overlay flex-column"
+        ng-include=" '/views/partials/drag-drop-overlay.html' "
+  ></div>
+</div>
+
+<span class="card-count"
+      ng-if=" ! vm.loading "
+      ng-bind=" vm.cardCount + ' Card' + (vm.cardCount > 1 ? 's' : '') "
+></span>
+
+<button class="tag-chooser-toggle white-primary circle"
+        ng-if=" ! vm.loading "
+        ng-click=" $root.showListViewTagChooser = true "
+>
+  <div class="wrapper flex-row">
+    <span class="image-container">
+      <svg class="icon vertical-sliders">
+        <use xlink:href="#vertical-sliders"/>
+      </svg>
+    </span>
+  </div>
+</button>
+
+<div class="tag-chooser flex-column"
+     ng-if=" ! vm.loading "
+     ng-class=" $root.showListViewTagChooser ? 'show' : '' "
+>
+  <div class="flex-row">
+    <span class="label uppercase">Filter Tags</span>
+    <span class="flex-spacer">&nbsp;</span>
+    <span class="close image-container"
+         ng-click=" $root.showListViewTagChooser = false "
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </span>
+  </div>
+
+  <div class="flex-row-wrap">
+    <button class="toggle-all-checkboxes white-primary round"
+            ng-class=" vm.checkboxesToggle ? 'active' : '' "
+            ng-click=" vm.toggleCheckboxes() "
+    >
+      <div class="wrapper">
+        <div class="label">All</div>
+      </div>
+    </button>
+    <button class="tag-list-toggle white-primary round"
+            ng-class=" vm.showTagList[list.name] ? 'active' : '' "
+            ng-repeat=" list in vm.cardLists "
+            ng-init=" vm.initTagListCheckbox(list.name) "
+            ng-click=" vm.toggleList(list.name) "
+    >
+      <div class="wrapper">
+        <span class="label"
+              ng-bind=" list.title "
+        ></span>
+      </div>
+    </button>
+    <span class="flex-spacer">&nbsp;</span>
+  </div>
+
+
+</div>

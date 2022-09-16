@@ -1,0 +1,173 @@
+<div class="modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-has-overflow=""
+     ng-click="close()"
+>
+
+  <form name="troopMemberChatForm"
+        class="troop-member-chat-modal modal flex-column"
+        ng-class=" modalData.loading ? 'loading' : '' "
+        novalidate="novalidate"
+        ng-submit="chatEntrySubmit()"
+        ng-click=" $event.stopPropagation() "
+  >
+    <div class="loader-wrapper flex-row"
+         ng-if="modalData.loading"
+    >
+      <div class="wrapper">
+        <div class="loader-2 small"></div>
+      </div>
+    </div>
+
+
+
+    <div class="close image-container"
+         ng-click="close()"
+        >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header class="flex-row">
+      <div class="profile-image image-container flex-row"
+           tp-troop-member="{{ currentTroopMember.$id }}"
+           tp-troop-member-troop-id="{{ currentTroopMember.troopId }}"
+           tp-troop-member-avatar-asset-size="mediumUrl"
+      ></div>
+      <div class="talking-to-member flex-column">
+        <div class="user-name"
+             ng-bind=" currentTroopMember.name "
+        ></div>
+        <div class="troop-title"
+             ng-bind=" currentTroopMember.title "
+        ></div>
+      </div>
+    </header>
+
+    <main>
+      <div class="confirm-entry-delete flex-row"
+           ng-if=" modalData.isConfirmDelete "
+      >
+        <div class="text">
+          Are you sure you want to delete the
+          "<b ng-bind="entryToDelete.text"></b>" comment?
+        </div>
+      </div>
+
+      <div class="empty-chat flex-column"
+           ng-if="( ! modalData.loading ) && ( ! modalData.isConfirmDelete ) && chatEntries.length === 0"
+           ng-include=" '/views/partials/empty-chat.html' "
+      ></div>
+
+      <ul class="chat flex-column"
+          ng-if="( ! modalData.loading ) && ( ! modalData.isConfirmDelete ) && chatEntries.length > 0"
+      >
+        <li class="top-spacer flex-spacer">&nbsp;</li>
+        <li class="chat-entry flex-row"
+            ng-class=" Me.troopMember.$id === entry.memberId ? 'mine' : '' "
+            ng-repeat="entry in chatEntries"
+            tp-chat-entry="entry"
+            tp-chat-entry-last="$last"
+        >
+
+          <div class="entry flex-row">
+            <span class="profile-image image-container flex-row"
+                 tp-troop-member="{{ entry.memberId }}"
+                 tp-troop-member-avatar-asset-size="mediumUrl"
+            ></span>
+
+            <span class="wrapper flex-column">
+
+              <main class="flex-row">
+
+                <div class="text"
+                     ng-bind="entry.text"
+                ></div>
+
+                <span class="chat-menu flex-row"
+                      ng-class=" chatMenus[entry.$id] === true ? 'showing' : '' "
+                      ng-if=" Me.troopMember.$id === entry.memberId "
+                >
+                  <span class="menu-button image-container flex-row"
+                        ng-click=" chatMenus[entry.$id] = true "
+                  >
+                    <svg class="icon gear">
+                      <use xlink:href="#gear"/>
+                    </svg>
+                  </span>
+                </span>
+
+                <ul class="menu flex-column"
+                    ng-mouseleave=" chatMenus[entry.$id] = false "
+                    ng-class=" chatMenus[entry.$id] === true ? 'show' : '' "
+                    ng-if=" Me.troopMember.$id === entry.memberId "
+                >
+                  <li class="edit menu-item flex-row">
+                    <span class="label">Edit Comment</span>
+                  </li>
+                  <li class="delete warning menu-item flex-row"
+                      ng-click="confirmEntryDelete(entry)"
+                  >
+                    <span class="label">Delete Comment</span>
+                  </li>
+                </ul>
+              </main>
+              <footer class="timestamp"
+                      ng-bind="entry.updatedAt | moment "
+              ></footer>
+
+            </span>
+
+
+
+
+
+
+
+          </div>
+        </li>
+
+        <li class="bottom-spacer">&nbsp;</li>
+      </ul>
+
+    </main>
+
+    <footer class="flex-row">
+      <div class="field-group flex-row"
+           ng-class=" labels['chatEntry'] ? '' : 'hide-label' "
+           ng-if=" ! modalData.isConfirmDelete "
+      >
+        <input type="text"
+               ng-model="modalData.chatEntry"
+               ng-focus="hideLabel('chatEntry')"
+               ng-blur=" chatEntryBlur() "
+               autocomplete="off"
+        >
+        <label>Write something here...</label>
+      </div>
+
+      <div class="actions flex-row"
+           ng-if=" modalData.isConfirmDelete "
+      >
+        <button class="cancel white-primary"
+                ng-click=" modalData.isConfirmDelete = false "
+        >
+          <div class="wrapper flex-row">
+            <span class="label">No</span>
+          </div>
+        </button>
+        <span class="flex-spacer"></span>
+        <button class="accept blue-primary"
+                ng-click="acceptEntryDelete()"
+        >
+          <div class="wrapper flex-row">
+            <span class="label">Yes</span>
+
+          </div>
+        </button>
+        </div>
+    </footer>
+  </form>
+
+</div>

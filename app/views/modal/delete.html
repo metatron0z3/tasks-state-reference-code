@@ -1,0 +1,58 @@
+<div class="modal-overlay flex-row"
+     ng-class=" vm.showModal ? 'show' : '' "
+     data-blah=" {{ vm.showModal }} "
+     ng-click=" vm.closeModal() "
+>
+
+  <div class="delete-modal modal flex-column"
+       ng-class=" vm.extraClasses "
+       ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click=" vm.closeModal() "
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header>
+      <div class="image-container warning">
+        <svg class="icon warning">
+          <use xlink:href="#warning"/>
+        </svg>
+      </div>
+      <h1 class="warning"
+          ng-bind-html=" vm.header ">
+        Delete
+      </h1>
+    </header>
+
+    <main class="delete"
+          ng-bind-html=" vm.message "
+    >
+      <p>Are you sure?</p>
+    </main>
+
+    <footer class="dual-buttons flex-row">
+      <button class="cancel white-primary"
+              ng-click=" vm.cancel() "
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Cancel, Keep {{ vm.element }}</span>
+        </div>
+      </button>
+      <span class="flex-spacer"></span>
+      <button class="delete blue-primary"
+              ng-class="  "
+              ng-click=" vm.remove() "
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Yes, {{ vm.actionTaken + ' ' +vm.element }}</span>
+        </div>
+      </button>
+    </footer>
+  </div>
+
+</div>

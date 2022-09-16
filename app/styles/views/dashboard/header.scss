@@ -1,0 +1,759 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+[data-ui-view=dashboardHeader] {
+  z-index: 130;
+  position: relative;
+  height: $header-height;
+  max-width: 100%;
+  background: $white-primary;
+  border-bottom: 1px solid $gray-octonary;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+  > .wrapper {
+    padding: 0px 30px;
+    width: 100%;
+    height: 100%;
+
+    > .detail-title-mobile {
+      display: none;
+    }
+    > .left-sidebar-toggle {
+      display: none;
+      height: 100%;
+    }
+
+    > .title {
+      cursor: pointer;
+      padding-right: 10px;
+      height: 100%;
+      max-width: 25%;
+      position: relative;
+
+      &:after {
+        content: "";
+        width: 1px;
+        height: 65%;
+        right: 0px;
+        position: absolute;
+        background: $gray-senary;
+      }
+
+      > .hamburger,
+        .troop-app {
+        display: none;
+      }
+
+      > .name {
+        margin-right: 10px;
+        padding: 0;
+        line-height: 26px;
+        position: relative;
+        font-size: 18px;
+        font-family: $font-family-regular;
+        white-space: nowrap;
+        color: $gray-tertiary;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      > .actions {
+        position: relative;
+
+        > .menu-toggle {
+          @include size(44px);
+
+          &:hover {
+            > svg {
+              fill: $gray-tertiary;
+            }
+          }
+
+          > svg {
+            @include all-height(4px);
+            @include all-width(18px);
+            fill: $light-gray-tertiary;
+          }
+        }
+
+        > .menu {
+          bottom: 0px;
+
+          &.show {
+            z-index: 120;
+          }
+        }
+
+      }
+
+    }
+
+    > .nav-list {
+      height: 100%;
+
+
+      > .nav-item {
+        cursor: pointer;
+        margin: 0px 10px;
+        padding: 0px 15px;
+        height: 100%;
+        width: 70px;
+        position: relative;
+        @include justify-content(center);
+
+        &:before {
+          content: "";
+          width: 100%;
+          height: 2px;
+          left: 0px;
+          bottom: 0px;
+          position: absolute;
+          background: $blue-primary;
+          @include transition(transform 250ms ease);
+          @include transform(scaleX(0));
+        }
+
+
+        &,
+        > a {
+          text-transform: uppercase;
+          font-size: 12px;
+          font-family: $font-family-regular;
+          color: $light-gray-tertiary;
+          @include transition(color 0.2s);
+
+
+        }
+
+        &.active {
+
+          > a {
+            color: $blue-gray-primary;
+          }
+
+          &:before {
+            @include transform(scaleX(1));
+          }
+        }
+
+        &:hover {
+          > a {
+            color: $black-primary;
+          }
+        }
+
+      }
+    }
+
+    > .search {
+      margin-right: 16px;
+      position: relative;
+      // display: none;
+
+      > .field-group {
+        @include transition(none);
+
+        > label {
+          padding-left: 36px;
+          text-transform: none;
+          line-height: 19px;
+          font-size: 14px;
+          color: rgba($light-gray-tertiary, 0.6);
+
+        }
+
+        > input[type=search] {
+          z-index: 1;
+          padding: 7px 10px 7px 36px;
+          width: 225px;
+          border: 1px solid $light-gray-senary;
+          @include border-radius(36px);
+          background: transparent;
+          line-height: 19px;
+          font-size: 14px;
+          color: rgba($light-gray-tertiary, 1);
+
+        }
+
+        > .image-container {
+          cursor: pointer;
+          @include transition(none);
+
+          &,
+          > svg {
+            height: 16px;
+            min-height: 16px;
+            max-height: 16px;
+            width: 16px;
+            min-width: 16px;
+            max-width: 16px;
+          }
+
+          > svg {
+            fill: $light-gray-tertiary;
+          }
+
+          &.magnifying-glass {
+            left: 10px;
+            bottom: 10px;
+            position: absolute;
+          }
+
+          &.close {
+            margin-left: 10px;
+            height: 40px;
+            min-height: 40px;
+            max-height: 40px;
+            width: 40px;
+            min-width: 40px;
+            max-width: 40px;
+            display: none;
+
+          }
+        }
+      }
+
+    }
+
+    > .action {
+      padding: 0px;
+      margin: 0px 9px;
+
+      &:first-of-type {
+        margin-left: 0px;
+      }
+
+      &:last-of-type {
+        margin-right: 0px;
+      }
+
+      > button {
+
+        > .wrapper {
+
+          > .image-container {
+
+            &,
+            > svg {
+              @include size(18px);
+            }
+          }
+        }
+
+        &:not(.link):not(.transparent) {
+          //border-color: $gray-nonary;
+
+          &:hover {
+            //border: 2x solid #BABFD2
+            //@include css3-prefix('box-shadow', 0px 3px 6px 0px $white-denary);
+          }
+
+          &:active,
+          &.showing {
+            // @include css3-prefix('box-shadow', inset 0px 3px 6px 0px $white-denary);
+
+          }
+
+          > .wrapper {
+
+            > .image-container {
+
+              > svg {
+                //fill: $gray-quinary;
+              }
+            }
+          }
+        }
+
+      }
+
+
+    }
+
+    > .settings {
+
+      > button {
+
+        > .wrapper {
+
+          > .image-container {
+
+            &,
+            > svg {
+              @include size(20px);
+            }
+          }
+        }
+
+      }
+    }
+
+    > .join {
+
+      > button {
+        border: 1px solid $blue-primary;
+        fill: $blue-primary;
+        width: 140px;
+
+        > .wrapper {
+
+          > .label {
+            font-family: $font-family-heavy;
+            text-transform: capitalize;
+            font-size: 11px;
+          }
+        }
+      }
+    }
+
+    > .notifications {
+      position: relative;
+
+      > button {
+
+        > .wrapper {
+
+          > .image-container {
+
+            &.count {
+              z-index: 1;
+              margin: 0px;
+              height: 20px;
+              min-height: 20px;
+              max-height: 20px;
+              width: 20px;
+              min-width: 20px;
+              max-width: 20px;
+              right: -4px;
+              top: -4px;
+              position: absolute;
+              @include border-radius(11px);
+              overflow: hidden;
+              background: $red-octonnary;
+              font-faimly: $font-family-regular;
+              font-size: 10px;
+              color: $white-primary;
+            }
+          }
+        }
+
+      }
+
+      > .menu {
+        z-index: -1;
+        opacity: 0;
+        padding: 8px;
+        width: 0px;
+        height: 100%;
+        right: 0px;
+        top: 0px;
+        position: fixed;
+        overflow: hidden;
+        @include justify-content(flex-start);
+        background: $white-primary;
+        @include box-shadow(0px, 11px, 29px, 0px, rgba($black-primary, 0.2));
+
+
+        > header,
+        > footer {
+          width: $notification-menu-width;
+        }
+
+        > header {
+          position: relative;
+          border-bottom: 1px solid $light-grey-primary;
+
+          &:before {
+            content: "";
+            width: 0;
+            height: 0;
+            right: 15px;
+            top: -6px;
+            position: absolute;
+            border-style: solid;
+            border-width: 0 8px 8px 8px;
+            border-color: transparent transparent $white-primary transparent;
+          }
+
+          > h1 {
+            padding: 32px 0px 16px 0px;
+            width: 100%;
+          }
+
+          > .image-container {
+            cursor: pointer;
+            height: 16px;
+            width: 16px;
+
+            > svg {
+              z-index: -1;
+              height: 16px;
+              width: 16px;
+              fill: $gray-primary;
+            }
+
+            &.close {
+              top: -4px;
+              right: 12px;
+              position: absolute;
+            }
+          }
+
+
+          > ul {
+            width: 100%;
+
+            > li {
+              cursor: pointer;
+              padding: 8px 0px;
+              width: 50%;
+              position: relative;
+              @include justify-content(center);
+
+              > .count {
+                display: none;
+
+                > svg {
+                  fill: $blue-primary;
+                }
+              }
+
+              > .label {
+                font-family: $font-family-regular;
+                font-size: 12px;
+                text-transform: uppercase;
+
+              }
+
+              &.active {
+                border-bottom: 0px;
+
+                &:before {
+                  content: "";
+                  width: 100%;
+                  height: 2px;
+                  left: 0px;
+                  bottom: -1px;
+                  position: absolute;
+                  background: $blue-primary;
+                }
+
+                > .label {
+                  color: $blue-primary;
+                }
+              }
+            }
+
+
+          }
+        }
+
+        > ul {
+          margin-top: 8px;
+          width: $notification-menu-width - 16px;
+          @include justify-content(flex-start);
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+
+          > li {
+            padding: 16px;
+            @include align-items(flex-start);
+            position: relative;
+            border-bottom: 1px solid $light-grey-primary;
+
+            &:last-of-type {
+              border-bottom: 0px;
+            }
+
+            > .profile-image {
+              padding: 0px;
+              margin-right: 8px;
+              height: 40px;
+              min-height: 40px;
+              width: 40px;
+              min-width: 40px;
+            }
+
+            > .flex-column {
+
+              &.image-container {
+                margin: 0px 16px;
+              }
+
+              > .message {
+                line-height: 1.5;
+                font-size: 12px;
+
+                > b {
+                  color: rgba($blue-tertiary, 0.75);
+                }
+              }
+
+              > .extra {
+                z-index: -1;
+                opacity: 0;
+                margin-top: 8px;
+                padding: 12px 12px 8px 8px;
+                position: absolute;
+                background: $white-primary;
+                @include box-shadow(0px, 2px, 4px, 0px, rgba($black-primary, 0.15));
+                @include border-radius(2px);
+
+                > .comment {
+                  font-size: 12px;
+                }
+              }
+            }
+
+            &.new {
+              background: $white-secondary;
+
+              &:before {
+                opacity: 1;
+              }
+
+              > .flex-column {
+                > .extra {
+                  z-index: 1;
+                  opacity: 1;
+                  position: relative;
+                }
+              }
+            }
+          }
+        }
+
+        > footer {
+          padding: 0px;
+          border-top: 1px solid $light-grey-primary;
+
+          > button {
+            padding: 16px;
+            width: 100%;
+            min-width: 0;
+
+            > .wrapper {
+              > .label {
+                font-size: 12px;
+                color: rgba($blue-tertiary, 0.6);
+              }
+            }
+          }
+        }
+
+
+        &.show {
+          opacity: 1;
+          z-index: 110;
+          width: $notification-menu-width;
+          overflow: visible;
+
+
+        }
+      }
+
+
+    }
+
+    > .right-sidebar-toggle {
+
+      > button {
+
+
+      }
+    }
+
+  }
+
+}
+
+.read-only-mode {
+  [data-ui-view=dashboardHeader] {
+    height: 66px;
+   > .wrapper {
+     width: 100%;
+     padding: 15px 40px;
+     > .title {
+       width: 100%;
+       min-width: 250px;
+       max-width: none;
+       padding-right: 0px;
+       @include justify-content(space-between);
+       > .hamburger {
+         display: flex;
+         flex: 0 1 auto;
+         fill: rgba($grey-twelvary, 0.9);
+         @include align-self(flex-start);
+         margin-top: 2px;
+         @include size(20px, 13px);
+         > svg {
+           pointer-events: auto;
+         }
+       }
+       &:after {
+         width: 0px;
+       }
+       > .name {
+         position: static;
+         display: flex;
+         flex: 0 1 auto;
+         font-size: 16px;
+         margin-left: 65px;
+       }
+       > .troop-app {
+         display: flex;
+         flex: 0 1 auto;
+         &:before {
+          content: "Open the app";
+          display: flex;
+          flex: 0 1 auto;
+          font-family: $font-family-light;
+          font-size: 14px;
+          color: rgba($blue-secondary, 0.69);
+          letter-spacing: 0px;
+          line-height: 26px;
+          padding-right: 14px;
+         }
+       }
+       > .actions {
+         display: none;
+       }
+     }
+
+     > .detail-title-mobile {
+       width: 100%;
+       min-width: 300px;
+       max-width: none;
+       padding-right: 0px;
+       display: flex;
+       @include justify-content(space-between);
+       > .back-to-multi-card {
+         display: flex;
+         flex: 0 1 auto;
+         fill: $grey-twelvary;
+
+         > .wrapper {
+           > .image-container {
+             @include size(20px, 14px);
+
+           }
+         }
+       }
+       > .creator-block {
+         > .profile-image {
+           margin-right: 10px;
+           overflow: hidden;
+           //@include border-radius(20px);
+
+           &,
+           > .asset,
+           > .asset > .asset-thumbnail,
+           > .asset > .asset-thumbnail > img {
+             width: 30px;
+             min-width: 30px;
+             max-width: 30px;
+             height: 30px;
+             min-height: 30px;
+             max-height: 30px;
+           }
+
+           > .asset {
+             padding: 0px;
+
+             > .asset-thumbnail {
+               overflow: hidden;
+               border: 0px;
+
+               &:before {
+                 display: none;
+               }
+
+               &,
+               > .upload-progress {
+                 @include border-radius(20px);
+               }
+
+             }
+           }
+         }
+         > .creator {
+          font-family: $font-family-light;
+          font-size: 16px;
+          color: $blue-secondary;
+         }
+       }
+       > .troop-app {
+         display: flex;
+         flex: 0 1 auto;
+         &:before {
+          content: "Open the app";
+          display: flex;
+          flex: 0 1 auto;
+          font-family: $font-family-light;
+          font-size: 14px;
+          color: rgba($blue-secondary, 0.69);
+          letter-spacing: 0px;
+          line-height: 26px;
+          padding-right: 14px;
+         }
+       }
+     }
+
+     > .nav-list,
+       .search,
+       .action,
+       .settings,
+       .join,
+       .notifications,
+       .right-sidebar-toggle {
+       display: none;
+     }
+   }
+ }
+}
+
+[data-state*="dashboard.troopMember.chat"] {
+  [data-ui-view=dashboardHeader] {
+    > .wrapper {
+      > .title {
+        &:after {
+          width:0px;
+          display:none;
+        }
+       }
+    }
+  }
+}
+
+@media only screen and (max-width:767px) {
+
+.read-only-mode {
+    [data-ui-view=dashboardHeader] {
+      > .wrapper {
+        padding: 15px 20px;
+        > .title {
+          > .name {
+            margin-left: 0px;
+          }
+          > .troop-app::before {
+              content: "";
+          }
+        }
+        > .detail-title-mobile {
+          > .troop-app::before {
+            content: "";
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width:414px) {
+
+  [data-ui-view=dashboardHeader] {
+
+  }
+
+
+}

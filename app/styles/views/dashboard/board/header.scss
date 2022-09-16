@@ -1,0 +1,321 @@
+@import "../../../bower-import.scss";
+@import "../../../variables.scss";
+
+
+
+[data-state*="dashboard.board.card"],
+[data-state*="dashboard.board.cards"],
+[data-state*="dashboard.board.tags"],
+[data-state*="dashboard.board.grid"],
+[data-state*="dashboard.board.chat"],
+[data-state*="dashboard.board.table"],
+[data-state*="dashboard.board.document"],
+[data-state*="home.dashboard.search."] {
+
+  [data-ui-view=dashboardHeader] {
+
+
+
+    > .wrapper {
+
+      > .detail-card {
+
+        > button {
+
+          > .wrapper {
+
+            > .image-container {
+              @include transform(translateX(-1px));
+
+              &,
+              > svg {
+                width: 9px;
+                min-width: 9px;
+                max-width: 9px;
+                height: 16px;
+                min-height: 16px;
+                max-height: 16px;
+              }
+
+              > svg {
+
+                &.arrow-left {
+                  width: 20px;
+                  min-width: 20px;
+                  max-width: 20px;
+                  height: 20px;
+                  min-height: 20px;
+                  max-height: 20px;
+                  fill: rgba($white-primary, 0.6);
+                }
+              }
+            }
+          }
+
+          &.back-to-multi-card {
+
+            > .wrapper {
+
+              > .image-container {
+
+                > svg {
+
+                  &.arrow-left {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+
+          &.back-to-detail {
+            display: none;
+
+          }
+        }
+      }
+
+      > .nav-list {
+
+        > .nav-item {
+
+          &.chat {
+
+            > .notifications {
+              opacity: 0;
+              margin-left: 4px;
+              padding: 0px;
+              position: relative;
+              display: none;
+
+              &,
+              > svg {
+                height: 20px;
+                min-height: 20px;
+                max-height: 20px;
+                width: 20px;
+                min-width: 20px;
+                max-width: 20px;
+                fill:$gray-twelvary;
+              }
+
+              > .count {
+                width: 100%;
+                height: 100%;
+                left: 0px;
+                top: 1px;
+                position: absolute;
+                @include justify-content(center);
+                color: $white-primary;
+                font-size: 10px;
+
+              }
+
+              > svg {
+                fill: $red-octonnary;
+              }
+
+              &.active {
+                opacity: 1;
+                @include display(flex);
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+
+
+
+
+@media only screen and (max-width:1023px) {
+
+  [data-state*="dashboard.board.card"],
+  [data-state*="dashboard.board.cards"],
+  [data-state*="dashboard.board.tags"],
+  [data-state*="dashboard.board.table"],
+  [data-state*="dashboard.board.chat"] {
+
+    [data-ui-view=dashboardHeader] {
+
+      // > .wrapper {
+      //
+      //
+      //   > .detail-card {
+      //
+      //     > button {
+      //       border: 0px;
+      //       background: transparent;
+      //
+      //       &:active {
+      //
+      //         > .wrapper {
+      //
+      //           > .image-container {
+      //
+      //             > svg {
+      //
+      //               &.arrow-left {
+      //                 fill: rgba($white-primary, 1);
+      //               }
+      //             }
+      //           }
+      //         }
+      //       }
+      //
+      //       > .wrapper {
+      //
+      //         > .image-container {
+      //
+      //           &,
+      //           > svg {
+      //             height: 10px;
+      //             min-height: 10px;
+      //             max-height: 10px;
+      //             width: 10px;
+      //             min-width: 10px;
+      //             max-width: 10px;
+      //           }
+      //
+      //           > svg {
+      //
+      //
+      //           }
+      //
+      //
+      //         }
+      //       }
+      //
+      //       &.back-to-multi-card {
+      //
+      //         > .wrapper {
+      //
+      //           > .image-container {
+      //
+      //             > svg {
+      //
+      //               &.arrow-reverse {
+      //                 display: none;
+      //               }
+      //
+      //               &.arrow-left {
+      //                 display: inline-block;
+      //               }
+      //             }
+      //           }
+      //         }
+      //       }
+      //
+      //       &.back-to-detail {
+      //
+      //       }
+      //     }
+      //   }
+      //
+      //
+      // }
+    }
+
+    &.showing-detail-card-comments {
+
+      [data-ui-view=dashboardHeader] {
+
+        // > .wrapper {
+        //
+        //
+        //   > .detail-card {
+        //
+        //     > button {
+        //
+        //       &.back-to-multi-card {
+        //         display: none;
+        //       }
+        //
+        //       &.back-to-detail {
+        //         display: inline-block;
+        //       }
+        //     }
+        //   }
+        // }
+      }
+    }
+  }
+
+  [data-state*="dashboard.board.card"] {
+
+    [data-ui-view=dashboardHeader] {
+
+      > .wrapper {
+
+        > .board-name {
+          @include display(flex !important);
+
+          > .board-actions {
+            display: none;
+          }
+        }
+
+      }
+    }
+
+    &.showing-search-bar {
+
+      [data-ui-view=dashboardHeader] {
+
+        > .wrapper {
+
+          > form {
+
+            &.search {
+              background: $white-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  [data-state*="dashboard.board.tags"] {
+
+    [data-ui-view=dashboardHeader] {
+
+      > .wrapper {
+
+        > .new {
+          right: 50px;
+        }
+
+        &.showing-list-view-tag-chooser {
+
+          > .new {
+            z-index: -1;
+          }
+        }
+      }
+    }
+
+  }
+
+  [data-state*="dashboard.board.chat"] {
+
+    &.showing-search-bar {
+
+      [data-ui-view=dashboardHeader] {
+
+        > .wrapper {
+
+          > form {
+
+            &.search {
+              background: $white-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}

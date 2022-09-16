@@ -1,0 +1,80 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+  > .modal-overlay {
+
+    > form.modal {
+
+      &.account-settings-modal {
+
+        > .close {
+          z-index:1;
+          fill: $black-primary;
+        }
+
+        > header {
+
+          > h1 {
+            margin-top:30px;
+          }
+        }
+
+
+        > main {
+          //padding:25px 50px 25px 50px;
+          margin-bottom:0px;
+
+          > .field-group {
+
+            &:last-of-type {
+              margin-bottom: 20px;
+            }
+
+            > input {
+              &.ng-dirty.ng-touched.ng-invalid {
+                border-color: $red-quaternary;
+              }
+            }
+
+          }
+
+          > [data-ng-messages],
+          > [np-messages] {
+            @include transform(translateY(-30px));
+
+            > .error {
+              line-height: 26px;
+              font-size: 12px;
+              color: $red-quaternary;
+            }
+          }
+
+        }
+
+        > footer {
+          @include justify-content(flex-end);
+          margin-bottom: 50px;
+
+          > button {
+            width: 112px;
+            min-width: 112px;
+            max-width: 112px;
+            background: $blue-octornary;
+            border-color: $blue-octornary;
+
+            > .wrapper {
+
+              > .label {
+                font-size: 11px;
+              }
+            }
+          }
+        }
+
+
+      }
+
+    }
+  }
+}

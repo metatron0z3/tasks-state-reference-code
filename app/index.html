@@ -1,0 +1,367 @@
+<!doctype html>
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns# fb:http://www.facebook.com/2008/fbml">
+<head>
+  <meta charset="utf-8">
+  <title ng-bind="$root.pageTitle | default('Troop')">Troop</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no" />
+  <meta name="fragment" content="!" />
+  <meta name="twitter:card" content="Troop" />
+  <meta name="twitter:site" content="@troopcentral" />
+  <meta name="twitter:creator" content="@troopcentral" />
+  <meta property="og:url" content="https://troop.space" />
+  <meta property="og:site_name" content="Troop" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Troop" />
+  <meta property="og:description" content="Build a Rich, Collaborative Group in Minutes" />
+  <meta property="og:image" content="https://troop-prod-main.s3.amazonaws.com/user12/-KKP200joiuwv9qJ5szp_original_site-scrape-2.png" />
+  <meta property="og:image:secure_url" content="https://troop-prod-main.s3.amazonaws.com/user12/-KKP200joiuwv9qJ5szp_original_site-scrape-2.png" />
+
+  <link rel="shortcut icon" href="/favicon.ico?v=3" />
+
+  <!-- build:css(.) /styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/Hover/css/hover.css" />
+    <link rel="stylesheet" href="/bower_components/normalize.css/normalize.css" />
+    <link rel="stylesheet" href="/bower_components/ui-select/dist/select.css" />
+    <link rel="stylesheet" href="/bower_components/angular-ui-switch/angular-ui-switch.css" />
+    <!-- endbower -->
+    <link rel="stylesheet" href="/bower_components/tether-shepherd/dist/css/shepherd-theme-arrows.css" />
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.css" />
+  <!-- endbuild -->
+  <!-- build:css(.tmp) /styles/main.css -->
+  <link rel="stylesheet" href="/styles/bower-import-jquery.minicolors.css">
+  <link rel="stylesheet" href="/styles/fonts/avenir.css">
+  <link rel="stylesheet" href="/styles/typography.css">
+  <link rel="stylesheet" href="/styles/button.css">
+  <link rel="stylesheet" href="/styles/form.css">
+  <link rel="stylesheet" href="/styles/util.css">
+  <link rel="stylesheet" href="/styles/animations.css">
+  <link rel="stylesheet" href="/styles/icons.css">
+  <link rel="stylesheet" href="/styles/angular-helpers.css">
+  <link rel="stylesheet" href="/styles/components.css">
+  <link rel="stylesheet" href="/styles/views/layout.css">
+  <link rel="stylesheet" href="/styles/views/authentication.css">
+  <link rel="stylesheet" href="/styles/views/home.css">
+  <link rel="stylesheet" href="/styles/views/invite.css">
+  <link rel="stylesheet" href="/styles/views/pricing.css">
+  <link rel="stylesheet" href="/styles/views/affiliate/header.css">
+  <link rel="stylesheet" href="/styles/views/affiliate/table.css">
+  <link rel="stylesheet" href="/styles/views/modal/logger-settings.css">
+  <link rel="stylesheet" href="/styles/views/modal/link-accounts.css">
+  <link rel="stylesheet" href="/styles/views/modal/account-settings.css">
+  <link rel="stylesheet" href="/styles/views/modal/modal.css">
+  <link rel="stylesheet" href="/styles/views/modal/card-view-settings.css">
+  <link rel="stylesheet" href="/styles/views/modal/board.css">
+  <link rel="stylesheet" href="/styles/views/modal/board-import.css">
+  <link rel="stylesheet" href="/styles/views/modal/board-invite.css">
+  <link rel="stylesheet" href="/styles/views/modal/card.css">
+  <link rel="stylesheet" href="/styles/views/modal/konami.css">
+  <link rel="stylesheet" href="/styles/views/modal/assets.css">
+  <link rel="stylesheet" href="/styles/views/modal/invite-accept.css">
+  <link rel="stylesheet" href="/styles/views/modal/troop-invite.css">
+  <link rel="stylesheet" href="/styles/views/modal/public-troop-share.css">
+  <link rel="stylesheet" href="/styles/views/modal/troop.css">
+  <link rel="stylesheet" href="/styles/views/modal/troop-member-chat.css">
+  <link rel="stylesheet" href="/styles/views/modal/troop-member-profile.css">
+  <link rel="stylesheet" href="/styles/views/modal/multimedia.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/dashboard.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/troop-sidebar.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/left-sidebar.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/right-sidebar.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/notification-sidebar.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/header.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/chat.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/board/header.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/board/multi-card.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/board/document.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/board/list.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/board/grid.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/board/chat.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/board/table.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/board/right-sidebar.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/boards/header.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/boards/boards.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/troopMember/header.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/troopMember/chat.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/troopMember/profile-sidebar.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/troopMembers/header.css">
+  <link rel="stylesheet" href="/styles/views/dashboard/troopMembers/list.css">
+  <link rel="stylesheet" href="/styles/views/style-guide.css">
+
+  <!-- endbuild -->
+
+
+</head>
+<body
+  class="flex-row loading"
+  data-ng-app="webClientApp"
+  data-tp-observer=""
+  data-state=""
+>
+
+  <div class="svg-sprite hide" ng-include="'/views/svg.html'"></div>
+  <div class="background">
+    <div class="loading-anim">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <!-- <div class="loading-lbl">Loading</div> -->
+  </div>
+
+  <aside class="troop-sidebar flex-column"
+         data-ui-view="troopSidebar"
+         style="position: fixed; left: -99999px;"
+         data-ng-clear-style=""
+         ng-click=" $event.stopPropagation() "
+  ></aside>
+
+  <aside class="left flex-column"
+         data-ui-view="leftSidebar"
+         style="position: fixed; left: -99999px;"
+         data-ng-clear-style=""
+         ng-click=" $event.stopPropagation() "
+  ></aside>
+
+  <div class="wrapper flex-row-wrap"
+       ng-click=" $event.stopPropagation() "
+  >
+
+    <main class="flex-row-wrap"
+          data-ui-view="content"
+    ></main>
+
+  </div>
+
+  <aside class="notifications flex-column"
+         data-ui-view="notificationSidebar"
+         style="position: fixed; right: -99999px;"
+         data-ng-clear-style=""
+         ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="flex-column"
+         ng-if=" ( ! loading ) && ( ! vm.notifications  )"
+    >
+      You have no Notifications at this time
+    </div>
+
+  </aside>
+  <audio id="notification-sound"
+         src="https://troop-prod.s3.amazonaws.com/1615b765-2981-4b75-b615-c75a82901bb7/-KBshHVhc7CNJI2tEv9f_original_Facebook%20Pop.mp3"
+  ></audio>
+
+  <!-- build:js(.) /scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/bower_components/FileSaver/FileSaver.js"></script>
+  <script src="/bower_components/Sortable/Sortable.js"></script>
+  <script src="/bower_components/jquery-bridget/jquery-bridget.js"></script>
+  <script src="/bower_components/angular/angular.js"></script>
+  <script src="/bower_components/angular-animate/angular-animate.js"></script>
+  <script src="/bower_components/angular-elastic/elastic.js"></script>
+  <script src="/bower_components/angular-embedly/angular-embedly.js"></script>
+  <script src="/bower_components/marked/lib/marked.js"></script>
+  <script src="/bower_components/angular-marked/dist/angular-marked.js"></script>
+  <script src="/bower_components/angular-messages/angular-messages.js"></script>
+  <script src="/bower_components/angular-resource/angular-resource.js"></script>
+  <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="/bower_components/angular-scroll-glue/src/scrollglue.js"></script>
+  <script src="/bower_components/angular-slugify/angular-slugify.js"></script>
+  <script src="/bower_components/angular-touch/angular-touch.js"></script>
+  <script src="/bower_components/angular-ua-parser/angular-ua-parser.js"></script>
+  <script src="/bower_components/x2js/xml2json.min.js"></script>
+  <script src="/bower_components/angular-xml/angular-xml.js"></script>
+  <script src="/bower_components/firebase/firebase.js"></script>
+  <script src="/bower_components/angularfire/dist/angularfire.js"></script>
+  <script src="/bower_components/blob-util/dist/blob-util.js"></script>
+  <script src="/bower_components/fingerprintjs2/dist/fingerprint2.min.js"></script>
+  <script src="/bower_components/firebase-util/dist/firebase-util.min.js"></script>
+  <script src="/bower_components/jquery-minicolors/jquery.minicolors.js"></script>
+  <script src="/bower_components/jszip/dist/jszip.js"></script>
+  <script src="/bower_components/moment/moment.js"></script>
+  <script src="/bower_components/ng-file-upload/ng-file-upload.js"></script>
+  <script src="/bower_components/ngstorage/ngStorage.js"></script>
+  <script src="/bower_components/player.js/dist/player-0.0.11.js"></script>
+  <script src="/bower_components/ua-parser-js/src/ua-parser.js"></script>
+  <script src="/bower_components/underscore/underscore.js"></script>
+  <script src="/bower_components/urijs/src/URI.js"></script>
+  <script src="/bower_components/async/lib/async.js"></script>
+  <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="/bower_components/angular-notification/angular-notification.js"></script>
+  <script src="/bower_components/ui-select/dist/select.js"></script>
+  <script src="/bower_components/sugar/release/sugar.js"></script>
+  <script src="/bower_components/angular-ui-switch/angular-ui-switch.js"></script>
+  <script src="/bower_components/clipboard/dist/clipboard.js"></script>
+  <script src="/bower_components/ag-logger/release/ag-logger.js"></script>
+  <script src="/bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
+  <script src="/bower_components/ev-emitter/ev-emitter.js"></script>
+  <script src="/bower_components/desandro-matches-selector/matches-selector.js"></script>
+  <script src="/bower_components/fizzy-ui-utils/utils.js"></script>
+  <script src="/bower_components/get-size/get-size.js"></script>
+  <script src="/bower_components/masonry/dist/masonry.pkgd.js"></script>
+  <script src="/bower_components/imagesloaded/imagesloaded.pkgd.js"></script>
+  <script src="/bower_components/angular-masonry/angular-masonry.js"></script>
+  <script src="/bower_components/tether/dist/js/tether.js"></script>
+  <script src="/bower_components/tether-shepherd/dist/js/shepherd.js"></script>
+  <script src="/bower_components/to-markdown/dist/to-markdown.js"></script>
+  <!-- endbower -->
+  <script src="/bower_components/angular-libphonenumber/dist/libphonenumber.full.js"></script>
+  <script src="/bower_components/angular-libphonenumber/dist/angular-libphonenumber.js"></script>
+  <script src="/bower_components/Sortable/ng-sortable.js"></script>
+  <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="/bower_components/cryptojslib/rollups/md5.js"></script>
+  <script src="/bower_components/highlight/src/highlight.js"></script>
+  <script src="/bower_components/algoliasearch/dist/algoliasearch.angular.js"></script>
+  <script src="/bower_components/3596a30bd69384624c11/generate-pushid.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) /scripts/scripts.js -->
+  <script src="/scripts/marked.custom.rules.js"></script>
+  <script src="/scripts/app.js"></script>
+  <script src="/scripts/config.js"></script>
+  <script src="/scripts/routes.js"></script>
+  <script src="/scripts/angularfire/config.js"></script>
+  <script src="/scripts/angularfire/App.js"></script>
+  <script src="/scripts/angularfire/Ref.js"></script>
+  <script src="/scripts/angularfire/Auth.js"></script>
+  <script src="/scripts/controllers/PublicTroop.js"></script>
+  <script src="/scripts/controllers/Invite.js"></script>
+  <script src="/scripts/controllers/Support.js"></script>
+  <script src="/scripts/controllers/SignUp.js"></script>
+  <script src="/scripts/controllers/Login.js"></script>
+  <script src="/scripts/controllers/Auth.js"></script>
+  <script src="/scripts/controllers/PasswordReset.js"></script>
+  <script src="/scripts/controllers/Home.js"></script>
+  <script src="/scripts/controllers/HomeHeader.js"></script>
+  <script src="/scripts/controllers/StyleGuide.js"></script>
+  <script src="/scripts/controllers/affiliate/Dashboard.js"></script>
+  <script src="/scripts/controllers/affiliate/Header.js"></script>
+  <script src="/scripts/controllers/affiliate/Table.js"></script>
+  <script src="/scripts/controllers/modal/TrackingCode.js"></script>
+  <script src="/scripts/controllers/modal/LoggerSettings.js"></script>
+  <script src="/scripts/controllers/modal/AccountSettings.js"></script>
+  <script src="/scripts/controllers/modal/LinkAccounts.js"></script>
+  <script src="/scripts/controllers/modal/Konami.js"></script>
+  <script src="/scripts/controllers/modal/Card.js"></script>
+  <script src="/scripts/controllers/modal/CardViewSettings.js"></script>
+  <script src="/scripts/controllers/modal/GridViewSettings.js"></script>
+  <script src="/scripts/controllers/modal/TagsViewSettings.js"></script>
+  <script src="/scripts/controllers/modal/TableViewSettings.js"></script>
+  <script src="/scripts/controllers/modal/Board.js"></script>
+  <script src="/scripts/controllers/modal/BoardInvite.js"></script>
+  <script src="/scripts/controllers/modal/BoardImport.js"></script>
+  <script src="/scripts/controllers/modal/Confirm.js"></script>
+  <script src="/scripts/controllers/modal/Delete.js"></script>
+  <script src="/scripts/controllers/modal/Message.js"></script>
+  <script src="/scripts/controllers/modal/Assets.js"></script>
+  <script src="/scripts/controllers/modal/Multimedia.js"></script>
+  <script src="/scripts/controllers/modal/PublicTroopJoin.js"></script>
+  <script src="/scripts/controllers/modal/PublicTroopShare.js"></script>
+  <script src="/scripts/controllers/modal/InviteAccept.js"></script>
+  <script src="/scripts/controllers/modal/TroopInvite.js"></script>
+  <script src="/scripts/controllers/modal/Troop.js"></script>
+  <script src="/scripts/controllers/modal/TroopMemberChat.js"></script>
+  <script src="/scripts/controllers/modal/TroopMemberProfile.js"></script>
+  <script src="/scripts/controllers/dashboard/Dashboard.js"></script>
+  <script src="/scripts/controllers/dashboard/TroopSidebar.js"></script>
+  <script src="/scripts/controllers/dashboard/LeftSidebar.js"></script>
+  <script src="/scripts/controllers/dashboard/NotificationSidebar.js"></script>
+  <script src="/scripts/controllers/dashboard/Header.js"></script>
+  <script src="/scripts/controllers/dashboard/board/SearchCards.js"></script>
+  <script src="/scripts/controllers/dashboard/board/SearchChats.js"></script>
+  <script src="/scripts/controllers/dashboard/board/MultiCard.js"></script>
+  <script src="/scripts/controllers/dashboard/board/Document.js"></script>
+  <script src="/scripts/controllers/dashboard/board/DetailCard.js"></script>
+  <script src="/scripts/controllers/dashboard/board/List.js"></script>
+  <script src="/scripts/controllers/dashboard/board/Grid.js"></script>
+  <script src="/scripts/controllers/dashboard/board/Chat.js"></script>
+  <script src="/scripts/controllers/dashboard/board/Table.js"></script>
+  <script src="/scripts/controllers/dashboard/board/Header.js"></script>
+  <script src="/scripts/controllers/dashboard/board/RightSidebar.js"></script>
+  <script src="/scripts/controllers/dashboard/boards/MyBoards.js"></script>
+  <script src="/scripts/controllers/dashboard/boards/TeamBoards.js"></script>
+  <script src="/scripts/controllers/dashboard/boards/Header.js"></script>
+  <script src="/scripts/controllers/dashboard/troopMember/Header.js"></script>
+  <script src="/scripts/controllers/dashboard/troopMember/Chat.js"></script>
+  <script src="/scripts/controllers/dashboard/troopMember/ProfileSidebar.js"></script>
+  <script src="/scripts/controllers/dashboard/troopMembers/Header.js"></script>
+  <script src="/scripts/controllers/dashboard/troopMembers/List.js"></script>
+  <script src="/scripts/filters/encodeURIComponent.js"></script>
+  <script src="/scripts/filters/reverse.js"></script>
+  <script src="/scripts/filters/moment.js"></script>
+  <script src="/scripts/filters/getTroop.js"></script>
+  <script src="/scripts/filters/getTroopMember.js"></script>
+  <script src="/scripts/directives/shepherdTour.js"></script>
+  <script src="/scripts/directives/ngCharacterEnforcer.js"></script>
+  <script src="/scripts/directives/ngHasOverflow.js"></script>
+  <script src="/scripts/directives/ngShowAuth.js"></script>
+  <script src="/scripts/directives/ngHideAuth.js"></script>
+  <script src="/scripts/directives/ngMouseEnter.js"></script>
+  <script src="/scripts/directives/ngMouseLeave.js"></script>
+  <script src="/scripts/directives/ngEnterKey.js"></script>
+  <script src="/scripts/directives/ngKeyBind.js"></script>
+  <script src="/scripts/directives/ngBlurOnEnter.js"></script>
+  <script src="/scripts/directives/ngEscKey.js"></script>
+  <script src="/scripts/directives/ngClearStyle.js"></script>
+  <script src="/scripts/directives/ngSetFocus.js"></script>
+  <script src="/scripts/directives/ngAsset.js"></script>
+  <script src="/scripts/directives/ngFocus.js"></script>
+  <script src="/scripts/directives/troop/tpObserver.js"></script>
+  <script src="/scripts/directives/troop/tpCheckbox.js"></script>
+  <script src="/scripts/directives/troop/tpNotification.js"></script>
+  <script src="/scripts/directives/troop/tpChatEntry.js"></script>
+  <script src="/scripts/directives/troop/tpCardNote.js"></script>
+  <script src="/scripts/directives/troop/tpCardNoteCount.js"></script>
+  <script src="/scripts/directives/troop/tpCardDescription.js"></script>
+  <script src="/scripts/directives/troop/tpLoadingSpinner.js"></script>
+  <script src="/scripts/directives/troop/tpCardTags.js"></script>
+  <script src="/scripts/directives/troop/tpAsset.js"></script>
+  <script src="/scripts/directives/troop/tpTroop.js"></script>
+  <script src="/scripts/directives/troop/tpTroopMember.js"></script>
+  <script src="/scripts/directives/troop/tpTroopMemberProfile.js"></script>
+  <script src="/scripts/directives/troop/tpUserProfile.js"></script>
+  <script src="/scripts/directives/troop/tpOtherFileType.js"></script>
+  <script src="/scripts/directives/troop/tpChatEntriesCount.js"></script>
+  <script src="/scripts/directives/troop/tpMultimediaPlayer.js"></script>
+  <script src="/scripts/directives/troop/tpChatSearch.js"></script>
+  <script src="/scripts/directives/troop/tpDataPump.js"></script>
+  <script src="/scripts/directives/minicolors.js"></script>
+  <script src="/scripts/directives/dotdotdot.js"></script>
+  <script src="/scripts/services/Ocrad.js"></script>
+  <script src="/scripts/services/Nav.js"></script>
+  <script src="/scripts/services/JSZip.js"></script>
+  <script src="/scripts/services/Fingerprint.js"></script>
+  <script src="/scripts/services/UAParser.js"></script>
+  <script src="/scripts/services/Me.js"></script>
+  <script src="/scripts/services/TrooperFactory.js"></script>
+  <script src="/scripts/services/TroopMemberFactory.js"></script>
+  <script src="/scripts/services/TroopLogger.js"></script>
+  <script src="/scripts/services/TroopApi.js"></script>
+  <script src="/scripts/services/TroopFactory.js"></script>
+  <script src="/scripts/services/TroopFirebaseObject.js"></script>
+  <script src="/scripts/services/InviteFactory.js"></script>
+  <script src="/scripts/services/ChatFactory.js"></script>
+  <script src="/scripts/services/ChatEntryFactory.js"></script>
+  <script src="/scripts/services/CardFactory.js"></script>
+  <script src="/scripts/services/CardListFactory.js"></script>
+  <script src="/scripts/services/BoardListFactory.js"></script>
+  <script src="/scripts/services/BoardFactory.js"></script>
+  <script src="/scripts/services/AssetFactory.js"></script>
+  <script src="/scripts/services/AssetFirebaseObject.js"></script>
+  <script src="/scripts/services/NotificationFactory.js"></script>
+  <script src="/scripts/services/NotificationFirebaseArray.js"></script>
+  <script src="/scripts/services/SearchFactory.js"></script>
+  <script src="/scripts/services/FileFactory.js"></script>
+  <script src="/scripts/services/SecurityFactory.js"></script>
+  <!-- endbuild -->
+
+  <div class="tracking"
+       ng-include="'/views/tracking.html'"
+       ng-if=" env !== 'dev' "
+  ></div>
+
+</body>
+</html>

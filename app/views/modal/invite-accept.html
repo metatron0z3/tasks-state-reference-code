@@ -1,0 +1,81 @@
+<div class="modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click=" closeModal() "
+>
+
+  <form name="inviteAcceptForm"
+        class="invite-accept-modal modal flex-column"
+        ng-class=" { 'saving': accepting } "
+        novalidate="novalidate"
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click="close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header>
+      <h1>Accept Troop Invite</h1>
+    </header>
+
+    <main class="flex-column">
+
+      <div class="loader-wrapper flex-row">
+        <div class="wrapper flex-column">
+          <div class="loader-2 small"></div>
+          <div class="message">
+            Accepting...
+          </div>
+        </div>
+      </div>
+
+      <span class="profile-image image-container flex-row">
+
+        <div class="asset flex-column file-image" >
+
+          <div class="asset-thumbnail image-container flex-row">
+
+          <img src=" {{ invite.fromAvatarUrl }} " />
+
+          </div>
+
+        </div>
+
+      </span>
+
+      <div class="name">
+        {{ invite.fromName }}
+      </div>
+
+      <p>
+        Have invited you to join "{{ invite.troopName }}" Troop
+      </p>
+
+    </main>
+
+    <footer class="flex-row">
+
+      <button class="accept blue-primary"
+              ng-click="acceptInvite()"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Accept</span>
+        </div>
+      </button>
+
+      <button class="decline transparent"
+              ng-click="declineInvite()"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Decline</span>
+        </div>
+      </button>
+
+    </footer>
+  </form>
+
+</div>

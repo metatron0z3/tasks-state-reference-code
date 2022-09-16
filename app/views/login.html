@@ -1,0 +1,261 @@
+<section class="login flex-column"
+         ng-has-overflow=""
+>
+
+  <div class="background image-container">
+
+    <div class="earth-map-dots image-container">
+      <svg class="icon earth-map-dots">
+        <use xlink:href="#earth-map-dots"/>
+      </svg>
+    </div>
+
+  </div>
+
+
+  <a class="troop-logo image-container"
+     ui-sref="home"
+  >
+    <svg class="icon troop-logo">
+      <use xlink:href="#troop-logo"/>
+    </svg>
+  </a>
+
+  <form name="loginForm"
+           class="login-modal modal embedded-modal form flex-column"
+           ng-class=" vm.uiState "
+           ng-submit=" vm.uiState !== 'link-oauths' ? vm.legacyLogin(loginForm) : vm.linkOauths(loginForm) "
+           novalidate="novalidate"
+  >
+    <div class="loader-wrapper flex-row"
+         ng-if=" vm.uiState === 'oauthing' "
+    >
+      <div class="wrapper">
+        <div class="loader-2 small"></div>
+      </div>
+    </div>
+
+    <header class="drag-handle"
+            ng-if=" vm.uiState !== 'link-oauths' "
+    >
+      <h1>Log In</h1>
+    </header>
+
+    <main class="flex-column"
+          ng-if=" vm.uiState !== 'link-oauths' "
+    >
+
+      <div class="firebaseui-wrapper flex-column">
+
+        <span class="button google"
+                ng-click=" vm.displayOauth('google.com') "
+        >
+          <div class="wrapper flex-row">
+            <div class="image-container">
+              <svg class="icon">
+                <use xlink:href="#google"></use>
+              </svg>
+            </div>
+            <span class="label">Log in with <b>Google</b></span>
+          </div>
+        </span>
+
+        <span class="button facebook"
+                ng-click=" vm.displayOauth('facebook.com') "
+        >
+          <div class="wrapper flex-row">
+            <div class="image-container">
+              <svg class="icon">
+                <use xlink:href="#facebook"></use>
+              </svg>
+            </div>
+            <span class="label">Log in with <b>Facebook</b></span>
+          </div>
+        </span>
+        <div class="flex-row"
+             ng-if=" vm.failedOauth"
+             ng-messages=""
+        >
+          <div class="error"
+               ng-if=" vm.failedOauth "
+               ng-bind=" vm.errorMsg "
+          ></div>
+        </div>
+
+        <!-- <span class="button twitter"
+                ng-click=" vm.displayOauth('twitter.com') "
+        >
+          <div class="wrapper flex-row">
+            <div class="image-container">
+              <svg class="icon">
+                <use xlink:href="#twitter"></use>
+              </svg>
+            </div>
+            <span class="label">Log in with <b>Twitter</b></span>
+          </div>
+        </span> -->
+
+        <!-- <span class="button github"
+                ng-click=" vm.displayOauth('github.com') "
+        >
+          <div class="wrapper flex-row">
+            <div class="image-container">
+              <svg class="icon">
+                <use xlink:href="#github"></use>
+              </svg>
+            </div>
+            <span class="label">Log in with <b>Github</b></span>
+          </div>
+        </span> -->
+
+      </div>
+
+
+      <div class="or flex-spacer flex-row">
+        <label>Or</label>
+      </div>
+      <p class="field-group flex-row"
+         ng-class="{ 'error': vm.failedAuth || ( loginForm.phone.$dirty && loginForm.phone.$touched && loginForm.phone.$invalid ) }"
+      >
+        <input name="phone"
+               placeholder="Phone"
+               type="tel"
+               required=""
+               phone-number=""
+               ng-model=" vm.$storage.newAccount.phone "
+               ng-blur=" vm.phoneCheck(loginForm) "
+               ng-change=" vm.formChange(loginForm) "
+               country-code=" "
+               autocomplete="off"
+        />
+      </p>
+      <div class="flex-row"
+           ng-if=" ( ! isProcessing ) && ( vm.failedAuth || ( loginForm.phone.$dirty && loginForm.phone.$touched && loginForm.phone.$invalid ) )"
+           ng-messages="loginForm.phone.$error"
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Your phone number is required
+        </div>
+        <div class="error"
+             ng-message="phoneNumber"
+        >
+          Your phone number must be valid
+        </div>
+        <div class="error"
+             ng-if=" vm.failedAuth "
+        >
+          Oops! That phone / password combination is not valid.
+        </div>
+      </div>
+
+      <p class="field-group flex-row"
+          ng-class="{ 'error': ( ! isProcessing ) && ( loginForm.password.$dirty && loginForm.password.$touched && loginForm.password.$invalid ) }"
+      >
+        <input placeholder="Password"
+               type="password"
+               name="password"
+               required=""
+               ng-change=" vm.formChange(loginForm)"
+               ng-model=" vm.$storage.newAccount.password "
+               autocomplete="off"
+        />
+      </p>
+      <div  class="flex-row"
+            ng-if="( ! isProcessing ) && ( loginForm.password.$dirty && loginForm.password.$touched && loginForm.password.$invalid )"
+            ng-messages="loginForm.password.$error"
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Your Password is Required
+        </div>
+      </div>
+
+
+      <p class="forgot-password field-group flex-column">
+        <span class="link"
+              ng-click=" vm.forgotPassword(loginForm) "
+        >
+          Forgot Password?
+        </span>
+        <span class="reset-sent"
+              ng-if=" vm.passwordResetSent "
+        >
+          Reset request sent.
+        </span>
+      </p>
+    </main>
+
+    <footer class="flex-row"
+            ng-if=" vm.uiState !== 'link-oauths'"
+    >
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label">Log In</span>
+        </div>
+      </button>
+    </footer>
+
+    <header class="drag-handle"
+            ng-if=" vm.uiState === 'link-oauths' "
+    >
+      <h1>Link Account</h1>
+
+    </header>
+
+    <main class="flex-column link-oauths"
+          ng-if=" vm.uiState === 'link-oauths' "
+    >
+      <div class="link-image flex-row">
+        <div class="wrapper flex-column">
+          <div class="image-container social-container">
+            <svg class="icon social-icon">
+              <use xlink:href="#facebook-link"></use>
+            </svg>
+          </div>
+          <p class="label">Facebook</p>
+        </div>
+        <div class="wrapper flex-row">
+          <div class="image-container">
+            <svg class="icon link-icon">
+              <use xlink:href="#broken-link"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="wrapper flex-column">
+          <div class="image-container social-container">
+            <svg class="icon social-icon">
+              <use xlink:href="#google-link"></use>
+            </svg>
+          </div>
+          <p class="label">Google</p>
+        </div>
+      </div>
+      <div class="flex-row link-warning">
+        An account already exists with that email address. Would you like to link this login with that account?
+      </div>
+    </main>
+
+    <footer class="flex-row link-footer"
+            ng-if=" vm.uiState === 'link-oauths' "
+    >
+      <button class="transparent"
+              type="button"
+              ng-click="vm.uiState = 'pending'"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Cancel</span>
+        </div>
+      </button>
+      <button class="blue-primary" ng-click="vm.accountExistsWithDifferentCredential()">
+        <div class="wrapper flex-row">
+          <span class="label">Link Accounts</span>
+        </div>
+      </button>
+    </footer>
+
+  </form>
+
+</section>

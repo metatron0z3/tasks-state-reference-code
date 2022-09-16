@@ -1,0 +1,346 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+
+  > .board-invite-modal-overlay  {
+
+    > form.modal {
+
+      &.board-invite-modal {
+
+        > .loader-wrapper {
+          margin: 64px 0px;
+
+          > .loader {
+
+            &:before,
+            &:after {
+              background: $white-primary;
+            }
+          }
+        }
+
+        > main {
+
+          max-height: 370px;
+
+          > .field-group {
+            @include transition(none);
+            border: 1px solid $light-gray-thirteenary;
+
+            > span {
+              > svg {
+                height: 16px;
+                min-height: 16px;
+                max-height: 16px;
+                width: 16px;
+                min-width: 16px;
+                max-width: 16px;
+                fill: rgba($blue-gray-primary, 0.3);
+              }
+            }
+
+            > input {
+
+              border-bottom: 0px;
+              font-size: 13px;
+              color: rgba($blue-gray-primary, 0.5);
+              font-family: $font-family-medium;
+              padding-top: 10px;
+
+              &.tp-invalid {
+                border-color: $red-quaternary;
+              }
+            }
+
+          }
+
+          > .member-list {
+            margin: 49px 0px;
+            max-height: 270px;
+            @include justify-content(flex-start);
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            border-top: 1px solid rgba($gray-senary, 0.6);
+            border-bottom: 1px solid rgba($gray-senary, 0.6);
+
+
+            > .member {
+              padding: 0px;
+              margin-bottom: 7px;
+              height: 62px;
+              min-height: 62px;
+              max-height: 62px;
+              border-bottom: 1px solid rgba($gray-senary, 0.6);
+
+              &:last-of-type {
+                border-bottom: 0px;
+              }
+
+              > .profile-image {
+                margin-right: 8px;
+
+                &,
+                > .asset,
+                > .asset > .asset-thumbnail,
+                > .asset > .asset-thumbnail > img,
+                > .asset > .asset-thumbnail > svg {
+                  width: 35px;
+                  min-width: 35px;
+                  max-width: 35px;
+                  height: 35px;
+                  min-height: 35px;
+                  max-height: 35px;
+                  @include border-radius(50%);
+                  overflow: hidden;
+                }
+
+                > .asset {
+
+                  &:hover {
+
+                    > .asset-thumbnail {
+                      opacity: 1;
+                    }
+                  }
+
+                  > .asset-thumbnail {
+                    overflow: hidden;
+                    border: 0px;
+
+                    &:before {
+                      display: none;
+                    }
+
+                    &,
+                    > .upload-progress {
+                      @include border-radius(50%);
+                    }
+                  }
+                }
+
+
+              }
+
+              > .label {
+
+                > .name {
+                  font-size: 14px;
+                  color: $blue-gray-primary;
+                }
+
+                > .text,
+                > .email {
+                  margin-top: 8px;
+                  font-size: 12px;
+                  color: rgba($blue-gray-primary, 0.4);
+                }
+
+              }
+
+              > .select-icon {
+                cursor: pointer;
+                margin: 1px;
+                width: 25px;
+                min-width: 25px;
+                max-width: 25px;
+                height: 25px;
+                min-height: 25px;
+                max-height: 25px;
+                //border: 1px solid $light-gray-senary;
+                @include css3-prefix('box-shadow', 0 0 0px 1px $light-gray-senary);
+                @include border-radius(50%);
+                @include transition(none);
+
+
+                > svg {
+                  width: 12px;
+                  min-width: 12px;
+                  max-width: 12px;
+                  height: 12px;
+                  min-height: 12px;
+                  max-height: 12px;
+                  fill: $light-gray-senary;
+
+                  &.check {
+                    display: none;
+                  }
+
+
+                }
+              }
+
+              &.active,
+              &.existing-member,
+              &.existing-invite,
+              &.has-invites {
+                //background: transparent;
+                //border-color: $blue-primary;
+
+                > .label {
+                  //color: $blue-gray-primary;
+                }
+
+                > .select-icon {
+                  //background: $blue-primary;
+                  //border-color: $blue-primary;
+
+                  > svg {
+
+                    &.check {
+                      display: inline-block;
+                    }
+
+                    &.plus {
+                      display: none;
+                    }
+                  }
+                }
+              }
+
+              //
+              // &.active,
+              // &.existing-invite,
+              // &.has-invites {
+              //
+              //   > .select-icon {
+              //     //border-color: $blue-octornary;
+              //     @include css3-prefix('box-shadow', 0 0 0px 1px rgba($blue-octornary, 1));
+              //
+              //     > svg {
+              //       fill: rgba($blue-octornary, 1);
+              //
+              //       &.check {
+              //         display: inline-block;
+              //       }
+              //
+              //       &.plus {
+              //         display: none;
+              //       }
+              //     }
+              //   }
+              //
+              // }
+              //
+              // &.existing-invite,
+              // &.has-invites {
+              //
+              //   > .select-icon {
+              //     cursor: default;
+              //   }
+              // }
+
+              &.active,
+              &.existing-member {
+
+
+                > .select-icon {
+                  cursor: default;
+                  //border-color: $blue-octornary;
+                  @include css3-prefix('box-shadow', 0 0 0px 1px rgba($blue-octornary, 1));
+
+                  > svg {
+                    fill: rgba($blue-octornary, 1);
+                  }
+                }
+              }
+
+              // &.existing-invite,
+              // &.new-member {
+              //
+              //   > .profile-image {
+              //     border: 1px solid $light-gray-senary;
+              //
+              //     > .asset,
+              //     > .asset > .asset-thumbnail,
+              //     > .asset > .asset-thumbnail > svg {
+              //       height: 19px;
+              //       max-height: 19px;
+              //       min-height: 19px;
+              //       width: 19px;
+              //       max-width: 19px;
+              //       min-width: 19px;
+              //       fill: $light-gray-senary;
+              //       @include border-radius(0);
+              //     }
+              //
+              //
+              //   }
+              // }
+
+            }
+
+
+
+          }
+
+        }
+
+        > footer {
+          @include justify-content(center);
+
+          > button {
+            @include transition(none);
+            min-width: 130px;
+
+            > .wrapper {
+
+              > .label {
+                @include transition(none);
+              }
+            }
+          }
+
+          > .cancel {
+            border: 0px;
+
+            > .wrapper {
+
+              > .label {
+
+                color: $light-gray-tertiary;
+              }
+            }
+          }
+        }
+
+        &.creating {
+          min-height: 350px;
+
+        }
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width:414px) {
+  body {
+
+    > .board-invite-modal-overlay  {
+      @include align-items(flex-start);
+
+
+      > form.modal {
+
+        &.troops-modal {
+
+          &.switch-troop {
+            > main {
+
+              > .troop-list {
+                max-height: none;
+              }
+            }
+
+            > footer {
+              margin: 10px 0px 0px 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

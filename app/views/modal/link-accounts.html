@@ -1,0 +1,95 @@
+<div class="modal-overlay flex-row"
+     ng-class=" vm.showModal ? 'show' : '' "
+     ng-click=" vm.close()"
+>
+
+  <form name="troopSettingsForm"
+        class="link-accounts-modal modal flex-column"
+        novalidate="novalidate"
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click=" vm.close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <main class="flex-column">
+
+      <div class="social-media image-container">
+        <svg class="icon">
+          <use xlink:href="#social-media"></use>
+        </svg>
+      </div>
+
+      <h1>Link Social Media</h1>
+
+      <p>
+        We're moving to a simpler, more secure login.
+        Link either your Facebook or Google account to Troop.
+      </p>
+
+      <div class="firebaseui-wrapper flex-column">
+
+        <span class="button google"
+                ng-click=" vm.linkOauth('google.com') "
+        >
+          <div class="wrapper flex-row">
+            <div class="image-container">
+              <svg class="icon">
+                <use xlink:href="#google"></use>
+              </svg>
+            </div>
+            <span class="label">Log in with <b>Google</b></span>
+          </div>
+        </span>
+
+        <span class="button facebook"
+                ng-click=" vm.linkOauth('facebook.com') "
+        >
+          <div class="wrapper flex-row">
+            <div class="image-container">
+              <svg class="icon">
+                <use xlink:href="#facebook"></use>
+              </svg>
+            </div>
+            <span class="label">Log in with <b>Facebook</b></span>
+          </div>
+        </span>
+
+        <!-- <span class="button twitter"
+                ng-click=" vm.linkOauth('twitter.com') "
+        >
+          <div class="wrapper flex-row">
+            <div class="image-container">
+              <svg class="icon">
+                <use xlink:href="#twitter"></use>
+              </svg>
+            </div>
+            <span class="label">Log in with <b>Twitter</b></span>
+          </div>
+        </span> -->
+
+        <!-- <span class="button github"
+                ng-click=" vm.linkOauth('github.com') "
+        >
+          <div class="wrapper flex-row">
+            <div class="image-container">
+              <svg class="icon">
+                <use xlink:href="#github"></use>
+              </svg>
+            </div>
+            <span class="label">Log in with <b>Github</b></span>
+          </div>
+        </span> -->
+
+      </div>
+
+    </main>
+
+  </form>
+
+</div>

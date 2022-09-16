@@ -1,0 +1,43 @@
+<div class="modal-overlay flex-row"
+     ng-class=" vm.showModal ? 'show' : '' "
+     ng-click="vm.close()"
+>
+
+  <div class="public-troop-share-modal modal flex-column"
+       ng-click=" $event.stopPropagation() "
+
+  >
+
+      <div class="close image-container"
+           ng-click="vm.close()"
+      >
+        <svg class="icon close">
+          <use xlink:href="#close"/>
+        </svg>
+      </div>
+
+      <header>
+        <h1>Share</h1>
+      </header>
+
+      <main class="flex-column">
+
+        <span class="url">
+          {{ vm.publicURL.baseUrl + vm.publicURL.troopSlug }}
+        </span>
+      </main>
+
+      <footer class="flex-row">
+        <button type="button"
+                class="copy-btn blue-primary"
+                data-clipboard-text="{{ vm.publicURL.baseUrl + vm.publicURL.troopSlug  }}"
+                ng-click=" copyNotification() "
+        >
+          <div class="wrapper flex-row">
+            <span class="label">Copy URL</span>
+          </div>
+        </button>
+      </footer>
+  </div>
+
+</div>

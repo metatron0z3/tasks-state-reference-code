@@ -1,0 +1,45 @@
+<header>
+
+  <div class="background">
+    <span class="profile-image image-container flex-row"
+          ng-if=" troopMemberLoaded "
+          tp-troop-member-profile=" Me.currentTroopMember.$id "
+          tp-troop-member-troop-id=" Me.currentTroopMember.troopId "
+          tp-troop-member-avatar-asset-size="smallUrl"
+    ></span>
+  </div>
+
+  <div class="profile-info flex-row"
+       ng-if=" troopMemberLoaded "
+  >
+
+    <div class="profile-image image-container flex-row"
+          data-tp-troop-member-profile=" Me.currentTroopMember.$id "
+          data-tp-troop-member-troop-id=" Me.currentTroopMember.troopId "
+          data-tp-troop-member-avatar-asset-size="smallUrl"
+    ></div>
+
+  </div>
+
+</header>
+
+<main class="profile-blurb" >
+  <div class="profile-id-text flex-column">
+    <div class="profile-name"
+         data-ng-class=""
+    >
+      <h2>{{ Me.currentTroopMember.name }}</h2>
+    </div>
+
+    <div class="profile-title"
+         data-ng-class=""
+    >
+      <h3>{{ Me.currentTroopMember.title }}</h3>
+    </div>
+  </div>
+
+  <div class="blurb flex-column"
+       data-marked="Me.currentTroopMember.blurb"
+  >
+  </div>
+</main>

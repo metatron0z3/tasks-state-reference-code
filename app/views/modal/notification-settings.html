@@ -1,0 +1,48 @@
+<section>
+  <h3>Create New Board</h3>
+  <p>Select a level of notification for the {{  BoardName  }} Board</p>
+
+  <form name="boardModalForm"
+        class="board-modal modal flex-column"
+        novalidate="novalidate"
+        ng-submit="save(boardModalForm)"
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="no-notification checkbox flex-row field-group">
+      <label class="label">No Notifications <span>(Don't clutter my inbox)</span></label>
+      <input type="checkbox"
+             ng-model="board.private"
+             on="On"
+             off="Off"
+      >
+    </div>
+
+    <div class="standard checkbox flex-row field-group">
+      <label class="label">Standard <span>(Push Notification on new activity)</span></label>
+      <input type="checkbox"
+             ng-model="board.readOnly"
+             on="On"
+             off="Off"
+      >
+    </div>
+
+    <div class="mail checkbox flex-row field-group">
+      <label class="label">Email <span>(Push Notifications & email alerts)</span></label>
+      <input type="checkbox"
+             ng-model="board.readOnly"
+             on="On"
+             off="Off"
+      >
+    </div>
+
+    <footer class="flex-row">
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label">Save</span>
+        </div>
+      </button>
+    </footer>
+  </form>
+
+</section>

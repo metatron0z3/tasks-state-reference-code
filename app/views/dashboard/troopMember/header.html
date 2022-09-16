@@ -1,0 +1,101 @@
+<div class="wrapper flex-row"
+     ng-class=" $root.showSearch ? '' : 'shrink-for-mobile' "
+     ng-mouseleave=" showActionMenu = false "
+>
+
+  <section class="left-sidebar-toggle action flex-row">
+    <button class="white-primary circle"
+            ng-click="toggleLeftSidebar()"
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon list">
+            <use xlink:href="#list"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+  </section>
+
+  <section class="title flex-row">
+    <span class="name"
+          ng-bind=" Me.currentTroopMember.name "
+    ></span>
+  </section>
+
+  <span class="flex-spacer"></span>
+
+  <form class="search flex-row"
+        ng-submit="searchBlur()"
+  >
+
+    <div class="field-group flex-row"
+         ng-class=" labels['search'] ? '' : 'hide-label' "
+         ng-if="searchIsEnabled"
+    >
+      <input type="search"
+             ng-model="search.string"
+             ng-keyup="$event.keyCode == 13 && doSearch()"
+             ng-focus="hideLabel('search')"
+             ng-blur="doSearch()"
+      >
+      <label class="uppercase">Search</label>
+
+      <span class="image-container magnifying-glass"
+            ng-click=" $root.showSearch = true "
+      >
+        <svg class="icon magnifying-glass">
+          <use xlink:href="#magnifying-glass"/>
+        </svg>
+      </span>
+      <span class="image-container close"
+            ng-click=" $root.showSearch = false "
+      >
+        <svg class="icon close">
+          <use xlink:href="#close"/>
+        </svg>
+      </span>
+    </div>
+  </form>
+
+  <section class="notifications action flex-row"
+           ng-if=" canDisplayMembers "
+  >
+
+    <button class="white-primary circle"
+            ng-class=" $root.showNotifications ? 'showing' : '' "
+            ng-click=" toggleNotificationSidebar() "
+    >
+      <div class="wrapper flex-row">
+        <span class="count image-container"
+              ng-if=" Me.notifications[Me.troopMember.$id].breakdown.unreadNonMessageNotifications "
+              ng-bind=" Me.notifications[Me.troopMember.$id].breakdown.unreadNonMessageNotifications "
+        ></span>
+
+        <span class="image-container">
+          <svg class="icon bell">
+            <use xlink:href="#bell"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+
+
+  </section>
+
+  <section class="right-sidebar-toggle action flex-row">
+    <button class="white-primary circle"
+            ng-class=" $root.showProfileSidebar ? 'showing' : '' "
+            ng-click=" toggleProfileSidebar() "
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon list">
+            <use xlink:href="#list"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+  </section>
+
+</div>

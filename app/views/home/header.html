@@ -1,0 +1,101 @@
+<div class="wrapper flex-row">
+
+  <a class="troop-logo image-container"
+     href="/home"
+  >
+    <svg class="icon troop-logo">
+      <use xlink:href="#troop-logo"/>
+    </svg>
+  </a>
+
+  <div class="flex-spacer"></div>
+
+
+  <ul class="nav-list flex-row">
+    <li class="nav-item blog flex-row">
+      <a href="http://troop.space/tr/blog">
+        <div class="wrapper flex-row">
+          <span class="label">Troop Blog</span>
+        </div>
+      </a>
+    </li>
+    <li class="nav-item demo flex-row">
+      <a href="http://troop.space/tr/demo">
+        <div class="wrapper flex-row">
+          <span class="label">Live Demo</span>
+        </div>
+      </a>
+    </li>
+    <li class="nav-item login flex-row">
+      <a ui-sref=" auth.login ">
+        <div class="wrapper">
+          <div class="label">
+            Login
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <span class="actions"
+        ng-click="toggleLoginMenu()"
+  >
+    <span class="hamburger"
+          ng-if=" !showLogin "
+    >
+      <svg class="icon list">
+        <use xlink:href="#list"/>
+      </svg>
+    </span>
+    <span class="close"
+          ng-if=" showLogin "
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </span>
+
+  </span>
+
+
+
+
+</div>
+<ul class="login-menu flex-column"
+    ng-if=" showLogin"
+  >
+  <li class="nav-item blog flex-row">
+    <a href="http://troop.space/tr/blog">
+      <div class="wrapper flex-row">
+        <span class="label">Troop Blog</span>
+      </div>
+    </a>
+  </li>
+  <li class="nav-item demo flex-row">
+    <a href="http://troop.space/tr/demo">
+      <div class="wrapper flex-row">
+        <span class="label">Live Demo</span>
+      </div>
+    </a>
+  </li>
+  <li class="nav-item login flex-row">
+    <a ui-sref=" auth.login ">
+      <div class="wrapper">
+        <div class="label">
+          Login
+        </div>
+      </div>
+    </a>
+  </li>
+  <li class="nav-item app flex-row">
+    <a ng-href="{{link.url}}"
+       target="_blank"
+    >
+      <div class="wrapper flex-row">
+        <span class="label">
+          Open the app
+        </span>
+        <ng-include src=" '/images/svg/icons/troop-icon.svg' "></ng-include>
+      </div>
+    </a>
+  </li>
+</ul>

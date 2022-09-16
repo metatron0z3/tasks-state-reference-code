@@ -1,0 +1,14 @@
+requireSpec('environment', 'clean-env');
+requireSpec('troop', 'init-troop');
+requireSpec('auth', 'sign-up');
+requireSpec('trooper', 'logout');
+requireSpec('auth', 'login');
+requireSpec('boards', 'add-board');
+requireSpec('cards', 'add-card');
+requireSpec('troop', 'rename-troop');
+requireSpec('trooper', 'logout');
+requireSpec('trooper', 'detach');
+requireSpec('auth', 'sign-up');
+requireSpec('trooper', 'logout');
+requireSpec('auth', 'login');
+requireSpec('trooper', 'logout');

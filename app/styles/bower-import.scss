@@ -1,0 +1,28 @@
+// bower:scss
+@import "../../bower_components/bourbon/app/assets/stylesheets/_bourbon.scss";
+@import "../../bower_components/sass-css3-mixins/css3-mixins.scss";
+// endbower
+
+
+
+@mixin all-width($width) {
+  width: $width;
+  min-width: $width;
+  max-width: $width;
+}
+
+@mixin all-height($height) {
+  height: $height;
+  min-height: $height;
+  max-height: $height;
+}
+
+@mixin size($width, $height: $width) {
+  @include all-height($height);
+  @include all-width($width);
+}
+@mixin user-select($select) {
+  -moz-user-select: $select;
+  -webkit-user-select: $select;
+  -ms-user-select: $select;
+}

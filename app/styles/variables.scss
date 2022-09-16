@@ -1,0 +1,301 @@
+/* ####################### */
+/* color variables */
+
+/* blacks */ // <-- thats racist ... LOL
+$black-primary: #000000;
+$black-secondary: #193945;
+$black-secondary-40: rgba($black-secondary, 0.4);
+$black-secondary-60: rgba($black-secondary, 0.6);
+$black-secondary-65: rgba($black-secondary, 0.65);
+$black-tertiary: #10252D;
+$black-quaternary: #132C35;
+$black-quinary: #555555;
+$black-senary: #666666;
+$black-septenary: #4C5667;
+$black-octonary: #2E313A;
+$black-nonary: #272C37;
+$black-denary: #1F232C;
+$black-elevenary: #3A444E;
+
+/* whites */
+$white-primary: #FFFFFF;
+$white-secondary: #F0FAFE;
+$white-tertiary: #FBFCFF;
+$white-quaternary: #F2F2F2;
+$white-quinary: #F9F9FB;
+$white-senary: #F8F8FD;
+$white-septenary: #F5F6F9;
+$white-octonary: #FDFDFE;
+$white-nonary: #E5E7E9;
+$white-denary: #DADCED;
+$white-elevenary: #FBFBFD;
+
+/* grays */
+$gray-primary: #6D7886;
+$gray-secondary: #828EA1;
+$gray-tertiary: #545F66;
+$gray-quaternary: #333333;
+$gray-quinary: #8C90A2;
+$gray-senary: #E4E7ED;
+$gray-septenary: #98A2A8;
+$gray-octonary: #D8E0E6;
+$gray-nonary: #E2E5F0;
+$gray-denary: #DFE2E4;
+$gray-elevenary: #A2A9C0;
+$gray-twelvary: #828EA5;
+$gray-thirteenary: #30384E;
+$gray-fourteenary: #3D455A;
+$gray-fifteenary: #7C97AF;
+$gray-sixteenary: #94A0B4;
+
+$grey-primary: $gray-primary;
+$grey-secondary: $gray-secondary;
+$grey-tertiary: $gray-tertiary;
+$grey-quaternary: $gray-quaternary;
+$grey-quinary: $gray-quinary;
+$grey-senary: $gray-senary;
+$grey-septenary: $gray-septenary;
+$grey-octonary: $gray-octonary;
+$grey-nonary: $gray-nonary;
+$grey-denary: $gray-denary;
+$grey-elevenary: $gray-elevenary;
+$grey-twelvary: $gray-twelvary;
+$grey-thirteenary: $gray-thirteenary;
+$grey-fourteenary: $gray-fourteenary;
+$grey-fifteenary: $gray-fifteenary;
+
+$light-gray-primary: #EBF4FB;
+$light-gray-secondary: #BFC4C8;
+$light-gray-tertiary: #BABFD2;
+$light-gray-quaternary: #CAD2D7;
+$light-gray-quinary: #B8BBC6;
+$light-gray-senary: #CDD1DF;
+$light-gray-septenary: #C1D2E6;
+$light-gray-octornary: #DEE6F2;
+$light-gray-nonary: #E1E4ED;
+$light-gray-denary: #9EA3B3;
+$light-gray-elevenary: #F8F8FD;
+$light-gray-twelvary: #718493;
+$light-gray-thirteenary: #E0E7EE;
+
+$light-grey-primary: $light-gray-primary;
+$light-grey-secondary: $light-gray-secondary;
+$light-grey-tertiary: $light-gray-tertiary;
+$light-grey-quaternary: $light-gray-quaternary;
+$light-grey-quinary: $light-gray-quinary;
+$light-grey-senary: $light-gray-senary;
+$light-grey-septenary: $light-gray-septenary;
+$light-grey-octornary: $light-gray-octornary;
+$light-grey-nonary: $light-gray-nonary;
+$light-grey-denary: $light-gray-denary;
+$light-grey-elevenary: $light-gray-elevenary;
+$light-grey-twelvary: $light-gray-twelvary;
+$light-grey-thirteenary: $light-gray-thirteenary;
+
+/* blues */
+$blue-primary: #37B8F9;
+$blue-secondary: #394052;
+$blue-tertiary: #313749;
+$blue-quaternary: #50C0F8;
+$blue-quinary: #95BAD4;
+$blue-senary: #07A9EA;
+$blue-septenary: #4074E1;
+$blue-octornary: #05A6F7;
+$blue-nonary: #82C0E0;
+$blue-denary: #0065B3;
+$blue-elevenary: #075EE0;
+$blue-twelvenary: #1CA8F4;
+$blue-thirteenary: #2C2C84;
+$blue-fourteenary: #0495DD;
+$blue-fifteenary: #0584C3;
+$blue-sixteenary: #408ED5;
+$blue-seventenary: #1E55AA;
+$blue-eighteenary: #2F76C6;
+$blue-nineteenary: #164499;
+$blue-twentiary: #1B4FA3;
+$blue-twentyoneary: #082A5D;
+$blue-twentytwoary: #00ACED;
+$blue-twentythreery: #1B5D89;
+$blue-twentyfourary: #082A5B;
+$blue-twentyfivary: #4CADF9;
+
+
+/* blue grays */
+$blue-gray-primary: #4A556B;
+$blue-gray-secondary: #4074E1;
+$blue-gray-tertiary: #717686;
+$blue-gray-quaternary: #222B3D;
+$blue-gray-quinary: #8C9CA9;
+$blue-gray-senary: #E0E8F3;
+$blue-gray-septenary: #F2F4FB;
+$blue-gray-octonary: #97ABBB;
+$blue-gray-nonary: #F3FBFF;
+$blue-gray-denary: #32353E;
+
+
+$blue-grey-primary: $blue-gray-primary;
+$blue-grey-secondary: $blue-gray-secondary;
+$blue-grey-tertiary: $blue-gray-tertiary;
+$blue-grey-quaternary: $blue-gray-quaternary;
+$blue-grey-quinary: $blue-gray-quinary;
+$blue-grey-senary: $blue-gray-senary;
+$blue-grey-septenary: $blue-gray-septenary;
+$blue-grey-octonary: $blue-gray-octonary;
+$blue-grey-nonary: $blue-gray-nonary;
+$blue-grey-denary: $blue-gray-denary;
+
+
+/* blue greens */
+$blue-green-primary: #69D0D0;
+$blue-green-secondary: #50E3C2;
+$blue-green-tertiary: #2FB846;
+$blue-green-quaternary: #048A8B;
+
+/* greens */
+$green-primary: #81C48F;
+$green-secondary: #B8E986;
+$green-tertiary: #A8CF38;
+$green-quaternary: #66D072;
+
+/* reds */
+$red-primary: #E14B4E;
+$red-secondary: #F26C4F;
+$red-tertiary: #FF524E;
+$red-quaternary: #EA4C60;
+$red-quinary: #ED193F;
+$red-senary: #E75A6B;
+$red-septenary: #F16475;
+$red-octonnary: #F94C74;
+$red-nonary: #DE4B39;
+
+
+/* oranges */
+$orange-primary: #F0A839;
+$orange-secondary: #F78222;
+$orange-tertiary: #F9934C;
+
+/* yellow */
+$yellow-primary: #F1C238;
+$yellow-secondary: #FDB813;
+
+/* purple */
+$purple-primary: #E285F5;
+$purple-secondary: #5C2E91;
+$purple-tertiary: #50495B;
+$purple-quatenary: #A5286A;
+$purple-quinary: #364FA3;
+$purple-sendary: #4A494B;
+$purple-septenary: #EAC4F5;
+$purple-octonary: #3B5998;
+$purple-nonary: #C24CF9;
+
+/* ####################### */
+/* font variables */
+
+$font-family-helvetica: helvetica, arial, verdana, sans-serif;
+$font-family-medium: "Avenir-Medium", helvetica, arial, verdana, sans-serif;
+$font-family-light: "Avenir-Light", helvetica, arial, verdana, sans-serif;
+$font-family-heavy: 'Avenir-Heavy', helvetica, arial, verdana, sans-serif;
+$font-family-bold: $font-family-heavy;
+$font-family-regular: $font-family-medium;
+
+/* ####################### */
+/* responsive layout setup */
+
+$screen-size-320: 320px;
+$screen-size-360: 360px;
+$screen-size-480: 480px;
+$screen-size-600: 600px;
+$screen-size-640: 640px;
+$screen-size-768: 768px;
+$screen-size-800: 800px;
+$screen-size-1024: 1024px;
+$screen-size-1200: 1200px;
+$screen-size-1280: 1280px;
+$screen-size-1440: 1440px;
+
+
+
+$screen-size-480x320: "only screen and (max-width:320px) and (max-height:480px)";
+
+$screen-height-480: "only screen and (max-height:480px)";
+$screen-size-320x480: "only screen and (max-width:320px) and (max-height:480px)";
+$screen-size-360x480: "only screen and (max-width:360px) and (max-height:480px)";
+$screen-size-480x480: "only screen and (max-width:480px) and (max-height:480px)";
+$screen-size-640x480: "only screen and (max-width:640px) and (max-height:480px)";
+
+$screen-width-640: "only screen and (max-width:640px)";
+$screen-height-640: "only screen and (max-height:640px)";
+$screen-size-320x640: "only screen and (max-width:320px) and (max-height:640px)";
+$screen-size-360x640: "only screen and (max-width:360px) and (max-height:640px)";
+$screen-size-480x640: "only screen and (max-width:480px) and (max-height:640px)";
+$screen-size-600x640: "only screen and (max-width:600px) and (max-height:640px)";
+$screen-size-640x640: "only screen and (max-width:640px) and (max-height:640px)";
+
+$screen-width-768: "only screen and (max-width:768px)";
+$screen-height-768: "only screen and (max-height:768px)";
+$screen-size-320x768: "only screen and (max-width:320px) and (max-height:768px)";
+$screen-size-360x768: "only screen and (max-width:360px) and (max-height:768px)";
+$screen-size-480x768: "only screen and (max-width:480px) and (max-height:768px)";
+$screen-size-600x768: "only screen and (max-width:600px) and (max-height:768px)";
+$screen-size-640x768: "only screen and (max-width:640px) and (max-height:768px)";
+$screen-size-768x768: "only screen and (max-width:768px) and (max-height:768px)";
+
+
+$screen-width-800: "only screen and (max-width:800px)";
+$screen-size-320x800: "only screen and (max-width:320px) and (max-height:800px)";
+$screen-size-360x800: "only screen and (max-width:360px) and (max-height:800px)";
+$screen-size-480x800: "only screen and (max-width:480px) and (max-height:800px)";
+$screen-size-600x800: "only screen and (max-width:600px) and (max-height:800px)";
+$screen-size-640x800: "only screen and (max-width:640px) and (max-height:800px)";
+$screen-size-768x800: "only screen and (max-width:768px) and (max-height:800px)";
+$screen-size-800x800: "only screen and (max-width:800px) and (max-height:800px)";
+
+$screen-height-1024: "only screen and (max-height:1024px)";
+$screen-width-1024: "only screen and (max-width:1024px)";
+
+$screen-size-320x1024: "only screen and (max-width:320px) and (max-height:1024px)";
+$screen-size-360x1024: "only screen and (max-width:360px) and (max-height:1024px)";
+$screen-size-480x1024: "only screen and (max-width:480px) and (max-height:1024px)";
+$screen-size-600x1024: "only screen and (max-width:600px) and (max-height:1024px)";
+$screen-size-640x1024: "only screen and (max-width:640px) and (max-height:1024px)";
+$screen-size-768x1024: "only screen and (max-width:768px) and (max-height:1024px)";
+$screen-size-800x1024: "only screen and (max-width:800px) and (max-height:1024px)";
+$screen-size-1024x1024: "only screen and (max-width:1024px) and (max-height:1024px)";
+
+$screen-size-320x1200: "only screen and (max-width:320px) and (max-height:1200px)";
+$screen-size-360x1200: "only screen and (max-width:360px) and (max-height:1200px)";
+$screen-size-480x1200: "only screen and (max-width:480px) and (max-height:1200px)";
+$screen-size-600x1200: "only screen and (max-width:600px) and (max-height:1200px)";
+$screen-size-640x1200: "only screen and (max-width:640px) and (max-height:1200px)";
+$screen-size-768x1200: "only screen and (max-width:768px) and (max-height:1200px)";
+$screen-size-800x1200: "only screen and (max-width:800px) and (max-height:1200px)";
+$screen-size-1024x1200: "only screen and (max-width:1024px) and (max-height:1200px)";
+$screen-size-1024x1200: "only screen and (max-width:1200px) and (max-height:1200px)";
+
+
+
+$header-height: 80px;
+$left-aside-width: 220px;
+$left-aside-padding: 27px;
+$troop-switch-sidebar-width: 80px;
+
+$right-sidebar-width: 350px;
+$thumbnail-size: 85px;
+$notification-menu-width: 320px;
+$search-width: 240px;
+
+$loading-anim-size: 80px;
+$loading-anim-dot-size: ($loading-anim-size / 8); //20
+$loading-anim-height: $loading-anim-dot-size; //20
+$loading-anim-dot-color: #2196F3;
+
+
+%size-auto {
+  height: auto;
+  min-height: 0px;
+  max-height: none;
+  width: auto;
+  min-width: 0px;
+  max-width: none;
+}

@@ -1,0 +1,275 @@
+<header>
+  <ul class="flex-row">
+
+    <li class="board-members flex-row"
+        ng-class=" { active: selectedSection === 'board-members' }  "
+        ng-click=" selectedSection = 'board-members' "
+        ng-show="  showMembers "
+    >
+      Members
+    </li>
+
+    <li class="assets flex-row"
+        ng-class=" { active: selectedSection === 'assets' }  "
+        ng-click=" selectedSection = 'assets' "
+    >
+      Files
+    </li>
+
+    <li class="tags flex-row"
+        ng-class=" { active: selectedSection === 'tags'  } "
+        ng-click=" selectedSection = 'tags' "
+        ng-hide="
+          isDocumentView ||
+          isCardDetail
+        "
+    >
+      Tags
+    </li>
+
+  </ul>
+</header>
+<main ng-class=" selectedSection "
+      class="selected"
+>
+
+   <section class="board-members flex-column  ">
+
+    <div class="loader-wrapper flex-row"
+         ng-if=" isLoadingMembers "
+    >
+      <div class="wrapper">
+        <div class="loader-2 small"></div>
+      </div>
+    </div>
+
+    <div class="add-new-member flex-row"
+         ng-if=" ! isLoadingMembers && Me.currentBoard.private"
+    >
+<!--
+      <h1 class="flex-row"
+          ng-bind=" members.length + ' Board Member' + (members.length > 1 ? 's' : '') "
+      ></h1> -->
+      <span class="flex-spacer"></span>
+      <span class="image-container flex-row"
+            ng-if = " Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' "
+            ng-click="showBoardInviteModal()"
+      >
+        <svg class="icon add-member">
+          <use xlink:href="#add-member"/>
+        </svg>
+      </span>
+    </div>
+
+
+    <ul class="member-list flex-column"
+        ng-if=" ! isLoadingMembers "
+    >
+
+      <li class="member flex-row"
+          ng-class="member.$id === Me.troopMember.$id ? 'mine' : '' "
+          ng-repeat="member in members"
+      >
+        <span class="profile-image image-container flex-row"
+              tp-troop-member-profile=" ::member.$id "
+              tp-troop-member-troop-id=" ::member.troopId "
+              tp-troop-member-avatar-asset-size="smallUrl"
+              ng-click="navToTroopMember(member.$id)"
+        ></span>
+        <span class="flex-column"
+              ng-click="navToTroopMember(member.$id)"
+        >
+          <span class="user-name">{{ member.name }}</span>
+
+          <span class="troop-member-permission" ng-class="member.boards[Me.currentBoard.$id].permission"></span>
+
+        </span>
+        <span class="flex-spacer"></span>
+        <span class="member-menu flex-row">
+          <span class="dotdotdot image-container flex-row"
+                ng-click=" memberMenus[member.$id] = !memberMenus[member.$id] "
+                ng-if=" ( Me.troopMember.$id === member.$id ) || ( Me.currentBoard.createdByMemberId === Me.troopMember.$id ) ||  ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' && member.boards[Me.currentBoard.$id].permission !== 'admin' )"
+          >
+            <svg class="icon dotdotdot">
+              <use xlink:href="#dotdotdot"/>
+            </svg>
+          </span>
+
+          <ul class="menu flex-column"
+              ng-class=" memberMenus[member.$id] === true ? 'show' : '' "
+              ng-mouseleave=" memberMenus[member.$id] = false "
+          >
+            <li class="admin menu-item flex-row"
+                ng-if=" Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' "
+                ng-class=" member.boards[Me.currentBoard.$id].permission === 'admin' ? 'active' : '' "
+                ng-click=" setPermission(member, 'admin') "
+            >
+              <span class="label">Moderator</span>
+              <span class="flex-spacer">&nbsp;</span>
+              <span class="image-container flex-row">
+                <svg class="icon circle">
+                  <use xlink:href="#circle"/>
+                </svg>
+              </span>
+            </li>
+            <li class="member menu-item flex-row"
+                ng-class=" member.boards[Me.currentBoard.$id].permission === 'member' ? 'active' : '' "
+                ng-if=" Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' "
+                ng-click=" setPermission(member, 'member') "
+            >
+              <span class="label">Member</span>
+              <span class="flex-spacer">&nbsp;</span>
+              <span class="image-container flex-row">
+                <svg class="icon circle">
+                  <use xlink:href="#circle"/>
+                </svg>
+              </span>
+            </li>
+            <!--
+            <li class="guest menu-item flex-row"
+                ng-class=" member.boards[Me.currentBoard.$id].permission === 'guest' ? 'active' : '' "
+                ng-click=" setPermission(member, 'guest') "
+            >
+              <span class="label">Guest</span>
+              <span class="flex-spacer">&nbsp;</span>
+              <span class="image-container flex-row">
+                <svg class="icon circle">
+                  <use xlink:href="#circle"/>
+                </svg>
+              </span>
+            </li>
+            -->
+            <li class="remove warning menu-item flex-row"
+                ng-class=" member.boards[Me.currentBoard.$id].permission === 'admin' ? 'active' : '' "
+                ng-if=" ( Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' ) || ( Me.troopMember.$id === member.$id ) "
+                ng-click=" removeMember(member) "
+            >
+              <span class="label"
+                    ng-if=" Me.troopMember.$id !== member.$id "
+              >
+                Remove
+              </span>
+              <span class="label"
+                    ng-if=" Me.troopMember.$id === member.$id "
+              >
+                Leave
+              </span>
+              <span class="flex-spacer">&nbsp;</span>
+            </li>
+          </ul>
+        </span>
+      </li>
+
+    </ul>
+
+  </section>
+
+  <section class="assets flex-column ">
+
+    <div class="loader-wrapper flex-row"
+         ng-if=" isLoadingAssets "
+    >
+      <div class="wrapper">
+        <div class="loader-2 small"></div>
+      </div>
+    </div>
+
+
+    <h1 class="flex-row"
+        ng-bind=" assets.length + ' Board File' + (assets.length > 1 ? 's' : '') "
+        ng-if=" ! isLoadingAssets "
+    ></h1>
+    <ul class="asset-list file-list flex-column"
+        ng-if=" (! isLoadingAssets) "
+    >
+      <li class="asset flex-column"
+          ng-repeat=" asset in assets "
+          tp-asset=" ::asset.$id "
+          tp-asset-troop-id=" ::asset.troopId "
+          tp-asset-index=" $index "
+          tp-asset-size=" mediumUrl "
+          tp-asset-info=" true "
+          tp-asset-download=" checkDownload(asset) "
+          tp-asset-info-file-size=" true "
+          tp-asset-rename=" Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' "
+          tp-asset-remove=" false "
+          tp-asset-thumbnail-click=" showAssetsModal(asset.$id) "
+          data-id="{{asset.$id}} blah {{ asset.troopId}}"
+      ></li>
+    </ul>
+  </section>
+
+  <section class="tags flex-column "
+    ng-hide="
+      isDocumentView ||
+      isCardDetail
+    "
+  >
+
+
+    <div class="loader-wrapper flex-row"
+         ng-if=" isLoadingTags "
+    >
+      <div class="wrapper">
+        <div class="loader-2 small"></div>
+      </div>
+    </div>
+
+
+    <!-- <h1 class="flex-row"
+        ng-if=" ! isLoadingTags "
+    >
+      Tag Filter
+    </h1> -->
+    <ul class="tag-list flex-column"
+        ng-if=" ! isLoadingTags "
+    >
+      <li class="tag flex-row"
+          ng-repeat="tag in $sess.currentBoardTags"
+          ng-class=" tag.selected ? 'active' : '' "
+          ng-click=" selectTag($event, tag.name) "
+          data-blabla="{{tag}}"
+      >
+        <span class="color"
+              data-color="{{ tag.color }}"
+        ></span>
+        <div class="tag-info flex-column">
+          <form class="tag-change flex-row"
+                ng-submit="changeTag(tag)"
+                ng-if="toggleTagChange[tag.name]"
+          >
+          <span class="image-container"
+                ng-if=" step === 'name' && toggleTagChange[tag.name]"
+          >
+            <svg class="icon hash2">
+              <use xlink:href="#hash2"/>
+            </svg>
+          </span>
+            <input type="text"
+                   ng-class= " { name: step === 'name' } "
+                   ng-model="changeTagInput[tag.name]"
+                   ng-blur="changeTag(tag)"
+                   ng-esc-key="showTagChange(tag, 'label', false)"
+                   ng-focus="toggleTagChange[tag.name]"
+            >
+          </form>
+          <span class="label"
+                ng-bind="tag.label"
+                ng-dblclick="showTagChange(tag, 'label', true)"
+                ng-if="! toggleTagChange[tag.name]"
+          ></span>
+          <span class="name"
+                ng-bind="'#' + tag.name.substring(3)"
+                ng-dblclick="showTagChange(tag, 'name', true)"
+                ng-if="! toggleTagChange[tag.name]"
+          ></span>
+        </div>
+        <span class="count"
+              ng-bind=" tag.count + ' Card' + ( tag.count !== 1 ? 's' : '' ) "
+              ng-if="! toggleTagChange[tag.name]"
+        ></span>
+      </li>
+    </ul>
+  </section>
+
+</main>

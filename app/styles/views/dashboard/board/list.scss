@@ -1,0 +1,1335 @@
+@import "../../../bower-import.scss";
+@import "../../../variables.scss";
+
+[data-state*="dashboard.board.tags"] {
+
+
+  &.read-only-mode {
+    [data-ui-view=dashboardContent] {
+      min-width: 375px;
+      > .card-count,
+        .tag-chooser-toggle,
+        .new-card-list-table {
+          display: none;
+        }
+      > .card-list-tables {
+        > .wrapper {
+          > .card-list-table {
+            > .wrapper {
+              > header {
+                > .card-list-menu {
+                  display: none;
+                }
+              }
+              > main {
+                > .card-list {
+                  > .card {
+                    > .close, .pencil {
+                      display: none;
+                    }
+                  }
+                }
+              }
+              > footer {
+                min-height: 0;
+                > .new-card {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  [data-ui-view=dashboardContent] {
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    @include flex-grow(1);
+    @include justify-content(flex-start);
+    @include align-items(flex-start);
+    @include flex-direction(column);
+    //overflow-x: auto;
+    overflow: hidden;
+
+    $list-right-margin: 20px;
+    $list-header-height: 70px;
+    $list-header-width: 270px;
+    $tag-chooser-height: 140px;
+
+    .card.ui-sortable-helper {
+      height: 60px;
+      border: 1px solid $light-grey-nonary;
+      @include border-radius(4px);
+      background: $white-primary;
+
+      > .title {
+        cursor: pointer;
+        padding: 0px 20px;
+        line-height: 26px;
+        overflow: hidden;
+        font-size: 14px;
+        color: $blue-gray-primary;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      > .image-container {
+        display: none;
+      }
+    }
+
+
+    > .loader-wrapper {
+
+      > .loader {
+
+        &:before,
+        &:after {
+          background: $blue-gray-septenary;
+        }
+      }
+    }
+
+    > .empty-board {
+      width: 100%;
+      height: 100%;
+      @include align-items(center);
+      @include justify-content(center);
+
+      > button {
+        border: 2px solid $blue-primary;
+        background: transparent;
+
+        &:hover {
+
+        }
+
+        > .wrapper {
+          > .image-container {
+            &,
+            >svg {
+              fill: $blue-primary;
+              &:hover {
+                fill: $white-primary;
+              }
+            }
+          }
+        }
+      }
+
+      > h1 {
+        margin-top: 40px;
+        font-size: 24px;
+        color: $blue-gray-primary;
+      }
+
+      > p {
+        margin-top: 25px;
+        line-height: 26px;
+        font-size: 14px;
+        color: rgba($blue-gray-primary, 0.8);
+        text-align: center;
+      }
+    }
+
+    > .card-count {
+      left: 20px;
+      bottom: 10px;
+      position: absolute;
+      font-family: $font-family-regular;
+      font-size: 14px;
+      color: $light-gray-tertiary;
+    }
+
+    > .tag-chooser-toggle {
+      cursor: pointer;
+      right: 20px;
+      bottom: 10px;
+      position: absolute;
+      border-color: $gray-octonary;
+
+      > .wrapper {
+
+        > .image-container {
+
+          > svg {
+            fill: $gray-quinary;
+          }
+
+        }
+      }
+
+    }
+
+    > .tag-chooser {
+      opacity: 0;
+      padding: 0px 0px 20px 0px;
+      width: 100%;
+      height: $tag-chooser-height;
+      max-height: 0px;
+      position: relative;
+      overflow: hidden;
+      background: $white-primary;
+      @include justify-content(flex-start);
+      @include transition(all 0.2s linear);
+
+      > .flex-row {
+        margin-bottom: 10px;
+        padding: 0px 30px;
+
+        > .label {
+          font-size: 12px;
+          color: $light-gray-tertiary;
+        }
+
+        > .close {
+          cursor: pointer;
+
+          &,
+          > svg {
+            width: 12px;
+            min-width: 12px;
+            max-width: 12px;
+            height: 12px;
+            min-height: 12px;
+            max-height: 12px;
+          }
+
+          > svg {
+           fill: $gray-octonary;
+          }
+        }
+      }
+
+      > .flex-row-wrap {
+        padding: 0px 30px;
+        height: 100%;
+        min-height: 100px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+
+        > button {
+          cursor: pointer;
+          margin: 5px 10px 5px 0px;
+          padding: 8px 16px;
+          width: auto;
+          min-width: 0;
+          position: relative;
+          border-color: $light-gray-nonary;
+
+          > .wrapper {
+
+            > .label {
+              text-transform: none;
+              color: rgba($blue-secondary, 0.4);
+            }
+          }
+
+          &.active {
+            background: $blue-primary;
+            border-color: $blue-primary;
+
+            > .wrapper {
+
+              > .label {
+                color: $white-primary;
+              }
+            }
+          }
+        }
+
+        > .flex-spacer {
+          width: 100%;
+        }
+      }
+
+      &.show {
+        z-index: 2;
+        opacity: 1;
+        padding-top: 20px;
+        max-height: $tag-chooser-height;
+
+      }
+    }
+
+    > .card-list-tables {
+      padding: 20px 20px 50px 20px;
+      height: 100%;
+      //height: 100%;
+      width: 100%;
+      @include align-items(flex-start);
+      overflow-y: hidden;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      @include transition(all 0.2s linear);
+
+      &.dragover {
+        > .drag-overlay {
+          display: flex;
+          position: fixed;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          height: 100%;
+          @include align-items(center);
+          @include justify-content(center);
+          background-color: rgba($blue-twentyoneary, 0.9);
+          z-index: 150;
+          > .background-box {
+            background-color: $white-primary;
+            @include size(600px, 430px);
+            box-shadow: 0px 3px 17px 0px rgba($blue-twentyoneary,0.40);
+            @include border-radius(4px);
+
+            >.border-box {
+              height: calc(100% - 34px);
+              border: 1px dashed $gray-octonary;
+              margin: 17px;
+              @include align-items(center);
+              @include justify-content(center);
+
+              > .three-icons {
+                margin-bottom: 26px;
+                > .file-type {
+                  height: 65px;
+                  width: 50px;
+                  z-index: 1;
+                  transform: translateY(-19px);
+                  transition: transform .5s;
+                  &:first-of-type {
+                    @include transform(rotate(-30deg) translate(6px, 0px));
+                    z-index: 0;
+                  }
+                  &:last-of-type {
+                    @include transform(rotate(30deg) translate(-6px, 0px));
+                    z-index: 0;
+                  }
+
+                  > svg {
+                    height: 65px;
+                    width: 50px;
+                  }
+                }
+              }
+              > .header {
+                font-family: $font-family-light;
+                font-size: 24px;
+                color: $blue-secondary;
+                line-height: 37px;
+              }
+              > .subtitle {
+                font-family: $font-family-light;
+                font-size: 14px;
+                color: rgba($blue-secondary, 0.69);
+                letter-spacing: 0px;
+                line-height: 26px;
+              }
+            }
+          }
+          &.drag-animate {
+            > .background-box {
+              > .border-box {
+                border-color: $blue-primary;
+                > .three-icons {
+                  > .file-type {
+                    transform: translateY(-49px);
+                    &:first-of-type {
+                      @include transform(rotate(-30deg) translate(-24px, -20px));
+                    }
+                    &:last-of-type {
+                      @include transform(rotate(30deg) translate(24px, -20px));
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      > .drag-overlay {
+        display: none;
+      }
+
+      > .new-card-list-table {
+        margin-right: $list-right-margin;
+        width: $list-header-width;
+        min-width: $list-header-width;
+        position: relative;
+
+        &.show-input {
+
+          > header {
+            z-index: -1;
+            opacity: 0;
+          }
+
+          > form {
+            z-index: 1;
+            opacity: 1;
+          }
+        }
+
+        > header {
+          z-index: 1;
+          opacity: 1;
+          width: 100%;
+          top: 0px;
+          left: 0px;
+          position: absolute;
+          @include transition(all 0.2s linear);
+
+          > button {
+            border-color: $gray-octonary;
+            background: rgba($white-primary, 0.5);
+
+            > .wrapper {
+
+              > .image-container {
+
+                > svg {
+                  fill: $gray-quinary;
+                }
+              }
+            }
+          }
+        }
+
+        > form {
+          z-index: -1;
+          opacity: 0;
+          padding: 15px;
+          background: $white-primary;
+          @include css3-prefix('box-shadow', 0px 1px 0px 0px rgba($black-primary,0.10));
+          //border-top: 3px solid $light-gray-tertiary;
+          @include border-radius(2px);
+          @include transition(all 0.2s linear);
+
+          > input {
+            margin-bottom: 20px;
+            width: 100%;
+            border: 0px;
+            border-bottom: 1px solid $gray-senary;
+            @include border-radius(0px);
+          }
+
+          > button {
+            height: 34px;
+            width: 105px;
+            min-width: 105px;
+            @include border-radius(2px);
+
+            > .wrapper {
+
+              > .label {
+                font-size: 12px;
+              }
+            }
+
+            &.cancel {
+              border-color: $light-grey-nonary;
+
+              > .wrapper {
+
+                > .label {
+                  color: $light-gray-tertiary;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      > .wrapper {
+        width: auto;
+        height: 100%;
+        @include align-items(center);
+
+        > .card-list-table {
+          z-index: 1;
+          margin-right: $list-right-margin;
+          width: $list-header-width;
+          min-width: $list-header-width;
+          height: 100%;
+
+          > .wrapper {
+            max-height: 100%;
+            background: $white-elevenary;
+            border: 1px solid $gray-octonary;
+            @include border-radius(4px);
+            @include css3-prefix('box-shadow', 0px 2px 3px 0px rgba($purple-tertiary, 0.05));
+
+            &:hover {
+              //@include css3-prefix('box-shadow', 0px 4px 10px -1px rgba($blue-gray-octonary, 0.3));
+            }
+
+            > header {
+              z-index: 3;
+              padding: 15px 12px;
+              display: flex;
+              @include flex-wrap(wrap);
+              height: auto;
+              min-height: $list-header-height;
+              max-height: none;
+              position: relative;
+              @include align-items(flex-start);
+              border-top: 3px solid $white-elevenary;
+              @include border-radius(4px 4px 0px 0px);
+              background: $white-elevenary;
+
+              > .tag-info {
+                width: 88%;
+
+                > .tag-label {
+                  line-height: 20px;
+                  letter-spacing: 0px;
+                  font-family: $font-family-medium;
+                  font-size: 16px;
+                  color: $blue-secondary;
+                  width: 100%;
+                  word-wrap: break-word;
+
+                  &:after {
+                    margin-left: 4px;
+                    content: attr(data-count);
+                    color: $light-gray-tertiary;
+                    font-size: 12px;
+                    font-family: $font-family-light;
+                    letter-spacing: 0.1em;
+                  }
+                }
+
+                > .tag-name {
+                  line-height: 26px;
+                  letter-spacing: 0px;
+                  font-family: $font-family-light;
+                  font-size: 12px;
+                  color: rgba($blue-secondary, 0.69);
+                }
+
+                > form {
+                  margin: 10px 0px;
+
+
+
+                  > input {
+                    padding: 4px 10px;
+                    width: 100%;
+                    border: 1px solid $gray-octonary;
+                    @include border-radius(2px);
+                    line-height: 26px;
+                    letter-spacing: 0px;
+                    font-size: 12px;
+                    color: $blue-secondary;
+                  }
+
+
+                  &.tag-label-rename {
+                    margin-top: 0px;
+                  }
+                }
+
+              }
+
+              > .card-list-menu {
+                position: absolute;
+                right: 12px;
+                top: 10px;
+
+                > .dotdotdot {
+                  cursor: pointer;
+                  -webkit-tap-highlight-color: rgba(0,0,0,0);
+                }
+
+                > .menu {
+                  bottom: 30px;
+                  width: 220px;
+                  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+                  > .menu-item {
+                    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+                    &.tag-color {
+                      cursor: default;
+                      padding: 0px;
+                      height: 110px;
+
+                      > ul.tag-color-list {
+
+                        > li.color {
+                          opacity: 0.4;
+
+                          &:hover {
+                            opacity: 1.0;
+                          }
+
+                          &.active {
+                            opacity: 1.0;
+                          }
+
+                          &.not-active {
+                            opacity: 0.4;
+                          }
+                        }
+                      }
+
+
+                      &:hover {
+                        background: transparent;
+                        @include css3-prefix('box-shadow', none);
+                      }
+
+                      > .label {
+                        margin-bottom: 12px;
+                        line-height: 16px;
+                        font-size: 12px;
+                        color: rgba($blue-gray-tertiary, 0.5);
+                        letter-spacing: 0.2px;
+                        text-shadow: 0px 1px 0px rgba($white-primary,0.72);
+                      }
+
+                      > .tag-color-list {
+                        padding: 0px 15px;
+
+
+                        > .color {
+                          cursor: pointer;
+                          margin: 0px 20px 18px 0px;
+                          height: 20px;
+                          min-height: 20px;
+                          max-height: 20px;
+                          width: 20px;
+                          min-width: 20px;
+                          max-width: 20px;
+                          position: relative;
+                          background: $black-primary;
+                          border: 4px solid transparent;
+                          @include border-radius(12px);
+
+                          &:nth-of-type(5n) {
+                            margin-right: 0px;
+                          }
+
+                          &[data-color="#0065B3"] {
+                            background: $blue-denary;
+                          }
+                          &[data-color="#A5286A"] {
+                            background: $purple-quatenary;
+                          }
+                          &[data-color="#5C2E91"] {
+                            background: $purple-secondary;
+                          }
+                          &[data-color="#364FA3"] {
+                            background: $purple-quinary;
+                          }
+                          &[data-color="#ED193F"] {
+                            background: $red-quinary;
+                          }
+                          &[data-color="#F78222"] {
+                            background: $orange-secondary;
+                          }
+                          &[data-color="#FDB813"] {
+                            background: $yellow-secondary;
+                          }
+                          &[data-color="#048A8B"] {
+                            background: $blue-green-quaternary;
+                          }
+                          &[data-color="#A8CF38"] {
+                            background: $green-tertiary;
+                          }
+                          &[data-color="#2FB846"] {
+                            background: $blue-green-tertiary;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+
+            }
+
+            > main {
+              padding: 0px 12px;
+              width: 100%;
+              max-height: calc(100% - (2 * #{$list-header-height}) + 10px);
+              overflow-y: auto;
+              -webkit-overflow-scrolling: touch;
+              background: $white-elevenary;
+              display: block;
+
+              > .card-list {
+                min-height: 20px;
+
+                > .card-row {
+                  padding-bottom: 9px;
+                  cursor: move;
+                  margin: 4px 0px;
+                  // height: 60px;
+                  position: relative;
+                  border: 1px solid $gray-octonary;
+                  @include border-radius(2px);
+                  background-color: $white-primary;
+                  background-position: left top;
+                  background-size: 242px auto;
+                  background-repeat: no-repeat;
+                  overflow: hidden;
+                  @include css3-prefix('box-shadow', 0px 2px 3px 0px rgba($purple-tertiary, 0.05));
+
+
+                  &:hover {
+                    // background-color: $white-quinary;
+
+                    > .image-container {
+                      opacity: 1;
+                    }
+                  }
+
+                  &:first-of-type {
+                    margin-top: 4px;
+                  }
+                  // &:last-of-type {
+                  //   margin-bottom: 0px;
+                  // }
+
+                  > .asset {
+
+                    > .asset-thumbnail {
+                      @include all-width(242px);
+                      height: auto;
+                      min-height: 0;
+                      max-height: none;
+                      border: 0px;
+                      @include border-radius(0px);
+
+                      &:before {
+                        display: none;
+                      }
+
+                      > img {
+                        @include all-width(100%);
+                        height: auto;
+                        min-height: 0;
+                        max-height: none;
+                      }
+                    }
+
+                    &.file-non-image {
+                      display: none;
+                    }
+                  }
+
+                  > .title {
+                    cursor: pointer;
+                    padding: 9px 20px 3px 9px;
+                    line-height: 19px;
+                    letter-spacing: 0px;
+                    // font-family: $font-family-medium;
+                    font-size: 14px;
+                    color: $blue-secondary;
+
+                    // &:hover {
+                    //   color: $blue-primary;
+                    // }
+                  }
+
+                  > .card-info {
+                    padding: 0px 9px 0px 9px;
+
+                    > .image-container {
+                      cursor: pointer;
+                      margin-right: 10px;
+                      padding: 0px;
+                      @include size(26px);
+                      position: relative;
+                      @include justify-content(flex-start);
+
+                      &:after {
+                        content: attr(data-count);
+                        left: 18px;
+                        top: 1px;
+                        position: absolute;
+                        letter-spacing: 0px;
+                        line-height: 26px;
+                        font-size: 12px;
+                        font-family: $font-family-medium;
+                        color: rgba($blue-secondary, 0.4);
+                      }
+
+                      &:last-of-type {
+                        margin-right: 0px;
+                      }
+
+
+                      > svg {
+                        @include size(15px);
+                        fill: rgba($blue-secondary, 0.4);
+
+
+                      }
+
+                    }
+                  }
+
+                  > .image-container {
+                    cursor: pointer;
+                    z-index: 1;
+                    opacity: 0;
+                    @include size(20px);
+                    position: absolute;
+                    @include border-radius(2px);
+                    background: rgba($white-primary, 0.8);
+
+                    &:hover {
+                      background: $blue-gray-septenary;
+
+                      > svg {
+                        fill: rgba($blue-secondary, 1);
+                      }
+                    }
+
+                    > svg {
+                      @include size(12px);
+                      fill: rgba($blue-secondary, 0.5);
+                    }
+
+                    &.close {
+                      right: 10px;
+                      top: 8px;
+                    }
+
+                    &.pencil {
+                      right: 34px;
+                      top: 8px;
+                    }
+                  }
+
+                  &:not(.ui-sortable-helper) {
+                    //border-top: 0px;
+                  }
+
+                  &.ui-sortable-placeholder {
+                    visibility: visible !important;
+                    border: 0px;
+                  }
+
+                  &.sortable-ghost {
+                    background-color: $white-quinary;
+
+                    > .title {
+                      // display: none;
+                    }
+                  }
+
+                  &.hovering {
+                    @include css3-prefix('box-shadow', 0 0 4px 1px $blue-octornary);
+                  }
+
+                }
+
+                > .flex-spacer {
+                  &.bottom {
+                    margin-top: 64px;
+                  }
+                }
+
+                &.sortable-disabled {
+
+                  > .card-row {
+                    cursor: default;
+                  }
+                }
+              }
+
+
+            }
+
+            > footer {
+              padding: 0px 12px 12px 12px;
+              width: 100%;
+              min-height: 56px;
+              display: inline-block;
+              background: $white-elevenary;
+              @include border-radius(0px 0px 4px 4px);
+              @include transition(all 0.2s linear);
+              overflow: hidden;
+
+              > .new-card {
+                margin-top: 8px;
+
+                > button {
+                  padding: 0px;
+                  height: 34px;
+                  width: 100%;
+                  @include border-radius(2px);
+                  @include transition(all 0.2s linear);
+
+                  &:hover {
+
+                    > .wrapper {
+
+                      > .label {
+                        color: $blue-primary;
+                      }
+
+                      > .image-container {
+
+                        > svg {
+                          fill: $blue-primary;
+                        }
+                      }
+                    }
+                  }
+
+
+                  > .wrapper {
+
+                    > .label {
+                      font-size: 12px;
+                      line-height: 34px;
+                      color: $blue-octornary;
+                    }
+
+                    > .image-container {
+                      margin: 0px;
+                      //border: 1px solid $light-grey-nonary;
+                      //@include border-radius(16px);
+
+                      &,
+                      > svg {
+                        height: 16px;
+                        min-height: 16px;
+                        max-height: 16px;
+                        width: 16px;
+                        min-width: 16px;
+                        max-width: 16px;
+                      }
+
+                      > svg {
+                        fill: $light-gray-tertiary;
+                      }
+                    }
+                  }
+
+
+                  &.new-card {
+                    border: none;
+                    @include size(16px 16px);
+                    padding: 18px 0px 26px;
+                    &:hover {
+
+
+                      > .wrapper {
+                        > span {
+                          > svg {
+                            fill: rgba($blue-octornary, 1);
+                          }
+                        }
+                      }
+                    }
+
+                    > .wrapper {
+
+                      > .label {
+                        color: rgba($blue-octornary, 0.6);
+                      }
+                    }
+                  }
+                }
+
+                > form {
+                  margin-top: 4px;
+
+
+                  > input {
+                    margin-bottom: 8px;
+                    padding: 8px 16px;
+                    width: 100%;
+                    border: 0px;
+                    border-bottom: 1px solid $gray-senary;
+                    @include border-radius(0px);
+                    font-size: 14px;
+                  }
+
+                  > button {
+                    height: 34px;
+                    width: 105px;
+                    min-width: 105px;
+                    @include border-radius(2px);
+
+                    > .wrapper {
+
+                      > .label {
+                        font-size: 12px;
+                      }
+                    }
+
+                    &.add {
+
+                    }
+
+                    &.cancel {
+                      border-color: $light-grey-nonary;
+
+                      > .wrapper {
+
+                        > .label {
+                          color: $light-gray-tertiary;
+                        }
+                      }
+                    }
+                  }
+
+                }
+
+
+              }
+
+              &.no-button {
+                min-height: 0;
+              }
+            }
+
+          }
+
+          &.flip {
+            width: 30px;
+            min-width: 0;
+
+            > .wrapper {
+
+              > header {
+                height: auto;
+                min-height: 0;
+                max-height: none;
+                width: 250px;
+                @include border-radius(4px);
+                @include css3-prefix('box-shadow', rgba(0, 0, 0, 0.0980392) 0px 1px 0px 0px);
+                @include transform(rotate(-90deg) translate(-110px, -110px));
+
+                > .card-list-menu {
+                  display: none;
+                }
+
+              }
+
+              > main {
+                display: none;
+              }
+
+              > footer {
+                display: none;
+              }
+            }
+          }
+
+          &.tag-list {
+            > .wrapper {
+
+              > header {
+                cursor: move;
+              }
+            }
+          }
+
+          &.sortable-ghost {
+
+            > .wrapper {
+              @include css3-prefix('box-shadow', 0px 4px 10px -1px rgba($blue-gray-octonary, 0.3));
+
+              > header {
+                border-top: 3px solid $light-gray-nonary;
+              }
+
+              header,
+              main,
+              footer {
+                background: $light-grey-nonary;
+
+                > * {
+                  opacity: 0;
+                }
+              }
+
+            }
+
+
+          }
+
+          &.showing-new-card-input {
+            > .wrapper {
+              > main {
+                max-height: calc(100% - (2 * #{$list-header-height}) - 50px);
+              }
+              > footer {
+                min-height: 100px;
+
+                > .new-card {
+
+                  > button {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+
+          &[data-color="#0065B3"] {
+
+            > .wrapper {
+
+              > header {
+                border-top-color: $blue-denary;
+              }
+            }
+
+          }
+          &[data-color="#A5286A"] {
+
+            > .wrapper {
+
+              > header {
+                border-top-color: $purple-quatenary;
+              }
+            }
+          }
+          &[data-color="#5C2E91"] {
+
+            > .wrapper {
+
+              > header {
+                border-top-color: $purple-secondary;
+              }
+            }
+          }
+          &[data-color="#364FA3"] {
+            > .wrapper {
+
+              > header {
+                border-top-color: $purple-quinary;
+              }
+            }
+          }
+          &[data-color="#ED193F"] {
+
+            > .wrapper {
+
+              > header {
+                border-top-color: $red-quinary;
+              }
+            }
+          }
+          &[data-color="#F78222"] {
+
+            > .wrapper {
+
+              > header {
+                border-top-color: $orange-secondary;
+              }
+            }
+          }
+          &[data-color="#FDB813"] {
+
+            > .wrapper {
+
+              > header {
+                border-top-color: $yellow-secondary;
+              }
+            }
+          }
+          &[data-color="#048A8B"] {
+
+            > .wrapper {
+
+              > header {
+                border-top-color: $blue-green-quaternary;
+              }
+            }
+          }
+          &[data-color="#A8CF38"] {
+
+            > .wrapper {
+
+              > header {
+                border-top-color: $green-tertiary;
+              }
+            }
+          }
+          &[data-color="#2FB846"] {
+
+            > .wrapper {
+
+              > header {
+                border-top-color: $blue-green-tertiary;
+              }
+            }
+          }
+
+        }
+
+        &.sortable-disabled {
+
+          > .card-list-table {
+
+            > .wrapper {
+
+              > header {
+                cursor: default;
+              }
+            }
+          }
+        }
+      }
+
+      &.showing-tag-chooser {
+        height: calc(100% - #{$tag-chooser-height});
+      }
+    }
+  }
+
+  &[data-browser-name~="Safari"] {
+
+    [data-ui-view=dashboardContent] {
+
+      > .card-list-tables {
+
+        > .wrapper {
+          @include flex-shrink(0);
+
+          > .card-list-table {
+
+            > .wrapper {
+
+              > * {
+                @include flex-shrink(1);
+              }
+
+              > main {
+
+                > .card-list {
+                  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+                  > .card-row {
+                    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+                    > .image-container {
+                      opacity: 0.5;
+                    }
+
+                    > .title {
+                      //-webkit-touch-callout: none;
+                      @include user-select(none);
+                    }
+                  }
+                }
+              }
+
+              > footer {
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+                > .new-card {
+
+                  > button {
+
+                    > .wrapper {
+
+                      > .label {
+                        @include user-select(none);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  &[data-browser-name="Chrome"] {
+
+    [data-ui-view=dashboardContent] {
+
+      > .card-list-tables {
+
+        > .wrapper {
+
+          > .card-list-table {
+
+            > .wrapper {
+
+              > * {
+                @include flex-shrink(1);
+              }
+
+            }
+          }
+        }
+      }
+
+      > .tag-chooser {
+
+        > * {
+          //@include flex-shrink(1);
+        }
+      }
+    }
+  }
+
+
+}
+
+
+
+
+@media only screen and (max-width:1023px) {
+
+  // [data-state*="dashboard.board.tags"] {
+  //
+  //   [data-ui-view=dashboardContent] {
+  //
+  //     > .card-list-tables {
+  //
+  //       > .wrapper {
+  //
+  //         > .card-list-table {
+  //           width: 46vw;
+  //           min-width: 46vw;
+  //         }
+  //       }
+  //     }
+  //   }
+  //
+  // }
+}
+
+
+@media only screen and (max-width:540px) {
+
+  // [data-state*="dashboard.board.tags"] {
+  //
+  //   [data-ui-view=dashboardContent] {
+  //
+  //     > .card-list-tables {
+  //
+  //       > .wrapper {
+  //
+  //         > .card-list-table {
+  //           width: 90vw;
+  //           min-width: 90vw;
+  //           max-width: 90vw;
+  //         }
+  //       }
+  //     }
+  //   }
+  //
+  // }
+
+}

@@ -1,0 +1,111 @@
+<div class="board-invite-modal-overlay modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-has-overflow=""
+     ng-click=" close() "
+>
+
+  <form class="board-invite-modal modal flex-column"
+        novalidate="novalidate"
+        name="boardInviteForm"
+        ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click="close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <div class="loader-wrapper flex-row"
+         ng-if="isCreating"
+    >
+      <div class="wrapper">
+        <div class="loader-2 small"
+             data-message="{{ data.loadingMessage }}"
+        >
+        </div>
+      </div>
+    </div>
+
+    <header ng-if=" ! isCreating ">
+      <h1>Invite to Board</h1>
+    </header>
+
+    <main ng-if=" ! isCreating ">
+
+      <div class="filter field-group flex-row">
+
+        <span class="image-container magnifying-glass">
+          <svg class="icon magnifying-glass">
+            <use xlink:href="#magnifying-glass"/>
+          </svg>
+        </span>
+
+        <input type="text"
+               placeholder="Search members..."
+               ng-model="formVals.memberFilter"
+        >
+      </div>
+
+      <ul class="member-list flex-column">
+
+        <li class="member flex-row"
+            ng-repeat="troopMember in troopMembers | filter:search"
+            ng-class=" troopMember.classes "
+        >
+          <span class="profile-image image-container flex-row"
+                tp-troop-member-profile=" troopMember.$id "
+                tp-troop-member-troop-id=" troopMember.troopId "
+                tp-troop-member-avatar-asset-size="smallUrl"
+                data-id="{{troopMember.$id}}"
+          ></span>
+          <span class="label flex-column flex-spacer">
+            <div class="name">{{ troopMember.name }}</div>
+            <div class="text"
+                 ng-if=" ( ! troopMember.hasInvites ) && selectedMembers[troopMember.$id] "
+            >
+              Inviting
+            </div>
+            <div class="text"
+                 ng-if=" troopMember.hasInvites "
+            >
+              Invited - Not yet responded
+            </div>
+          </span>
+          <span class="select-icon image-container"
+                ng-click=" selectMember(troopMember) "
+          >
+            <svg class="icon check" >
+              <use xlink:href="#check"></use>
+            </svg>
+            <svg class="icon plus" >
+              <use xlink:href="#plus"></use>
+            </svg>
+          </span>
+        </li>
+      </ul>
+    </main>
+    <footer class="flex-row"
+            ng-if=" ! isCreating "
+    >
+      <!-- <button class="cancel"
+               ng-click="close()">
+        <div class="wrapper flex-row">
+           <span class="label">Cancel</span>
+        </div>
+      </button> -->
+      <button class="blue-primary">
+        <div class="wrapper"
+             ng-click=" invite() "
+        >
+          <span class="label">Invite</span>
+        </div>
+      </button>
+    </footer>
+
+
+  </form>
+
+</div>

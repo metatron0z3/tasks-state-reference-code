@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>Plus</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Cardview" stroke="none" stroke-width="1" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Card-View" sketch:type="MSArtboardGroup" transform="translate(-917.000000, -33.000000)">
+            <path d="M924.8,40.8 L918.208981,40.8 C917.538704,40.8 917,41.3372583 917,42 C917,42.6673622 917.541279,43.2 918.208981,43.2 L924.8,43.2 L924.8,49.7910192 C924.8,50.4612958 925.337258,51 926,51 C926.667362,51 927.2,50.4587209 927.2,49.7910192 L927.2,43.2 L933.791019,43.2 C934.461296,43.2 935,42.6627417 935,42 C935,41.3326378 934.458721,40.8 933.791019,40.8 L927.2,40.8 L927.2,34.2089808 C927.2,33.5387042 926.662742,33 926,33 C925.332638,33 924.8,33.5412791 924.8,34.2089808 L924.8,40.8 Z" id="Plus" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

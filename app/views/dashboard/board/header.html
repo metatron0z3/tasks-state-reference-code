@@ -1,0 +1,385 @@
+<div class="wrapper flex-row"
+     ng-class=" ($root.showSearch ? '' : 'shrink-for-mobile ') + ($root.showListViewTagChooser ? 'showing-list-view-tag-chooser ' : '') "
+     ng-mouseleave=" showActionMenu = false "
+>
+  <section class="left-sidebar-toggle action flex-row">
+    <button class="white-primary circle"
+            ng-click="toggleLeftSidebar()"
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon list">
+            <use xlink:href="#list"/>
+          </svg>
+        </span>
+
+      </div>
+    </button>
+  </section>
+
+  <section class="detail-card flex-row action"
+           ng-if=" view === 'card' "
+  >
+    <button class="back-to-multi-card white-primary circle"
+            ng-click="navBack()"
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon arrow-reverse">
+            <use xlink:href="#arrow-reverse"/>
+          </svg>
+          <svg class="icon arrow-left">
+            <use xlink:href="#arrow-left"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+    <button class="back-to-detail white-primary circle"
+            ng-click="$root.showDetailCardComments = false"
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon arrow-left">
+            <use xlink:href="#arrow-left"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+  </section>
+
+  <section class="detail-title-mobile flex-row"
+           ng-if=" view === 'card' "
+  >
+  <div class="back-to-multi-card"
+          ng-click="navBack()"
+  >
+    <div class="wrapper flex-row">
+      <span class="image-container">
+        <svg class="icon arrow-left">
+          <use xlink:href="#arrow-left"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+  <span class="creator-block flex-row">
+    <span class="profile-image image-container"
+          tp-troop-member-profile=" card.createdByMemberId "
+          tp-troop-member-troop-id=" card.troopId "
+          tp-troop-member-avatar-asset-size="smallUrl"
+    ></span>
+    <span class="creator"
+          tp-troop-member="{{ card.createdByMemberId }}"
+          tp-troop-member-troop-id=" {{ card.troopId }} "
+          tp-troop-member-user-name="true"
+    ></span>
+  </span>
+
+    <a ng-href="{{mobileLink.url}}"
+       target="_blank"
+       class="troop-app"
+    >
+    <ng-include src=" '/images/svg/icons/troop-icon.svg' "></ng-include>
+  </a>
+
+
+  </section>
+
+  <section class="title flex-row"
+           ng-hide=" view === 'card' "
+  >
+
+    <span class="hamburger"
+          ng-click="toggleLeftSidebar()"
+    >
+      <svg class="icon list">
+        <use xlink:href="#list"/>
+      </svg>
+    </span>
+
+    <span class="name"
+        ng-bind=" Me.currentBoard.boardName"
+        ng-click="showActionMenu = !showActionMenu "
+    ></span>
+
+      <a ng-href="{{mobileLink.url}}"
+         target="_blank"
+         class="troop-app"
+      >
+      <ng-include src=" '/images/svg/icons/troop-icon.svg' "></ng-include>
+    </a>
+
+    <span class="actions"
+          ng-click="showActionMenu = !showActionMenu "
+          ng-if=" Me.troopMember.troopPermission !== 'guest' "
+    >
+      <span class="menu-toggle image-container flex-row">
+        <svg class="icon dotdotdot">
+          <use xlink:href="#dotdotdot"/>
+        </svg>
+      </span>
+
+
+
+      <ul class="menu flex-column"
+          ng-class=" showActionMenu ? 'show' : '' "
+          ng-mouseleave=" showActionMenu = false "
+        >
+        <li class="edit menu-item flex-row"
+            ng-if=" Me.troopMember.troopPermission === 'admin'  "
+            ng-click="showBoardModal()"
+        >
+          <span class="label">Edit Board</span>
+        </li>
+        <!-- <li class="edit menu-item flex-row"
+            ng-if=" Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' "
+            ng-click="showBoardInviteModal()"
+        >
+          <span class="label">Invite to Board</span>
+        </li> -->
+        <!-- <li class="export menu-item link flex-row"
+            ng-if=" Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin' "
+        >
+          <a class="label"
+             href="{{ exportUrl + Me.currentBoard.$id }}"
+             download=""
+          >
+            Export Board
+          </a>
+        </li> -->
+        <li class="delete warning menu-item flex-row"
+            ng-if=" Me.troop.createdByUserId === Me.trooper.$id || Me.currentBoard.createdByMemberId === Me.troopMember.$id || memberLength === 1"
+            ng-click=" showDeleteBoardModal() "
+        >
+          <span class="label">Delete Board</span>
+        </li>
+        <li class="leave warning menu-item flex-row"
+            ng-click=" tryToLeaveBoard() "
+            ng-if=" memberLength > 1 "
+        >
+          <span class="label">Leave Board</span>
+        </li>
+
+      </ul>
+    </span>
+
+  </section>
+
+  <ul class="nav-list flex-row"
+      ng-if=" view !== 'card' "
+  >
+    <li class="cards nav-item flex-row"
+        data-ui-sref=".cards({boardId: Me.currentBoard.$id})"
+        data-ui-sref-active="active"
+        ng-if=" Me.currentBoard.viewSettings.card.visible "
+    >
+      <a>
+        Cards
+      </a>
+    </li>
+    <li class="tags nav-item flex-row"
+        data-ui-sref-active="active"
+        data-ui-sref=".tags({boardId: Me.currentBoard.$id})"
+        ng-if=" Me.currentBoard.viewSettings.tag.visible "
+    >
+      <a>
+        Tags
+      </a>
+    </li>
+    <li class="table nav-item flex-row active"
+        data-ui-sref=".table({boardId: Me.currentBoard.$id})"
+        data-ui-sref-active="active"
+        ng-if=" Me.currentBoard.viewSettings.list.visible "
+    >
+      <a>
+        List
+      </a>
+    </li>
+    <li class="grid nav-item flex-row"
+        data-ui-sref=".grid({boardId: Me.currentBoard.$id})"
+        data-ui-sref-active="active"
+        ng-if=" Me.currentBoard.viewSettings.grid.visible "
+    >
+      <a>
+        Grid
+      </a>
+    </li>
+
+    <li class="document nav-item flex-row"
+        data-ui-sref=".document({boardId: Me.currentBoard.$id})"
+        data-ui-sref-active="active"
+        ng-if=" Me.currentBoard.viewSettings.document.visible "
+    >
+      <a>
+        Doc
+      </a>
+    </li>
+    <li class="chat nav-item flex-row"
+        data-ui-sref=".chat({boardId: Me.currentBoard.$id})"
+        data-ui-sref-active="active"
+        ng-if=" Me.currentBoard.viewSettings.chat.visible "
+    >
+      <a>
+        Chat
+      </a>
+      <span class="notifications image-container"
+            ng-class=" Me.notifications[Me.troopMember.$id].breakdown.boardMessage[Me.currentBoard.$id].unread ? 'active' : '' "
+      >
+        <span class="count flex-row"
+              ng-bind=" Me.notifications[Me.troopMember.$id].breakdown.boardMessage[Me.currentBoard.$id].unread "
+        ></span>
+        <svg class="icon circle">
+          <use xlink:href="#circle"/>
+        </svg>
+      </span>
+    </li>
+  </ul>
+
+  <span class="flex-spacer"></span>
+
+  <form class="search flex-row"
+        ng-submit="searchBlur()"
+        ng-if=" ( Me.troopMember.troopPermission !== 'guest') && canDisplayMembers "
+  >
+
+    <div class="field-group flex-row"
+         ng-class=" labels['search'] ? '' : 'hide-label' "
+         ng-if="searchIsEnabled"
+    >
+      <input type="search"
+             ng-model="search.string"
+             ng-keyup="$event.keyCode == 13 && doSearch()"
+             ng-focus="hideLabel('search')"
+             ng-blur="doSearch()"
+      >
+      <label class="uppercase">Search</label>
+
+      <span class="image-container magnifying-glass"
+            ng-click=" $root.showSearch = true "
+      >
+        <svg class="icon magnifying-glass">
+          <use xlink:href="#magnifying-glass"/>
+        </svg>
+      </span>
+      <span class="image-container close"
+            ng-click=" $root.showSearch = false "
+      >
+        <svg class="icon close">
+          <use xlink:href="#close"/>
+        </svg>
+      </span>
+    </div>
+  </form>
+
+  <section class="join flex-row"
+           ng-if="  Me.troopMember.troopPermission === 'guest'  "
+  >
+    <button class="blue-primary "
+            ng-click="showPublicTroopJoinModal('button')"
+    >
+    <div class="wrapper flex-row">
+      <span class="label">Join</span>
+    </div>
+    </button>
+
+  </section>
+
+
+  <section class="settings action flex-row"
+           ng-if=" showCardSettingsGear "
+  >
+
+    <button class="white-primary circle"
+            ng-click=" showSettingsModal() "
+    >
+      <div class="wrapper flex-row">
+
+        <span class="image-container">
+          <svg class="icon gear">
+            <use xlink:href="#gear"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+
+
+  </section>
+
+
+  <section class="new action flex-row"
+           ng-if="
+            (
+              Me.troopMember.troopPermission !== 'guest'
+            ) &&
+            canDisplayMembers &&
+            (
+              view === 'multi-card' ||
+              view === 'table' ||
+              view === 'grid' ||
+              view === 'list'
+            ) &&
+            (
+              (
+                ! Me.currentBoard.readOnly
+              ) ||
+              (
+                Me.troopMember.boards[Me.currentBoard.$id].permission === 'admin'
+              )
+            )
+          "
+  >
+    <button class="blue-primary circle"
+            ng-click="showCardModal('new')"
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon plus">
+            <use xlink:href="#plus"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+  </section>
+
+  <section class="notifications action flex-row"
+           ng-if=" canDisplayMembers && Me.troopMember.troopPermission !== 'guest' "
+  >
+
+    <button class="white-primary circle"
+            ng-class=" $root.showNotifications ? 'showing' : '' "
+            ng-click=" toggleNotificationSidebar() "
+    >
+      <div class="wrapper flex-row">
+        <span class="count image-container"
+              ng-if=" Me.notifications[Me.troopMember.$id].breakdown.unreadNonMessageNotifications "
+              ng-bind=" Me.notifications[Me.troopMember.$id].breakdown.unreadNonMessageNotifications "
+        ></span>
+
+        <span class="image-container">
+          <svg class="icon bell">
+            <use xlink:href="#bell"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+
+
+  </section>
+
+  <section class="right-sidebar-toggle action flex-row"
+           ng-if=" Me.troopMember.troopPermission !== 'guest' "
+  >
+    <button class="white-primary circle"
+            ng-class=" $rootScope.showRightSidebar ? 'showing' : '' "
+            ng-click="toggleRightSidebar()"
+    >
+      <div class="wrapper flex-row">
+        <span class="image-container">
+          <svg class="icon list">
+            <use xlink:href="#list"/>
+          </svg>
+        </span>
+      </div>
+    </button>
+  </section>
+
+</div>

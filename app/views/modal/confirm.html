@@ -1,0 +1,48 @@
+<div class="modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click=" close() "
+>
+
+  <div class="confirm-modal modal flex-column"
+       ng-class=" extraClasses "
+       ng-click=" $event.stopPropagation() "
+  >
+
+    <div class="close image-container"
+         ng-click="close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header>
+      <h1 ng-bind-html=" header ">
+        Confirm
+      </h1>
+    </header>
+
+    <main ng-bind-html=" message ">
+      Are you sure?
+    </main>
+
+    <footer class="flex-row">
+      <button class="cancel white-primary"
+              ng-click="cancel()"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">No</span>
+        </div>
+      </button>
+      <span class="flex-spacer"></span>
+      <button class="accept blue-primary"
+              ng-click="accept()"
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Yes</span>
+        </div>
+      </button>
+    </footer>
+  </div>
+
+</div>

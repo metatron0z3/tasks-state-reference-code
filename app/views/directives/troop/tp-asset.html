@@ -1,0 +1,224 @@
+<div class="asset-thumbnail image-container flex-row"
+     ng-if=" showAsset "
+     ng-style=" thumbnailStyling "
+     title=" {{ assetTitle ? assetTitle : fileName }} "
+>
+
+  <div class="upload-progress"
+       ng-if=" $asset && $asset.isUploading && ( ! hasMoreAssets ) "
+  >
+    <!--
+    <div class="uploading wrapper flex-row">
+      <progress max="100"
+                value="{{ asset.progress }}"
+      >
+      </progress>
+    </div>
+    -->
+    <div class="processing wrapper flex-row">
+      <progress max="100"
+                value="{{ $asset.totalProgress || 0 }}"
+      >
+      </progress>
+    </div>
+  </div>
+
+  <iframe ng-src=" {{ iframeUrl }} "
+          ng-if=" displayDocument "
+          width="100%"
+          height="100%"
+          frameborder="0"
+  ></iframe>
+
+  <svg class="icon file-type "
+       ng-if=" showNonImage && ( ! displayDocument ) "
+  >
+    <use xlink:href="{{ '#' + fileType }}"></use>
+  </svg>
+
+  <div class="image-click"
+       ng-if=" showImageClick "
+       ng-click=" onThumbnailClick() "
+  >
+    &nbsp;
+  </div>
+
+  <img src=" {{ imageUrl }} "
+       ng-if=" showImage "
+  />
+
+
+  <img ngf-src=" ( ! $asset ) && assetFile && (fileType !== 'file-photoshop') "
+       ng-if=" hasFileToUpload "
+  />
+
+
+  <div class="duration"
+       ng-if=" formattedVideoDuration "
+  >
+    {{ formattedVideoDuration }}
+  </div>
+
+  <span class="play-button image-container"
+        ng-if=" showPlayButton "
+  >
+    <div class="wrapper flex-row"
+         ng-click=" onThumbnailClick() "
+    >
+      <svg class="icon play">
+        <use xlink:href="#play"></use>
+      </svg>
+    </div>
+  </span>
+
+
+
+
+  <span class="more-assets flex-row"
+        ng-if=" hasMoreAssets "
+        ng-click=" onHasMoreClick() "
+  >
+    <span class="text">{{ moreAssetsCount }}</span>
+  </span>
+
+
+
+</div>
+
+<div class="info flex-column ng-scope"
+     ng-if=" showAsset && assetInfo "
+>
+  <form class="file-name-rename"
+        name="fileNameRenameForm"
+        ng-if=" isRenaming "
+        ng-submit=" renameSave(fileNameRenameForm) "
+  >
+    <div class="field-group">
+      <input name="filename"
+             type="text"
+             ng-model=" formData.newFilename "
+             placeholder="Filename"
+             autocomplete="off"
+             required=""
+      />
+    </div>
+    <div class="actions flex-row">
+      <button class="save small blue-octornary" >
+        <div class="wrapper flex-row">
+          <span class="label">Save</span>
+        </div>
+      </button>
+      <button class="cancel small link"
+              ng-click=" renameCancel() "
+      >
+        <div class="wrapper flex-row">
+          <span class="label">Cancel</span>
+        </div>
+      </button>
+    </div>
+  </form>
+  <div class="file-name flex-row"
+       ng-if=" ! isRenaming "
+       title=" {{ fileName }} "
+       data-extension="{{ fileExtension }}"
+
+  >
+    <span class="name">
+      {{ fileBasename }}
+      <span ng-if="fileExtension">.</span>
+    </span>
+  </div>
+  <div class="file-size"
+       ng-if=" assetInfoFileSize && ( ! isRenaming ) "
+  >
+    {{ formattedStorageSize }}
+  </div>
+
+</div>
+
+<span class="asset-icon-menu flex-row"
+      ng-if="iconMenu"
+>
+  <span class="close image-container"
+        ng-if=" canRemove "
+        ng-click="onRemoveClick(); $event.stopPropagation();"
+        title=" Delete "
+  >
+    <svg class="icon close">
+      <use xlink:href="#close"/>
+    </svg>
+  </span>
+</span>
+
+
+<span class="asset-menu flex-row"
+      ng-if="
+        showAsset
+        &&( menuDisplay )
+        && ( ! isRenaming )
+        && ( ! hasMoreAssets )
+        && (
+          canDownload
+          || canRename
+          || canRemove
+          || canStreamDownload
+          || permission === 'guest'
+        )
+      "
+>
+  <span class="menu-toggle image-container flex-row"
+        ng-click=" showMenu = ! showMenu "
+  >
+    <svg class="icon dotdotdot">
+      <use xlink:href="#dotdotdot"></use>
+    </svg>
+  </span>
+
+  <ul class="menu flex-column show"
+      ng-if=" showMenu "
+      ng-mouseleave=" $parent.showMenu = false "
+  >
+    <li class="download menu-item flex-row"
+        ng-if=" canDownload || permission === 'guest' "
+    >
+      <a href="{{ $asset.originalUrl }}"
+         class="label "
+         download="{{ fileName }}"
+         ng-if=" permission !== 'guest' "
+      >
+        Download
+      </a>
+      <div class="label"
+           ng-click="showPublicTroopJoinModal()"
+           ng-if="permission === 'guest'"
+      >
+        Join to Download
+      </div>
+    </li>
+    <!-- <li class="ocr menu-item flex-row"
+        ng-if=" canOcr "
+        ng-click=" onOcrClick() "
+    >
+      <span class="label">OCR</span>
+    </li> -->
+    <li class="ocr menu-item flex-row"
+        ng-if=" canStreamDownload "
+        ng-click=" onStreamDownload() "
+    >
+      <span class="label">Video Download</span>
+    </li>
+    <li class="edit menu-item flex-row"
+        ng-if=" canRename "
+        ng-click=" rename() "
+    >
+      <span class="label">Rename</span>
+    </li>
+    <li class="remove menu-item warning flex-row"
+        ng-if=" canRemove "
+        ng-click=" onRemoveClick() "
+    >
+      <span class="label">Remove</span>
+    </li>
+
+  </ul>
+</span>

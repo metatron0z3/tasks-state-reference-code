@@ -1,0 +1,178 @@
+<div class="modal-overlay flex-row"
+     ng-class=" showModal ? 'show' : '' "
+     ng-click="close()"
+>
+
+  <form name="troopMemberProfileForm"
+        class="troop-member-profile-modal modal flex-column"
+        novalidate="novalidate"
+        ng-submit="save(troopMemberProfileForm)"
+        ng-click=" $event.stopPropagation() "
+  >
+    <div class="loader-wrapper flex-row"
+         ng-if=" isProcessing "
+    >
+      <div class="wrapper">
+        <div class="loader-2 small"></div>
+      </div>
+    </div>
+    <div class="close image-container"
+         ng-click="close()"
+    >
+      <svg class="icon close">
+        <use xlink:href="#close"/>
+      </svg>
+    </div>
+
+    <header ng-class="{ empty: ( ! $file ) && ( ! troopMember.avatarAssetId ) }" >
+
+      <h1>Profile Settings</h1>
+
+      <div class="uploader field-group flex-column">
+
+        <div class="dropper flex-column"
+             ngf-select="fileAdded($file)"
+        >
+
+          <div class="uploaded-image profile-image image-container"
+               ng-if=" $file "
+          >
+            <img ngf-src=" $file ">
+          </div>
+
+          <span class="profile-image image-container flex-row"
+                ng-show=" ( ! $file ) && Me.troopMember.avatarAssetId "
+                tp-troop-member-profile=" Me.troopMember.$id "
+                tp-troop-member-troop-id=" Me.troop.$id "
+          ></span>
+
+          <div class="empty image-container"
+               ng-if=" ( ! $file ) && ( ! Me.troopMember.avatarAssetId ) "
+          >
+            <svg class="icon profile-icon">
+              <use xlink:href="#profile-icon"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <div class="field-group flex-row">
+        <input name="name"
+               placeholder="Name"
+               required=""
+               ng-model=" troopMember.name "
+               autocomplete="off"
+        >
+      </div>
+      <div class="flex-row"
+           ng-if="troopMemberProfileForm.name.$dirty && troopMemberProfileForm.name.$touched && troopMemberProfileForm.name.$invalid"
+           ng-messages="troopMemberProfileForm.name.$error"
+      >
+        <div class="error"
+             ng-message="required"
+        >
+          Your Name is required
+        </div>
+      </div>
+
+
+
+      <div class="textarea field-group flex-row">
+        <textarea name="blurb"
+                  placeholder="Blurb"
+                  rows="1"
+                  data-msd-elastic=""
+                  ng-model="troopMember.blurb"
+                  ng-focus="hideLabel('blurb')"
+                  ng-blur=" ! troopMember.blurb ? showLabel('blurb') : '' "
+                  ng-keyup=""
+                  autocomplete="off"
+        ></textarea>
+      </div>
+
+
+      <div class="field-group flex-row">
+        <input placeholder="Old Password"
+               type="password"
+               name="oldPassword"
+               ng-minlength="6"
+               ng-model=" formVals.oldPassword "
+               autocomplete="off"
+               ng-change=" updateErrors() "
+               ng-if = " hasPassword "
+        />
+      </div>
+      <div  class="flex-row"
+            ng-if="( ! isProcessing ) && (( formVals.errorMsg ) || ( troopMemberProfileForm.oldPassword.$dirty && troopMemberProfileForm.oldPassword.$touched && troopMemberProfileForm.oldPassword.$invalid )) "
+            ng-messages="troopMemberProfileForm.oldPassword.$error"
+      >
+
+        <div class="error"
+             ng-message="minlength"
+        >
+          Your Old Password is at least 6 characters long
+        </div>
+        <div class="error"
+             ng-if=" formVals.errorMsg "
+        >
+          Your Old Password is Invalid
+        </div>
+      </div>
+
+      <div class="field-group flex-row">
+        <input placeholder="New Password"
+               type="password"
+               name="newPassword"
+               ng-minlength="6"
+               ng-model=" formVals.newPassword "
+               autocomplete="off"
+               ng-if = " hasPassword "
+        />
+      </div>
+
+      <div  class="flex-row"
+            ng-if=" ( formVals.oldPassword  === formVals.newPassword ) || ( troopMemberProfileForm.newPassword.$dirty && troopMemberProfileForm.newPassword.$touched && troopMemberProfileForm.newPassword.$invalid ) "
+            ng-messages="troopMemberProfileForm.newPassword.$error"
+      >
+        <div class="error"
+             ng-message="minlength"
+        >
+          Your Password must be at least 6 characters long
+        </div>
+        <div class="error"
+             ng-if=" ( formVals.oldPassword ) && ( formVals.newPassword ) &&  ( formVals.oldPassword === formVals.newPassword )  "
+        >
+          Your New Password Must be Different From Your Old
+        </div>
+      </div>
+
+
+
+<!--
+      <div class="field-group flex-row"
+           ng-class=" labels['groupString'] ? '' : 'hide-label' "
+      >
+        <label class="">@groups</label>
+        <input name="groupString"
+               ng-model=" troopMember.groupString "
+               ng-focus="hideLabel('groupString')"
+               ng-blur=" ! troopMember.groupString ? showLabel('groupString') : '' "
+               autocomplete="off"
+        >
+      </div>
+-->
+    </main>
+
+    <footer class="flex-row">
+      <button class="blue-primary">
+        <div class="wrapper flex-row">
+          <span class="label">Save</span>
+        </div>
+      </button>
+    </footer>
+  </form>
+
+</div>

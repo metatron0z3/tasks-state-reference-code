@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="37px" height="48px" viewBox="0 0 37 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.3 (16618) - http://www.bohemiancoding.com/sketch -->
+    <title>ai</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Asset-Icons" sketch:type="MSArtboardGroup" transform="translate(-28.000000, -107.000000)">
+            <g id="ai" sketch:type="MSLayerGroup" transform="translate(28.000000, 107.000000)">
+                <g id="Page-1-+-MP4">
+                    <g id="Page-1" transform="translate(0.238482, 0.000000)" sketch:type="MSShapeGroup">
+                        <path d="M36.299458,10.8384 L36.299458,46.248 C36.299458,47.2128 35.5083469,48 34.5387534,48 L1.76070461,48 C0.791111111,48 0,47.2128 0,46.248 L0,1.872 C0,0.9072 0.791111111,0.12 1.76070461,0.12 L24.3604336,0.12 L36.299458,10.8384 Z" id="Fill-1" fill="#F0A839"></path>
+                        <path d="M36.299458,10.8384 L36.299458,11.04 L25.8027642,11.04 C24.9392954,11.04 24.2398374,10.344 24.2398374,9.4848 L24.2398374,0.12 L24.3604336,0.12 L36.299458,10.8384 Z" id="Fill-3" opacity="0.5" fill="#FFFFFF"></path>
+                    </g>
+                    <text id="Ai" sketch:type="MSTextLayer" font-family="Avenir" font-size="12" font-weight="420" line-spacing="26" fill="#FFFFFF">
+                        <tspan x="5.47425474" y="42.24">Ai</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

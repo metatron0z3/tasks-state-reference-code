@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="17px" height="13px" viewBox="0 0 17 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>AlignRight</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="New-Card" stroke="none" stroke-width="1" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Card-View-Copy" sketch:type="MSArtboardGroup" transform="translate(-564.000000, -346.000000)">
+            <g id="FormattingBar" sketch:type="MSLayerGroup" transform="translate(403.000000, 332.000000)">
+                <g id="TextButtons" transform="translate(0.302595, 0.685092)" sketch:type="MSShapeGroup">
+                    <g id="AlignRight" transform="translate(162.048303, 13.631910)">
+                        <g id="Group" transform="translate(4.767532, 2.421273)" >
+                            <rect id="Rectangle-195-Copy" x="0.316205913" y="0.605318258" width="9.53506321" height="1.21063652"></rect>
+                            <rect id="Rectangle-195-Copy-2" x="0.316205913" y="2.42127303" width="9.53506321" height="1.21063652"></rect>
+                            <rect id="Rectangle-195-Copy-3" x="0.316205913" y="4.23722781" width="9.53506321" height="1.21063652"></rect>
+                            <rect id="Rectangle-195-Copy-4" x="0.316205913" y="6.05318258" width="9.53506321" height="1.21063652"></rect>
+                        </g>
+                        <g id="Rectangle-195-+-Rectangle-195-Copy-5">
+                            <rect id="Rectangle-195" x="0" y="0" width="15.4944777" height="1.21063652"></rect>
+                            <rect id="Rectangle-195-Copy-5" x="0" y="10.8957286" width="15.4944777" height="1.21063652"></rect>
+                        </g>
+                        <path d="M-0.59594145,7.2638191 L-0.59594145,4.84254606 L4.17159015,6.05318258 L-0.59594145,7.2638191 L-0.59594145,7.2638191 Z" id="Triangle-3-Copy-4"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

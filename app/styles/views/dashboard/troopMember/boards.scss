@@ -1,0 +1,17 @@
+@import "../../../bower-import.scss";
+@import "../../../variables.scss";
+
+[data-state*="dashboard.troopMember.boards"] {
+
+  [data-ui-view=dashboardContent] {
+    height: 100%;
+    position: relative;
+    
+
+  }
+
+  [data-ui-view=dashboardRightSidebar] {
+    display: none;
+  }
+
+}

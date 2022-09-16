@@ -1,0 +1,28 @@
+
+<div class="loader-wrapper flex-row"
+     ng-if="loading"
+>
+  <div class="wrapper">
+    <div class="loader-2 small"></div>
+  </div>
+</div>
+
+<div class="empty-board flex-column"
+     ng-if=" ( ! loading ) && Me.currentBoardCards.length === 0"
+     ng-include=" '/views/partials/empty-board.html' "
+></div>
+
+<ul class="card-list flex-column"
+    ng-class=" Me.currentBoard.viewSettings.card.imageSize || 'standard' "
+    ng-if="( ! loading ) && cards.length > 0"
+>
+  <li class="card searchResult flex-column fade"
+      ng-class="(card.boardLabel)? 'hasLabel':''"
+      ng-repeat="card in cards"
+      ng-mouseleave=" cardMenus[card.$id] = false "
+      ng-include=" '/views/partials/card/card-search.html' "
+  >
+  </li>
+
+  <li class="bottom flex-spacer">&nbsp;</li>
+</ul>

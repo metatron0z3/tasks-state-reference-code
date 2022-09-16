@@ -1,0 +1,310 @@
+@import "../../bower-import.scss";
+@import "../../variables.scss";
+
+body {
+  > .modal-overlay {
+
+    > form.modal {
+
+      &.board-modal {
+
+        > .image-container {
+          &.close {
+            top: 40px;
+            right: 40px;
+          }
+        }
+
+
+        > header {
+
+          > h1 {
+            font-family: $font-family-light;
+            font-size: 24px;
+          }
+
+          > p {
+            margin-top: 8px;
+            line-height: 20px;
+            font-size: 14px;
+            // font-family: $font-family-medium;
+            color: rgba($blue-gray-primary, 0.5);
+            text-align: center;
+          }
+
+        }
+
+        > main {
+          margin-top: 65px;
+          margin-bottom: 48px;
+
+          .field-group {
+
+            > label {
+              font-size: 14px;
+              color: $light-gray-tertiary;
+            }
+
+            > input {
+
+              &.tp-invalid,
+              &.ng-dirty.ng-touched.ng-invalid {
+                border-color: $red-quaternary;
+              }
+            }
+
+            > .ui-select-container {
+              z-index: 1;
+            }
+
+            &.switch-group {
+              margin: 0px;
+              padding: 0px;
+              position: relative;
+
+              &:after {
+                content: "";
+                @include size(100%, 1px);
+                left: 0px;
+                bottom: -25px;
+                position: absolute;
+                background: $gray-senary;
+              }
+
+            }
+
+          }
+
+
+          > .board-settings {
+
+            > label {
+              margin-top:10px;
+              margin-bottom:30px;
+              font-size:12px;
+              font-weight: bold;
+              text-transform:uppercase;
+              color:rgba($gray-twelvary, 0.5);
+
+            }
+
+            > .switch-group {
+              padding: 12px 0px;
+
+              > .switch {
+                top: auto;
+              }
+
+              > label {
+                padding: 0px;
+                color: $blue-secondary;
+
+              }
+
+              &.first {
+                &:before {
+                  content: "";
+                  @include size(100%, 1px);
+                  left: 0px;
+                  bottom: 0px;
+                  position: absolute;
+                  background: $gray-senary;
+                }
+              }
+
+              // &:before,
+              &:after {
+                content: "";
+                @include size(100%, 1px);
+                left: 0px;
+                bottom: 0px;
+                position: absolute;
+                background: $gray-senary;
+              }
+
+
+              &:first-of-type {
+
+                &:before {
+                  content: "";
+                  @include size(100%, 1px);
+                  left: 0px;
+                  top: 0px;
+                  position: absolute;
+                  background: $gray-senary;
+                }
+              }
+
+            }
+
+          }
+
+          > .view-choices {
+
+            > .choice {
+              cursor: pointer;
+              @include size(158px, 126px);
+              position: relative;
+              border: 1px solid $light-gray-secondary;;
+              @include border-radius(3px);
+              margin: 6px 12px;
+
+              &:hover {
+
+                > .box {
+
+                  > .image-container {
+
+                    > svg {
+                      fill: $gray-septenary;
+                    }
+                  }
+
+                  > label {
+                    color: $gray-septenary;
+                  }
+                }
+              }
+
+              &:nth-child(1n) {
+                    margin-left: 0px;
+              }
+              &:nth-child(3n) {
+                    margin-right: 0px;
+              }
+              &:nth-child(4n) {
+                    margin-left: 0px;
+              }
+
+              > .box {
+                @include size(100%);
+                @include align-items(center);
+                @include justify-content(center);
+
+                > .image-container {
+                  @include align-items(center);
+                  @include justify-content(center);
+
+                  > svg {
+                    fill: rgba($light-gray-tertiary, 0.5);
+                  }
+
+                }
+
+                > label {
+                  cursor: pointer;
+                  margin-top: 18px;
+                  font-family: $font-family-heavy;
+                  color: rgba($blue-gray-primary, 0.3);
+                  text-transform: uppercase;
+                  font-size: 12.15px;
+                  letter-spacing: 2.2px;
+                }
+
+              }
+
+              > .check {
+                @include size(25px);
+                right: 10px;
+                top: 8px;
+                position: absolute;
+
+                > .wrapper {
+                  @include size(100%);
+                  position: relative;
+
+                  > .image-container {
+                    @include size(100%);
+                    position: absolute;
+
+
+                    &.circle {
+
+                      > svg {
+                        @include size(25px);
+                        fill: $blue-octornary;
+                      }
+                    }
+
+                    &.check {
+
+                      > svg {
+                        @include size(13px, 8px);
+                        fill: $white-primary;
+                      }
+                    }
+                  }
+                }
+              }
+
+              &.selected {
+                border: 1px solid $blue-octornary;
+
+                > .box {
+
+                  > .image-container {
+
+                    > svg {
+                      fill: rgba($light-gray-tertiary, 1);
+                    }
+                  }
+
+                  > label {
+                    color: rgba($blue-gray-primary, 0.8);
+                  }
+                }
+              }
+            }
+
+
+          }
+
+          > .view-choices-errors {
+
+            > .error {
+              @include transform(none);
+            }
+          }
+
+          > [data-ng-messages],
+          > [np-messages] {
+            @include transform(translateY(-30px));
+
+            > .error {
+              line-height: 26px;
+              font-size: 12px;
+              color: $red-quaternary;
+            }
+          }
+
+        }
+
+        > footer {
+
+          > button,
+          > .button {
+
+            > .wrapper {
+
+              > span.label {
+                line-height: 26px;
+                font-family: $font-family-medium;
+                font-size: 11px;
+              }
+            }
+
+            &.link {
+
+              > .wrapper {
+
+                > span.label {
+                  color: $light-gray-tertiary;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

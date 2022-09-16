@@ -1,0 +1,1 @@
+requireSpec('auth', 'sign-up');

@@ -1,0 +1,1 @@
+requireSpec('boards', 'add-board');
